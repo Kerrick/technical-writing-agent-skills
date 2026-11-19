@@ -4,13 +4,13 @@ The skill in this repo was made for one model at one effort level. Every other m
 
 ## Most wanted
 
-1. **Eval results for the existing run.** `runs/claude-opus-5.5-medium/` has never been evaluated, so nobody knows yet whether the method beats its own baseline. This is the single most useful contribution. See [Evaluating](README.md#evaluating).
+1. **Eval results for the existing run.** `runs/claude-opus-5.5-medium/` has never been evaluated, so nobody knows yet whether the method beats its own baseline. This is the single most useful contribution. See [Evaluating](METHOD.md#evaluating).
 2. **A run on another model.** Any model, any effort level, any provider. Wanted especially: Fable 5.2, Sonnet 5.5, Astra 6.2, Sol 6.2, Gemini 4 Neon.
-3. **Real-task results.** You used the skill to document a real project; tell us what happened, recorded as [Evaluating](README.md#evaluating) describes for real tasks.
+3. **Real-task results.** You used the skill to document a real project; tell us what happened, recorded as [Evaluating](METHOD.md#evaluating) describes for real tasks.
 
 ## Contributing a run
 
-Follow [Repeating it](README.md#repeating-it) in the README. Expect a dozen or so long sessions; most of the cost is the reading forks, one per source, each of which reads up to about half its context window of documentation.
+Follow [Repeating it](METHOD.md#repeating-it) in METHOD.md. Expect a dozen or so long sessions; most of the cost is the reading forks, one per source, each of which reads up to about half its context window of documentation.
 
 A pull request for a run adds one folder, `runs/<provider>-<model>-<version>-<effort>/`, containing:
 
@@ -43,4 +43,4 @@ Fixes to the method, the scripts, the docs or readme-rewrite are welcome as ordi
 
 ## License
 
-By contributing, you dedicate your contribution to the public domain under [CC0 1.0](LICENSES/CC0-1.0.txt), like the rest of the repo. Quoted source material in findings files keeps its source's license, as [Licensing](README.md#licensing) describes.
+By contributing, you dedicate your contribution to the public domain under [CC0 1.0](LICENSES/CC0-1.0.txt), like the rest of the repo. Quoted source material in findings files keeps its source's license, as [Licensing](README.md#license) describes.

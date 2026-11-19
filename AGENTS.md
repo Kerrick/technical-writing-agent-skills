@@ -1,6 +1,6 @@
 # Working in this repo
 
-Read [README.md](README.md) for what this is and how the method runs, and [CONTRIBUTING.md](CONTRIBUTING.md) before adding a run. This file is the rules an agent breaks without being told.
+Read [README.md](README.md) for what this is, [METHOD.md](METHOD.md) for how the method runs, and [CONTRIBUTING.md](CONTRIBUTING.md) before adding a run. This file is the rules an agent breaks without being told.
 
 ## Rules
 
@@ -10,7 +10,7 @@ Read [README.md](README.md) for what this is and how the method runs, and [CONTR
 - **Never install a technical-writing skill while running the method**, this repo's included. Install only `method/vendor/agent-skills`.
 - **`skills/technical-writing/` changes only when a run's evals beat it.** `skills/readme-rewrite/` isn't made by the method and changes the ordinary way.
 - **Python only**, run with `uv run`, standard library first. No shell scripts. Each mise task runs exactly one script in `method/scripts/`.
-- **No fixed paths or baseline line numbers in prompts.** Use the `${SLOTS}` in the README, and describe a baseline rule by what it says.
+- **No fixed paths or baseline line numbers in prompts.** Use the `${SLOTS}` in METHOD.md, and describe a baseline rule by what it says.
 - **Pin to public, exact versions:** full commit hashes reachable upstream, exact tool versions. Prefer the newest stable release.
 - **Run `mise run check` before every commit**, and test a script by running it the way an agent would.
 
