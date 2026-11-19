@@ -19,9 +19,11 @@ readme-rewrite isn't made by the method, so it has no run. Its evals, in `evals/
 | - | - |
 | `skills/developer-docs/` | The default developer-docs skill |
 | `skills/readme-rewrite/` | The companion README skill. Not made by the method. |
+| `skills/skill-authoring/` | The companion skill for writing skills. Not made by the method. |
 | `runs/<run>/` | One run of the method for one model and effort level: its baseline, every intermediate file, and (unless it's the default) its own skill. `runs/claude-opus-5.5-medium/` is the first. |
 | `evals/developer-docs/` | The evals every run is tested against: `evals.json`, `eval_queries.json` and their input files |
 | `evals/readme-rewrite/` | readme-rewrite's evals |
+| `evals/skill-authoring/` | skill-authoring's evals |
 | `method/prompts/` | Every prompt as the method now stands, with `${SLOTS}`. Each run's README records where that run differed. |
 | `method/sources.toml` | The seven sources (eight reading forks, since Rails is split in two): repositories, commits, paths, and every per-source prompt value |
 | `method/sources.md` | Why each source and scope was chosen |

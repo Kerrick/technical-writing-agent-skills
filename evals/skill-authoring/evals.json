@@ -1,0 +1,90 @@
+{
+  "skill_name": "skill-authoring",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I keep correcting Claude on how we do database migrations in our ferry app. My notes from the last few weeks are in evals/skill-authoring/files/ferry-notes/corrections.md. Can you turn them into a skill? Put it in a new folder next to the notes.",
+      "expected_output": "A new, valid skill for writing and running ferry migrations that holds the project-specific corrections as steps and gotchas, leaves out the generic advice, never tells the agent to leave TODO comments, and points deploys to ferry-deploy, plus a report of the judgment calls.",
+      "files": [
+        "evals/skill-authoring/files/ferry-notes/corrections.md"
+      ],
+      "assertions": [
+        "[Workflow step 8: Validate] The response shows the validator run on the new skill and passing, and the skill's name matches its folder's name.",
+        "[Descriptions] The description starts with \"Use when\", covers writing or running database migrations or schema changes in ferry, and says it is not for deploys, naming ferry-deploy.",
+        "[Workflow step 4: Filter against the baseline] The skill contains none of the generic notes: clear commit messages, testing before pushing, descriptive migration names, understanding SQL.",
+        "[Workflow step 5: Place each rule] The db/ferry/ location, the 50,000-row default batch that locks large tables, and the two-deploy column rename each appear in SKILL.md itself, as a step or a gotcha, not only in a reference file.",
+        "[Give a procedure with defaults] SKILL.md gives numbered steps that run bin/ferry migrate --plan and review the plan before --apply, and use --batch 5000 for backfills on orders, events, and line_items.",
+        "[Never direct an agent to write a placeholder to disk] No instruction in the skill tells the agent to leave a TODO comment or other marker; for a migration whose reversibility is unclear, it has the agent write a down step or irreversible! with a reason, or raise the question in chat.",
+        "[Never direct an agent to write a placeholder to disk] No file the agent wrote contains TODO, TBD, a bracketed placeholder, or a question to the user.",
+        "[Workflow step 11: Report] The response lists the judgment calls made, including how Priya's TODO suggestion was handled and which notes were left out as generic.",
+        "[Keep every link inside the installed skill] Every relative link in the new skill resolves to a file inside the skill's own folder.",
+        "[State verified facts plainly] No rule in the skill is hedged with \"should probably\", \"as far as we know\", or similar wording the notes don't use."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "can you review the skill in evals/skill-authoring/files/csv-report before our data team publishes it? just tell me what's wrong, don't change anything",
+      "expected_output": "A review, with no file changed, that reports the validator's name error and the skill's content, structure, and placeholder problems, each with its file and line.",
+      "files": [
+        "evals/skill-authoring/files/csv-report/SKILL.md",
+        "evals/skill-authoring/files/csv-report/references/charts.md",
+        "evals/skill-authoring/files/csv-report/references/old-notes.md"
+      ],
+      "assertions": [
+        "[Choose the task: Review] Every file in evals/skill-authoring/files/csv-report is unchanged.",
+        "[Workflow step 8: Validate] The review reports the validator's error: the directory csv-report doesn't match the name csv-reports.",
+        "[Descriptions] The review says the description isn't imperative, doesn't say when to use the skill, and sets no boundary with neighboring work.",
+        "[Workflow step 4: Filter against the baseline] The review flags the paragraph explaining what a CSV file is as something the model already knows.",
+        "[Give a procedure with defaults] The review flags the list of four libraries with no default.",
+        "[Never direct an agent to write a placeholder to disk] The review flags the instruction to mark unidentified columns with [UNKNOWN] in the report.",
+        "[Say when to read each reference] The review flags that references/old-notes.md is linked from nowhere, and says its separator and decimal-mark fact belongs in SKILL.md, as a gotcha.",
+        "[Keep every link inside the installed skill] The review flags the link to ../../docs/report-style.md as one that breaks once the skill is installed.",
+        "[State verified facts plainly] The review flags \"This should probably work on most CSV files, as far as we know\" as hedging that tells the agent nothing.",
+        "[State a limit only where it changes what the reader can do] The review says the note that no evals have been run doesn't belong in SKILL.md.",
+        "[Gotchas: unquoted number in metadata] The review flags version: 1.0 as an unquoted number that should be the string \"1.0\".",
+        "[Choose the task: Review] Each problem the review reports cites its file and line."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I wrote a skill for our changelog entries, it's in evals/skill-authoring/files/changelog-entry. How do I tell whether it actually helps? Set up whatever evals I need and tell me how to run them headless with Claude Code. Don't run them yet.",
+      "expected_output": "Output evals with input files and rule-named assertions, trigger queries with near-misses, all outside the skill folder, and a run plan with three isolated setups, blind grading, and repeated runs.",
+      "files": [
+        "evals/skill-authoring/files/changelog-entry/SKILL.md"
+      ],
+      "assertions": [
+        "[Where evals live] Every eval file is written outside the changelog-entry folder, and the skill's own files are unchanged.",
+        "[Test cases] evals.json holds three or four realistic prompts, each with an expected_output and assertions, including at least one edge case, such as a security fix that needs its GHSA ID or a CHANGES.md with no ## Next section.",
+        "[Build inputs that exercise the rules] At least one eval supplies its own input files, such as a CHANGES.md and a diff or pull request description, under a files/ folder.",
+        "[Assertions] Every assertion names, in brackets, the step or gotcha of changelog-entry it tests.",
+        "[No placeholders] No eval file contains TODO, a placeholder value, or a question to the user.",
+        "[Trigger queries] eval_queries.json holds 16 to 20 queries, about half with should_trigger false, including at least one request for release notes.",
+        "[Isolating each run] The run plan has three setups per eval: the skill, no skill, and a snapshot of the current version or another baseline.",
+        "[Isolating each run] The headless commands start every output-eval run as a fresh session with --disallowedTools Skill and give the skill's path in the prompt.",
+        "[Isolating each run] Each run gets its own copy of the input files, and the plan records each run's tokens and duration.",
+        "[Grading] The grader sees the setups' outputs without knowing which setup produced which.",
+        "[Aggregating] The plan runs each setup three times before comparing results.",
+        "[Running them] The plan runs trigger queries with the skill installed and the skill tool enabled, unlike the output evals."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "two problems with our changelog-entry skill (evals/skill-authoring/files/changelog-entry). people say stuff like \"note this fix in CHANGES\" or \"add this PR to the changelog\" and it never loads. and it keeps writing entries in past tense (\"Fixed crash when...\") even though we write them imperative (\"Fix crash when...\"), I've corrected that like 4 times. can you fix the skill?",
+      "expected_output": "An edited skill whose description covers requests to record a change in the changelog without quoting the user's phrasings, with the imperative-mood correction as a gotcha in SKILL.md, no history in the body, the validator passing, and queries to check the new description.",
+      "files": [
+        "evals/skill-authoring/files/changelog-entry/SKILL.md"
+      ],
+      "assertions": [
+        "[Editing an existing skill] Before editing, the agent copies the skill outside its folder, so the new version can be evaluated against the old one.",
+        "[Editing an existing skill] The imperative-mood rule appears in SKILL.md as a gotcha or in step 3, with a wrong form (\"Fixed …\") beside the right one (\"Fix …\").",
+        "[Descriptions] The new description covers requests to record or note a change in CHANGES.md or the changelog without the words \"changelog entry\", still excludes release notes, and is under 1024 characters.",
+        "[Tuning] The description names the kind of request in general terms rather than quoting the user's two phrasings word for word.",
+        "[Editing an existing skill] SKILL.md holds no note about what changed or why, such as \"Updated:\" or \"added after repeated corrections\".",
+        "[Editing an existing skill] The new rule sits in the existing steps or Gotchas, not in a new section appended at the end.",
+        "[Workflow step 8: Validate] The response shows the validator run on the edited skill and passing.",
+        "[Trigger queries] The response adds or proposes should-trigger and should-not-trigger queries to check the new description, including both of the user's phrasings and a release-notes near-miss.",
+        "[Workflow step 11: Report] The response lists the judgment calls made."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "query": "I've corrected the agent on our deploy checklist like ten times now. can you turn what it keeps getting wrong into a skill so it stops",
+    "should_trigger": true
+  },
+  {
+    "query": "my pdf-tools skill never gets picked up, even when I literally say 'merge these PDFs'. what's wrong with its description?",
+    "should_trigger": true
+  },
+  {
+    "query": "review ~/.claude/skills/terraform-plan/ before I share it with the team, especially whether the SKILL.md is too long",
+    "should_trigger": true
+  },
+  {
+    "query": "SKILL.md for our incident-response skill is 900 lines now. split it up properly",
+    "should_trigger": true
+  },
+  {
+    "query": "does skills/invoice-export pass the spec? the frontmatter has a version field and I'm not sure that's allowed",
+    "should_trigger": true
+  },
+  {
+    "query": "how do I prove our sql-review skill makes the agent better than no skill at all? I want numbers, not vibes",
+    "should_trigger": true
+  },
+  {
+    "query": "every time the agent uses our data-cleaning instructions it writes its own CSV parser from scratch. can we ship a script with it instead",
+    "should_trigger": true
+  },
+  {
+    "query": "teach the agent how our team does code review, in a way I can install for everyone, with the gotchas from the last few months of PR comments",
+    "should_trigger": true
+  },
+  {
+    "query": "rewrite the README for our skills repo so people understand how to install them",
+    "should_trigger": false
+  },
+  {
+    "query": "write a how-to guide for the docs site on configuring our CLI's plugin system",
+    "should_trigger": false
+  },
+  {
+    "query": "add docstrings to the Python scripts in method/scripts/",
+    "should_trigger": false
+  },
+  {
+    "query": "write an AGENTS.md for this repo telling agents to run the linter before every commit",
+    "should_trigger": false
+  },
+  {
+    "query": "install the readme-rewrite skill for my user account",
+    "should_trigger": false
+  },
+  {
+    "query": "write a system prompt for our customer support chatbot",
+    "should_trigger": false
+  },
+  {
+    "query": "draft release notes for v1.1 of our skills repo from the commits since v1.0.0",
+    "should_trigger": false
+  },
+  {
+    "query": "write an API reference page for the validate() function in our skills-linter package",
+    "should_trigger": false
+  }
+]

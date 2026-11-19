@@ -1,9 +1,10 @@
 # Technical writing agent skills
 
-Two [Agent Skills](https://agentskills.io/) that make a coding agent write better developer documentation:
+Three [Agent Skills](https://agentskills.io/) that make a coding agent write better developer documentation, and better Agent Skills:
 
 - **developer-docs** guides tutorials, quickstarts, how-to guides, API and CLI reference, docstrings, conceptual explanations, docs-site landing pages, programming books, courses, and video scripts.
 - **readme-rewrite** rewrites, reviews, or writes from scratch a project README, so that it tells readers why to try the project, gets them started, and links to the rest of the docs, with every claim checked against the code.
+- **skill-authoring** creates, edits, reviews, and tests Agent Skills: what a skill should hold, its description, its evals, and how to check it.
 
 They're for developers who have an AI agent such as [Claude Code](https://claude.com/claude-code) write or revise their docs, and who want docs that are accurate and readable instead of stock AI prose. An Agent Skill is a folder with a `SKILL.md` file of instructions. Your agent loads one when a request matches its description, and follows it. Each of these two tells the agent to use the other for the other kind of page.
 
@@ -38,7 +39,7 @@ Each hit is a phrase for the agent to fix or defend, not proof of a mistake. Lin
 
 | Requirement | Details |
 | - | - |
-| Format | The [Agent Skills specification](https://agentskills.io/specification). Both skills pass the format validator that this repository's checks run. |
+| Format | The [Agent Skills specification](https://agentskills.io/specification). All three skills pass the format validator that this repository's checks run. |
 | Agent | Any agent that loads Agent Skills. |
 | Model | developer-docs was made for Claude Opus 5.5 at medium effort. Another model may already follow some of its rules, or miss others it doesn't list. |
 | Installing | [Node.js](https://nodejs.org/), for `npx skills`. Or copy the folders by hand. |
@@ -48,7 +49,7 @@ Neither skill has been through its evals yet, so there are no measured results o
 
 ## Installation
 
-Install both skills for your user account with the [`skills`](https://github.com/vercel-labs/skills) command-line tool:
+Install all three skills for your user account with the [`skills`](https://github.com/vercel-labs/skills) command-line tool:
 
 ```
 npx skills add Kerrick/technical-writing-agent-skills -g -a claude-code --skill '*' -y
@@ -66,6 +67,7 @@ To install by hand on macOS or Linux, clone this repository and link the folders
 git clone https://github.com/Kerrick/technical-writing-agent-skills.git ~/src/technical-writing-agent-skills
 ln -s ~/src/technical-writing-agent-skills/skills/developer-docs ~/.claude/skills/developer-docs
 ln -s ~/src/technical-writing-agent-skills/skills/readme-rewrite ~/.claude/skills/readme-rewrite
+ln -s ~/src/technical-writing-agent-skills/skills/skill-authoring ~/.claude/skills/skill-authoring
 ```
 
 On Windows, use `npx skills`, which copies the folders for you.
@@ -86,6 +88,8 @@ With **readme-rewrite**, the agent works in one of three modes:
 
 In every mode it runs the commands it plans to show, runs `hunt.py` on the draft, works through a review checklist, and tells you where the code and the old docs disagree. If it can't tell from your repository or your other projects whether AI agents wrote parts of your project, it asks you, so it can add a disclosure.
 
+With **skill-authoring**, the agent decides what the skill should hold before writing it: what the target model already does, what it gets wrong, and which corrections keep recurring. It writes the description for the requests that should and shouldn't trigger it, validates the skill, and sets up evals that compare it with no skill.
+
 To get newer versions of skills you installed with `-g`, run:
 
 ```
@@ -96,6 +100,7 @@ npx skills update -g
 
 - [`skills/developer-docs/SKILL.md`](skills/developer-docs/SKILL.md) and its [references](skills/developer-docs/references/): the rules, so you can read what your agent will do.
 - [`skills/readme-rewrite/SKILL.md`](skills/readme-rewrite/SKILL.md) and its [references](skills/readme-rewrite/references/): the steps, the style rules, the section plan, and the review checklist.
+- [`skills/skill-authoring/SKILL.md`](skills/skill-authoring/SKILL.md) and its [references](skills/skill-authoring/references/): the workflow, the rules for every skill, and how to evaluate one.
 - [How the skill is made](method/README.md): the method that produced developer-docs, its status, how to repeat it for another model, and what the first run taught.
 - [Sources](method/sources.md): the seven documentation sets, and why each was read the way it was.
 - [The first run](runs/claude-opus-5.5-medium/README.md): the model, settings, and every intermediate file from making the current developer-docs, from the skill the model wrote from memory to the [47 rules](runs/claude-opus-5.5-medium/pipeline/kept.md) it kept.
@@ -111,7 +116,7 @@ The most useful contributions are eval results for the existing skill and runs o
 
 ## License
 
-You can use the skills, and what you write with them, without conditions. developer-docs is dedicated to the public domain under [CC0 1.0](LICENSES/CC0-1.0.txt), as is most of the repository. readme-rewrite is under [MIT No Attribution](LICENSES/MIT-0.txt), so you can copy, change, and redistribute it without giving credit.
+What you write with the skills is yours, without conditions. developer-docs is dedicated to the public domain under [CC0 1.0](LICENSES/CC0-1.0.txt), as is most of the repository. readme-rewrite is under [MIT No Attribution](LICENSES/MIT-0.txt), so you can copy, change, and redistribute it without giving credit. skill-authoring adapts the Agent Skills documentation, so it's under [CC BY 4.0](LICENSES/CC-BY-4.0.txt): if you redistribute it, keep its `NOTICE.md`, which gives the credit.
 
 A few files keep other licenses. The vendored copy of the agent-skills skill in `method/vendor/agent-skills/` is under [CC BY 4.0](LICENSES/CC-BY-4.0.txt). The findings files in `runs/*/pipeline/findings/` quote the documentation they compare, and each keeps its source's license, as its opening notice states. The three that quote Rails and MDN are share-alike, per file. [`REUSE.toml`](REUSE.toml) gives every file's license, following the [REUSE specification](https://reuse.software/), and [`LICENSES/`](LICENSES/) holds the texts.
 
@@ -119,4 +124,4 @@ A few files keep other licenses. The vendored copy of the agent-skills skill in 
 
 I use three words for how code and prose comes to exist. Code or prose I wrote, I typed by hand, with nothing generated. Code or prose I wrought, an AI agent generated while I iterated with it, and I reviewed every change before committing it, so I take responsibility for every diff. Code or prose I requested, an agent built with little or no review from me, in the style of a "dark factory."
 
-I wrote the prompts that start the method: the recall and baseline prompts, and the reading-order prompts. Everything else was requested, including both skills, the rest of the method, the evals, and this README. Agents built it from my goals and decisions, with little review of the diffs. In place of review, the repository's rules require `mise run check` before every commit: it runs the Agent Skills validator on each skill, checks that developer-docs and the run's clean-room files carry no source wording, checks that every kept rule is placed in the skill, and runs `reuse lint`. [declare-ai.org](https://declare-ai.org/1.0.0/creative.html).
+I wrote the prompts that start the method: the recall and baseline prompts, and the reading-order prompts. Everything else was requested, including all three skills, the rest of the method, the evals, and this README. Agents built it from my goals and decisions, with little review of the diffs. In place of review, the repository's rules require `mise run check` before every commit: it runs the Agent Skills validator on each skill, checks that developer-docs and the run's clean-room files carry no source wording, checks that every kept rule is placed in the skill, and runs `reuse lint`. [declare-ai.org](https://declare-ai.org/1.0.0/creative.html).
