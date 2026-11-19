@@ -1,11 +1,11 @@
 # Contributing
 
-The default developer-docs skill was made for Claude Opus 5.5 at medium effort. On Claude Sonnet 5.5 it beat a skill the method made for Sonnet itself, 80% of assertions to 51%. So the first thing to learn about another model is whether the default helps it. Evals answer that, at a small fraction of a run's cost.
+The default developer-docs skill was made for Claude Opus 5.5 at medium effort. On Claude Sonnet 5.5 it beat a skill the method made for Sonnet itself, 80% of assertions to 51%. So the first thing to learn about another model is whether the default helps it. Evals answer that for about a tenth of a run's cost (see [What it costs](#what-it-costs)).
 
 ## Most wanted
 
 1. **Evals of the default on another model.** Run `evals/developer-docs/` with the default skill and with no skill on any model, any effort level, any provider, as [Evaluating](method/README.md#evaluating) describes. That shows what that model's users should install. Wanted especially: Fable 5.2, Astra 6.2, Sol 6.2, Gemini 4 Neon.
-2. **More iterations of the existing evals.** Iteration 1 ran once per setup; the method asks for three before trusting the differences.
+2. **More iterations of the existing evals.** Iteration 1 ran once per setup. Differences are worth trusting after three runs per setup.
 3. **A run on a model at least as strong as Claude Opus 5.5.** Such a run could make a better default. A run on a smaller model made a variant that did worse than the default on that model, so check the default there first.
 4. **Real-task results.** You used a skill to document a real project; tell us what happened, recorded as [Evaluating](method/README.md#evaluating) describes for real tasks.
 
