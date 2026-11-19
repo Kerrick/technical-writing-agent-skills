@@ -58,6 +58,19 @@ No scope was changed, because the window matched the first run's and every scope
 
 Check placement: `uv run method/scripts/check_placement.py runs/claude-sonnet-5.5-medium/PLACEMENT.md runs/claude-sonnet-5.5-medium/pipeline/kept.md runs/claude-sonnet-5.5-medium/skill`.
 
+## Evals
+
+Iteration 1, one run per setup, on Claude Sonnet 5.5 at medium effort, graded blind by Opus 5.5 against `evals/developer-docs/`:
+
+| Setup | Assertions passed |
+| - | - |
+| This run's skill | 35 of 71 (51%) |
+| This run's baseline | 36 of 71 (50%) |
+| The default skill, made for Opus 5.5 | 57 of 71 (80%) |
+| No skill | 37 of 71 (53%) |
+
+Graders ranked the default first in all five evals. This run's skill holds 33 rules, against the default's 50, and lacks most of the teaching rules the evals check. Sonnet with no skill fails those rules too, so they were real gaps the run should have found. The likely cause is the merge's rule 4, which drops a rule the baseline already states: this run's baseline scored no better than no skill, so Sonnet doesn't do what its baseline says. The evals were written from the first run's rules, which favors the default's coverage, but doesn't explain why Sonnet's own gaps went unfound. Results are in `workspace/iteration-1/`.
+
 ## How this run differed from the method as written
 
 - **Headless, with limited tools.** Each session got `--allowedTools` for only what its step needed (file reading and writing, Grep and Glob; the Skill tool for steps 2 and 9; the Agent tool for step 3's file listing; Bash only for the writer, which runs the validator) and `--add-dir` for `${SRC}` and this repository. The step 1 session had no tools. The listing sub-agents still used Bash: a sub-agent's tools come from its own agent type, not from the parent's `--allowedTools`.

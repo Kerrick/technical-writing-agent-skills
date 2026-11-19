@@ -1,0 +1,7 @@
+Read the skill at /Users/kerrick/Developer/technical-writing-agent-skill/runs/claude-sonnet-5.5-medium/baseline/developer-docs/SKILL.md and follow it for this task. Its reference files and scripts are in that same folder; read them when SKILL.md says to.
+
+Task:
+
+We're running a one-day workshop, "Testing Python services with pytest", for backend devs. Some have only used unittest, a few have never written a fixture. Please write (1) the course landing page that lists the six modules and (2) the narration script for the module 1 video, about 8 minutes, where they write and run their first test.
+
+Save what you write as Markdown files in the outputs/ folder of the current directory.

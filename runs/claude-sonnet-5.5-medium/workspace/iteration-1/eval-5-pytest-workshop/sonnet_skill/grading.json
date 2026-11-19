@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[6. Give the docs a map and each section a landing page] The landing page summarizes the course, lists all six modules with one line on what each covers, and sends different readers (unittest users, people new to fixtures) to different starting points or tells them what they can skip.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Summary up top; a six-row table with one line each ('Install pytest, write a test function, and run it.'...); 'How to use this workshop' routes readers: 'Already writing pytest tests: skim module 1, then start at module 3'; 'Coming from `unittest`: do module 1 and module 2 in full'; 'Falling behind: ...'."
+    },
+    {
+      "text": "[31. Bridge gaps in assumed knowledge] The course bridges basics only some attendees have, with a short bridging section or module (e.g. unittest-to-pytest or fixture basics) that says who can skip it and invites readers to return when stuck.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No bridging section. Routing tells unittest users to 'do module 1 and module 2 in full', and module 2's blurb mentions the assertEqual family, but there's no bridge that says who can skip it and invites readers back when stuck. The 'come back' line is for people new to Python, pointing outside the course."
+    },
+    {
+      "text": "[34. Say where to get help] The landing page or module 1 says where to get help from people and how to report a mistake in the material, using channels the inputs name. If the inputs name none, it invents none, and the response tells the user they're missing.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No help or mistake-report channel in either file, and response.md says only 'Left out: dates, venue, instructor and registration'. It never says help or report channels are missing."
+    },
+    {
+      "text": "[9. Connect new concepts to what readers already know] Module 1 connects pytest concepts to their unittest counterparts (e.g. plain assert vs self.assertEqual) and flags where the unittest habit misleads.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'If you come from `unittest`, notice what is missing. There is no class, no base class that you inherit from, and no `assertEqual` method.' In the failure section: 'pytest took your plain `assert` and worked out the values on both sides for you. You did not write a message.'"
+    },
+    {
+      "text": "[18. Let failures recur while each one teaches] The module 1 script includes a deliberately failing test, shows pytest's actual failure output, and uses it to teach reading the assertion diagnostics.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "It does include a deliberate failure (3850 -> 3851) and teaches reading order, but it explicitly doesn't show the output: 'Output is described in the narration' and 'The failure report in section 6 is described, not pasted'. The assertion requires showing pytest's actual failure output."
+    },
+    {
+      "text": "[15. Use \"we\" for shared narrative work] The script uses \"we\"/\"let's\" for shared work and reads as one person talking to another, not as neutral summary.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'We start with an empty folder', 'We call the function...', 'That is why we did it first.' The tone is personal ('I assume you can read Python')."
+    },
+    {
+      "text": "[27. Tell learners where difficulty is normal] The script names a spot where people commonly get stuck (e.g. test discovery naming rules) and says that is normal.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No statement that a sticking point is normal. The closest is the landing page's 'On a first pass you do not need to understand every line', which isn't about a common stuck spot in the module 1 script."
+    },
+    {
+      "text": "[24. Show several solutions when judgment is the goal] Module 1 keeps a single path to the first passing test (no alternative approaches presented at that point).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Before the first passing run it presents two ways to run pytest: 'From here on, I run pytest as `python -m pytest`, not as `pytest`. Both work.' That's an alternative approach at that point."
+    },
+    {
+      "text": "[2. End lessons with a short, fixed closing that points forward] Module 1 ends with a brief fixed closing (one sentence or short recap) and a pointer or preview of module 2.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Section 7: 'Let me recap...' then 'Error cases come in module 2. In module 3, you will see what to do when five tests need the same setup. See you there.' It points to module 2. The closing is a little long (recap, exercise, left-out list) but fixed and forward-pointing."
+    },
+    {
+      "text": "[12. Let readers feel the problem before giving them the feature] Before introducing a pytest feature (e.g. fixtures or parametrize, if previewed), the script or module plan shows the problem it solves in code the viewer has just written.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The preview 'what to do when five tests need the same setup' describes a hypothetical, not the viewer's code. The parametrize blurb 'Replace copy-pasted tests' isn't shown in code."
+    },
+    {
+      "text": "[38. Show commands and output the way readers will copy them] Commands and output in the video script are shown as a transcript block or split blocks, with the choice appropriate to a screencast and the prompt marker explained once.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Split command blocks with the convention explained ('Command blocks hold only the command. Output is described in the narration'), but output is never shown in any block, so the 'commands and output' half isn't met."
+    },
+    {
+      "text": "[21. Avoid claims that age] Neither deliverable contains time-relative wording such as \"new\", \"latest\", or \"currently\".",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Mechanical scan: only non-temporal hits ('new to Python', 'the current time', 'Your prompt now shows')."
+    },
+    {
+      "text": "[47. Pin versions unless the docs track the current release] Any install command either pins the version the workshop was tested against or explains why it doesn't, since a one-day workshop is written against one version.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "`python -m pip install pytest` is unpinned, and neither the files nor response.md explain why or mention pinning."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 8,
+    "total": 13,
+    "pass_rate": 0.3846
+  },
+  "blind_label": "Z"
+}

@@ -96,8 +96,8 @@ The skill must carry ideas, not any source's wording, and must not restate the b
 
 Iteration 1 has run for developer-docs and readme-rewrite, one run per setup. After it, six assertions in `evals/developer-docs/evals.json` that no output could pass were reworded: ones that needed a help channel or a page address no input gave, and ones that demanded one form (mutual links, a callout, a dedicated module) where the rule asks only for the effect. Iteration 1's grades used the earlier wording, which git history keeps. The procedure, following `method/vendor/agent-skills/references/evaluating-skills.md`:
 
-1. For each eval in `evals/developer-docs/evals.json`, run three fresh sub-agents: one told to read and follow the run's skill, one the run's baseline, one with no skill. Each gets its own copy of the eval's input file. Record each run's tokens and duration when it finishes.
-2. One fresh grader per eval sees the three outputs as X, Y and Z, not knowing which is which, plus the assertions. It writes `grading.json` per output with quoted evidence, and a blind comparison.
+1. For each eval in `evals/developer-docs/evals.json`, run fresh sessions, one per setup: the run's skill, the run's baseline, no skill, and the current default when the run isn't the default's. Each gets its own copy of the eval's input file. Record each run's tokens and duration when it finishes.
+2. One fresh grader per eval sees the outputs under shuffled letters, not knowing which is which, plus the assertions. It writes `grading.json` per output with quoted evidence, and a blind comparison.
 3. Aggregate pass rate, tokens and time per setup into `benchmark.json`, also broken down by each rule's Kind in the run's `kept.md`.
 4. Run each setup three times before trusting the differences.
 
@@ -127,6 +127,8 @@ For another model, effort level or provider:
 - **A reader judging the baseline sides with it.** Readers are forks of the baseline's author, so their "where the source falls short" group leans toward the baseline. Step 7 re-decides those items on evidence, and its "deliberate" test now requires a count and a contradiction of the rule ([why](prompts/07-check-often-broken.md#changes-since-the-first-run)).
 - **Silence isn't a choice.** A style guide that doesn't forbid something hasn't endorsed it. Only templates, style guides, or a pattern on nearly every page of a kind count as deliberate.
 - **The writer must not be the author.** The baseline's author is the best judge of what's redundant, and that judgment belongs in the merge. Writing belongs to a session that has never seen the baseline.
+- **Stating isn't doing.** The merge's rule 4 drops a cluster the baseline already states. In the Sonnet 5.5 run, the baseline scored no better than no skill in evals, so the rules it stated were rules Sonnet doesn't follow, and dropping them left the skill without them: it passed 51% of assertions on Sonnet, against 80% for the default made for Opus. Before trusting rule 4 for a new model, eval its baseline against no skill. If the baseline doesn't help, keep the stated rules too.
+- **Evals favor the run they were written from.** `evals/developer-docs/` was written from the first run's rules, so it measures coverage of those rules. Read a later run's results with that in mind, and add assertions for a run's own rules before calling it worse.
 - **Keep ad-hoc judgment out.** In the first run, a by-hand check of the "often broken" entries agreed with the checker fork on only 9 of 13, and the checker had the better evidence each time. Checks done outside a fixed prompt aren't repeatable for the next model, so every check is a prompt or a script.
 
 ## Licensing of the run files

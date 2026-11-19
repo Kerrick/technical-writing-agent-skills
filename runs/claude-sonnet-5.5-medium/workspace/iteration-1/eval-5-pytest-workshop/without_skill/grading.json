@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[6. Give the docs a map and each section a landing page] The landing page summarizes the course, lists all six modules with one line on what each covers, and sends different readers (unittest users, people new to fixtures) to different starting points or tells them what they can skip.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Lists six modules, but with multi-sentence paragraphs, not one line each. There's no reader routing: 'If you've written tests with `unittest`, you'll see how much of that ceremony you can drop. If you've never written a fixture, you'll write several by lunchtime.' 'Start here: Begin with Module 1' applies to everyone, and nobody is told what they can skip."
+    },
+    {
+      "text": "[31. Bridge gaps in assumed knowledge] The course bridges basics only some attendees have, with a short bridging section or module (e.g. unittest-to-pytest or fixture basics) that says who can skip it and invites readers to return when stuck.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No bridging section or module. Module 2's blurb 'Replace `setUp` and `tearDown` with fixtures' is a syllabus line, not a bridge. Nothing says who can skip or to return when stuck."
+    },
+    {
+      "text": "[34. Say where to get help] The landing page or module 1 says where to get help from people and how to report a mistake in the material, using channels the inputs name. If the inputs name none, it invents none, and the response tells the user they're missing.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Neither file names a help or error-report channel, and response.md lists missing logistics ('no date, venue, price, instructor or registration link') but never says help or report channels are missing."
+    },
+    {
+      "text": "[9. Connect new concepts to what readers already know] Module 1 connects pytest concepts to their unittest counterparts (e.g. plain assert vs self.assertEqual) and flags where the unittest habit misleads.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Look at what's missing compared to unittest. There's no import of a test framework. No class inheriting from TestCase. And no `assertEqual`.' It also addresses the habit of writing messages: 'This is the payoff for using plain `assert`. pytest rewrites your assertions... You didn't write a failure message. You got a useful one anyway.'"
+    },
+    {
+      "text": "[18. Let failures recur while each one teaches] The module 1 script includes a deliberately failing test, shows pytest's actual failure output, and uses it to teach reading the assertion diagnostics.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Section 6: 'let's break it on purpose', changing 80 to 85; the direction says 'Highlight the `assert 80.0 == 85` line' and narration teaches: 'the line that failed, marked with an arrow, and the actual values: eighty point zero does not equal eighty-five. pytest also shows which call produced that 80.0.' round(100*0.8,2)=80.0, so that line is right."
+    },
+    {
+      "text": "[15. Use \"we\" for shared narrative work] The script uses \"we\"/\"let's\" for shared work and reads as one person talking to another, not as neutral summary.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'So let's break it on purpose', 'let's check that it does', 'Let's recap', 'We'll use a tiny piece of a pretend online shop.' It's conversational."
+    },
+    {
+      "text": "[27. Tell learners where difficulty is normal] The script names a spot where people commonly get stuck (e.g. test discovery naming rules) and says that is normal.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Names the naming rule ('That name matters'), but no spot is called a common sticking point and nothing says difficulty is normal."
+    },
+    {
+      "text": "[24. Show several solutions when judgment is the goal] Module 1 keeps a single path to the first passing test (no alternative approaches presented at that point).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "One path: venv, `pip install pytest`, pricing.py, test_pricing.py, `pytest`. `-v` and `pytest.raises` come after the first pass."
+    },
+    {
+      "text": "[2. End lessons with a short, fixed closing that points forward] Module 1 ends with a brief fixed closing (one sentence or short recap) and a pointer or preview of module 2.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Section 8: 'Let's recap. A test is a function... In Module 2, we'll look at fixtures... See you there.' A short recap, then a pointer forward."
+    },
+    {
+      "text": "[12. Let readers feel the problem before giving them the feature] Before introducing a pytest feature (e.g. fixtures or parametrize, if previewed), the script or module plan shows the problem it solves in code the viewer has just written.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The fixtures preview ('In Module 2, we'll look at fixtures, which is where pytest starts to really differ from unittest') shows no problem. The landing page's 'Turn copy-pasted tests into one table' isn't shown in the viewer's code either."
+    },
+    {
+      "text": "[38. Show commands and output the way readers will copy them] Commands and output in the video script are shown as a transcript block or split blocks, with the choice appropriate to a screencast and the prompt marker explained once.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Commands are in a ```bash block with inline `# Windows:` comments, but output is never shown as a block. It's only stage directions ('*[Screen output shows `test_pricing.py .` and `1 passed`.]*'). No transcript block and no split output blocks."
+    },
+    {
+      "text": "[21. Avoid claims that age] Neither deliverable contains time-relative wording such as \"new\", \"latest\", or \"currently\".",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Time-relative wording in the script: 'Anything recent will behave the same for today.' 'Recent' will go stale."
+    },
+    {
+      "text": "[47. Pin versions unless the docs track the current release] Any install command either pins the version the workshop was tested against or explains why it doesn't, since a one-day workshop is written against one version.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Unpinned `pip install pytest`, but the script gives a reason: 'If that last command prints a version number, you're set. Anything recent will behave the same for today.' That's weak, and it's an ageing claim, but it does explain why there's no pin."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 7,
+    "total": 13,
+    "pass_rate": 0.4615
+  },
+  "blind_label": "Y"
+}

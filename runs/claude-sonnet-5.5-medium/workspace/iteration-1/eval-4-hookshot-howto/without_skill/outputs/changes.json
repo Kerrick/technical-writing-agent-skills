@@ -1,0 +1,10 @@
+{
+  "added": [
+    "outputs/verify-webhook-signatures-flask.md",
+    "scratch/app.py",
+    "scratch/hookshot.py",
+    "scratch/test_app.py"
+  ],
+  "modified": [],
+  "deleted": []
+}

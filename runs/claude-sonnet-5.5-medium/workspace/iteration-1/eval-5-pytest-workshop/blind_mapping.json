@@ -1,0 +1,9 @@
+{
+  "seed": 1011112825,
+  "mapping": {
+    "W": "sonnet_baseline",
+    "X": "default_skill",
+    "Y": "without_skill",
+    "Z": "sonnet_skill"
+  }
+}

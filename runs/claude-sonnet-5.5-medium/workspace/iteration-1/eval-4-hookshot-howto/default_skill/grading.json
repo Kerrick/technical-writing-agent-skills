@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[47. Pin versions unless the docs track the current release] The install command for hookshot has no exact version pin (a minimum constraint is acceptable only if justified), because the docs are built per release.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "outputs/W/files/verify-webhook-signatures-with-hookshot.md: install line is `pip install hookshot flask`, with no version pin. Response: 'the install line is unpinned'."
+    },
+    {
+      "text": "[20. Keep one maintained copy of anything that changes] The guide does not reproduce Flask's installation steps; it links to Flask's own documentation and documents only how hookshot connects to Flask.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The page installs Flask itself (`pip install hookshot flask`) and never links to Flask's installation docs. There are no Flask documentation links anywhere on the page."
+    },
+    {
+      "text": "[19. Write every example as if it will be copied into production] The example reads the secret from configuration or the environment, not a hardcoded literal, and returns an error status on SignatureError; it uses no deprecated or insecure construct.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "app.py: `SECRET = os.environ[\"HOOKSHOT_SECRET\"]`; `except SignatureError: abort(400)`; there is a 'Put the signing secret in an environment variable, not in source control' step. No insecure constructs (uses hookshot's compare_digest)."
+    },
+    {
+      "text": "[7. Warn about silent and breaking failures too] A clearly marked warning (a callout or a labeled section) flags that passing re-serialized JSON (e.g. request.get_json()) instead of the raw body bytes makes verification fail.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Labeled section '## Don't verify a re-serialized body' with a wrong example: `event = request.get_json()` / `raw_body = json.dumps(event).encode()` and the comment '# Wrong: this body is rebuilt from parsed JSON'."
+    },
+    {
+      "text": "[36. Cross-cutting topics: full treatment once, local consequences everywhere] The guide states, in a line or two at the relevant step, the security consequence that applies here (e.g. replay protection via tolerance, or that tolerance=0 disables it) and links to a fuller security treatment. When the inputs give no address for the fuller treatment, naming it counts as linking.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The local consequence is there at the tolerance step: '> **Warning:** `tolerance=0` turns the age check off entirely, so a captured delivery stays valid forever.' But there is no link to, or name of, a fuller security treatment. The only cross-link goes to the page's own short 'Reject replays inside the tolerance window' section, and it comes from the 'doesn't do' list, not from the tolerance step."
+    },
+    {
+      "text": "[30. Give reasoning where the reader will wonder] The choice of tolerance value is explained in a few sentences in a titled box or clearly marked skippable paragraph at the step where it is set.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'## Adjust the tolerance' has a clearly marked paragraph: 'Reasoning: a shorter window leaves less time for a captured delivery to be replayed, but it means a server clock that drifts by more than the window rejects every delivery... Keep your servers on NTP before you tighten it.'"
+    },
+    {
+      "text": "[29. One page can serve beginners and experts] The guide starts with the simplest common use and moves to advanced material (e.g. migrating from a hand-rolled HMAC check, custom tolerance) in clearly titled, skippable sections, on one page rather than separate novice/expert pages.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "One page. A collapsible '<details><summary>New to webhooks? Why signatures matter</summary>' for beginners, the basic route first, and then titled sections later: '## Replace a hand-written HMAC check', '## Adjust the tolerance', '## Rotating the signing secret'."
+    },
+    {
+      "text": "[3. One primary job per page; other kinds of material only in short, labeled sections] The guide stays task-focused: it does not paste a full reference table of hookshot's API; it points to the reference instead, by link or by name.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "There is no full API table (the comparison table covers failure behaviour only). But it doesn't point to a reference by link or by name either. It only says 'Search for those names when you need help or the reference', which is a vague gesture, not a pointer to a named reference."
+    },
+    {
+      "text": "[38. Show commands and output the way readers will copy them] Command and output presentation is explained or consistent with one chosen convention, and the prompt marker, if any, is explained once.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Every shell command uses ```console with no prompt marker (`pip install hookshot flask`, `export HOOKSHOT_SECRET=...`, `HOOKSHOT_SECRET=whsec_test pytest`). One convention throughout, and there is no prompt marker that would need explaining."
+    },
+    {
+      "text": "[40. Say what isn't covered or done] The guide states what hookshot does not do (e.g. it does not parse the payload, deduplicate deliveries, or read the Flask request for you).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'## What hookshot does and doesn't do': 'It doesn't: parse or validate the payload...; remember deliveries, so a replay inside the tolerance window passes; store or rotate your signing secret; sign outgoing webhooks'."
+    },
+    {
+      "text": "[1. Run every example as written] The code, run against evals/developer-docs/files/hookshot.py with a body signed by hookshot.sign, verifies successfully as written, and any output shown matches.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Ran: extracted the page's code blocks into work/W/, copied hookshot.py beside them, and ran `uv run --with flask --with pytest python3 work/runtests.py work/W whsec_test` (sets HOOKSHOT_SECRET, runs pytest on the page's test file against the page's app). Output: 'test_valid_signature_is_accepted PASSED ... test_wrong_secret_is_rejected PASSED ... test_old_delivery_is_rejected PASSED ... test_missing_header_is_rejected PASSED / 4 passed in 0.10s'. The body is signed with hookshot.sign and returns 204, as the page says."
+    },
+    {
+      "text": "[11. Realistic names for real use; neutral names only for pure mechanism] Example payloads and names model a realistic webhook (e.g. an order or invoice event), not foo/bar.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "The running scenario is an `invoice.paid` webhook from a billing service, at route `/webhooks/billing`, with body `{\"type\": \"invoice.paid\", \"invoice_id\": \"inv_1042\"}` and handler `mark_invoice_paid`."
+    },
+    {
+      "text": "[37. Elisions in code must be valid code] Any elided code in samples is a valid comment that says what belongs there.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "The one elision is `...  # your handler code`, which is valid Python with a comment saying what belongs there. The stub `mark_invoice_paid` has the comment '# Replace with your own code that updates the invoice.'"
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 3,
+    "total": 13,
+    "pass_rate": 0.7692
+  },
+  "blind_label": "W"
+}

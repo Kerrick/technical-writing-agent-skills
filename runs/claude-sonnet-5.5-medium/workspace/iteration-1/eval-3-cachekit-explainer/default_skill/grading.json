@@ -1,0 +1,95 @@
+{
+  "assertion_results": [
+    {
+      "text": "[9. Connect new concepts to what readers already know] The page opens from functools.lru_cache/functools.cache, says memoize is a thin wrapper over functools.cache, and states where cached differs from lru_cache (TTL, keying on positional arguments only).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "First section '## Start from what you know: functools.lru_cache': 'It is a thin wrapper over functools.cache, which is lru_cache(maxsize=None)'; table row 'Cache key ... **Positional arguments only**' and 'Entries expire ... After ttl seconds'."
+    },
+    {
+      "text": "[13. Settle easily confused pairs where the confusion happens] A side-by-side comparison (table or equivalent) of memoize and cached appears in the page itself, covering at least keying, expiry, and boundedness.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Three-column table (lru_cache, @memoize, @cached) with rows 'Cache key', 'Entries expire', 'Size limit'."
+    },
+    {
+      "text": "[7. Warn about silent and breaking failures too] A warning callout flags that cached ignores keyword arguments in its key, silently returning a wrong result; the warning names that one failure.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'> **Warning: @cached ignores keyword arguments when matching calls.** ... No error is raised, and the result is the wrong one.' Names only that failure."
+    },
+    {
+      "text": "[4. Show the wrong form beside the right one] The page shows the wrong usage (calling a @cached function that differs only by a keyword argument) next to a correct alternative, and explains why the wrong one returns a stale value.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'price(10, currency=\"EUR\")   # Wrong: returns the USD result' then 'This version is correct: get_user(1) ... get_user(2)'; explains 'Its key is (10,), the same as the first call'."
+    },
+    {
+      "text": "[26. Mark wrong and failing samples inside the block] The wrong sample is marked as wrong inside the code block (e.g. a # Wrong: comment).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Inside the block: '# Wrong: returns the USD result; the function doesn't run' and '# Wrong: returns {'id': 1}'."
+    },
+    {
+      "text": "[40. Say what isn't covered or done] The page states plainly that the caches are per process and not shared between worker processes, and that memoize never evicts entries.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'The cache lives inside each worker process. With four workers, there are four independent caches'; '@memoize never evicts.'"
+    },
+    {
+      "text": "[43. Collect known limits] Known limitations and caveats are collected in a clearly titled section.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'## What cachekit leaves to you' collects single-entry invalidation, memory bound, cross-process sharing, locking, mutable results."
+    },
+    {
+      "text": "[22. One term per concept, with any unavoidable second name declared once] The page uses one term for the cache key concept (and for other core concepts) consistently, without undeclared synonyms.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Uses 'key'/'cache key' and 'entry' consistently."
+    },
+    {
+      "text": "[5. Show the longhand before the shortcut, and say how equivalent they are] The page shows longhand code for what @cached does (a dict keyed by args with timestamps) before or alongside the decorator, and says how exact the equivalence is.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'### What the implementation does' shows the full body of cached with comments ('# key: positional args only', 'store[args] = (now, value)') and 'This is the body of cached', i.e. exact equivalence; also memoize body 'That makes the equivalence exact'."
+    },
+    {
+      "text": "[23. Ask for predictions at the point of the concept] At the point the keyword-argument behavior is introduced, the reader is asked to predict the output before it is shown.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No point where the reader is asked to predict the output before it is shown; the keyword trap is shown with the result in the comments/output immediately."
+    },
+    {
+      "text": "[35. Flag teaching shortcuts] Any simplified illustrative implementation is flagged as such, with what production code would do instead.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Implementation listing flagged: 'It is explanatory, so don't copy it into your code: import cached instead.'"
+    },
+    {
+      "text": "[14. Put optional depth in titled, consistent asides] Optional depth, if any, is in titled asides distinct from warnings.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No titled asides; the implementation walkthrough is a normal subsection and the only callout is the Warning, so depth is not mixed into warnings."
+    },
+    {
+      "text": "[2. End lessons with a short, fixed closing that points forward] The page does not end with a conclusion that restates its content.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Ends with '## What cachekit leaves to you' list; no restating conclusion."
+    },
+    {
+      "text": "[10. Verify every fact against its source, and keep facts consistent] Every behavior stated about memoize and cached matches cachekit.py (e.g. expired entries are replaced on the next call, not evicted in the background).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Claims match source; ran samples: '1 USD'-style trap, bare @cached returns '<function cached.<locals>.decorator.<locals>.wrapper ...>' as the page shows, positional-only TypeError text matches. 'Expired entries are replaced, not removed. Nothing runs in the background.' Ran work/check.py against inputs cachekit.py: printed 'm -> unhashable type: 'list'', 'c -> cannot use 'tuple' as a dict key (unhashable type: 'list')', 'CacheInfo(hits=0, misses=3, maxsize=None, currsize=3)', '1 USD 1 USD 1 EUR', bare @cached call returned '<function cached.<locals>.decorator.<locals>.wrapper ...>', '{'id': 1} {'id': 1}', positional-only TypeError 'got some positional-only arguments passed as keyword arguments', hasattr(cached_fn,'cache_info')=False."
+    }
+  ],
+  "summary": {
+    "passed": 13,
+    "failed": 1,
+    "total": 14,
+    "pass_rate": 0.9286
+  },
+  "blind_label": "Z"
+}

@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[17. Document boundary behavior] Entries state boundary behavior with exact results, including at least: slugify on input with no ASCII-transliterable characters returning \"\", truncate on text already within width being unchanged, and truncate raising ValueError when width < len(ellipsis).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`>>> slugify(\"\u65e5\u672c\")` -> `''` and \"Returns `\"\"` if no ASCII letters or digits remain.\" truncate: \"**Returns:** `text` unchanged if `len(text) <= width`.\" Raises table: \"`ValueError` | `width must be at least len(ellipsis)` | `width < len(ellipsis)`\". Message matches the source exactly."
+    },
+    {
+      "text": "[42. State operational cost] dedupe_lines states that it holds every distinct line in memory, and natural_sort states it returns a new list (a copy) rather than sorting in place, with a note on cost for large inputs.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "dedupe_lines: \"The generator keeps every distinct line in memory until it is exhausted.\" natural_sort: \"**Returns:** a new `list`. `items` is not modified.\" There is no cost note for large inputs."
+    },
+    {
+      "text": "[45. Definitions first in lookup material] Each entry's description comes before its examples and fully defines the behavior on its own.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Each entry opens with a definition sentence (e.g. \"Cuts text to at most `width` characters, ellipsis included. Can cut mid-word.\"), then signature, param table, Returns, Behavior/Raises, and only then examples. The edge case for shorten is stated before its examples."
+    },
+    {
+      "text": "[39. Scale reference entries to their item] No entry contains an empty section or a section filled with \"None\"; entries share a fixed section order.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No empty or 'None' sections. The order definition/signature/params/Returns/Behavior-or-Raises/examples/Related holds, though shorten omits the **Behavior** label before its bullets."
+    },
+    {
+      "text": "[46. Frame every example, and give reference a set of task examples] Each entry ends with more than one framed example (a sentence or heading saying what it shows), covering common tasks and notable options such as sep or placeholder.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Examples are unframed doctests. dedupe_lines and natural_sort have a single example each, and there is no placeholder example."
+    },
+    {
+      "text": "[13. Settle easily confused pairs where the confusion happens] The page distinguishes truncate (may cut mid-word) from shorten (cuts at a word boundary) at the point of confusion, for example with a side-by-side table on the same input.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "shorten: \"**Related:** use [`truncate`](#truncate) to cut mid-word to an exact width.\" truncate: \"Can cut mid-word.\" ... \"**Related:** use [`shorten`](#shorten) to cut at a word boundary.\" The summary table has \"at a word boundary\" vs \"possibly mid-word\"."
+    },
+    {
+      "text": "[41. Change one thing at a time to show variants] At least one option (for example sep, ellipsis, or placeholder) is shown by keeping the input fixed and changing only that option, with the real output for each.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No option is varied on a fixed input. `slugify(\"a b\", sep=\"_\")` and `truncate(\"abcdef\", 3, \"...\")` have no default counterpart on the same input. The shorten pair (20 vs 50) varies `width`, a required argument, not an option like sep/ellipsis/placeholder."
+    },
+    {
+      "text": "[32. Show legacy forms for recognition] make_slug is shown, labeled deprecated or legacy, placed after the current functions, pointing to slugify, and noting it uses \"_\" as separator.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "make_slug is the last section: \"> **Deprecated since 0.8.** Use [`slugify(text, sep=\"_\")`](#slugify) instead.\" Before/After table `make_slug(text)` -> `slugify(text, sep=\"_\")`, and example -> `'hello_world'`."
+    },
+    {
+      "text": "[16. One shared sample domain per set of examples] Examples across entries share one small sample domain (e.g. the same set of article titles) rather than new data each time.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "There is no shared domain: [\"a\",\"b\",...], [\"file10\",...], \"The quick brown fox jumps over the lazy dog\", \"H\u00e9llo, W\u00f6rld! 2024\", \"a b\", \"Stra\u00dfe \u00c6on\", \"abcdef\"."
+    },
+    {
+      "text": "[33. Say where each name comes from] The page states the module that provides the functions (textkit) and how to import them.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`from textkit import slugify, truncate, shorten, dedupe_lines, natural_sort` near the top. It omits make_slug, which its own example uses."
+    },
+    {
+      "text": "[10. Verify every fact against its source, and keep facts consistent] Every default value, exception type, and output shown matches textkit.py, and the page records that it documents version 0.9.2.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "All 14 example outputs verified correct, but the page says \"Reference for `textkit` 0.9.\", not 0.9.2."
+    },
+    {
+      "text": "[21. Avoid claims that age] The page contains no time-relative wording such as \"new\", \"recently\", or \"currently\".",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The last line of the page reads \"No removal version has been announced.\" That is a claim about the present state that will age, of the same kind as 'currently'."
+    },
+    {
+      "text": "[4. Show the wrong form beside the right one] At least one entry shows a plausible wrong form beside the right one, labeled, with why it fails (for example, slicing text[:n] instead of truncate, or expecting dedupe_lines to ignore case).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "There is no wrong form with a reason. The make_slug Before/After table is a migration mapping, not a plausible mistake labeled with why it fails."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 7,
+    "total": 13,
+    "pass_rate": 0.4615
+  },
+  "blind_label": "Y"
+}

@@ -1,0 +1,12 @@
+{
+  "added": [
+    "evals/developer-docs/files/__pycache__/ledgerline.cpython-315.pyc",
+    "outputs/part-2-totals-with-summarize.md",
+    "scratch/__pycache__/ledgerline.cpython-315.pyc",
+    "scratch/ledgerline.py",
+    "scratch/part2.py",
+    "scratch/tutorial.py"
+  ],
+  "modified": [],
+  "deleted": []
+}

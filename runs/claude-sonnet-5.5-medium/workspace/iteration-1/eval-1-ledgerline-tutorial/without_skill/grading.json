@@ -1,0 +1,119 @@
+{
+  "assertion_results": [
+    {
+      "text": "[12. Let readers feel the problem before giving them the feature] Before summarize() appears, the reader computes per-account totals the laborious way (a hand-written loop) or is shown the cost of doing so in their Part 1 code.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The reader lists grocery entries, then is told \"adding up the amounts by hand for every account would get old quickly. That's what `summarize()` is for.\" No totals are computed by hand. The cost is asserted, not felt."
+    },
+    {
+      "text": "[5. Show the longhand before the shortcut, and say how equivalent they are] The page shows the longhand loop that summarize() stands for and states whether the two are exactly or approximately equivalent, naming at least one difference (for example, sorting by account name or omitting accounts with no entries).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No longhand totalling loop and no equivalence statement."
+    },
+    {
+      "text": "[18. Let failures recur while each one teaches] The reader deliberately passes a float amount to add(), the page shows the exact TypeError message, and that error leads into the next step (using Decimal or str).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The float case is prose only: \"It raises `TypeError` for a `float`... Quote your amounts and you won't hit this.\" The reader never triggers it."
+    },
+    {
+      "text": "[26. Mark wrong and failing samples inside the block] The failing float sample is marked as wrong or meant to fail inside the code block itself, not only in prose, and the reader is warned before running it.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "There is no failing sample."
+    },
+    {
+      "text": "[23. Ask for predictions at the point of the concept] At least once, at the point a concept is shown, the page asks the reader to predict an output before revealing it, or to change one specific value and predict the result.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No prediction prompts anywhere."
+    },
+    {
+      "text": "[25. Tell readers how to check their own work] Each checkpoint tells readers what to run and what output they should see.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Some steps say to run and show output (\"Run the file with `python part2.py`. You should see:\"). The finished-script checkpoint says \"Copy it into a fresh file to check that your version matches\" but shows no expected output. The report-loop and accounts= blocks give no run instruction."
+    },
+    {
+      "text": "[8. Show code changes by file size, with full-code checkpoints] Changed code is shown either as the whole short file with changes marked or as an anchored excerpt naming the file; the marking notation is explained the first time; at least one checkpoint shows the complete current code.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "\"The finished script\" shows the full file. But several excerpts (the report loop, both `summarize(accounts=...)` blocks) don't name the file. \"Replace the loop from the previous step... or add this below it\" leaves the file contents ambiguous. The finished script omits the `travel` line."
+    },
+    {
+      "text": "[15. Use \"we\" for shared narrative work] Shared build-along work uses \"we\" or \"let's\", with \"you\" for what the reader alone observes.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Second person throughout (\"you'll add a few more entries\", \"Add the following to the end of `part2.py`\"). No \"we\" or \"let's\"."
+    },
+    {
+      "text": "[28. Sequenced pages may build on earlier ones] The page links back to Part 1 and restates the starting code it builds on.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"In [Part 1](part-1.md) you created a `Ledger`\". The \"Before you start\" section rebuilds it: \"this tutorial rebuilds it.\""
+    },
+    {
+      "text": "[34. Say where to get help] Near the start, the page tells readers where to get help from people, using a channel the inputs name. If the inputs name none, the page invents none, and the response tells the user that a help channel is missing.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The inputs name no channel. The page invents none, but the response never tells the user one is missing."
+    },
+    {
+      "text": "[27. Tell learners where difficulty is normal] The page names at least one place where readers commonly get stuck (for example, Decimal vs float) and says difficulty there is normal.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"Accounts that have no entries are left out, even if you name them. This is easy to trip over\"."
+    },
+    {
+      "text": "[33. Say where each name comes from] When Ledger, Decimal, or summarize first appear, the page says which module provides them (ledgerline or decimal).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Decimal is never attributed to the decimal module (\"`add()` accepts a `Decimal`, an `int`, or a `str`\"). Ledger is only sourced by the import line."
+    },
+    {
+      "text": "[2. End lessons with a short, fixed closing that points forward] The page ends with a short closing (one sentence or brief recap) plus a pointer or preview of the next part, without walking back through the content.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Ends with \"What you learned\" bullets, then the literal placeholder \"In Part 3, you'll ...\". The forward pointer has no content."
+    },
+    {
+      "text": "[38. Show commands and output the way readers will copy them] Commands and their output are in separate blocks, because the prompt says the copy button grabs the whole block.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Output is in separate ```text blocks. The run command is inline prose (\"Run the file with `python part2.py`\"), never mixed into a block with output."
+    },
+    {
+      "text": "[1. Run every example as written] Every code sample, run in page order against evals/developer-docs/files/ledgerline.py, runs without errors except the deliberately failing one, and produces exactly the output the page shows.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Ran work/run_blocks.py (extracts every fenced block in page order, execs python blocks cumulatively in one namespace against a copy of ledgerline.py in work/Z/). The entries loop printed Weekly shop -84.50 / Weekly shop -62.25. summarize gave {'groceries': Decimal('-146.75'), 'rent': Decimal('-2400.00'), 'salary': Decimal('7000.00')}. The report and both accounts= blocks match. The finished script ran without error. All shown outputs match."
+    },
+    {
+      "text": "[37. Elisions in code must be valid code] No code block contains a bare ... elision; any omitted code is marked with a comment that says what belongs there.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No code block contains `...`. The `...` in \"In Part 3, you'll ...\" is in prose."
+    },
+    {
+      "text": "[11. Realistic names for real use; neutral names only for pure mechanism] Examples use realistic account names and memos (such as rent, salary) rather than foo/bar.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Uses rent, salary, groceries, with memos \"March paycheck\", \"Weekly shop\"."
+    },
+    {
+      "text": "[44. Refer to other parts by stable label, never by position] The page never refers to other content as \"above\" or \"below\".",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No \"above\" or \"below\" referring to page content. \"add this below it\" refers to placement in the reader's file. \"from the previous step\" is positional, but it isn't above or below."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 11,
+    "total": 18,
+    "pass_rate": 0.3889
+  },
+  "blind_label": "Z"
+}

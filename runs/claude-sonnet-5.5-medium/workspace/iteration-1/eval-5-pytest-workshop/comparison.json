@@ -1,0 +1,56 @@
+{
+  "scores": {
+    "X": {
+      "organization": 9,
+      "accuracy": 8,
+      "usability": 9,
+      "polish": 8,
+      "overall": 9,
+      "notes": "Strongest for mixed readers. The landing page routes readers and has a unittest-to-pytest map, a scope list, and a help line. The script shows unittest beside pytest, includes a prediction pause, a silent-collection trap, a real failure output block, a 'that's normal' note, and a closing motivated by the viewer's own code. It's honest about unverified output and the unpinned install. Decimal example is slightly heavier than needed."
+    },
+    "W": {
+      "organization": 8,
+      "accuracy": 8,
+      "usability": 7,
+      "polish": 8,
+      "overall": 7,
+      "notes": "Clean two-column production script with timings, a carefully reasoned failure (the // rounding makes the test wrong, not the code) and good recording notes. The landing page is tidy but has many bracketed placeholders, little reader routing, and no help channel. The table format hides commands from copy-paste."
+    },
+    "Y": {
+      "organization": 7,
+      "accuracy": 7,
+      "usability": 6,
+      "polish": 7,
+      "overall": 6,
+      "notes": "Readable, friendly script, but a generic landing page: no routing, no bridge, no help. 'Anything recent will behave the same for today' is an ageing claim. Output is only in stage directions. Module blurbs are paragraphs, not a scannable map."
+    },
+    "Z": {
+      "organization": 7,
+      "accuracy": 7,
+      "usability": 6,
+      "polish": 4,
+      "overall": 6,
+      "notes": "Good landing page routing and a solid hand-calculate-first teaching idea. But the script deliberately omits all pytest output, offers two ways to run pytest early, and says functions must start with 'test_' (pytest's default is 'test'). It also left an ~895-file Python venv in outputs/scratch, which is a serious polish problem."
+    }
+  },
+  "ranking": [
+    "X",
+    "W",
+    "Y",
+    "Z"
+  ],
+  "reasoning": "X serves both stated audiences best (unittest map, fixture-newcomer route, normal-difficulty note, help line) and gives the most usable screencast material. W is the most production-ready script but the weakest landing page for mixed readers. Y and Z are close: Z has better routing but no shown output and a stray venv in the deliverable; Y is cleaner but generic and has an ageing claim.",
+  "assertion_notes": "There's no inputs/ directory, so #34 depends on whether the response flags the missing channels; X's 'ask the instructor in the room' counted as not invented. #38's 'prompt marker explained once' is moot when no output uses prompts, so I graded it on whether output is shown in blocks at all. #47 is satisfied by an explanation in the response (X) or the script (Y), even a weak one. #12 is judgment-heavy because no module 1 script introduces fixtures or parametrize; only X ties the preview to code the viewer typed. #31's two-part requirement (who can skip + return when stuck) failed every label, even X's good unittest map. I didn't run code samples because no assertion asks whether they run.",
+  "label_mapping": {
+    "W": "sonnet_baseline",
+    "X": "default_skill",
+    "Y": "without_skill",
+    "Z": "sonnet_skill"
+  },
+  "ranking_by_setup": [
+    "default_skill",
+    "sonnet_baseline",
+    "without_skill",
+    "sonnet_skill"
+  ]
+}

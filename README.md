@@ -43,7 +43,7 @@ Each hit is a phrase for the agent to fix or defend, not proof of a mistake. Lin
 | - | - |
 | Format | The [Agent Skills specification](https://agentskills.io/specification). All three skills pass the format validator that this repository's checks run. |
 | Agent | Any agent that loads Agent Skills. |
-| Model | developer-docs was made for Claude Opus 5.5 at medium effort. A variant made the same way for Claude Sonnet 5.5 at medium effort is in [`runs/claude-sonnet-5.5-medium/skill/developer-docs/`](runs/claude-sonnet-5.5-medium/skill/developer-docs/). Another model may already follow some of their rules, or miss others they don't list. |
+| Model | developer-docs was made for Claude Opus 5.5 at medium effort. On Claude Sonnet 5.5 at medium effort it also does best: in evals it passed 80% of its assertions, against 53% with no skill and 51% for a variant the method made for Sonnet. |
 | Installing | [Node.js](https://nodejs.org/), for `npx skills`. Or copy the folders by hand. |
 | `hunt.py` (readme-rewrite only) | [uv](https://docs.astral.sh/uv/), or Python 3.11 or later with `python3 scripts/hunt.py`. It uses only the standard library. |
 
@@ -74,17 +74,6 @@ ln -s ~/src/technical-writing-agent-skills/skills/skill-authoring ~/.claude/skil
 
 On Windows, use `npx skills`, which copies the folders for you.
 
-To use the variant made for Claude Sonnet 5.5 in place of the default developer-docs, install it from its folder:
-
-```
-npx skills add https://github.com/Kerrick/technical-writing-agent-skills/tree/main/runs/claude-sonnet-5.5-medium/skill/developer-docs -g
-```
-
-Or, from a clone, link it instead of the default:
-
-```
-ln -s ~/src/technical-writing-agent-skills/runs/claude-sonnet-5.5-medium/skill/developer-docs ~/.claude/skills/developer-docs
-```
 
 Each [release](https://github.com/Kerrick/technical-writing-agent-skills/releases) also has a ZIP of each skill, holding its folder, for installing without git or Node.js: unzip it into your agent's skills folder.
 
@@ -117,7 +106,7 @@ npx skills update -g
 - [`skills/skill-authoring/SKILL.md`](skills/skill-authoring/SKILL.md) and its [references](skills/skill-authoring/references/): the workflow, the rules for every skill, and how to evaluate one.
 - [How the skill is made](method/README.md): the method that produced developer-docs, its status, how to repeat it for another model, and what the first run taught.
 - [Sources](method/sources.md): the seven documentation sets, and why each was read the way it was.
-- [The Sonnet run](runs/claude-sonnet-5.5-medium/README.md): the same method on Claude Sonnet 5.5 at medium effort, run entirely by headless sessions, and the variant it made.
+- [The Sonnet run](runs/claude-sonnet-5.5-medium/README.md): the same method on Claude Sonnet 5.5 at medium effort, run entirely by headless sessions, and the variant it made, which the default outperforms on Sonnet.
 - [The first run](runs/claude-opus-5.5-medium/README.md): the model, settings, and every intermediate file from making the current developer-docs, from the skill the model wrote from memory to the [47 rules](runs/claude-opus-5.5-medium/pipeline/kept.md) it kept.
 - [`evals/`](evals/): for each skill, test prompts with input files and assertions, and sample requests marked with whether the skill should trigger on them.
 

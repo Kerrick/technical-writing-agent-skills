@@ -1,0 +1,119 @@
+{
+  "assertion_results": [
+    {
+      "text": "[12. Let readers feel the problem before giving them the feature] Before summarize() appears, the reader computes per-account totals the laborious way (a hand-written loop) or is shown the cost of doing so in their Part 1 code.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Section \"The laborious way: add them up yourself\" has the loop `totals[entry.account] = totals.get(entry.account, 0) + entry.amount`, followed by \"That works, but look at what we had to do... We would write the same loop in every script\"."
+    },
+    {
+      "text": "[5. Show the longhand before the shortcut, and say how equivalent they are] The page shows the longhand loop that summarize() stands for and states whether the two are exactly or approximately equivalent, naming at least one difference (for example, sorting by account name or omitting accounts with no entries).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"`summarize()` is the loop we just wrote, with one difference: it returns the accounts sorted by name.\" Later: \"The two are equivalent for the totals. They differ in order (our loop kept first-use order) and in the starting value\"."
+    },
+    {
+      "text": "[18. Let failures recur while each one teaches] The reader deliberately passes a float amount to add(), the page shows the exact TypeError message, and that error leads into the next step (using Decimal or str).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Block `ledger.add(\"groceries\", 84.17, \"Weekly shop\")` shows `TypeError: amount must be Decimal, int, or str, not float`. It leads into \"Pass a string instead\" and `ledger.add(\"groceries\", \"-84.17\", ...)`."
+    },
+    {
+      "text": "[26. Mark wrong and failing samples inside the block] The failing float sample is marked as wrong or meant to fail inside the code block itself, not only in prose, and the reader is warned before running it.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Inside the block: `# Wrong: a float amount raises TypeError.` Before it: \"The next block is meant to fail, so don't paste it into your real file.\""
+    },
+    {
+      "text": "[23. Ask for predictions at the point of the concept] At least once, at the point a concept is shown, the page asks the reader to predict an output before revealing it, or to change one specific value and predict the result.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"Before you run it, predict two things. Which account comes first in the result, `salary` or `rent`?\" Also \"What do you expect to get back, a total of `0` or nothing?\" and the closing exercise \"predict the new groceries total\"."
+    },
+    {
+      "text": "[25. Tell readers how to check their own work] Each checkpoint tells readers what to run and what output they should see.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Hand loop: \"Running the file prints:\" plus output. Check your work: \"Run it and confirm that `ledger.summarize()` prints three accounts in the order `groceries`, `rent`, `salary`, with the totals shown above.\" Every sample has its output block."
+    },
+    {
+      "text": "[8. Show code changes by file size, with full-code checkpoints] Changed code is shown either as the whole short file with changes marked or as an anchored excerpt naming the file; the marking notation is explained the first time; at least one checkpoint shows the complete current code.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Excerpts don't name the file. The only anchor is \"Everything we add today goes below these lines.\" No checkpoint shows the complete current code: \"Your file should now be the Part 1 setup followed by the `groceries` entry\" describes the file but doesn't show it, and it conflicts with the earlier blocks the reader added."
+    },
+    {
+      "text": "[15. Use \"we\" for shared narrative work] Shared build-along work uses \"we\" or \"let's\", with \"you\" for what the reader alone observes.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"In this part we total those entries\", \"we can loop over them\", \"look at what we had to do\". \"you\" is used for the reader's own predictions (\"Before you run it, predict\")."
+    },
+    {
+      "text": "[28. Sequenced pages may build on earlier ones] The page links back to Part 1 and restates the starting code it builds on.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"In [Part 1](part-1.md) we created a `Ledger`\". The \"Where we're starting\" section restates the code: \"Here is the ledger from Part 1.\""
+    },
+    {
+      "text": "[34. Say where to get help] Near the start, the page tells readers where to get help from people, using a channel the inputs name. If the inputs name none, the page invents none, and the response tells the user that a help channel is missing.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "The page invents no channel. The response says: \"I left out install steps and a 'where to get help' line because I couldn't find the package name or a support channel... add one if you have a channel.\""
+    },
+    {
+      "text": "[27. Tell learners where difficulty is normal] The page names at least one place where readers commonly get stuck (for example, Decimal vs float) and says difficulty there is normal.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Never says any difficulty is common or normal. \"If you see a `TypeError`, an amount is a float\" is troubleshooting, not normalizing."
+    },
+    {
+      "text": "[33. Say where each name comes from] When Ledger, Decimal, or summarize first appear, the page says which module provides them (ledgerline or decimal).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"`Ledger` comes from the `ledgerline` module.\" Also \"`Decimal` comes from Python's standard `decimal` module.\" The Decimal note comes where Decimal is first used in code (`Decimal(\"0\")`), but after earlier prose mentions of Decimal as a type."
+    },
+    {
+      "text": "[2. End lessons with a short, fixed closing that points forward] The page ends with a short closing (one sentence or brief recap) plus a pointer or preview of the next part, without walking back through the content.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"You can now total a ledger by account, and you know which accounts `summarize()` leaves out. Continue to [Part 3](part-3.md).\""
+    },
+    {
+      "text": "[38. Show commands and output the way readers will copy them] Commands and their output are in separate blocks, because the prompt says the copy button grabs the whole block.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Every python block is followed by a separate ```text output block. The version-check command is inline in prose."
+    },
+    {
+      "text": "[1. Run every example as written] Every code sample, run in page order against evals/developer-docs/files/ledgerline.py, runs without errors except the deliberately failing one, and produces exactly the output the page shows.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Ran work/run_blocks.py (extracts every fenced block in page order, execs python blocks cumulatively in one namespace against a copy of ledgerline.py in work/X/). Outputs: the loop gave {'salary': Decimal('6400.00'), 'rent': Decimal('-3000.00')}. summarize gave {'rent': Decimal('-3000.00'), 'salary': Decimal('6400.00')}. Formatted: rent: -3000.00 / salary: 6400.00. summarize(['groceries']) gave {}. The float block gave EXCEPTION TypeError: amount must be Decimal, int, or str, not float (intended). The final run gave {'groceries': Decimal('-84.17'), ...}. All match the page."
+    },
+    {
+      "text": "[37. Elisions in code must be valid code] No code block contains a bare ... elision; any omitted code is marked with a comment that says what belongs there.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No code block contains `...`."
+    },
+    {
+      "text": "[11. Realistic names for real use; neutral names only for pure mechanism] Examples use realistic account names and memos (such as rent, salary) rather than foo/bar.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Uses salary, rent, groceries, with memos \"March paycheck\", \"Weekly shop\"."
+    },
+    {
+      "text": "[44. Refer to other parts by stable label, never by position] The page never refers to other content as \"above\" or \"below\".",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Line 15: \"Everything we add today goes below these lines.\" Line 139: \"with the totals shown above.\""
+    }
+  ],
+  "summary": {
+    "passed": 15,
+    "failed": 3,
+    "total": 18,
+    "pass_rate": 0.8333
+  },
+  "blind_label": "X"
+}

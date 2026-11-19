@@ -1,0 +1,56 @@
+{
+  "scores": {
+    "W": {
+      "organization": 8,
+      "accuracy": 9,
+      "usability": 6,
+      "polish": 8,
+      "overall": 7,
+      "notes": "Concise, consistent template that respects 'don't make it bloated'. The only page that records 0.9.2. All 13 examples are correct. Weak spots: the `import textkit` shown doesn't match the bare-name examples, examples are sparse and unframed (one each for dedupe_lines and natural_sort), and there is no cost note on natural_sort. The truncate/shorten distinction is only a one-way pointer."
+    },
+    "X": {
+      "organization": 7,
+      "accuracy": 8,
+      "usability": 7,
+      "polish": 8,
+      "overall": 7,
+      "notes": "Tight and readable. The upfront guidance on truncate vs shorten is good, and so are the \u00df and newline-ending notes. All outputs are correct. It deliberately omits the version (a wrong call for a versioned docs site). make_slug sits second, interleaved with current functions. Examples are thin."
+    },
+    "Y": {
+      "organization": 7,
+      "accuracy": 8,
+      "usability": 7,
+      "polish": 7,
+      "overall": 6,
+      "notes": "Thorough parameter tables and a precise Raises table with the exact message. Alphabetical order splits truncate and shorten. It says 0.9 rather than 0.9.2, and 'No removal version has been announced' will age. Examples are thin and unframed. Its tables make it somewhat heavier than the 'not bloated' brief asks for."
+    },
+    "Z": {
+      "organization": 6,
+      "accuracy": 8,
+      "usability": 9,
+      "polish": 7,
+      "overall": 8,
+      "notes": "Most useful for readers: rich call/result tables, the truncate-vs-shorten comparison table, cost notes, the wrong-form `sorted` contrast, newline pitfalls and migration advice. But it is the longest page, against the 'don't bloat' request. Section order is irregular, with behavior facts after examples. It contains one false claim (non-string input to shorten raises AttributeError, not TypeError), says 0.9 rather than 0.9.2, and its slugify fallback snippet uses an undefined post_id."
+    }
+  },
+  "ranking": [
+    "Z",
+    "W",
+    "X",
+    "Y"
+  ],
+  "reasoning": "Z covers the most behavior a reference user needs (comparisons, costs, pitfalls) and is the only page with a wrong-vs-right example and a real truncate/shorten table. Its length and irregular structure cost it on concision and organization. W is the cleanest and most faithful to the 'small, not bloated' brief and is the only page with the exact version, but it is thin on examples and guidance. X is similar to W but misplaces make_slug and omits the version. Y is solid and precise, but its alphabetical order separates the confusable pair, it uses aging wording, and it is the heaviest per entry for the least example coverage.",
+  "assertion_notes": "#16 (shared sample domain) fails for every label. None tried it, so it doesn't discriminate. #42 is ambiguous about whether the 'note on cost for large inputs' attaches to natural_sort or to either function. I read it as natural_sort, which only Z satisfies (X's 'memory use grows with the number of distinct lines' would pass under the looser reading). #13 passes with a one-line cross-reference under a lenient reading of 'at the point of confusion'. Only Z has the suggested side-by-side table. #21 is borderline for Z, where the only hit is the 'Current' table header. #39 and #45 penalize Z's richer interleaved structure, while sparse pages pass them easily. #46 failed all four, because none frames each example with a sentence.",
+  "label_mapping": {
+    "W": "without_skill",
+    "X": "sonnet_skill",
+    "Y": "sonnet_baseline",
+    "Z": "default_skill"
+  },
+  "ranking_by_setup": [
+    "default_skill",
+    "without_skill",
+    "sonnet_skill",
+    "sonnet_baseline"
+  ]
+}

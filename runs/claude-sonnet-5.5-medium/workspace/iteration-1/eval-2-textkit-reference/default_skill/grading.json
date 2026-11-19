@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[17. Document boundary behavior] Entries state boundary behavior with exact results, including at least: slugify on input with no ASCII-transliterable characters returning \"\", truncate on text already within width being unchanged, and truncate raising ValueError when width < len(ellipsis).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "slugify table: `slugify(\"\u65e5\u672c\u8a9e\")` | `''`, and \"Returns `\"\"` if nothing survives.\" truncate: \"Text that already fits (`len(text) <= width`) is returned unchanged, with no ellipsis. Raises `ValueError` if `width` is less than `len(ellipsis)`.\" Table: `truncate(\"abc\", 0)` | raises `ValueError`. Verified by running."
+    },
+    {
+      "text": "[42. State operational cost] dedupe_lines states that it holds every distinct line in memory, and natural_sort states it returns a new list (a copy) rather than sorting in place, with a note on cost for large inputs.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "dedupe_lines: \"Cost: it keeps every distinct line in memory until the generator is discarded, so memory grows with the number of distinct lines.\" natural_sort: \"Returns a new list ... `items` is not modified.\" and \"Cost: it sorts a copy, so memory is one extra list.\""
+    },
+    {
+      "text": "[45. Definitions first in lookup material] Each entry's description comes before its examples and fully defines the behavior on its own.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Behavior facts come after examples. shorten's \"**The result can be longer than `width`.**\" and its Cost paragraph follow the call table. dedupe_lines's \"Cost: it keeps every distinct line in memory...\" comes after the first code example. slugify's \"doesn't enforce uniqueness\" follows the table. So the description before the examples doesn't fully define behavior."
+    },
+    {
+      "text": "[39. Scale reference entries to their item] No entry contains an empty section or a section filled with \"None\"; entries share a fixed section order.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "There are no empty sections, but the order isn't fixed. Cost appears after the table (shorten), between two code examples (dedupe_lines), or at the very end (natural_sort). slugify ends with a code snippet plus prose, natural_sort with bullets and Cost."
+    },
+    {
+      "text": "[46. Frame every example, and give reference a set of task examples] Each entry ends with more than one framed example (a sentence or heading saying what it shows), covering common tasks and notable options such as sep or placeholder.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Most examples are bare Call/Result table rows with no framing sentence per example. Entries don't end with examples: slugify ends with a uniqueness paragraph, shorten with Cost and a comparison subsection, natural_sort with \"Cost: ...\". Only dedupe_lines has a framed example (\"Removing repeated lines from a file, line endings included:\")."
+    },
+    {
+      "text": "[13. Settle easily confused pairs where the confusion happens] The page distinguishes truncate (may cut mid-word) from shorten (cuts at a word boundary) at the point of confusion, for example with a side-by-side table on the same input.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"### truncate or shorten?\" is a side-by-side table (\"Cuts at | Exact character position | Word boundary\", \"Can split a word | Yes | No\"), placed right after shorten, plus \"Use `truncate` for fixed-size fields ... Use `shorten` for prose\"."
+    },
+    {
+      "text": "[41. Change one thing at a time to show variants] At least one option (for example sep, ellipsis, or placeholder) is shown by keeping the input fixed and changing only that option, with the real output for each.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`truncate(\"abcdef\", 3)` -> `'ab\u2026'` and `truncate(\"abcdef\", 3, \"...\")` -> `'...'`. Same input, only ellipsis changed. Both verified by running."
+    },
+    {
+      "text": "[32. Show legacy forms for recognition] make_slug is shown, labeled deprecated or legacy, placed after the current functions, pointing to slugify, and noting it uses \"_\" as separator.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"## make_slug (legacy)\" is the last section: \"Deprecated since 0.8. Use [`slugify`](#slugify). `make_slug(text)` is equivalent to `slugify(text, sep=\"_\")`\" and the table shows `'hello_world'`."
+    },
+    {
+      "text": "[16. One shared sample domain per set of examples] Examples across entries share one small sample domain (e.g. the same set of article titles) rather than new data each time.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "There is no shared domain: \"H\u00e9llo, W\u00f6rld! 2024\", \"Stra\u00dfe\", \"The quick brown fox\", \"abcdef\", \"Supercalifragilistic word\", \"access.log\", [\"file10\",...], [\"v1.10\",...], [\"x01\",\"x1\"]."
+    },
+    {
+      "text": "[33. Say where each name comes from] The page states the module that provides the functions (textkit) and how to import them.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"Every name on this page is imported from the `textkit` module:\" followed by `from textkit import slugify, truncate, shorten, dedupe_lines, natural_sort`."
+    },
+    {
+      "text": "[10. Verify every fact against its source, and keep facts consistent] Every default value, exception type, and output shown matches textkit.py, and the page records that it documents version 0.9.2.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The page says \"Version 0.9.\", not 0.9.2. It also says \"Passing `None` or another non-string type to a text function raises `TypeError`\", but running `shorten(None, 5)` raises AttributeError: 'NoneType' object has no attribute 'split'. All 28 table and example outputs did verify."
+    },
+    {
+      "text": "[21. Avoid claims that age] The page contains no time-relative wording such as \"new\", \"recently\", or \"currently\".",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The make_slug table header reads \"| Legacy | Current |\". 'Current' is time-relative wording of the kind the assertion bans (borderline, since it is a column label)."
+    },
+    {
+      "text": "[4. Show the wrong form beside the right one] At least one entry shows a plausible wrong form beside the right one, labeled, with why it fails (for example, slicing text[:n] instead of truncate, or expecting dedupe_lines to ignore case).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"**Plain `sorted` gets this wrong.** `sorted([\"file10\", \"file9\"])` returns `['file10', 'file9']`.\" sits beside natural_sort's correct output (verified by running). The dedupe_lines entry also shows the newline pitfall with the fix `dedupe_lines(line.rstrip(\"\\n\") for line in f)`."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 6,
+    "total": 13,
+    "pass_rate": 0.5385
+  },
+  "blind_label": "Z"
+}

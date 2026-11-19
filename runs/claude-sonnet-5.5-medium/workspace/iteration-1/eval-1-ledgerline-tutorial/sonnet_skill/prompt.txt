@@ -1,0 +1,7 @@
+Read the skill at /Users/kerrick/Developer/technical-writing-agent-skill/runs/claude-sonnet-5.5-medium/skill/developer-docs/SKILL.md and follow it for this task. Its reference files and scripts are in that same folder; read them when SKILL.md says to.
+
+Task:
+
+I'm writing a multi-part tutorial for our little Python library ledgerline (source is in evals/developer-docs/files/ledgerline.py, v2.1.0). Part 1 had readers create a Ledger and add a few entries for rent and salary. Can you write Part 2? The goal is that by the end they use summarize() to get per-account totals. Our docs are plain Markdown on a site whose copy button grabs the whole code block.
+
+Save what you write as Markdown files in the outputs/ folder of the current directory.

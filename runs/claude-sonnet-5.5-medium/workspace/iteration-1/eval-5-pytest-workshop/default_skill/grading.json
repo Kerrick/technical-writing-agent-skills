@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[6. Give the docs a map and each section a landing page] The landing page summarizes the course, lists all six modules with one line on what each covers, and sends different readers (unittest users, people new to fixtures) to different starting points or tells them what they can skip.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "index.md has a summary ('A one-day workshop for backend developers. You will write tests for a small invoicing service...'), a six-row table with one line each, and routing: 'You've used `unittest`... [the unittest-to-pytest map](#coming-from-unittest) below lists the pairs'; 'You've never written a fixture. Module 2 builds one from scratch'; 'Already comfortable with a module's topic? Skip to the next one. Module 1 is the quickest to skim if you have written pytest tests before.'"
+    },
+    {
+      "text": "[31. Bridge gaps in assumed knowledge] The course bridges basics only some attendees have, with a short bridging section or module (e.g. unittest-to-pytest or fixture basics) that says who can skip it and invites readers to return when stuck.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "There's a 'Coming from unittest' section with a mapping table (setUp/tearDown -> Fixtures, subTest -> Parametrization...), which is a real bridge. But it doesn't say who can skip it, and it doesn't invite readers to return when stuck. Both are required."
+    },
+    {
+      "text": "[34. Say where to get help] The landing page or module 1 says where to get help from people and how to report a mistake in the material, using channels the inputs name. If the inputs name none, it invents none, and the response tells the user they're missing.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No inputs exist, so no channels are named. index.md 'Getting help': 'Ask the instructor in the room... If you find a mistake in these materials, tell the instructor so it gets corrected.' It invents no URL or Slack. response.md tells the user: 'Help channel. I used \"ask the instructor in the room\", since I had no other channel.'"
+    },
+    {
+      "text": "[9. Connect new concepts to what readers already know] Module 1 connects pytest concepts to their unittest counterparts (e.g. plain assert vs self.assertEqual) and flags where the unittest habit misleads.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Shows the unittest version side by side ('A class, a base class to inherit, and `self.assertEqual`. Now the pytest version'), then addresses the assertEqual habit: 'pytest rewrote our plain `assert` so it can show both values, which is why we didn't need `assertEqual`.' The landing page also has the full unittest map."
+    },
+    {
+      "text": "[18. Let failures recur while each one teaches] The module 1 script includes a deliberately failing test, shows pytest's actual failure output, and uses it to teach reading the assertion diagnostics.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "5:30 'Break it on purpose': `assert total == Decimal(\"25.00\")  # Wrong on purpose`, then a text block with the output: '>       assert total == Decimal(\"25.00\")' / 'E       assert Decimal('27.50') == Decimal('25.00')'. Narration teaches: 'first the `>` line to find where, then the `E` lines to find what.'"
+    },
+    {
+      "text": "[15. Use \"we\" for shared narrative work] The script uses \"we\"/\"let's\" for shared work and reads as one person talking to another, not as neutral summary.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'In the next eight minutes we'll write one test, run it, break it on purpose', 'We'll make one', 'How did pytest find our test...?' It's conversational throughout."
+    },
+    {
+      "text": "[27. Tell learners where difficulty is normal] The script names a spot where people commonly get stuck (e.g. test discovery naming rules) and says that is normal.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'If you're new to this, that reading may feel slow. That's normal. It speeds up after a handful of failures.' It also flags the discovery naming trap: 'That rule has a trap, and it fails silently.'"
+    },
+    {
+      "text": "[24. Show several solutions when judgment is the goal] Module 1 keeps a single path to the first passing test (no alternative approaches presented at that point).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "The pytest path is single: venv, install, invoices.py, test_invoices.py, `pytest`. The unittest block is shown only for contrast and labelled 'We won't keep this file', so it isn't an alternative path. `-v` comes after the first pass."
+    },
+    {
+      "text": "[2. End lessons with a short, fixed closing that points forward] Module 1 ends with a brief fixed closing (one sentence or short recap) and a pointer or preview of module 2.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'7:30 Close': 'You can now write a plain-`assert` test, run it with `pytest`, and read a failure. Next, in Module 2, we'll see what happens when five tests all need the same line items, and fix it with a fixture.'"
+    },
+    {
+      "text": "[12. Let readers feel the problem before giving them the feature] Before introducing a pytest feature (e.g. fixtures or parametrize, if previewed), the script or module plan shows the problem it solves in code the viewer has just written.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'What we left out' ties the coming features to the code just written: 'We also typed the line items inside the test. Once several tests need them, you'd move that setup into a fixture'; 'We tested one invoice, and one invoice isn't enough... Module 3 does that without copying the test.' The fixture is motivated by the viewer's own inline line items."
+    },
+    {
+      "text": "[38. Show commands and output the way readers will copy them] Commands and output in the video script are shown as a transcript block or split blocks, with the choice appropriate to a screencast and the prompt marker explained once.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Split blocks: commands in ```bash blocks (`pytest`, `pytest -v`) and failure output in a separate ```text block. The header says 'Code blocks show exactly what appears in the editor or terminal'. No prompt marker is used, so none needs explaining. That suits a screencast."
+    },
+    {
+      "text": "[21. Avoid claims that age] Neither deliverable contains time-relative wording such as \"new\", \"latest\", or \"currently\".",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Mechanical scan: only non-temporal hits ('fix that now', 'the current folder', 'If you're new to this')."
+    },
+    {
+      "text": "[47. Pin versions unless the docs track the current release] Any install command either pins the version the workshop was tested against or explains why it doesn't, since a one-day workshop is written against one version.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "The command is unpinned (`python -m pip install pytest`), but response.md explains why and flags it: 'Install isn't pinned. I couldn't check a pytest version... Because the workshop is written for one fixed day, you'll probably want to pin the version you rehearse with.'"
+    }
+  ],
+  "summary": {
+    "passed": 12,
+    "failed": 1,
+    "total": 13,
+    "pass_rate": 0.9231
+  },
+  "blind_label": "X"
+}

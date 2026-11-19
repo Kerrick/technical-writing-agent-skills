@@ -1,0 +1,56 @@
+{
+  "scores": {
+    "Z": {
+      "organization": 9,
+      "accuracy": 9,
+      "usability": 9,
+      "polish": 8,
+      "overall": 9,
+      "notes": "Opens from lru_cache with a three-way table, shows the actual implementation flagged as explanatory, proper Warning callout, wrong/right samples with real output, data-exposure framing of the all-keyword case, positional-only fix. Slightly long; bare-@cached example was not re-run per its own reply (but it is correct)."
+    },
+    "W": {
+      "organization": 8,
+      "accuracy": 9,
+      "usability": 8,
+      "polish": 9,
+      "overall": 8,
+      "notes": "Tight, clean, verified outputs, clear WRONG/RIGHT block and good decision list. lru_cache mapping comes late; no callout; limits scattered rather than collected."
+    },
+    "X": {
+      "organization": 7,
+      "accuracy": 9,
+      "usability": 8,
+      "polish": 7,
+      "overall": 7,
+      "notes": "Good lru-anchored mental model and useful extras (self in key, all-keyword empty key). Redundant tables (short version, scenario, lru comparison); no wrong marker or callout; agent ran nothing."
+    },
+    "Y": {
+      "organization": 7,
+      "accuracy": 9,
+      "usability": 8,
+      "polish": 7,
+      "overall": 7,
+      "notes": "Thorough and verified, has a 'What cachekit does not do' section and migration table. Somewhat sprawling ('In a test run...' narration inside the doc), lru framing deferred, no callout or wrong marker."
+    }
+  },
+  "ranking": [
+    "Z",
+    "W",
+    "X",
+    "Y"
+  ],
+  "reasoning": "All four are factually accurate against cachekit.py. Z best serves lru_cache-literate readers by starting from what they know and showing the mechanism, and it marks the silent failure most visibly. W is the most concise and polished but defers the lru_cache connection and lacks a collected limits section. X and Y are comparable; X connects to lru_cache earlier, Y collects limits, both are wordier with overlapping tables.",
+  "assertion_notes": "Assertions 35 (teaching shortcuts) and 14 (optional asides) are conditional; outputs with no simplified implementation or asides pass vacuously. Assertion 9's 'opens from' is a judgment call: W and Y contain the mapping content but place it late, graded FAIL. Assertion 23 (predictions) failed for every label. Y and Z left a __pycache__ in inputs per changes.json (not graded).",
+  "label_mapping": {
+    "W": "sonnet_skill",
+    "X": "without_skill",
+    "Y": "sonnet_baseline",
+    "Z": "default_skill"
+  },
+  "ranking_by_setup": [
+    "default_skill",
+    "sonnet_skill",
+    "without_skill",
+    "sonnet_baseline"
+  ]
+}

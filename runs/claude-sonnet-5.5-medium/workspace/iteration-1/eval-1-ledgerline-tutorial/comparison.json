@@ -1,0 +1,56 @@
+{
+  "scores": {
+    "X": {
+      "organization": 9,
+      "accuracy": 9,
+      "usability": 8,
+      "polish": 8,
+      "overall": 9,
+      "notes": "The only page with the narrative arc the task expects: restated starting code, hand loop, summarize() as the fix with stated differences, predictions, a marked deliberate float error, and a closing linking to Part 3. Weak spot: which blocks belong in the reader's file is unclear. \"Everything we add today goes below these lines\" and \"don't paste it into your real file\" pull against each other, and there's no full-file checkpoint. Its response flags the missing help channel."
+    },
+    "Y": {
+      "organization": 8,
+      "accuracy": 10,
+      "usability": 9,
+      "polish": 8,
+      "overall": 7,
+      "notes": "A very careful step-by-step build: numbered actions, anchored excerpts, a full-file checkpoint with exact output, a deliberate float error with fix, a prediction prompt, and an exercise. Reads as a procedure rather than a narrative. No hand-loop motivation, no Part 1/3 links, no 'we', and the ending points to docstrings instead of Part 3. Slightly long."
+    },
+    "Z": {
+      "organization": 7,
+      "accuracy": 9,
+      "usability": 6,
+      "polish": 5,
+      "overall": 5,
+      "notes": "Clean and concise, with correct outputs and a finished-script block. The ending is an unfilled placeholder (\"In Part 3, you'll ...\"). Instructions are ambiguous (\"Replace the loop... or add this below it\"). No float demo, no predictions, and the finished script shows no expected output."
+    },
+    "W": {
+      "organization": 7,
+      "accuracy": 9,
+      "usability": 6,
+      "polish": 7,
+      "overall": 4,
+      "notes": "Accurate, and it has a nice catch about the substring trap in summarize(\"re\"). But it reads more like a how-to than a lesson: no motivation loop, no float error, no predictions, no links, no full-code checkpoint, and no Part 3 pointer. Uses \"above\" and \"below\"."
+    }
+  },
+  "ranking": [
+    "X",
+    "Y",
+    "Z",
+    "W"
+  ],
+  "reasoning": "All four pages run as written and match the output they show, so the differences are teaching design. X best fits the expected Part 2: a felt problem, the shortcut, its equivalence, predictions, and a deliberate float error with recovery. Its weakness is file-state bookkeeping. Y is the most rigorous to follow and verify, but it skips the motivation and the series links. Z is tidy but unfinished at the end. W is correct but the thinnest as a tutorial.",
+  "assertion_notes": "Assertion 33 (module sources) is ambiguous on whether an import line counts as saying where a name comes from. I required explicit attribution of Decimal, which only X gives (and X gives it after Decimal is first mentioned in prose). Assertion 8's 'marking notation is explained' is vacuous when no notation is used. Assertion 27 is soft: phrases like 'easy to trip over' and 'a common mistake' were accepted as normalizing. Assertion 44 only bans 'above/below'. Z's 'from the previous step' is positional but not banned. Assertion 1 passes for all four, so it doesn't discriminate here. Assertion 34 mostly tests the response, not the page.",
+  "label_mapping": {
+    "W": "sonnet_skill",
+    "X": "default_skill",
+    "Y": "sonnet_baseline",
+    "Z": "without_skill"
+  },
+  "ranking_by_setup": [
+    "default_skill",
+    "sonnet_baseline",
+    "without_skill",
+    "sonnet_skill"
+  ]
+}

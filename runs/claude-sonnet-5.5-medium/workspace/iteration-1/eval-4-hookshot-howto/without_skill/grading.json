@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[47. Pin versions unless the docs track the current release] The install command for hookshot has no exact version pin (a minimum constraint is acceptable only if justified), because the docs are built per release.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Step 2: `pip install hookshot==3.4.0` with 'Pinning the version keeps your app on the release this guide describes.' That is an exact pin, even though the docs are built per release."
+    },
+    {
+      "text": "[20. Keep one maintained copy of anything that changes] The guide does not reproduce Flask's installation steps; it links to Flask's own documentation and documents only how hookshot connects to Flask.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No link to Flask's documentation. Instead it states its own Flask version requirements: 'Any recent Flask 2.x or 3.x works. The `@app.post` shortcut used below needs Flask 2.0 or later.'"
+    },
+    {
+      "text": "[19. Write every example as if it will be copied into production] The example reads the secret from configuration or the environment, not a hardcoded literal, and returns an error status on SignatureError; it uses no deprecated or insecure construct.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`WEBHOOK_SECRET = os.environ[\"HOOKSHOT_SECRET\"]`; `except hookshot.SignatureError: abort(400)`; 'Keep the secret out of your source code.'"
+    },
+    {
+      "text": "[7. Warn about silent and breaking failures too] A clearly marked warning (a callout or a labeled section) flags that passing re-serialized JSON (e.g. request.get_json()) instead of the raw body bytes makes verification fail.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "A labeled subsection '### Verify the raw body, not parsed JSON': 'If you parse the body and serialize it again... the signature won't match... Don't read the body through `request.form` or `request.get_json()` before verifying.'"
+    },
+    {
+      "text": "[36. Cross-cutting topics: full treatment once, local consequences everywhere] The guide states, in a line or two at the relevant step, the security consequence that applies here (e.g. replay protection via tolerance, or that tolerance=0 disables it) and links to a fuller security treatment. When the inputs give no address for the fuller treatment, naming it counts as linking.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "At '## Tune the replay window': '`tolerance=0` turns the age check off entirely, which allows replays. It's not recommended.' That is the local consequence, but there is no link to, or name of, a fuller security treatment."
+    },
+    {
+      "text": "[30. Give reasoning where the reader will wonder] The choice of tolerance value is explained in a few sentences in a titled box or clearly marked skippable paragraph at the step where it is set.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "'Tune the replay window' gives the default and the clock-drift caveat, but nothing explains how to choose the value (the trade-off between window size and replay exposure). There is no titled or skippable reasoning box."
+    },
+    {
+      "text": "[29. One page can serve beginners and experts] The guide starts with the simplest common use and moves to advanced material (e.g. migrating from a hand-rolled HMAC check, custom tolerance) in clearly titled, skippable sections, on one page rather than separate novice/expert pages.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'## Background: what a signature is' starts with 'If you already hand-roll HMAC checks, skip to [Step 1]'. Advanced material comes in titled sections later: '## Tune the replay window' and '## Switch from a hand-rolled HMAC check'."
+    },
+    {
+      "text": "[3. One primary job per page; other kinds of material only in short, labeled sections] The guide stays task-focused: it does not paste a full reference table of hookshot's API; it points to the reference instead, by link or by name.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No full API table, but also no pointer to a reference by link or by name. Readers are never sent to hookshot's reference."
+    },
+    {
+      "text": "[38. Show commands and output the way readers will copy them] Command and output presentation is explained or consistent with one chosen convention, and the prompt marker, if any, is explained once.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "```bash blocks with no prompt markers (`export HOOKSHOT_SECRET=...`, `pip install hookshot==3.4.0`). Consistent."
+    },
+    {
+      "text": "[40. Say what isn't covered or done] The guide states what hookshot does not do (e.g. it does not parse the payload, deduplicate deliveries, or read the Flask request for you).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "It never says what hookshot doesn't do (no payload parsing, no dedup of deliveries, no reading the request). The 'Things to watch' bullets cover format limits ('only understands the `t=...,v1=...` format'), not the library's scope."
+    },
+    {
+      "text": "[1. Run every example as written] The code, run against evals/developer-docs/files/hookshot.py with a body signed by hookshot.sign, verifies successfully as written, and any output shown matches.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Ran: extracted the page's code blocks into work/Y/, copied hookshot.py beside them, and ran `uv run --with flask --with pytest python3 work/runtests.py work/Y test-secret` (sets HOOKSHOT_SECRET, runs pytest on the page's test file against the page's app). (The page's test imports `from myapp import app`, so the route was saved as myapp.py.) Output: 'test_valid_signature_is_accepted PASSED ... test_wrong_secret_is_rejected PASSED ... test_tampered_body_is_rejected PASSED ... test_old_delivery_is_rejected PASSED ... test_missing_header_is_rejected PASSED / 5 passed in 0.07s'."
+    },
+    {
+      "text": "[11. Realistic names for real use; neutral names only for pure mechanism] Example payloads and names model a realistic webhook (e.g. an order or invoice event), not foo/bar.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The payload is `{\"type\": \"ping\"}`, the route is `/webhooks/hookshot`, and the handler is `receive()`, with secrets like \"your-endpoint-secret\" and \"wrong\". Nothing models a real event such as an order or invoice."
+    },
+    {
+      "text": "[37. Elisions in code must be valid code] Any elided code in samples is a valid comment that says what belongs there.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "The only placeholder is the valid comment `# Only act on `event` after this point.`, and there are no `...` elisions."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 7,
+    "total": 13,
+    "pass_rate": 0.4615
+  },
+  "blind_label": "Y"
+}

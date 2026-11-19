@@ -1,0 +1,56 @@
+{
+  "scores": {
+    "W": {
+      "organization": 9,
+      "accuracy": 9,
+      "usability": 9,
+      "polish": 8,
+      "overall": 9,
+      "notes": "The most complete guide. It has a scope section, a terms table, a collapsible beginner aside, a realistic invoice scenario, a full passing test suite, a migration table of failure behaviour, tolerance with reasoning, and replay and rotation sections. It is long, and the terms table and 400-vs-401 aside add bulk. It bundles flask into the pip install and has no Flask docs link."
+    },
+    "Z": {
+      "organization": 8,
+      "accuracy": 9,
+      "usability": 8,
+      "polish": 8,
+      "overall": 8,
+      "notes": "Tight and accurate. It states its scope up front, points to help(hookshot.verify), has a clear Wrong/Right re-serialization section, a strong 'Limits of this check' section, and handles the non-ASCII TypeError. Gaps: no install step, tolerance is never shown as a step with reasoning, and the test relies on an implied client fixture."
+    },
+    "X": {
+      "organization": 7,
+      "accuracy": 8,
+      "usability": 7,
+      "polish": 7,
+      "overall": 7,
+      "notes": "Clean numbered steps and a good troubleshooting table. The migration section points out the timing-unsafe == comparison. Gaps: no install command, the re-serialization warning is buried in a bullet, tolerance is handled only in troubleshooting, it never says what hookshot doesn't do, and it has a single test."
+    },
+    "Y": {
+      "organization": 7,
+      "accuracy": 7,
+      "usability": 7,
+      "polish": 6,
+      "overall": 6,
+      "notes": "Well-structured steps, a good test suite, and a skippable background. But it pins hookshot==3.4.0 and says 'applies to hookshot 3.4.0', even though the docs are per-release. It uses generic ping/receive names and states Flask version requirements itself. It left scratch files in the deliverable, including a copied hookshot.py."
+    }
+  },
+  "ranking": [
+    "W",
+    "Z",
+    "X",
+    "Y"
+  ],
+  "reasoning": "All four routes run correctly against hookshot.py. W serves both audiences best: a beginner aside, a migration table, tolerance reasoning, and a scope list, with a realistic scenario throughout. Z is the most disciplined about scope and limits, but it skips the install step and tolerance guidance. X is solid but thinner, and its key warning is buried. Y makes the one clear wrong call for this task (an exact version pin in per-release docs), uses placeholder-ish names, and left scratch files.",
+  "assertion_notes": "Assertion 20 (link to Flask docs) failed for every label, since none linked Flask's docs. W arguably went furthest wrong by installing flask in its own pip command. Assertion 36 requires a link to or name of a fuller security treatment, which every label lacked. W came closest with a tolerance=0 warning at the step. Assertion 38 passes trivially for Z, which has no shell commands. Assertion 47 is phrased about 'the install command', so X and Z (no install command) fail for lack of substance, not for pinning. Assertion 3's 'by name' bar is fuzzy: W's 'search for those names... the reference' was judged too vague. For assertion 1, Z needed a grader-supplied client fixture that the page describes in prose, and Y's module name had to be inferred from `from myapp import app`.",
+  "label_mapping": {
+    "W": "default_skill",
+    "X": "sonnet_baseline",
+    "Y": "without_skill",
+    "Z": "sonnet_skill"
+  },
+  "ranking_by_setup": [
+    "default_skill",
+    "sonnet_skill",
+    "sonnet_baseline",
+    "without_skill"
+  ]
+}

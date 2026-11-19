@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[17. Document boundary behavior] Entries state boundary behavior with exact results, including at least: slugify on input with no ASCII-transliterable characters returning \"\", truncate on text already within width being unchanged, and truncate raising ValueError when width < len(ellipsis).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`>>> slugify(\"\u65e5\u672c\u8a9e\")` -> `''` and \"Returns `\"\"` when nothing survives.\" truncate: \"Text of `width` characters or fewer is returned unchanged, with no ellipsis.\" and \"Raises `ValueError` if `width` is less than `len(ellipsis)`.\" Verified by running."
+    },
+    {
+      "text": "[42. State operational cost] dedupe_lines states that it holds every distinct line in memory, and natural_sort states it returns a new list (a copy) rather than sorting in place, with a note on cost for large inputs.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "dedupe_lines: \"It keeps every distinct line in memory, so memory use grows with the number of distinct lines.\" natural_sort: \"Returns a new list ... `items` is not modified.\" There is no cost note for natural_sort's copy on large inputs."
+    },
+    {
+      "text": "[45. Definitions first in lookup material] Each entry's description comes before its examples and fully defines the behavior on its own.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Each entry gives signature -> one-sentence definition -> parameter table -> behavior bullets -> example. All behavior, such as the empty-string result, exact comparison and memory use, is stated before the `>>>` blocks."
+    },
+    {
+      "text": "[39. Scale reference entries to their item] No entry contains an empty section or a section filled with \"None\"; entries share a fixed section order.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No empty or 'None' sections. The order signature/definition/param table/bullets/examples is the same for each current function. make_slug is prose only, with no empty headings."
+    },
+    {
+      "text": "[46. Frame every example, and give reference a set of task examples] Each entry ends with more than one framed example (a sentence or heading saying what it shows), covering common tasks and notable options such as sep or placeholder.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Examples are unframed doctests. Only an inline comment like `# \u00df is dropped, not expanded to \"ss\"` frames anything. dedupe_lines and natural_sort have one example each. No placeholder example."
+    },
+    {
+      "text": "[13. Settle easily confused pairs where the confusion happens] The page distinguishes truncate (may cut mid-word) from shorten (cuts at a word boundary) at the point of confusion, for example with a side-by-side table on the same input.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Before the entries: \"use `truncate` when you need an exact maximum and can accept a cut inside a word. Use `shorten` when you need whole words.\" truncate entry: \"The cut can fall in the middle of a word. Use [`shorten`](#shorten) to cut at a word boundary.\""
+    },
+    {
+      "text": "[41. Change one thing at a time to show variants] At least one option (for example sep, ellipsis, or placeholder) is shown by keeping the input fixed and changing only that option, with the real output for each.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`truncate(\"The quick brown fox\", 10)` -> `'The quick\u2026'` vs `truncate(\"The quick brown fox\", 10, ellipsis=\"\")` -> `'The quick '`. Only ellipsis changes, and both are verified by running."
+    },
+    {
+      "text": "[32. Show legacy forms for recognition] make_slug is shown, labeled deprecated or legacy, placed after the current functions, pointing to slugify, and noting it uses \"_\" as separator.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "make_slug is labeled deprecated and notes \"Its separator is `_`\", but it sits second, immediately after slugify and before truncate, both in the summary table and in the body. It is not placed after the current functions."
+    },
+    {
+      "text": "[16. One shared sample domain per set of examples] Examples across entries share one small sample domain (e.g. the same set of article titles) rather than new data each time.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "There is no shared domain: \"H\u00e9llo, W\u00f6rld! 2024\", \"Stra\u00dfe\", \"The quick brown fox\", \"  hello   world \", \"Supercalifragilistic word\", [\"a\",\"b\",\"a\",\"A\",\"a \"], [\"file10\",...,\"b2\",\"a\"]."
+    },
+    {
+      "text": "[33. Say where each name comes from] The page states the module that provides the functions (textkit) and how to import them.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"Paste them into a Python session after `from textkit import *`.\" and \"Reference for every public function in `textkit`\"."
+    },
+    {
+      "text": "[10. Verify every fact against its source, and keep facts consistent] Every default value, exception type, and output shown matches textkit.py, and the page records that it documents version 0.9.2.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "All outputs verified correct (12/12 OK), but the page never records 0.9.2. response.md says \"The page doesn't state the 0.9 version anywhere\" and the page only offers `print(textkit.__version__)`."
+    },
+    {
+      "text": "[21. Avoid claims that age] The page contains no time-relative wording such as \"new\", \"recently\", or \"currently\".",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "A grep for time-relative words found only \"Returns a new list\" (an object, not time). The change note is version-anchored: \"Change note, 0.8\"."
+    },
+    {
+      "text": "[4. Show the wrong form beside the right one] At least one entry shows a plausible wrong form beside the right one, labeled, with why it fails (for example, slicing text[:n] instead of truncate, or expecting dedupe_lines to ignore case).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "There is no wrong-vs-right pair. `slugify(\"Stra\u00dfe\")  # \u00df is dropped, not expanded to \"ss\"` corrects an expectation but shows no wrong code form beside a right one."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 6,
+    "total": 13,
+    "pass_rate": 0.5385
+  },
+  "blind_label": "X"
+}
