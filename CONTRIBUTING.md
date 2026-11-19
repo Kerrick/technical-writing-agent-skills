@@ -23,11 +23,10 @@ A pull request for a run adds one folder, `runs/<provider>-<model>-<version>-<ef
 Before opening it, run:
 
 ```
-uv run method/vendor/agent-skills/scripts/validate.py runs/<run>/skill/technical-writing
-python3 method/scripts/leak_check.py runs/<run>/skill/technical-writing/SKILL.md runs/<run>/skill/technical-writing/references/*.md runs/<run>/pipeline/kept.md runs/<run>/pipeline/abstracted-full.md
-python3 method/scripts/check_placement.py runs/<run>/PLACEMENT.md runs/<run>/pipeline/kept.md runs/<run>/skill
-uvx reuse@6.2.0 lint
+mise run check
 ```
+
+(Or `uv run method/scripts/check.py` without mise.) It runs the agent-skills validator and the leak check on every skill, the placement check on every run, and `reuse lint`.
 
 For `reuse lint` to pass, add your findings files to `REUSE.toml` the way the first run's are, each with its source's copyright holder and license, and give each findings file the same opening notice.
 

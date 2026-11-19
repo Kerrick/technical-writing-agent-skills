@@ -1,0 +1,178 @@
+# The sources every run reads, and the per-source values its prompts need.
+# method/scripts/fetch_sources.py clones them; method/scripts/prompt.py fills the prompts.
+# Keep these fixed across runs so the only thing that changes is the model.
+#
+# Each [[source]] is one reading fork. Rails is split across two forks that
+# share the letter D: they are one source.
+#
+# Slots (${SRC}, ${WORK}, ${LISTER}) are filled by prompt.py. In the
+# compare fields, ${does}, ${shows}, ${falls} and ${confirms} become the right verb
+# for a singular or plural source name.
+
+[[source]]
+key = "react"
+letter = "A"
+dir = "react.dev"
+repo = "https://github.com/reactjs/react.dev.git"
+commit = "46a54e0592729712b7640308b53268e84fdc7c9f"
+paths = ["src/content/learn"]
+reading = "Now, send a ${LISTER} sub-agent out to ${SRC}/react.dev/ to give you the .md filenames to read, in the correct order, and nothing more, so you can read them all and have read everything a human would've read by clicking Learn and going page-by-page on react.dev."
+reading_check = "About 51 pages, all under src/content/learn/, in the order of src/sidebarLearn.json."
+name = "react.dev"
+plural = false
+style_guide = "First read ${SRC}/react.dev/CONTRIBUTING.md in full. Its \"Technical Writing Tips\", \"Guidelines for Text\" and \"Guidelines for Code Examples\" sections state the intent behind the pages you just read."
+house = "React, to react.dev's interactive sandboxes, or to its audience"
+names = "React or react.dev"
+license = "The content is CC BY 4.0. Quote briefly, and only when the exact wording matters. Otherwise describe the pattern in your own words."
+output = "react-learn.md"
+source_line = "react.dev Learn, commit 46a54e05"
+
+[[source]]
+key = "ember"
+letter = "B"
+dir = "guides-source"
+repo = "https://github.com/ember-learn/guides-source.git"
+commit = "919777db27b0b84d4ec8130bdb66ec833bf4465b"
+paths = ["guides/release"]
+reading = "Now, send a ${LISTER} sub-agent out to ${SRC}/guides-source/ to give you the .md filenames to read, in the correct order, and nothing more, so you can read them all and have read everything a human would've read by clicking Getting Started and going page-by-page on guides.emberjs.com/release."
+reading_check = "About 127 pages, all under guides/release/ (none from the older version folders), in pages.yml order, without the redirect stubs of about 57 bytes."
+name = "the Ember Guides"
+plural = true
+style_guide = "First read the \"Style Guide\" and \"Writing\" sections of ${SRC}/guides-source/CONTRIBUTING.md. They state the intent behind the guides you just read."
+house = "Ember, to its tooling or its tutorial app, or to the guides' audience"
+names = "Ember or the Ember Guides"
+license = "The content is MIT licensed. Quote briefly, and only when the exact wording matters. Otherwise describe the pattern in your own words."
+output = "ember-guides.md"
+source_line = "Ember Guides (release), commit 919777db2"
+
+[[source]]
+key = "django"
+letter = "C"
+dir = "django"
+repo = "https://github.com/django/django.git"
+commit = "9e2e5a31e2ef2e8673d3c2a38d2a391dbf42cf23"
+paths = ["docs"]
+reading = """Now, send a ${LISTER} sub-agent out to ${SRC}/django/docs/ to give you the .txt filenames to read, in the correct order, and nothing more, so you can read them all and have read everything a human would've read by clicking Documentation and going page-by-page on docs.djangoproject.com, but only these parts, about 1.1 MB, in this order, in full:
+
+1. index.txt
+2. All of intro/ (the tutorial and the overview), in the order the tutorial's "next" links follow
+3. All of howto/, in the order of howto/index.txt
+4. topics/forms/ and ref/forms/, in the order of their index files: one feature followed from its topic guide into its reference pages
+5. topics/http/ and ref/request-response.txt: a second feature followed the same way
+6. All of faq/
+7. internals/contributing/writing-documentation.txt last: it's Django's own documentation style guide
+
+Skip releases/, the rest of topics/ and ref/, misc/ and the rest of internals/."""
+reading_check = "About 81 files."
+name = "the Django docs"
+plural = true
+style_guide = "You've already read Django's documentation style guide, internals/contributing/writing-documentation.txt. Don't re-read it; treat it as the stated intent behind the pages you read."
+focus = "Pay particular attention to how one feature is split across the tutorial, topic guide, how-to and reference pages: what each kind of page includes, leaves out, and links to."
+house = "Django, to Python or reStructuredText and Sphinx, or to the docs' audience"
+names = "Django, Python, or the Django docs"
+license = "The content is under the BSD 3-Clause License. Quote briefly, and only when the exact wording matters. Otherwise describe the pattern in your own words."
+output = "django-docs.md"
+source_line = "Django docs (intro, howto, forms and HTTP threads, FAQ), commit 9e2e5a3"
+
+[[source]]
+key = "rails-1"
+letter = "D"
+dir = "rails"
+repo = "https://github.com/rails/rails.git"
+commit = "f12b61577667833a528a16ce52b73d6e7e2845e9"
+paths = ["guides/source"]
+reading = "Now, send a ${LISTER} sub-agent out to ${SRC}/rails/guides/source/ to give you the .md filenames to read, in the correct order, and nothing more, so you can read them all and have read everything a human would've read by going page-by-page through the Start Here, Models, Routing and Controllers, Views, and Other Components sections of the Rails Guides index (the order in documents.yaml), skipping work-in-progress guides."
+reading_check = "About 23 guides, none from Release Notes."
+name = "the Rails guides"
+plural = true
+style_guide = "First read the Rails documentation style guides, which state the intent behind the guides you just read: in ${SRC}/rails/guides/source/, read the \"Guidelines\" section of ruby_on_rails_guides_guidelines.md (skip \"HTML Guides\" and \"EPUB Guides\", which cover the build), and all of api_documentation_guidelines.md."
+house = "Rails, to Ruby or RDoc, or to the guides' audience"
+names = "Rails, Ruby, or the Rails guides"
+license = "The content is CC BY-SA 4.0, a share-alike license. Quote rarely and briefly, and only when the exact wording matters. Otherwise describe the pattern in your own words."
+output = "rails-guides-1.md"
+source_line = "Rails guides, Start Here through Other Components, commit f12b615"
+
+[[source]]
+key = "rails-2"
+letter = "D"
+dir = "rails"
+repo = "https://github.com/rails/rails.git"
+commit = "f12b61577667833a528a16ce52b73d6e7e2845e9"
+paths = ["guides/source"]
+reading = "Now, send a ${LISTER} sub-agent out to ${SRC}/rails/guides/source/ to give you the .md filenames to read, in the correct order, and nothing more, so you can read them all and have read everything a human would've read by going page-by-page through the Digging Deeper, Going to Production, Advanced Active Record, Extending Rails, and Contributing sections of the Rails Guides index (the order in documents.yaml), skipping work-in-progress guides."
+reading_check = "About 26 guides, none from Release Notes, including both documentation style guides in Contributing."
+name = "the Rails guides"
+plural = true
+first_paragraph_extra = "I'm not asking you to make it follow Rails conventions; I'm asking what the Rails guides know that it doesn't."
+style_guide = "You've already read the two Rails documentation style guides, api_documentation_guidelines.md and ruby_on_rails_guides_guidelines.md, as part of the Contributing section. Don't re-read them; treat them as the stated intent behind the guides you read."
+house = "Rails, to Ruby or RDoc, or to the guides' audience"
+names = "Rails, Ruby, or the Rails guides"
+license = "The content is CC BY-SA 4.0, a share-alike license. Quote rarely and briefly, and only when the exact wording matters. Otherwise describe the pattern in your own words."
+output = "rails-guides-2.md"
+source_line = "Rails guides, Digging Deeper through Contributing, commit f12b615"
+
+[[source]]
+key = "rust"
+letter = "E"
+dir = "book"
+repo = "https://github.com/rust-lang/book.git"
+commit = "9be09363472786e3252f7c8419c6a5d972194a12"
+paths = ["src", "listings"]
+reading = "Now, send a ${LISTER} sub-agent out to ${SRC}/book/src/ to give you the .md filenames to read, in the correct order, and nothing more, so you can read them all and have read everything a human would've read by going page-by-page on doc.rust-lang.org/book."
+reading_check = "About 112 files, from the title page through Appendix G, in SUMMARY.md order."
+name = "the Rust book"
+plural = false
+prefix = "Don't read all the listings. Where a difference you're about to record depends on what a listing or its output.txt actually shows, open that one listing (or grep across ${SRC}/book/listings/) to check, and cite it. Otherwise work from the prose."
+style_guide = "First read ${SRC}/book/style-guide.md and ${SRC}/book/CONTRIBUTING.md. They state the intent behind the chapters you just read."
+focus = "The book is long-form, which the skill covers in its guidance on books and on learning, wherever it puts that. Pay particular attention to how the book differs from that guidance."
+house = "Rust, to its tooling (Cargo, rustc, mdBook), or to the book's audience"
+names = "Rust, Cargo, or the Rust book"
+license = "The content is dual-licensed MIT and Apache-2.0. Quote briefly, and only when the exact wording matters. Otherwise describe the pattern in your own words."
+output = "rust-book.md"
+source_line = "The Rust Programming Language, commit 9be0936"
+
+[[source]]
+key = "mdn"
+letter = "F"
+dir = "content"
+repo = "https://github.com/mdn/content.git"
+commit = "54ef250ba91a42a7755b7dbd3fd6420c128b7d53"
+paths = ["files/en-us/web/javascript/guide", "files/en-us/web/javascript/reference/global_objects/promise", "files/en-us/web/javascript/reference/global_objects/map", "files/en-us/mdn/writing_guidelines", "files/sidebars"]
+reading = "Now, send a ${LISTER} sub-agent out to ${SRC}/content/files/en-us/web/javascript/guide/ to give you the .md filenames to read, in the correct order, and nothing more, so you can read them all and have read everything a human would've read by going page-by-page on developer.mozilla.org/en-US/docs/Web/JavaScript/Guide."
+reading_check = "About 38 pages, in the sidebar's order (files/sidebars/jssidebar.yaml), with the regular expression and module sub-pages placed where their parent pages link to them."
+after_reading = """Before comparing, read two more parts of MDN in full, so you've seen its reference pages as well as its Guide:
+
+1. Every page under ${SRC}/content/files/en-us/web/javascript/reference/global_objects/promise/, starting with index.md, then the constructor, static methods, and instance methods in the order index.md lists them.
+2. The same for ${SRC}/content/files/en-us/web/javascript/reference/global_objects/map/.
+3. These templates from ${SRC}/content/files/en-us/mdn/writing_guidelines/page_structures/page_types/: javascript_class_page_template, javascript_constructor_page_template, javascript_static_method_page_template, javascript_instance_method_page_template (each is index.md in that folder).
+
+Read them in full; then wait for my next message."""
+name = "MDN"
+plural = false
+style_guide = "First read MDN's writing guidelines that apply to the Guide, in ${SRC}/content/files/en-us/mdn/writing_guidelines/: index.md, what_we_write/index.md, writing_style_guide/index.md, code_style_guide/index.md, code_style_guide/javascript/index.md, page_structures/code_examples/index.md, and page_structures/page_types/index.md. They state the intent behind the pages you just read. Skip the rest; it's mostly templates for reference page types."
+focus = "MDN is written by many contributors under one style guide. Note where that shows: what the style guide succeeds in keeping consistent, and what it doesn't. Compare how the Guide and the reference pages handle the same concepts, and what each kind of page leaves to the other."
+house = "MDN, to JavaScript or the web platform, to MDN's macros and live samples, or to its audience"
+names = "MDN, JavaScript, or the web platform"
+license = "The prose is CC BY-SA 2.5, a share-alike license. Quote rarely and briefly, and only when the exact wording matters. Otherwise describe the pattern in your own words."
+output = "mdn-js-guide.md"
+source_line = "MDN JavaScript Guide, plus the Promise and Map reference pages, commit 54ef250b"
+
+[[source]]
+key = "postgres"
+letter = "G"
+dir = "postgres"
+repo = "https://github.com/postgres/postgres.git"
+commit = "8303f2e13c5c2fab539e11054073a58942cb0f30"
+paths = ["doc/src/sgml"]
+reading = "Now, send a ${LISTER} sub-agent out to ${SRC}/postgres/doc/src/sgml/ to give you the .sgml filenames to read, in the correct order, and nothing more, so you can read everything a human would've read by going page-by-page on postgresql.org/docs/current through these parts only: the tutorial (start, query, advanced), then the SQL Language chapters syntax, ddl, dml, queries, datatype (with the files it includes: json, array, rowtypes, rangetypes, in the order it includes them), typeconv, indices and mvcc. Then add exactly one function section, func/func-string.sgml, as a sample of the reference tables, and docguide.sgml last; it's the documentation style guide. Skip the rest of func/, textsearch and perform."
+reading_check = "17 files."
+after_reading = "First read these SQL command reference pages in full, in this order, from ${SRC}/postgres/doc/src/sgml/ref/: select.sgml, insert.sgml, update.sgml, delete.sgml, create_table.sgml, create_index.sgml. Each covers a command a chapter you've read already taught, so notice how the reference page and the chapter divide the work. Then wait for my next message."
+name = "the PostgreSQL manual"
+plural = false
+style_guide = "You've already read PostgreSQL's documentation style guide, docguide.sgml. Don't re-read it; treat it as the stated intent behind the pages you read."
+focus = "Pay particular attention to how each command is split between its chapter and its reference page: what each includes, leaves out, and links to."
+house = "PostgreSQL, to SQL or psql, to DocBook/SGML, or to the manual's audience"
+names = "PostgreSQL, SQL, or psql"
+license = "The manual is under the PostgreSQL License, a permissive BSD-style license. Quote briefly, and only when the exact wording matters. Otherwise describe the pattern in your own words."
+output = "postgres-manual.md"
+source_line = "PostgreSQL manual (tutorial, SQL language, func-string, six SQL command reference pages), commit 8303f2e"

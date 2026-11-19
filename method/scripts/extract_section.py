@@ -1,3 +1,7 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
 """Print one Markdown section's body: the lines after a heading, up to the next heading of the same or a higher level.
 
 Used to pass clean-room agents only the parts of a file they may see, e.g. the
@@ -17,12 +21,12 @@ from pathlib import Path
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        prog="python3 method/scripts/extract_section.py",
+        prog="uv run method/scripts/extract_section.py",
         description="Print the body of one Markdown section.",
         epilog=(
             "exit codes: 0 found, 1 heading not found, 2 bad arguments\n\n"
             "example:\n"
-            '  python3 method/scripts/extract_section.py "## For the writer" often-broken-check.md > for-the-writer.md'
+            '  uv run method/scripts/extract_section.py "## For the writer" often-broken-check.md > for-the-writer.md'
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )

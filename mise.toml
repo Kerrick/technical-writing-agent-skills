@@ -1,0 +1,19 @@
+# Tools and tasks for working on this repo. `mise install` sets up the tools;
+# `mise tasks` lists the tasks. Every task is one Python script in
+# method/scripts/, so without mise you can run the same thing with `uv run`.
+
+[tools]
+python = "3.15"
+uv = "0.13.4"
+
+[tasks.check]
+description = "Run every check: validator, leak, placement, REUSE"
+run = "uv run -q method/scripts/check.py"
+
+[tasks.fetch]
+description = "Clone the sources at their pinned commits into a folder: mise run fetch -- ~/tw/sources"
+run = "uv run -q method/scripts/fetch_sources.py"
+
+[tasks.prompt]
+description = "Print one step's prompt, filled in: mise run prompt -- compare --source rails-1 --src ~/tw/sources --work ~/tw/work"
+run = "uv run -q method/scripts/prompt.py"

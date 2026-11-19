@@ -5,7 +5,7 @@ A new fork of the baseline point, which must never open the findings files. It n
 ```
 Don't change technical-writing. It's the baseline: a record of what you believed before reading anything. Its value depends on it staying exactly as you wrote it.
 
-Read {WORK}/abstracted-full.md in full, and read nothing else in that folder. It holds what seven famous documentation sources, labeled A–G, showed about your skill, checked against evidence you won't see. For each source it has four sections: "Rules" (things your skill missed, or corrections to things it states), "Baseline rules broken" (rules your skill states that the source itself breaks), "Confirmed" (skill lines the source backs up), and "On mixing modes" (the source's position on the skill's rule about keeping each page to one kind of documentation). You haven't seen the sources, and you don't need to.
+Read ${WORK}/abstracted-full.md in full, and read nothing else in that folder. It holds what seven famous documentation sources, labeled A–G, showed about your skill, checked against evidence you won't see. For each source it has four sections: "Rules" (things your skill missed, or corrections to things it states), "Baseline rules broken" (rules your skill states that the source itself breaks), "Confirmed" (skill lines the source backs up), and "On mixing modes" (the source's position on the skill's rule about keeping each page to one kind of documentation). You haven't seen the sources, and you don't need to.
 
 Merge the Rules into clusters, applying these fixed rules exactly:
 
@@ -18,7 +18,7 @@ Merge the Rules into clusters, applying these fixed rules exactly:
 
 "Confirmed" doesn't add rules. Use it only to report, under "Counts", which skill lines two or more sources confirmed.
 
-Write {WORK}/merged.md with three sections:
+Write ${WORK}/merged.md with three sections:
 
 - "## Kept": for each cluster, the standalone rule; whether it's a missed principle, a correction, or "baseline, often broken"; for a correction or baseline rule, the skill line (file:line); its sources (letters) and count; where it applies (every page, or which kind: tutorial, how-to, reference, explanation, book, video); in one sentence, what an agent writing without this rule would do wrong; and, where rule 3 applied, one sentence on how the conflict was resolved.
 - "## Dropped": each dropped cluster in one line, with its sources and the reason: single source, redundant with the skill (file:line), or unresolvable conflict.

@@ -40,9 +40,11 @@ The skill doesn't cover READMEs; use a README skill alongside it.
 | `skills/technical-writing/` | The default skill, the only one the skills CLI offers |
 | `runs/<run>/` | One run of the method for one model and effort level: its baseline, every intermediate file, and (unless it's the default) its own skill. `runs/claude-opus-5.5-medium/` is the first. |
 | `evals/` | The evals every run is tested against: `evals.json`, `eval_queries.json` and their input files |
-| `method/prompts/` | Every prompt, word for word as run, with `{SLOTS}` for paths |
-| `method/sources.md` | The seven sources: repositories, commits, scopes and per-source prompt values |
-| `method/scripts/` | The extraction and check steps |
+| `method/prompts/` | Every prompt as the method now stands, with `${SLOTS}`. Each run's README records where that run differed. |
+| `method/sources.toml` | The seven sources: repositories, commits, paths, and every per-source prompt value |
+| `method/sources.md` | Why each source and scope was chosen |
+| `method/scripts/` | Fetching sources, filling prompts, extracting files and every check, in Python |
+| `mise.toml` | Tool versions and tasks: `mise run check`, `mise run fetch`, `mise run prompt` |
 | `method/vendor/agent-skills/` | A pinned copy of the agent-skills skill, which steps 2 and 9 load |
 
 ## Status
@@ -69,7 +71,7 @@ Any agent harness that can do four things:
 3. **Show context use:** how full a session's context is. (Claude Code: `/context`.)
 4. **Run a cheaper sub-agent** for mechanical work like listing files. (Claude Code: a Sonnet sub-agent.)
 
-Plus `python3` for `method/scripts/`, `uv` for the agent-skills validator, and `uvx` for `reuse`.
+Plus git, and either [mise](https://mise.jdx.dev/) or [uv](https://docs.astral.sh/uv/). `mise install` installs the pinned Python and uv. Every script in `method/scripts/` runs with `uv run`, which supplies Python on any platform, and every mise task is one of those scripts.
 
 ### Slots
 
@@ -77,12 +79,13 @@ The prompts use these, so they work on any machine:
 
 | Slot | Meaning |
 | - | - |
-| `{SRC}` | The folder holding the source checkouts from `method/sources.md` |
-| `{WORK}` | An empty working folder for this run, outside any skills folder |
-| `{RUN}` | This run's folder: `runs/<provider>-<model>-<version>-<effort>/` in this repo |
-| `{AGENT_SKILLS}` | `method/vendor/agent-skills/`, installed as a skill |
+| `${SRC}` | The folder holding the source checkouts, cloned by `mise run fetch` |
+| `${WORK}` | An empty working folder for this run, outside any skills folder |
+| `${RUN}` | This run's folder: `runs/<provider>-<model>-<version>-<effort>/` in this repo |
+| `${AGENT_SKILLS}` | `method/vendor/agent-skills/`, installed as a skill |
+| `${LISTER}` | The cheaper sub-agent model that lists files to read (default: Sonnet) |
 
-`runs/claude-opus-5.5-medium/README.md` gives the values from the first run.
+Don't fill them in by hand. `mise run prompt -- <step> [--source <key>] --src … --work … --run …` prints any step's prompt with every slot and per-source value filled in, and refuses if one is missing; `mise run prompt -- --help` lists the steps. `runs/claude-opus-5.5-medium/README.md` gives the values from the first run.
 
 ### Steps
 
@@ -97,12 +100,12 @@ Each step runs in one of three kinds of context, and what a context may see is t
 | 1 | [Recall](method/prompts/01-recall.md) | New session | Nothing | Nothing |
 | 2 | [Baseline](method/prompts/02-baseline.md) | Same session | The agent-skills skill | The baseline skill. **The fork point.** |
 | 3 | [Reading order](method/prompts/03-reading-order.md) | One fork per source | A sub-agent's file list, then the pages | Nothing |
-| 4 | [Compare](method/prompts/04-compare.md) | Same fork | The source's style guide | `{WORK}/<source>.md` |
+| 4 | [Compare](method/prompts/04-compare.md) | Same fork | The source's style guide | `${WORK}/<source>.md` |
 | 5 | [Audit](method/prompts/05-audit.md) | New fork | All findings files, with quotes | `abstracted-full.md`: anonymized, no quotes |
 | 6 | [Merge](method/prompts/06-merge.md) | New fork | `abstracted-full.md` only | `merged.md` |
 | 7 | [Check "often broken"](method/prompts/07-check-often-broken.md) | New fork | `merged.md`, the findings, the source checkouts | `often-broken-check.md` |
 | 8 | [Apply the check](method/prompts/08-apply-check.md) | Script, then the merge fork | `for-the-writer.md` only | Updated `merged.md`; then `kept.md` by script |
-| 9 | [Write](method/prompts/09-write.md) | **Fresh session** | The agent-skills skill and `kept.md` only | `{RUN}/skill/technical-writing/` and `{RUN}/PLACEMENT.md` |
+| 9 | [Write](method/prompts/09-write.md) | **Fresh session** | The agent-skills skill and `kept.md` only | `${RUN}/skill/technical-writing/` and `${RUN}/PLACEMENT.md` |
 | 10 | [Evaluate](#evaluating) | Fresh sub-agents | One skill each (or none) | Outputs, grades, `benchmark.json` |
 
 The rules that decide what goes into the skill are fixed in advance, in the merge prompt (step 6) and the check prompt (step 7):
@@ -129,7 +132,7 @@ Not yet run. The plan, following `method/vendor/agent-skills/references/evaluati
 3. Aggregate pass rate, tokens and time per setup into `benchmark.json`, also broken down by each rule's Kind in the run's `kept.md`.
 4. Run each setup three times before trusting the differences.
 
-Put the workspace at `{RUN}/workspace/iteration-N/`. Keep `evals/` fixed across runs, or comparisons between models mean nothing. A run's skill replaces the default in `skills/` only if it beats it.
+Put the workspace at `${RUN}/workspace/iteration-N/`. Keep `evals/` fixed across runs, or comparisons between models mean nothing. A run's skill replaces the default in `skills/` only if it beats it.
 
 Real tasks count as evals too. For each, keep the target repo's commit, the brief word for word, the session ID, tokens and time, whether the skill triggered without being named, every correction given, and a separate commit for hand fixes. Then the task can be rerun with a later version of the skill, the baseline, or none.
 
@@ -137,12 +140,14 @@ Real tasks count as evals too. For each, keep the target repo's commit, the brie
 
 For another model, effort level or provider:
 
-1. Make `runs/<provider>-<model>-<version>-<effort>/` and an empty `{WORK}` folder. Clone the sources into `{SRC}` at the commits in `method/sources.md`.
-2. Install `method/vendor/agent-skills` as a skill. Uninstall every technical-writing skill.
-3. Run steps 1–2 on the target model at the target effort. Measure how much of the context the fork point already uses.
-4. Run steps 3–9 with the same sources, scopes and prompts, filling in the slots. Move the baseline into `{RUN}/baseline/` before step 9.
-5. Copy `{WORK}`'s files into `{RUN}/pipeline/`, with the findings in `{RUN}/pipeline/findings/`, and write `{RUN}/README.md` the way the first run's does.
-6. Evaluate against the same `evals/`, and against the current default.
+1. Clone this repo and run `mise install` (or install uv).
+2. Fetch the sources: `mise run fetch -- <SRC>`. It makes shallow, sparse clones at the pinned commits, and leaves any existing checkout alone.
+3. Make `runs/<provider>-<model>-<version>-<effort>/` and an empty `<WORK>` folder.
+4. Install `method/vendor/agent-skills` as a skill. Uninstall every technical-writing skill.
+5. Run steps 1–2 on the target model at the target effort (`mise run prompt -- recall`, then `-- baseline`). Measure how much of the context the fork point already uses.
+6. Run steps 3–9, getting each prompt from `mise run prompt`. For each source: `reading`, check the file list it prints a note about, then `after-reading` if the source has one, then `compare`. Move the baseline into `${RUN}/baseline/` before step 9.
+7. Copy `<WORK>`'s files into `${RUN}/pipeline/`, with the findings in `${RUN}/pipeline/findings/`, write `${RUN}/README.md` the way the first run's does, and run `mise run check`.
+8. Evaluate against the same `evals/`, and against the current default.
 
 ## Lessons from the first run
 
@@ -150,14 +155,14 @@ For another model, effort level or provider:
 - **Never compact a reading fork.** The comparison needs exact wording. If one runs out of room, rewind it to the reading-order message, narrow the scope, and fork that point again.
 - **Check each findings file before ending its fork.** Run the leak check on its Abstracted section and verify two claims against the source. A fork can still fix a weak claim; once it's gone, nothing can.
 - **Ask every source about mixing modes.** The baseline's "one kind of documentation per page" rule was the one real conflict. The template now asks every source for its position.
-- **A reader judging the baseline sides with it.** Readers are forks of the baseline's author, so their "where the source falls short" group leans toward the baseline. Step 7 re-decides those items on evidence. Tighten its "deliberate" test as described in [its prompt](method/prompts/07-check-often-broken.md#tighten-deliberate-next-time).
+- **A reader judging the baseline sides with it.** Readers are forks of the baseline's author, so their "where the source falls short" group leans toward the baseline. Step 7 re-decides those items on evidence, and its "deliberate" test now requires a count and a contradiction of the rule ([why](method/prompts/07-check-often-broken.md#changes-since-the-first-run)).
 - **Silence isn't a choice.** A style guide that doesn't forbid something hasn't endorsed it. Only templates, style guides, or a pattern on nearly every page of a kind count as deliberate.
 - **The writer must not be the author.** The baseline's author is the best judge of what's redundant, and that judgment belongs in the merge. Writing belongs to a session that has never seen the baseline.
 - **Keep ad-hoc judgment out.** In the first run, a by-hand check of the "often broken" entries agreed with the checker fork on only 9 of 13, and the checker had the better evidence each time. Checks done outside a fixed prompt aren't repeatable for the next model, so every check is a prompt or a script.
 
 ## Licensing
 
-The repo follows the [REUSE specification](https://reuse.software/): `REUSE.toml` gives each file's copyright and license, and `LICENSES/` holds every license text. Check it with `uvx reuse@6.2.0 lint`.
+The repo follows the [REUSE specification](https://reuse.software/): `REUSE.toml` gives each file's copyright and license, and `LICENSES/` holds every license text. Check it with `mise run check`, which runs `uvx reuse@6.2.0 lint` along with the other checks.
 
 Everything is dedicated to the public domain under [CC0 1.0](LICENSES/CC0-1.0.txt), except the files described below. Agents wrote most of the text and code, so how much copyright exists in it is unclear; CC0 waives whatever does.
 

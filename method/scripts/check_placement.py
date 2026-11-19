@@ -1,3 +1,7 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
 """Check PLACEMENT.md against kept.md and the skill.
 
 Every rule in kept.md must have exactly one row, and every file:line a row
@@ -18,12 +22,12 @@ from pathlib import Path
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        prog="python3 method/scripts/check_placement.py",
+        prog="uv run method/scripts/check_placement.py",
         description="Check that every kept rule is placed in the skill.",
         epilog=(
             "exit codes: 0 all placed, 1 problems found, 2 bad arguments\n\n"
             "example:\n"
-            "  python3 method/scripts/check_placement.py runs/claude-opus-5.5-medium/PLACEMENT.md \\\n"
+            "  uv run method/scripts/check_placement.py runs/claude-opus-5.5-medium/PLACEMENT.md \\\n"
             "    runs/claude-opus-5.5-medium/pipeline/kept.md skills"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,

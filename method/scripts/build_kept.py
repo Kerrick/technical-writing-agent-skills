@@ -1,3 +1,7 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
 """Build kept.md, the writer's only input, from merged.md.
 
 Keeps each "Kept" entry's heading, Rule, Kind, Applies to and Without it. Drops
@@ -38,9 +42,9 @@ def relabel(line: str) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        prog="python3 method/scripts/build_kept.py",
+        prog="uv run method/scripts/build_kept.py",
         description="Build the writer's kept.md from merged.md.",
-        epilog="example:\n  python3 method/scripts/build_kept.py runs/claude-opus-5.5-medium/pipeline/merged.md -o kept.md",
+        epilog="example:\n  uv run method/scripts/build_kept.py runs/claude-opus-5.5-medium/pipeline/merged.md -o kept.md",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("merged", type=Path)

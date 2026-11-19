@@ -1,3 +1,7 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
 """Check that files meant for a clean-room agent name no source and no technology.
 
 Run it on every file a clean-room context will read (abstracted-full.md,
@@ -24,13 +28,13 @@ DEFAULT_NAMES = [
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        prog="python3 method/scripts/leak_check.py",
+        prog="uv run method/scripts/leak_check.py",
         description="Find source or technology names in clean-room files.",
         epilog=(
             "exit codes: 0 clean, 1 names found, 2 bad arguments\n\n"
             "examples:\n"
-            "  python3 method/scripts/leak_check.py runs/claude-opus-5.5-medium/pipeline/kept.md\n"
-            "  python3 method/scripts/leak_check.py --names vue,nuxt pipeline/abstracted-full.md"
+            "  uv run method/scripts/leak_check.py runs/claude-opus-5.5-medium/pipeline/kept.md\n"
+            "  uv run method/scripts/leak_check.py --names vue,nuxt pipeline/abstracted-full.md"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
