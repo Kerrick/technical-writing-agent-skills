@@ -4,7 +4,7 @@ description: Use when rewriting, substantially editing, restructuring, or review
 license: MIT-0
 metadata:
   author: setdef
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Rewrite a README
@@ -81,9 +81,10 @@ If agents wrote or changed the code or docs, and the maintainer discloses AI inv
 ## Step 9: Hunt for problems, then review
 
 1. Run `uv run scripts/hunt.py <README>` from this skill's directory (or `python3 scripts/hunt.py`, with Python 3.11 or later). It lists every banned pattern from the style rules, by line. For each hit, ask who acts, then fix it or defend it. Run it again until every remaining hit is one you can defend.
-2. Read the draft once as the target reader who has never heard of the project. Note where you would stop reading.
-3. Run the review checklist in [references/review-checklist.md](references/review-checklist.md). It comes from detailed maintainer feedback on a real first draft.
-4. Re-run every command shown. Confirm every link resolves.
-5. If the maintainer reviews by file, edit the file at its real path, not a copy.
+2. If the repository has a Vale configuration (`.vale.ini`), run `vale` on the draft too. Its rules are the project's style guide: where they and the style rules here disagree, follow Vale's.
+3. Read the draft once as the target reader who has never heard of the project. Note where you would stop reading.
+4. Run the review checklist in [references/review-checklist.md](references/review-checklist.md). It comes from detailed maintainer feedback on a real first draft.
+5. Re-run every command shown. Confirm every link resolves.
+6. If the maintainer reviews by file, edit the file at its real path, not a copy.
 
 When you change a README in a repo that has agent instructions, follow them. If they lack a rule against append-only edits, propose adding: "Editing README.md or README.rdoc requires reading both files in full first, then rewriting for coherence, not appending."
