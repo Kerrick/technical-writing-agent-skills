@@ -4,8 +4,8 @@
 # ///
 """Run every check the repo has, for the default skill and every run.
 
-For skills/technical-writing and each runs/<run>/skill/technical-writing:
-the agent-skills validator and the leak check. For each run with a
+For every skill in skills/ and each runs/<run>/skill/technical-writing: the
+agent-skills validator. For the skills the method made: the leak check. For each run with a
 PLACEMENT.md: the placement check, and the leak check on the files clean-room
 steps read. Then REUSE compliance for the whole repo.
 
@@ -48,10 +48,15 @@ def main() -> int:
     ).parse_args()
 
     results = []
-    skills = [ROOT / "skills" / "technical-writing", *sorted(ROOT.glob("runs/*/skill/technical-writing"))]
-    for skill in skills:
+    for skill in sorted(ROOT.glob("skills/*/")):
+        results.append(run(f"validate {skill.relative_to(ROOT)}", ["uv", "run", "-q", str(VALIDATE), str(skill)]))
+
+    # Skills made by the method must carry no source wording.
+    made = [ROOT / "skills" / "technical-writing", *sorted(ROOT.glob("runs/*/skill/technical-writing"))]
+    for skill in made:
         name = skill.relative_to(ROOT)
-        results.append(run(f"validate {name}", ["uv", "run", "-q", str(VALIDATE), str(skill)]))
+        if skill.parent.name == "skill":
+            results.append(run(f"validate {name}", ["uv", "run", "-q", str(VALIDATE), str(skill)]))
         results.append(run(f"leak check {name}", ["uv", "run", "-q", str(SCRIPTS / "leak_check.py"), *skill_files(skill)]))
 
     for run_dir in sorted(ROOT.glob("runs/*/")):

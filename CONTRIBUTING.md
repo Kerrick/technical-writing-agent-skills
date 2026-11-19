@@ -39,7 +39,7 @@ For `reuse lint` to pass, add your findings files to `REUSE.toml` the way the fi
 
 ## Other changes
 
-Fixes to the method, the scripts or the docs are welcome as ordinary pull requests. A change to a prompt changes what the next run does, so explain what went wrong with the old wording.
+Fixes to the method, the scripts, the docs or readme-rewrite are welcome as ordinary pull requests. readme-rewrite isn't made by the method, so it changes the ordinary way. A change to a prompt changes what the next run does, so explain what went wrong with the old wording.
 
 ## License
 

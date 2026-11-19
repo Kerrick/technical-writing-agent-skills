@@ -1,6 +1,6 @@
 # Technical writing agent skill
 
-An [Agent Skill](https://agentskills.io) for developer-facing documentation: tutorials, how-to guides, API and CLI reference, explanations, books, courses and video scripts. This repo also holds the method that made it, so it can be made again for other models.
+An [Agent Skill](https://agentskills.io) for developer-facing documentation: tutorials, how-to guides, API and CLI reference, explanations, books, courses and video scripts. This repo also holds the method that made it, so it can be made again for other models, and a companion skill, readme-rewrite, for the one kind of page technical-writing leaves out.
 
 The skill holds only what a given model doesn't already do: rules that seven famous documentation sets follow and the model's own idea of good docs leaves out, corrects, or knows but skips. It assumes its reader already knows standard technical writing practice. That gap differs by model and effort level. The default skill was made for **Claude Opus 5.5 at medium effort**, and works best there.
 
@@ -12,13 +12,14 @@ With the [skills CLI](https://github.com/vercel-labs/skills), for any supported 
 npx skills add Kerrick/technical-writing-agent-skill -g
 ```
 
-It asks which agents to install for. `-g` installs it for your user rather than one project.
+It asks which skills and which agents to install for. `-g` installs for your user rather than one project. Add `--skill technical-writing` or `--skill readme-rewrite` to install just one.
 
 With git, on macOS or Linux, clone the repo and link the skill into your agent's skills folder. Linking means a `git pull` updates it.
 
 ```
 git clone https://github.com/Kerrick/technical-writing-agent-skill.git ~/src/technical-writing-agent-skill
 ln -s ~/src/technical-writing-agent-skill/skills/technical-writing ~/.claude/skills/technical-writing
+ln -s ~/src/technical-writing-agent-skill/skills/readme-rewrite ~/.claude/skills/readme-rewrite
 ```
 
 That's the folder for Claude Code. Agents that read `~/.agents/skills` (Codex, for example) use that folder instead.
@@ -27,17 +28,22 @@ On Windows, clone the repo the same way, then copy the skill folder:
 
 ```
 Copy-Item -Recurse skills\technical-writing $HOME\.claude\skills\
+Copy-Item -Recurse skills\readme-rewrite $HOME\.claude\skills\
 ```
 
-Copy it again after each `git pull`.
+Copy them again after each `git pull`.
 
-The skill doesn't cover READMEs; use a README skill alongside it.
+## The two skills
+
+- **technical-writing** covers tutorials, how-to guides, reference, explanations, books, courses and video scripts. It was made by the method below, so it holds only what its model doesn't already do.
+- **readme-rewrite** covers READMEs, which technical-writing deliberately leaves out: rewriting or substantially editing one so it serves marketing, onboarding and indexing, with every claim checked against the code. It wasn't made by the method. It was written by request, the ordinary way, and holds full instructions rather than a gap.
 
 ## Layout
 
 | Path | What it is |
 | - | - |
-| `skills/technical-writing/` | The default skill, the only one the skills CLI offers |
+| `skills/technical-writing/` | The default technical-writing skill |
+| `skills/readme-rewrite/` | The companion README skill. Not made by the method. |
 | `runs/<run>/` | One run of the method for one model and effort level: its baseline, every intermediate file, and (unless it's the default) its own skill. `runs/claude-opus-5.5-medium/` is the first. |
 | `evals/` | The evals every run is tested against: `evals.json`, `eval_queries.json` and their input files |
 | `method/prompts/` | Every prompt as the method now stands, with `${SLOTS}`. Each run's README records where that run differed. |
@@ -168,7 +174,7 @@ Everything is dedicated to the public domain under [CC0 1.0](LICENSES/CC0-1.0.tx
 
 The findings files in `runs/*/pipeline/findings/` quote their sources, and each opens with a notice naming its source, copyright holder and license. The quotes are short and used to compare and criticize. React (CC BY 4.0), Ember (MIT), Django (BSD 3-Clause), Rust (MIT or Apache-2.0) and PostgreSQL (PostgreSQL License) are permissive. Rails (CC BY-SA 4.0) and MDN (CC BY-SA 2.5) are share-alike, so the three files that quote them are licensed under those licenses. That applies per file, not to the rest of the repo.
 
-`method/vendor/agent-skills/` is licensed under [CC BY 4.0](LICENSES/CC-BY-4.0.txt). Its references are adapted from the Agent Skills documentation, and its `NOTICE.md` gives the credit and lists the changes.
+`skills/readme-rewrite/` is licensed under [MIT-0](LICENSES/MIT-0.txt), as its frontmatter says. `method/vendor/agent-skills/` is licensed under [CC BY 4.0](LICENSES/CC-BY-4.0.txt). Its references are adapted from the Agent Skills documentation, and its `NOTICE.md` gives the credit and lists the changes.
 
 Everything from `abstracted-full.md` onward, the skill included, contains no source wording; `method/scripts/leak_check.py` checks the files that matter.
 
@@ -176,4 +182,4 @@ Everything from `abstracted-full.md` onward, the skill included, contains no sou
 
 > I use three words for how code and prose comes to exist. Code or prose I wrote, I typed by hand, with nothing generated. Code or prose I wrought, an AI agent generated while I iterated with it, and I reviewed every change before committing it, so I take responsibility for every diff. Code or prose I requested, an agent built with little or no review from me, in the style of a "dark factory."
 
-I wrote the prompts that start the method: the recall and baseline prompts in `method/prompts/01-recall.md` and `method/prompts/02-baseline.md`, and the reading-order prompts in `method/sources.md`. Everything else I requested. Agents (Claude Opus 5.5, with Claude Sonnet 5.5 listing files to read) wrote both skills, the findings and pipeline files, the evals, the other prompts, `method/sources.md`, the scripts, `REUSE.toml` and this README. The idea of a skill made only of the gap between a model's own baseline and famous documentation is mine, and so is each decision along the way; much of the pipeline's design came from an agent's proposals that I accepted, changed or rejected. In place of my review stand the agent-skills validator, `method/scripts/leak_check.py`, `method/scripts/check_placement.py`, `reuse lint`, and an agent's spot checks of each findings file's evidence against its source checkout. Under [declare-ai](https://declare-ai.org/1.0.0/assess.html), this is creative assistance.
+I wrote the prompts that start the method: the recall and baseline prompts in `method/prompts/01-recall.md` and `method/prompts/02-baseline.md`, and the reading-order prompts in `method/sources.md`. Everything else I requested. Agents (Claude Opus 5.5, with Claude Sonnet 5.5 listing files to read) wrote the technical-writing skill and its baseline, the findings and pipeline files, the evals, the other prompts, `method/sources.md`, the scripts, `REUSE.toml` and this README. Agents also wrote readme-rewrite, at my request, outside this method. The idea of a skill made only of the gap between a model's own baseline and famous documentation is mine, and so is each decision along the way; much of the pipeline's design came from an agent's proposals that I accepted, changed or rejected. In place of my review stand the agent-skills validator, `method/scripts/leak_check.py`, `method/scripts/check_placement.py`, `reuse lint`, and an agent's spot checks of each findings file's evidence against its source checkout. Under [declare-ai](https://declare-ai.org/1.0.0/assess.html), this is creative assistance.

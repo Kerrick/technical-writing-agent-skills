@@ -52,3 +52,9 @@ path = "method/vendor/agent-skills/**"
 precedence = "override"
 SPDX-FileCopyrightText = ["2026 Kerrick Long", "Agent Skills project contributors"]
 SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "skills/readme-rewrite/**"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Kerrick Long"
+SPDX-License-Identifier = "MIT-0"
