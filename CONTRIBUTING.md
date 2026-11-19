@@ -9,6 +9,21 @@ The default developer-docs skill was made for Claude Opus 5.5 at medium effort. 
 3. **A run on a model at least as strong as Claude Opus 5.5.** Such a run could make a better default. A run on a smaller model made a variant that did worse than the default on that model, so check the default there first.
 4. **Real-task results.** You used a skill to document a real project; tell us what happened, recorded as [Evaluating](method/README.md#evaluating) describes for real tasks.
 
+## What it costs
+
+What the first contributions cost, in API prices, from each session's own records:
+
+| Contribution | What ran | Cost |
+| - | - | - |
+| Evals of the default on Claude Sonnet 5.5 | 20 runs on Sonnet 5.5, 5 graders on Claude Opus 5.5 | about $8 |
+| Evals of developer-docs and readme-rewrite on Claude Opus 5.5 | 21 runs and 8 graders, all on Opus 5.5 | about $14 |
+| A full run for Claude Sonnet 5.5 | 13 headless Sonnet 5.5 sessions | about $42 |
+| Orchestrating that run | Claude Fable 5.1 | about $32 |
+
+Evals are the cheap contribution, which is one more reason they come first. Orchestrating mostly runs scripts and collects results, so give it a cheaper model than the one doing the reading and writing.
+
+On a subscription plan, the same work counts against usage limits instead. One step of a trial on GPT-6-Luna through Codex, reading and comparing about 270 KB of documentation, used about 4.9M tokens, mostly cached rereads.
+
 ## Contributing a run
 
 Follow [Repeating it](method/README.md#repeating-it) in method/README.md. Expect a dozen or so long sessions; most of the cost is the reading forks, one per source, each of which reads up to about half its context window of documentation.
