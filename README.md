@@ -116,7 +116,7 @@ Open an issue at [github.com/Kerrick/technical-writing-agent-skills/issues](http
 
 ## Contributing
 
-The most useful contributions are eval results for the existing skill and runs of the method on other models. [CONTRIBUTING.md](CONTRIBUTING.md) says what each needs and how to check it before you open a pull request.
+The most useful contribution is running the evals for the default skill on another model, which shows what that model's users should install. [CONTRIBUTING.md](CONTRIBUTING.md) says what each needs and how to check it before you open a pull request.
 
 ## License
 

@@ -147,6 +147,8 @@ Everything from `abstracted-full.md` onward, the skill included, contains no sou
 
 `skills/developer-docs/` is the default, made for one model. Every other run's skill stays in its own `runs/<run>/skill/developer-docs/`, and is installed from a clone by path. A run's skill replaces the default only if it beats the default on the default's own model. A skill made for another model is a variant, not a replacement.
 
+The first variant didn't earn its place. On Claude Sonnet 5.5, the default made for Opus 5.5 passed 80% of assertions, and the variant the method made for Sonnet passed 51%, no better than no skill. So before running the method for a model, run the evals of the default on it. Run the method itself mainly for a model at least as strong as the default's, where it could make a better default.
+
 ## Running it headless
 
 Every step can run without a person at the keyboard, through Claude Code's command line (v2.1.311). These commands were tried for the first time with Claude Sonnet 5.5:
