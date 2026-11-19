@@ -4,7 +4,7 @@ description: Use when rewriting, substantially editing, restructuring, or review
 license: MIT-0
 metadata:
   author: setdef
-  version: "1.5"
+  version: "1.6"
 ---
 
 # Rewrite a README
@@ -23,7 +23,7 @@ If you are about to append a paragraph to a README you have not read in full, st
 
 In the first two modes, anything in the repository besides the code's behavior may echo the old README: other docs, package metadata, docstrings, comments, CLI help text. Use it only to find what to check. Take nothing from it as fact, structure, or wording.
 
-The maintainer asked for the writing so they don't have to do it, so finish the README: never leave placeholders or questions in it. Where this skill says to ask and no one can answer (you're running unattended), don't guess. Take the answer the evidence supports that claims the least on the maintainer's behalf, write it as final, and list each such call in your report, so the maintainer can overturn it at a glance.
+Never write a placeholder, a question, or a note to the maintainer into any file. The maintainer asked for the writing so they don't have to do it: what you write is final. Bring up in chat only what truly needs their judgment, where a wrong call would cause real harm, and keep that as short as you can. For everything else, take the answer the evidence supports that claims the least on the maintainer's behalf, and list those calls in your report, so the maintainer can overturn one at a glance.
 
 ## Step 1: Ground every claim in the code
 

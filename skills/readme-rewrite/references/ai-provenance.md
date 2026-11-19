@@ -2,7 +2,7 @@
 
 Put it in the README's last section, after License, under a heading such as "How this was made". Say the facts a reader needs to weigh the code: who wrote what, and who reviewed it, or what checks stand in for review.
 
-Use the maintainer's existing wording and any existing disclosure in their other projects. Never assume they've written, reviewed, or read anything they haven't said they have. If you can ask, ask once, with your proposed answer. If you can't, use the category that claims least: work an agent made, with no record of review, is requested. Write the disclosure as final, and say in your report which categories you inferred.
+Use the maintainer's existing wording and any existing disclosure in their other projects. Never assume they've written, reviewed, or read anything they haven't said they have. Ask in chat only if you have no evidence at all, once, with your proposed answer. Otherwise, use the category that claims least: work an agent made, with no record of review, is requested. Write the disclosure as final, and say in your report which categories you inferred.
 
 ## In Kerrick Long's projects
 

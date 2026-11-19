@@ -8,7 +8,8 @@ Read [README.md](README.md) for what this is, [method/README.md](method/README.m
 - **Prompts are the method as it now stands.** Changing a prompt in `method/prompts/` changes the next run. Say why in the commit, and record any difference a past run had in that run's `README.md`, not in the prompt.
 - **Keep runs comparable.** Don't change `method/sources.toml` sources, scopes or commits, or `evals/developer-docs/`, as part of a run.
 - **Never install the baseline or a developer-docs skill while running the method**, this repo's included. Install only `method/vendor/agent-skills`.
-- **`skills/developer-docs/` changes only when a run's evals beat it.** `skills/readme-rewrite/` isn't made by the method and changes the ordinary way.
+- **The skills never direct an agent to write placeholders to disk.** Anything that needs the human's judgment goes to them in chat, as little as practical.
+- **`skills/developer-docs/` changes only when a run's evals beat it,** or when the maintainer sets a rule for every skill, recorded in that run's README. `skills/readme-rewrite/` isn't made by the method and changes the ordinary way.
 - **Python only**, run with `uv run`, standard library first. No shell scripts. Each mise task runs exactly one script in `method/scripts/`.
 - **No fixed paths or baseline line numbers in prompts.** Use the `${SLOTS}` in method/README.md, and describe a baseline rule by what it says.
 - **Pin to public, exact versions:** full commit hashes reachable upstream, exact tool versions. Prefer the newest stable release.
