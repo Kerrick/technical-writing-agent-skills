@@ -1,0 +1,11 @@
+{
+  "added": [
+    "evals/developer-docs/files/__pycache__/cachekit.cpython-315.pyc",
+    "outputs/caching-in-cachekit.md",
+    "scratch/check.py",
+    "scratch/limits.py",
+    "scratch/probe.py"
+  ],
+  "modified": [],
+  "deleted": []
+}

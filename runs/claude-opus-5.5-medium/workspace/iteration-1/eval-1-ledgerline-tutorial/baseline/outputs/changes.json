@@ -1,0 +1,18 @@
+{
+  "added": [
+    "outputs/part-2-total-your-accounts.md",
+    "scratch/__pycache__/ledgerline.cpython-315.pyc",
+    "scratch/budget.py",
+    "scratch/ledgerline.py",
+    "scratch/run.sh",
+    "scratch/run_steps.py",
+    "scratch/step0.py",
+    "scratch/step1.py",
+    "scratch/step2.py",
+    "scratch/step3.py",
+    "scratch/step4.py",
+    "scratch/step5.py"
+  ],
+  "modified": [],
+  "deleted": []
+}

@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[47. Pin versions unless the docs track the current release] The install command for hookshot has no exact version pin (a minimum constraint is acceptable only if justified), because the docs are built per release.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "verify-webhook-signatures.md, Before you begin: `pip install hookshot==3.4.0`, an exact pin, repeated in replace-hand-rolled-hmac-check.md."
+    },
+    {
+      "text": "[20. Keep one maintained copy of anything that changes] The guide does not reproduce Flask's installation steps; it links to Flask's own documentation and documents only how hookshot connects to Flask.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No Flask install steps are reproduced, but there is no link to Flask documentation; prerequisites say only \"A Flask app with a route that will receive webhooks.\""
+    },
+    {
+      "text": "[19. Write every example as if it will be copied into production] The example reads the secret from configuration or the environment, not a hardcoded literal, and returns an error status on SignatureError; it uses no deprecated or insecure construct.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`WEBHOOK_SECRET = os.environ[\"HOOKSHOT_SECRET\"]`; `except hookshot.SignatureError as error: ... abort(400)`. `json.loads(raw_body)` parses the verified bytes."
+    },
+    {
+      "text": "[7. Warn about silent and breaking failures too] A warning callout flags that passing re-serialized JSON (e.g. request.get_json()) instead of the raw body bytes makes verification fail.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "This is only a bullet under \"Three details in this view matter\": \"**Pass the exact bytes you received.** ... If you pass `json.dumps(request.json).encode()` instead ... every delivery fails with `signature mismatch`.\" The page's only `> **Warning:**` callout is about tolerance=0."
+    },
+    {
+      "text": "[36. Cross-cutting topics: full treatment once, local consequences everywhere] The guide states, in a line or two at the relevant step, the security consequence that applies here (e.g. replay protection via tolerance, or that tolerance=0 disables it) and links to a fuller security treatment.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Step 3: \"> **Warning:** `tolerance=0` turns off the age check. An attacker who captures one signed delivery can then resend it whenever they like\". It links to the fuller treatment: \"[How webhook signatures work](how-webhook-signatures-work.md): why the signature covers a timestamp\". That page explains replay and tolerance."
+    },
+    {
+      "text": "[30. Give reasoning where the reader will wonder] The choice of tolerance value is explained in a few sentences in a titled box or clearly marked skippable paragraph at the step where it is set.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Step 3 (\"If the default 5-minute replay window doesn't suit you, pass `tolerance`\") describes the mechanism and clock drift, but not how to choose a value or the tradeoff of a wider window. The explanation is plain step text, not a titled box. The only box warns about tolerance=0."
+    },
+    {
+      "text": "[29. One page can serve beginners and experts] The guide starts with the simplest common use and moves to advanced material (e.g. migrating from a hand-rolled HMAC check, custom tolerance) in clearly titled, skippable sections, on one page rather than separate novice/expert pages.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The audiences are split across three pages: \"New to webhook signatures? Read [How webhook signatures work](...) first. Already checking HMAC signatures with your own code? Follow [Replace a hand-rolled HMAC check with hookshot](...) instead.\" These are exactly the separate novice and expert pages the assertion rules out."
+    },
+    {
+      "text": "[3. One primary job per page; other kinds of material only in short, labeled sections] The guide stays task-focused: it does not paste a full reference table of hookshot's API; it links to reference instead.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The page is strictly task-focused with no reference table, but it never links or points to hookshot's API reference. The Related links go only to the explanation and migration pages."
+    },
+    {
+      "text": "[38. Show commands and output the way readers will copy them] Command and output presentation is explained or consistent with one chosen convention, and the prompt marker, if any, is explained once.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Commands are in ```bash blocks with no prompt markers (`flask --app app run`, `curl -i http://127.0.0.1:5000/webhooks \\`), and expected results are given in prose (\"The response status is `204`\"). The convention is consistent."
+    },
+    {
+      "text": "[40. Say what isn't covered or done] The guide states what hookshot does not do (e.g. it does not parse the payload, deduplicate deliveries, or read the Flask request for you).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The main guide never says what hookshot does not do: nothing on deduplication, payload parsing, or reading the request. The migration page's \"hookshot keeps no state\" is about undoing the change and is not on this page."
+    },
+    {
+      "text": "[1. Run every example as written] The code, run against evals/developer-docs/files/hookshot.py with a body signed by hookshot.sign, verifies successfully as written, and any output shown matches.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Copied app.py and test_webhooks.py from the page into work/Z with hookshot.py. Ran `uv run --with flask --with pytest python3 work/runtests.py work/Z`; the test file sets the secret itself with `os.environ.setdefault`. Output: \"test_accepts_signed_delivery PASSED ... test_rejects_tampered_body PASSED ... test_rejects_missing_header PASSED ... 3 passed in 0.07s\". The curl steps were not run; the page leaves a \"TODO(verify): paste the actual status line\"."
+    },
+    {
+      "text": "[11. Realistic names for real use; neutral names only for pure mechanism] Example payloads and names model a realistic webhook (e.g. an order or invoice event), not foo/bar.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`{\"id\": \"evt_1042\", \"type\": \"invoice.paid\"}` and the tampered `invoice.voided`."
+    },
+    {
+      "text": "[37. Elisions in code must be valid code] Any elided code in samples is a valid comment that says what belongs there.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "The code samples on the main page have no elisions (app.py is complete). `t=1795065369, v1=\u2026` appears only in inline prose, as an example of a malformed header."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 7,
+    "total": 13,
+    "pass_rate": 0.4615
+  },
+  "blind_label": "Z"
+}

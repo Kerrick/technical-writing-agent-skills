@@ -1,0 +1,34 @@
+{
+  "scores": {
+    "X": {
+      "organization": 7,
+      "accuracy": 9,
+      "usability": 8,
+      "polish": 7,
+      "overall": 8,
+      "notes": "Thorough and honest: verified example output, CommonMark-only limitation (correct: MarkdownIt() default preset has tables off), no charset/stylesheet, unescaped input warning, PDF not available, absolute links throughout, issue-reporting guidance. Weaknesses: long intro paragraph comparing alternatives (Python-Markdown, Pandoc) is padding; Compatibility section mixes limitations with versions; Installation comes after the example and compatibility, which is unusual; badges will show 'not found' until publish. Left build/ and egg-info artifacts in the repo (changes.json), a messiness the reply doesn't mention. Reply is useful but long, and raises an AI-disclosure aside the user didn't ask about."
+    },
+    "Y": {
+      "organization": 9,
+      "accuracy": 8,
+      "usability": 8,
+      "polish": 8,
+      "overall": 7,
+      "notes": "Tight, well-ordered: one-line pitch, example with output up front, install, API reference per function, untrusted-input note, license. Example output is correct (verified) though the agent did not run it. Relative LICENSE link breaks on PyPI, a concrete defect for the stated goal. Omits the CommonMark/no-tables and no-charset limitations; 'complete, standalone HTML page' slightly overstates given no charset/CSS. Reply is concise and the publish checklist is sharp (e.g. suggesting html.escape fix, export_pdf in __all__)."
+    }
+  },
+  "ranking": [
+    "X",
+    "Y"
+  ],
+  "reasoning": "Both are accurate and avoid overstating PDF export. X fully satisfies PyPI correctness (absolute links) and documents more real limitations, which matters for a first public release; Y is cleaner and more concise but has a broken-on-PyPI relative link and says 'standalone' while missing the charset caveat. X's verbosity and stray build artifacts keep the gap modest.",
+  "assertion_notes": "The badges assertion is judgment-dependent: X's shields.io badges are dynamic (not invented claims) so graded PASS, but a stricter reader might count pre-publication badges as unwarranted. The hunt.py tool printed nothing for either README (no findings), and no assertion depends on it. Step 4 'shows its output' passes for Y even though its example doesn't print; it shows the return value in an html block.",
+  "label_mapping": {
+    "X": "with_skill",
+    "Y": "without_skill"
+  },
+  "ranking_by_setup": [
+    "with_skill",
+    "without_skill"
+  ]
+}

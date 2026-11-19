@@ -1,0 +1,95 @@
+{
+  "assertion_results": [
+    {
+      "text": "[9. Connect new concepts to what readers already know] The page opens from functools.lru_cache/functools.cache, says memoize is a thin wrapper over functools.cache, and states where cached differs from lru_cache (TTL, keying on positional arguments only).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "First paragraph: 'using `functools.lru_cache` as the reference point'. Short version: '**`@memoize`** is `functools.cache`, which is `lru_cache(maxsize=None)`' and '**`@cached(ttl)`** ... entries go stale after `ttl` seconds' / '`@cached` builds its key from **positional arguments only**.' Then section 'The mental model: lru_cache, then what changes'."
+    },
+    {
+      "text": "[13. Settle easily confused pairs where the confusion happens] A side-by-side comparison (table or equivalent) of memoize and cached appears in the page itself, covering at least keying, expiry, and boundedness.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Three-column table with rows 'Key' (positional and keyword vs **Positional args only**), 'Becomes invalid' (Never vs `ttl` seconds), 'Size limit' (None/None)."
+    },
+    {
+      "text": "[7. Warn about silent and breaking failures too] A warning callout flags that cached ignores keyword arguments in its key, silently returning a wrong result; the warning names that one failure.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No callout. The trap is a bullet ('**The trap:** `@cached` builds its key from **positional arguments only**') plus prose ('It fails silently. There's no error...'). Nothing is set off as a warning."
+    },
+    {
+      "text": "[4. Show the wrong form beside the right one] The page shows the wrong usage (calling a @cached function that differs only by a keyword argument) next to a correct alternative, and explains why the wrong one returns a stale value.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Block: `price(42, currency=\"EUR\")   # cache hit on (42,): returns the USD price` directly followed by `price(42, \"EUR\")            # key (42, \"EUR\"): runs, correct EUR price`. The explanation precedes it: 'Keyword arguments get passed to your function, but they never become part of the key.'"
+    },
+    {
+      "text": "[26. Mark wrong and failing samples inside the block] The wrong sample is marked as wrong inside the code block (e.g. a # Wrong: comment).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The wrong line carries `# cache hit on (42,): returns the USD price`, which describes the result but never labels the call as wrong. The `price(sku=99)` line likewise says only '# cache hit on (): returns the price for sku 42'. No explicit wrong marker."
+    },
+    {
+      "text": "[40. Say what isn't covered or done] The page states plainly that the caches are per process and not shared between worker processes, and that memoize never evicts entries.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'## Caches live in one process' ... 'Each worker has its **own** cache'; '**there is no `maxsize`, so nothing is ever evicted.**'"
+    },
+    {
+      "text": "[43. Collect known limits] Known limitations and caveats are collected in a clearly titled section.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Caveats are spread across 'Other differences from lru_cache', 'What both decorators share' > 'Other things to know', and 'Common mistakes'. No section is titled as limitations or caveats."
+    },
+    {
+      "text": "[22. One term per concept, with any unavoidable second name declared once] The page uses one term for the cache key concept (and for other core concepts) consistently, without undeclared synonyms.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Synonym drift for core concepts: expiry is 'go stale', 'Becomes invalid' (table row), and 'expiry'/'expired'. Removal is 'evicted', 'Removed from memory', 'pruned', and 'cleaned up'. None is declared as an alias."
+    },
+    {
+      "text": "[5. Show the longhand before the shortcut, and say how equivalent they are] The page shows longhand code for what @cached does (a dict keyed by args with timestamps) before or alongside the decorator, and says how exact the equivalence is.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Only an excerpt of the real code: `hit = store.get(args)        # kwargs are not used` / `...` / `store[args] = (now, value)`, plus a prose list. No complete longhand, and no statement of how exact the equivalence is."
+    },
+    {
+      "text": "[23. Ask for predictions at the point of the concept] At the point the keyword-argument behavior is introduced, the reader is asked to predict the output before it is shown.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Not asked. The keyword block shows its outcomes in comments right away ('So:' then the block)."
+    },
+    {
+      "text": "[35. Flag teaching shortcuts] Any simplified illustrative implementation is flagged as such, with what production code would do instead.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Vacuous: no simplified implementation. The code excerpt is quoted from the source, and example bodies are `...`."
+    },
+    {
+      "text": "[14. Put optional depth in titled, consistent asides] Optional depth, if any, is in titled asides distinct from warnings.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Vacuous: no asides. Depth is inline."
+    },
+    {
+      "text": "[2. End lessons with a short, fixed closing that points forward] The page does not end with a conclusion that restates its content.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The page ends with '## Common mistakes', which mostly repeats earlier points: 'Assuming a short TTL keeps memory down. It doesn't. Expired entries stay in memory...' (already covered in 'Expired entries are not cleaned up') and 'Calling `cache_clear()` to invalidate after a write. This only clears one worker's cache.' (already covered in 'Caches live in one process'). This is a restating conclusion."
+    },
+    {
+      "text": "[10. Verify every fact against its source, and keep facts consistent] Every behavior stated about memoize and cached matches cachekit.py (e.g. expired entries are replaced on the next call, not evicted in the background).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Checked against cachekit.py and work/check.py: keyword unhashable args don't raise (`cached(1)(lambda x, y=None: x)(1, y=[1])` returned 1); None is cached (1 call for 2 invocations); with `/` and no defaults, `price(sku=42)` always misses, so it raises; 'Expiry is checked lazily ... Nothing runs in the background' matches the docstring. No false claim found. (The page's samples are fragments with `...` bodies and can't be run as written. The response admits nothing was executed.)"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 7,
+    "total": 14,
+    "pass_rate": 0.5
+  },
+  "blind_label": "Y"
+}

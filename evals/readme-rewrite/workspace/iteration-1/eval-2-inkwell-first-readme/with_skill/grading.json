@@ -1,0 +1,47 @@
+{
+  "assertion_results": [
+    {
+      "text": "Step 1: the install command uses the package name from pyproject.toml (inkwell-md), and the example imports the module name (inkwell)",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "README Installation: \"pip install inkwell-md\" (pyproject name = \"inkwell-md\"); Example: \"import inkwell\". Also: \"The package on PyPI is `inkwell-md`. You import it as `inkwell`.\""
+    },
+    {
+      "text": "Step 1: any image or link to a file in the repository uses an absolute URL, so it works on PyPI",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Only repo-file link is the LICENSE: \"[Apache License 2.0](https://github.com/example/inkwell/blob/main/LICENSE)\" (and the badge also links there absolutely). No images embedded (demo.png omitted). Issues link is absolute too."
+    },
+    {
+      "text": "Step 4: the first example calls render() as defined in src/inkwell/__init__.py and shows its output",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "First example: `html = inkwell.render(\"# Hello\\n\\nThis is *Markdown*.\", title=\"Greeting\")` then \"It prints:\" with the HTML. Ran via `uv run --with markdown-it-py python3 work/run_first.py` against inputs' src: printed '<!doctype html><html><head><title>Greeting</title></head><body><h1>Hello</h1>\\n<p>This is <em>Markdown</em>.</p>\\n</body></html>', matching the README block exactly."
+    },
+    {
+      "text": "Step 5: PDF export is either left out or marked as not available yet, never presented as working",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"PDF export isn't available yet. `inkwell.export_pdf()` exists, but it raises `NotImplementedError`.\""
+    },
+    {
+      "text": "Step 6: there are no invented badges, user counts, testimonials or adopters",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No user counts, testimonials or adopters. Three shields.io badges (pypi/v, pypyversions, pypi/l for inkwell-md) are dynamic badges reading real PyPI metadata, not invented claims; no CI/coverage/download badges. Caveat: they render 'not found' until the package is published (agent's reply flags this)."
+    },
+    {
+      "text": "Section plan: the license section names Apache-2.0, matching LICENSE and pyproject.toml",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "License section: \"inkwell is available under the [Apache License 2.0](...)\"; LICENSE file is \"Apache License Version 2.0\" and pyproject license = \"Apache-2.0\"."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "blind_label": "X"
+}

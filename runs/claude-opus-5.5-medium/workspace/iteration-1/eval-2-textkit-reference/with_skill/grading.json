@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[17. Document boundary behavior] Entries state boundary behavior with exact results, including at least: slugify on input with no ASCII-transliterable characters returning \"\", truncate on text already within width being unchanged, and truncate raising ValueError when width < len(ellipsis).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "slugify: 'Returns `\"\"` when no ASCII letter or digit survives, including for empty input.' with `slugify(\"\u041f\u0440\u0438\u0432\u0435\u0442 \u043c\u0438\u0440\")` -> `''`. truncate: 'Text of `width` characters or fewer is returned unchanged, with no ellipsis.' and '**Raises** `ValueError(\"width must be at least len(ellipsis)\")` when `width < len(ellipsis)`.' All verified."
+    },
+    {
+      "text": "[42. State operational cost] dedupe_lines states that it holds every distinct line in memory, and natural_sort states it returns a new list (a copy) rather than sorting in place, with a note on cost for large inputs.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "dedupe_lines: '`dedupe_lines` keeps every distinct line in memory until the generator is finished, so memory grows with the number of distinct lines'. natural_sort: 'Returns a new list of `items` ... `items` is not modified.' and 'Like `sorted()`, `natural_sort` builds a full list and computes a key for every item, so memory and time grow with the number and length of items.'"
+    },
+    {
+      "text": "[45. Definitions first in lookup material] Each entry's description comes before its examples and fully defines the behavior on its own.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Every entry has a signature, then a full definition paragraph, then params/returns/raises, then cost, then '### Examples'. e.g. shorten's paragraph fully covers collapse, the no-placeholder case and the first-word-doesn't-fit case before any example."
+    },
+    {
+      "text": "[39. Scale reference entries to their item] No entry contains an empty section or a section filled with \"None\"; entries share a fixed section order.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No empty or 'None' sections. Raises appears only where something is raised (truncate, natural_sort). Shared order: signature \u2192 definition \u2192 param bullets \u2192 cost \u2192 warning(s) \u2192 ### Examples."
+    },
+    {
+      "text": "[46. Frame every example, and give reference a set of task examples] Each entry ends with more than one framed example (a sentence or heading saying what it shows), covering common tasks and notable options such as sep or placeholder.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Each entry has '### Examples' with framed sentences: e.g. 'Turn an article title into a URL path segment:', 'Use a different separator, for example for file names...' (sep), 'Use an ASCII ellipsis...' (ellipsis), 'Use a shorter placeholder to keep one more word:' (placeholder). There are 2\u20134 framed examples per entry; make_slug's migration block is framed with '# Older form' / '# Wrong replacement' comments."
+    },
+    {
+      "text": "[13. Settle easily confused pairs where the confusion happens] The page distinguishes truncate (may cut mid-word) from shorten (cuts at a word boundary) at the point of confusion, for example with a side-by-side table on the same input, and each links to the other.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "It has a strong side-by-side table ('### `truncate` or `shorten`?') and the same input 'The quick brown fox' at width 12 -> 'The quick b\u2026' vs 'The [\u2026]'. But the page has no hyperlinks at all, and the truncate entry never mentions shorten, so 'each links to the other' is not met. The comparison sits in the summary, not in the entries."
+    },
+    {
+      "text": "[41. Change one thing at a time to show variants] At least one option (for example sep, ellipsis, or placeholder) is shown by keeping the input fixed and changing only that option, with the real output for each.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`truncate(\"Quarterly report\", 10)` -> 'Quarterly\u2026', `..., ellipsis=\"...\")` -> 'Quarter...', `truncate(\"Quarterly report\", 9, ellipsis=\"\")` -> 'Quarterly'. Also shorten with placeholder=\"...\". All verified in work/check.py."
+    },
+    {
+      "text": "[32. Show legacy forms for recognition] make_slug is shown, labeled deprecated or legacy, placed after the current functions, pointing to slugify, and noting it uses \"_\" as separator.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Last section '## make_slug (deprecated)': 'Deprecated since 0.8. It is exactly `slugify(text, sep=\"_\")`' and 'To migrate, keep the underscore separator.'"
+    },
+    {
+      "text": "[16. One shared sample domain per set of examples] Examples across entries share one small sample domain (e.g. the same set of article titles) rather than new data each time.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Data varies per entry: 'Hello, World!'/'Cr\u00e8me Br\u00fbl\u00e9e & Co.' (slugify), 'Quarterly report' (truncate), 'The quick brown fox jumps' (shorten), log lines 'error'/'warn' (dedupe_lines), 'file10'/'v1.10' (natural_sort). There is no single shared domain."
+    },
+    {
+      "text": "[33. Say where each name comes from] The page states the module that provides the functions (textkit) and how to import them.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Every function is defined in the top-level `textkit` module:' with `from textkit import slugify, truncate, shorten, dedupe_lines, natural_sort`."
+    },
+    {
+      "text": "[10. Verify every fact against its source, and keep facts consistent] Every default value, exception type, and output shown matches textkit.py, and the page records that it documents version 0.9.2.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "All 30 checked outputs reproduced in work/check.py (every 'Z OK'), including 'r-resund', the NFD 'Cafe\u2026', and the dedupe-characters list. Exception claims verified: truncate(\"\",0) -> ValueError, natural_sort([\"10\u00b2\"]) -> ValueError, non-str -> TypeError. 'This page documents textkit 0.9.2.' (Minor: make_slug is used in examples but missing from the import line.)"
+    },
+    {
+      "text": "[21. Avoid claims that age] The page contains no time-relative wording such as \"new\", \"recently\", or \"currently\".",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Grep for time-relative words found only 'New list with numbers sorted by value' and 'a new list' (non-temporal)."
+    },
+    {
+      "text": "[4. Show the wrong form beside the right one] At least one entry shows a plausible wrong form beside the right one, labeled, with why it fails (for example, slicing text[:n] instead of truncate, or expecting dedupe_lines to ignore case).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`truncate(title, 5)  # Wrong: the accent is cut off` beside the NFC fix. `list(dedupe_lines(\"error\\nwarn\\nerror\"))  # Wrong: dedupes characters` beside `.splitlines()`. `slugify(\"Hello World\")  # Wrong replacement: the separator changes`. Each is labeled with the reason."
+    }
+  ],
+  "summary": {
+    "passed": 11,
+    "failed": 2,
+    "total": 13,
+    "pass_rate": 0.8462
+  },
+  "blind_label": "Z"
+}

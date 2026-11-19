@@ -1,0 +1,165 @@
+{
+  "skill_name": "readme-rewrite",
+  "iteration": 1,
+  "model": "claude-opus-5-5",
+  "effort": "medium",
+  "runs_per_setup_per_eval": 1,
+  "note": "Iteration 1: one run per setup per eval, so stddev is across evals, not repeated runs. Tokens are input + output + cache read + cache creation, summed over every model the session used.",
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0
+      },
+      "assertions_passed": 19,
+      "assertions_total": 19,
+      "pooled_pass_rate": 1.0,
+      "time_seconds": {
+        "mean": 139.7287,
+        "stddev": 48.7826
+      },
+      "tokens": {
+        "mean": 541450.3333,
+        "stddev": 188548.2089
+      },
+      "output_tokens": {
+        "mean": 8251.6667,
+        "stddev": 1675.8306
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.7528,
+        "stddev": 0.0914
+      },
+      "assertions_passed": 14,
+      "assertions_total": 19,
+      "pooled_pass_rate": 0.7368,
+      "time_seconds": {
+        "mean": 43.841,
+        "stddev": 3.7561
+      },
+      "tokens": {
+        "mean": 149447.3333,
+        "stddev": 50438.6603
+      },
+      "output_tokens": {
+        "mean": 2740,
+        "stddev": 171.3651
+      }
+    }
+  },
+  "delta": {
+    "with_skill_minus_without_skill": {
+      "pass_rate": 0.2472,
+      "time_seconds": 95.8877,
+      "tokens": 392003.0
+    }
+  },
+  "per_eval": {
+    "eval-1-tallyho-cleanup": {
+      "with_skill": {
+        "passed": 8,
+        "total": 8,
+        "pass_rate": 1.0,
+        "tokens": 709278,
+        "output_tokens": 9470,
+        "time_seconds": 150.6,
+        "cost_usd": 0.5300674
+      },
+      "without_skill": {
+        "passed": 5,
+        "total": 8,
+        "pass_rate": 0.625,
+        "tokens": 185539,
+        "output_tokens": 2553,
+        "time_seconds": 43.1,
+        "cost_usd": 0.1582536
+      }
+    },
+    "eval-2-inkwell-first-readme": {
+      "with_skill": {
+        "passed": 6,
+        "total": 6,
+        "pass_rate": 1.0,
+        "tokens": 636983,
+        "output_tokens": 9403,
+        "time_seconds": 193.3,
+        "cost_usd": 0.5147268
+      },
+      "without_skill": {
+        "passed": 5,
+        "total": 6,
+        "pass_rate": 0.8333,
+        "tokens": 184685,
+        "output_tokens": 2967,
+        "time_seconds": 48.8,
+        "cost_usd": 0.166904
+      }
+    },
+    "eval-3-tallyho-review": {
+      "with_skill": {
+        "passed": 5,
+        "total": 5,
+        "pass_rate": 1.0,
+        "tokens": 278090,
+        "output_tokens": 5882,
+        "time_seconds": 75.3,
+        "cost_usd": 0.3258258
+      },
+      "without_skill": {
+        "passed": 4,
+        "total": 5,
+        "pass_rate": 0.8,
+        "tokens": 78118,
+        "output_tokens": 2700,
+        "time_seconds": 39.7,
+        "cost_usd": 0.127934
+      }
+    }
+  },
+  "assertions_differing": {
+    "eval-1-tallyho-cleanup#4": {
+      "text": "Step 4: a first example near the top shows a real command and its output in the CLI's actual format",
+      "with_skill": true,
+      "without_skill": false
+    },
+    "eval-1-tallyho-cleanup#6": {
+      "text": "Step 7: test and release instructions are gone from the README, which at most points to a contributing guide in one or two sentences",
+      "with_skill": true,
+      "without_skill": false
+    },
+    "eval-1-tallyho-cleanup#8": {
+      "text": "Style rules: no sentence makes a non-agentic thing the actor (for example, 'the counter decides')",
+      "with_skill": true,
+      "without_skill": false
+    },
+    "eval-2-inkwell-first-readme#2": {
+      "text": "Step 1: any image or link to a file in the repository uses an absolute URL, so it works on PyPI",
+      "with_skill": true,
+      "without_skill": false
+    },
+    "eval-3-tallyho-review#4": {
+      "text": "Step 9: the review flags the announced honesty, the self-praise, the em dashes and the ADR citation, citing lines",
+      "with_skill": true,
+      "without_skill": false
+    }
+  },
+  "assertions_always_pass": [
+    "eval-1-tallyho-cleanup#1",
+    "eval-1-tallyho-cleanup#2",
+    "eval-1-tallyho-cleanup#3",
+    "eval-1-tallyho-cleanup#5",
+    "eval-1-tallyho-cleanup#7",
+    "eval-2-inkwell-first-readme#1",
+    "eval-2-inkwell-first-readme#3",
+    "eval-2-inkwell-first-readme#4",
+    "eval-2-inkwell-first-readme#5",
+    "eval-2-inkwell-first-readme#6",
+    "eval-3-tallyho-review#1",
+    "eval-3-tallyho-review#2",
+    "eval-3-tallyho-review#3",
+    "eval-3-tallyho-review#5"
+  ],
+  "assertions_always_fail": []
+}

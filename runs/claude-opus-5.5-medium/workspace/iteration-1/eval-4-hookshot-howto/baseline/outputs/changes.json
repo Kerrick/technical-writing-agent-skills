@@ -1,0 +1,10 @@
+{
+  "added": [
+    "evals/developer-docs/files/__pycache__/hookshot.cpython-315.pyc",
+    "outputs/how-webhook-signatures-work.md",
+    "outputs/replace-hand-rolled-hmac-check.md",
+    "outputs/verify-webhook-signatures.md"
+  ],
+  "modified": [],
+  "deleted": []
+}

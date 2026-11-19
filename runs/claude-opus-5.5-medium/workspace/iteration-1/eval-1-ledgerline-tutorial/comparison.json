@@ -1,0 +1,45 @@
+{
+  "scores": {
+    "X": {
+      "organization": 9,
+      "accuracy": 9,
+      "usability": 8,
+      "polish": 8,
+      "overall": 9,
+      "notes": "Clear problem-then-solution arc (sum by hand, loop, then summarize with a verified equality and a prediction). The equivalence callout and the KeyError and substring traps are accurate and verified. It's long: the six steps plus two 'Mistake' subsections may be more than a Part 2 needs, and the substring-trap section is a bit heavy for beginners. The closing 'Continue to Part 3.' has no link. No help channel."
+    },
+    "Y": {
+      "organization": 8,
+      "accuracy": 9,
+      "usability": 8,
+      "polish": 7,
+      "overall": 7,
+      "notes": "Clean procedural layout with numbered run/output checkpoints, a full listing, and a nice <details> prediction exercise. It reads more like a how-to than a narrative tutorial: summarize comes first and the hand check comes after. It leaves TODO(verify) placeholders in the Part 1 link and the Next steps, and uses a bare '...' in output blocks. Float handling is a troubleshooting line only."
+    },
+    "Z": {
+      "organization": 7,
+      "accuracy": 8,
+      "usability": 6,
+      "polish": 7,
+      "overall": 5,
+      "notes": "Concise and correct, and every sample runs. But it's essentially a feature tour: no motivation, no predictions, no float error demo. The Step 4 snippets aren't anchored to the file, and `from decimal import Decimal` lands mid-script. 'Code below' is positional. It makes up 'March/April' data that replaces rather than restates Part 1, and has no forward pointer."
+    }
+  },
+  "ranking": [
+    "X",
+    "Y",
+    "Z"
+  ],
+  "reasoning": "X best matches the expected tutorial shape: it restates Part 1, makes readers feel the manual-totals cost, introduces summarize() as the fix with an exact equivalence statement, shows a marked float failure with the exact message, and asks for predictions. Y is polished and checkpoint-heavy but skips the motivation and leaves TODO placeholders. Z is accurate but thin as a tutorial and leaves out most of the pedagogical moves.",
+  "assertion_notes": "#18 ('reader deliberately passes a float'): X shows the float sample in a warning callout rather than as an explicit 'run this' step; I passed it because the exact error leads into the Decimal fix, but a stricter reading would fail it. #28: both X ('part-1.md') and Y ('TODO(verify)') use placeholder link targets, since no agent knew the real URL; I accepted the link markup. #37: Y's bare '...' is in output (text) blocks, not executable code; I failed it on the literal wording ('no code block'). #34 (help channel) fails for every label because the prompt provides no support channel; it can't be satisfied without inventing one. #23: Y's prediction comes in a dedicated exercise section right after the concept, which is borderline for 'at the point of the concept'. #1: X's Mistake 2 output block shows only the new print's output without 'last line' wording, while the cumulative script prints more.",
+  "label_mapping": {
+    "X": "with_skill",
+    "Y": "baseline",
+    "Z": "without_skill"
+  },
+  "ranking_by_setup": [
+    "with_skill",
+    "baseline",
+    "without_skill"
+  ]
+}

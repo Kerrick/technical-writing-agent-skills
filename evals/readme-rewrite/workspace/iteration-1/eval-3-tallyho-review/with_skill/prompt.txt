@@ -1,0 +1,5 @@
+Read the skill at /Users/kerrick/Developer/technical-writing-agent-skill/skills/readme-rewrite/SKILL.md and follow it for this task. Its reference files and scripts are in that same folder; read them when SKILL.md says to.
+
+Task:
+
+can you review the README in evals/readme-rewrite/files/tallyho and tell me what's wrong with it? don't change anything yet

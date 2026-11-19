@@ -1,0 +1,5 @@
+Read the skill at /Users/kerrick/Developer/technical-writing-agent-skill/skills/readme-rewrite/SKILL.md and follow it for this task. Its reference files and scripts are in that same folder; read them when SKILL.md says to.
+
+Task:
+
+inkwell (evals/readme-rewrite/files/inkwell) has no README at all and we're about to publish it to PyPI. can you write one?

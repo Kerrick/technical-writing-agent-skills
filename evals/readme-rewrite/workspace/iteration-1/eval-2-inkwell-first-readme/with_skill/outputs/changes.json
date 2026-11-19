@@ -1,0 +1,13 @@
+{
+  "added": [
+    "evals/readme-rewrite/files/inkwell/README.md",
+    "evals/readme-rewrite/files/inkwell/build/lib/inkwell/__init__.py",
+    "evals/readme-rewrite/files/inkwell/src/inkwell_md.egg-info/PKG-INFO",
+    "evals/readme-rewrite/files/inkwell/src/inkwell_md.egg-info/SOURCES.txt",
+    "evals/readme-rewrite/files/inkwell/src/inkwell_md.egg-info/dependency_links.txt",
+    "evals/readme-rewrite/files/inkwell/src/inkwell_md.egg-info/requires.txt",
+    "evals/readme-rewrite/files/inkwell/src/inkwell_md.egg-info/top_level.txt"
+  ],
+  "modified": [],
+  "deleted": []
+}

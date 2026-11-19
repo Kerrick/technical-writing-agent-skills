@@ -1,0 +1,119 @@
+{
+  "assertion_results": [
+    {
+      "text": "[12. Let readers feel the problem before giving them the feature] Before summarize() appears, the reader computes per-account totals the laborious way (a hand-written loop) or is shown the cost of doing so in their Part 1 code.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Step 2 goes straight to `print(ledger.summarize())`; there is no hand-written totals loop and no mention of what it would cost to write one."
+    },
+    {
+      "text": "[5. Show the longhand before the shortcut, and say how equivalent they are] The page shows the longhand loop that summarize() stands for and states whether the two are exactly or approximately equivalent, naming at least one difference (for example, sorting by account name or omitting accounts with no entries).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No longhand version of summarize() is shown and no equivalence statement."
+    },
+    {
+      "text": "[18. Let failures recur while each one teaches] The reader deliberately passes a float amount to add(), the page shows the exact TypeError message, and that error leads into the next step (using Decimal or str).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Only prose: 'If you pass a float such as `4.50`, `add()` raises a `TypeError`.' No float sample, no exact message."
+    },
+    {
+      "text": "[26. Mark wrong and failing samples inside the block] The failing float sample is marked as wrong or meant to fail inside the code block itself, not only in prose, and the reader is warned before running it.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No failing float code block exists."
+    },
+    {
+      "text": "[23. Ask for predictions at the point of the concept] At least once, at the point a concept is shown, the page asks the reader to predict an output before revealing it, or to change one specific value and predict the result.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No prediction prompt anywhere; outputs are shown right after each sample ('Output:')."
+    },
+    {
+      "text": "[25. Tell readers how to check their own work] Each checkpoint tells readers what to run and what output they should see.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Steps 2 and 3 say 'Run the script' / 'You should see:', but in Step 4 the samples are followed only by 'Output:' with no instruction on where to add the code or what to run (e.g. '`print(ledger.summarize(accounts=[\"rent\", \"salary\"]))` Output:')."
+    },
+    {
+      "text": "[8. Show code changes by file size, with full-code checkpoints] Changed code is shown either as the whole short file with changes marked or as an anchored excerpt naming the file; the marking notation is explained the first time; at least one checkpoint shows the complete current code.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Step 3 is anchored ('Replace the `print(ledger.summarize())` line with', 'Add this to the end of the file'), and 'The complete script' gives full code. But the Step 4 snippets (`print(ledger.summarize(accounts=[\"rent\", \"utilities\"]))`, and the block starting `from decimal import Decimal`) name no file or position."
+    },
+    {
+      "text": "[15. Use \"we\" for shared narrative work] Shared build-along work uses \"we\" or \"let's\", with \"you\" for what the reader alone observes.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Second person only: 'you'll add a few more entries', 'Create a file called budget.py'. No 'we'/'let's'."
+    },
+    {
+      "text": "[28. Sequenced pages may build on earlier ones] The page links back to Part 1 and restates the starting code it builds on.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'In [Part 1](part-1.md), you created a `Ledger`...'; Step 1 code is 'the ledger from Part 1, plus a second month' (Part 1 entries are merged with new ones, not restated separately)."
+    },
+    {
+      "text": "[34. Say where to get help] Near the start, the page tells readers where to get help from people.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No help channel is mentioned."
+    },
+    {
+      "text": "[27. Tell learners where difficulty is normal] The page names at least one place where readers commonly get stuck (for example, Decimal vs float) and says difficulty there is normal.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No statement that some point is commonly difficult; the list-vs-string warning doesn't normalize difficulty."
+    },
+    {
+      "text": "[33. Say where each name comes from] When Ledger, Decimal, or summarize first appear, the page says which module provides them (ledgerline or decimal).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Decimal first appears in 'ledgerline converts them to `Decimal` so cents stay exact' without naming the decimal module; `from decimal import Decimal` shows up only in Step 4 code."
+    },
+    {
+      "text": "[2. End lessons with a short, fixed closing that points forward] The page ends with a short closing (one sentence or brief recap) plus a pointer or preview of the next part, without walking back through the content.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Ends with 'Recap' of four bullets restating the content and no pointer or preview of Part 3."
+    },
+    {
+      "text": "[38. Show commands and output the way readers will copy them] Commands and their output are in separate blocks, because the prompt says the copy button grabs the whole block.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'```bash python budget.py```' separate from '```text ...```' output blocks."
+    },
+    {
+      "text": "[1. Run every example as written] Every code sample, run in page order against evals/developer-docs/files/ledgerline.py, runs without errors except the deliberately failing one, and produces exactly the output the page shows.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Ran python3 work/runz.py: s2 \"{'groceries': Decimal('-209.55'), 'rent': Decimal('-3000.00'), 'salary': Decimal('8400.00')}\"; s3 'groceries     -209.55 / rent         -3000.00 / salary        8400.00'; net 'net           5190.45'; accounts=[rent,salary] \"{'rent': Decimal('-3000.00'), 'salary': Decimal('8400.00')}\"; [rent,utilities] \"{'rent': Decimal('-3000.00')}\"; .get -> '0'; complete script prints the four lines shown. All match. (Step 4 outputs are shown for each print alone, which works for the snippets.)"
+    },
+    {
+      "text": "[37. Elisions in code must be valid code] No code block contains a bare ... elision; any omitted code is marked with a comment that says what belongs there.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No `...` in any code block."
+    },
+    {
+      "text": "[11. Realistic names for real use; neutral names only for pure mechanism] Examples use realistic account names and memos (such as rent, salary) rather than foo/bar.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Accounts rent, salary, groceries; memos 'March rent', 'Market run', 'Weekly shop'."
+    },
+    {
+      "text": "[44. Refer to other parts by stable label, never by position] The page never refers to other content as \"above\" or \"below\".",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Step 1: 'Create a file called `budget.py` and add the code below.'"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 13,
+    "total": 18,
+    "pass_rate": 0.2778
+  },
+  "blind_label": "Z"
+}

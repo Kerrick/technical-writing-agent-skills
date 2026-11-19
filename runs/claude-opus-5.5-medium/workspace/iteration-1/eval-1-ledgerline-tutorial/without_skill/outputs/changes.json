@@ -1,0 +1,11 @@
+{
+  "added": [
+    "outputs/part-2-summarizing-your-ledger.md",
+    "scratch/lib/__pycache__/ledgerline.cpython-315.pyc",
+    "scratch/lib/ledgerline.py",
+    "scratch/t1.py",
+    "scratch/t2.py"
+  ],
+  "modified": [],
+  "deleted": []
+}

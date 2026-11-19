@@ -1,0 +1,59 @@
+{
+  "assertion_results": [
+    {
+      "text": "Step 1: every command shown uses flags that exist in src/tallyho/cli.py (--limit, not --top)",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "README commands: `tallyho --limit 3 story.txt`, `tallyho [--limit N] FILE [FILE ...]`, `tallyho --limit 25 chapter1.txt chapter2.txt`, `tallyho --help`; all flags exist in cli.py (`--limit`, argparse's default `-h/--help`). No --top. Ran `tallyho --limit 3 story.txt` via work/run_examples.py: rc=0."
+    },
+    {
+      "text": "Step 1: the stated Python requirement matches pyproject.toml (3.11 or later, not 3.8)",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "README Compatibility table: \"| [Python](https://www.python.org/) | 3.11 or later |\"; pyproject.toml requires-python = \">=3.11\"."
+    },
+    {
+      "text": "Step 1: the response tells the user that the old README's --top flag and Python 3.8 requirement disagree with the code",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "response.md 'Removed as false': \"**Python 3.8+:** `pyproject.toml` requires 3.11 or later.\" and \"**The `--top` flag:** it doesn't exist. The flag is `--limit`.\""
+    },
+    {
+      "text": "Step 4: a first example near the top shows a real command and its output in the CLI's actual format",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'## Example' right after the intro gives story.txt's contents, `$ tallyho --limit 3 story.txt`, and the output \"     4  the\\n     2  cat\\n     2  on\". I ran that exact command on that file with work/run_examples.py (python3 -m tallyho.cli against inputs src) and it printed \"     4  the / 2  cat / 2  on\", an exact match."
+    },
+    {
+      "text": "Step 5: no dated update log and no 'the latest version is' sentence remain",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "README sections: Example, Compatibility, Installation, Usage, How words are counted, Reporting problems, Contributing, License. No 'Update' headings and no 'latest version' text."
+    },
+    {
+      "text": "Step 7: test and release instructions are gone from the README, which at most points to a contributing guide in one or two sentences",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "README '## Contributing' is a single sentence: \"To run the tests or cut a release, see [CONTRIBUTING.md](CONTRIBUTING.md).\" Tests and release steps are now in a new CONTRIBUTING.md."
+    },
+    {
+      "text": "Step 9: running scripts/hunt.py on the new README reports no 'announced honesty', 'em dash', 'self-praise' or 'internal citation' hits",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`uv run tools/hunt.py outputs/Y/.../README.md` printed nothing and exited 0."
+    },
+    {
+      "text": "Style rules: no sentence makes a non-agentic thing the actor (for example, 'the counter decides')",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "hunt.py reports no [non-agentic subject] hits. On a manual read, the subjects are the reader, tallyho (a program described doing what it does: \"tallyho lowercases the text\"), or plain descriptive verbs (\"Each line shows a count\", \"The license covers tallyho itself\"). Nothing makes a thing decide or handle things the way 'the counter decides' does. The closest case is \"This puts the `tallyho` command on your `PATH`\", which is ordinary description."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  },
+  "blind_label": "Y"
+}

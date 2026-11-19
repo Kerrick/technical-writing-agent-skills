@@ -1,0 +1,34 @@
+{
+  "scores": {
+    "X": {
+      "organization": 7,
+      "accuracy": 7,
+      "usability": 6,
+      "polish": 7,
+      "overall": 6,
+      "notes": "Short and clean, and it fixes the flag and Python version. But the output block isn't tied to any input or command shown. It keeps the test and release instructions in the README, along with claims it can't back up ('CI runs them on every push', 'The release workflow handles the rest'), even though the response admits no CI or workflow files exist. `pip install tallyho` assumes a PyPI release that nothing confirms. The response reports the mismatches clearly. It also left a stray __pycache__ .pyc in the inputs tree."
+    },
+    "Y": {
+      "organization": 9,
+      "accuracy": 9,
+      "usability": 9,
+      "polish": 8,
+      "overall": 9,
+      "notes": "The example's input, command and output are all given, and the output matches a real run exactly. Contributor material is moved to CONTRIBUTING.md, and the CI and workflow claims it couldn't verify are dropped. The word-splitting rules ('caf\u00e9' -> 'caf') match the regex; I verified that. The response is thorough: it reports the mismatches, its install decision, and a real bug (files joined with \"\"). It's somewhat long: the shell-pipeline comparison, the license paraphrase and the 'Reporting problems' section with no link are extra. The response also brings up an unrelated 'AI disclosure' topic."
+    }
+  },
+  "ranking": [
+    "Y",
+    "X"
+  ],
+  "reasoning": "Y does everything the task asked for: users get a verifiable example, requirements match the code, contributor material is moved out, and the disagreements are reported. X fixes the factual errors but leaves the contributor sections in place, keeps unverifiable workflow claims, and gives an output sample that matches no command it shows. Y is a little wordier than it needs to be, but it is more accurate and more useful.",
+  "assertion_notes": "The Step 4 call on X is a judgment call: the output format is correct, but the output isn't tied to either command shown, so I failed it. The Step 8 style rule is somewhat subjective for program-as-subject sentences ('tallyho lowercases'). I treated describing what a program does as fine, and counted 'the release workflow handles the rest' (which hunt.py flags) as a violation. The Step 9 assertion names only four hunt categories, so X passes it despite its non-agentic-subject hit.",
+  "label_mapping": {
+    "X": "without_skill",
+    "Y": "with_skill"
+  },
+  "ranking_by_setup": [
+    "with_skill",
+    "without_skill"
+  ]
+}

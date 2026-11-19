@@ -1,0 +1,45 @@
+{
+  "scores": {
+    "Z": {
+      "organization": 9,
+      "accuracy": 8,
+      "usability": 9,
+      "polish": 8,
+      "overall": 9,
+      "notes": "One running example with a print that makes hits and misses visible. All 30 doctest steps pass. Includes a glossary, a warning and a separate aside, a fix pattern (positional-only cached core plus a keyword-friendly wrapper), and an ordered decision list. The longest page. The intro and glossary delay the functools hook. One wrong claim about @cached on methods releasing instances. The REPL prompts hurt copy-paste."
+    },
+    "X": {
+      "organization": 8,
+      "accuracy": 9,
+      "usability": 8,
+      "polish": 8,
+      "overall": 8,
+      "notes": "Tight and accurate, and it leads with the real bug. Real verified output, a good 'Three misconceptions' framing, and it catches the @cached-without-parens trap. No callout, no wrong markers in code, no longhand, no limits section. Ends with TODO placeholder links."
+    },
+    "Y": {
+      "organization": 7,
+      "accuracy": 8,
+      "usability": 7,
+      "polish": 7,
+      "overall": 7,
+      "notes": "A solid four-question mental model, a three-way table and a useful decision table. Facts are right, including the all-keyword () key case. Samples are unrunnable fragments and nothing was executed. Terminology drifts (stale/invalid/evicted/pruned). Caveats are scattered, and it ends with a 'Common mistakes' recap."
+    }
+  },
+  "ranking": [
+    "Z",
+    "X",
+    "Y"
+  ],
+  "reasoning": "Z gives readers who know lru_cache the most usable teaching page. Its executable running example shows the trap and the fix, a prediction prompt sits at the key point, and the warning and aside are cleanly separated. Its one factual slip (methods) is minor. X is the most concise and fully accurate page, with a strong hook, but it lacks the structural affordances (warning, marked wrong code, limits section). Y covers the content well but is less verified, less consistent in its terms, and repeats itself at the end.",
+  "assertion_notes": "Assertions 35 (flag teaching shortcuts) and 14 (titled asides) are conditional ('any', 'if any'), so X and Y pass vacuously without doing the work. Assertion 9's 'opens from' is a placement judgment: Z covers the substance in its third section but fails on order. Assertion 26 is borderline for Y, whose outcome comments imply wrongness without labeling it. Assertion 10 ('every behavior') is unforgiving: one minor wrong aside fails Z while thinner pages with fewer claims pass more easily. Assertion 4 for X is lenient, since the correct alternative is shown as output rather than code.",
+  "label_mapping": {
+    "X": "baseline",
+    "Y": "without_skill",
+    "Z": "with_skill"
+  },
+  "ranking_by_setup": [
+    "with_skill",
+    "baseline",
+    "without_skill"
+  ]
+}

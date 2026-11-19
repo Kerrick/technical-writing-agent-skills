@@ -1,0 +1,59 @@
+{
+  "assertion_results": [
+    {
+      "text": "Step 1: every command shown uses flags that exist in src/tallyho/cli.py (--limit, not --top)",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "README commands: `tallyho notes.txt` and `tallyho --limit 5 chapter1.txt chapter2.txt`; options table lists only `--limit N` default 10, matching cli.py `parser.add_argument(\"--limit\", type=int, default=10, ...)`. No --top. Ran `tallyho notes.txt` via work/run_examples.py: rc=0."
+    },
+    {
+      "text": "Step 1: the stated Python requirement matches pyproject.toml (3.11 or later, not 3.8)",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "README: \"Requires Python 3.11 or later.\" pyproject.toml: requires-python = \">=3.11\"."
+    },
+    {
+      "text": "Step 1: the response tells the user that the old README's --top flag and Python 3.8 requirement disagree with the code",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "response.md: \"**Wrong flag name:** the README said `--top`, but the CLI's flag is `--limit`\" and \"**Wrong Python version:** the README said Python 3.8+, but `pyproject.toml` requires 3.11 or later.\""
+    },
+    {
+      "text": "Step 4: a first example near the top shows a real command and its output in the CLI's actual format",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Usage shows two commands (`tallyho notes.txt`, `tallyho --limit 5 chapter1.txt chapter2.txt`) then an output block \"     2  the / 2  cat / 2  sat\". The format matches cli.py's f\"{count:>6}  {word}\", but the output is not the output of either shown command: the input is never given, and the response admits it was \"made by running `count_words` on a sample sentence\" that the README doesn't show. With the default limit 10 and an unknown notes.txt, the pairing can't be checked; when I made a plausible notes.txt and ran `tallyho notes.txt` it printed 5 lines (3 the, 2 cat, 2 sat, 1 on, 1 mat), not this block. The command and output aren't tied together, so it isn't a real command-plus-output example."
+    },
+    {
+      "text": "Step 5: no dated update log and no 'the latest version is' sentence remain",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "README has sections Install, Usage, From Python, Development, License; no 'Update 2026-...' headings and no 'latest version' text."
+    },
+    {
+      "text": "Step 7: test and release instructions are gone from the README, which at most points to a contributing guide in one or two sentences",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "README '## Development' still contains \"Run the tests with `pytest` from the repo root. CI runs them on every push.\" and \"To release, bump `version` in `pyproject.toml`, tag the commit, and push the tag. The release workflow handles the rest.\" No CONTRIBUTING.md was created (changes.json only modifies README.md)."
+    },
+    {
+      "text": "Step 9: running scripts/hunt.py on the new README reports no 'announced honesty', 'em dash', 'self-praise' or 'internal citation' hits",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`uv run tools/hunt.py outputs/X/.../README.md` output: \"README.md:46: [non-agentic subject] handles\" (exit 1). That is the only hit, and it's in none of the four listed categories."
+    },
+    {
+      "text": "Style rules: no sentence makes a non-agentic thing the actor (for example, 'the counter decides')",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "README line 46: \"The release workflow handles the rest.\" makes the workflow the actor; hunt.py flags it as \"[non-agentic subject] handles\". Also \"CI runs them on every push.\""
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 3,
+    "total": 8,
+    "pass_rate": 0.625
+  },
+  "blind_label": "X"
+}

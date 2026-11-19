@@ -1,0 +1,34 @@
+{
+  "scores": {
+    "X": {
+      "organization": 8,
+      "accuracy": 9,
+      "usability": 8,
+      "polish": 7,
+      "overall": 8,
+      "notes": "Thorough, line-cited, separates factual/structure/style/outside-README. Catches every planted issue plus extras (no readme field in pyproject, non-ASCII words). Some leakage of process talk ('by the skill's rules', 'house style', permission prompt) and an AI-disclosure question that reads off-topic for a review request. A bit long."
+    },
+    "Y": {
+      "organization": 8,
+      "accuracy": 9,
+      "usability": 8,
+      "polish": 8,
+      "overall": 7,
+      "notes": "Tighter and cleaner, with a useful unique catch (pytest fails on fresh clone with src layout) and the pyproject description as a ready replacement tagline. Misses em dashes and the 'honestly' point specifically, cites fewer lines, and only half-commits to the tests/release sections being contributor material (proposes keeping them in a reordered README)."
+    }
+  },
+  "ranking": [
+    "X",
+    "Y"
+  ],
+  "reasoning": "Both find the critical factual errors with code citations and leave files untouched. X covers the full set of style and audience problems with line numbers; Y is more concise and has a sharp src-layout insight but misses style issues and is softer on the audience split. X's extra process chatter costs some polish but not enough to outweigh its completeness.",
+  "assertion_notes": "Step 7 is borderline for Y: it labels release as maintainer content and groups tests under 'contributing' but doesn't say they don't belong in a user README. Step 9 bundles four sub-items plus line citations; a single miss fails it, which makes it strict. Assertion 1 passes trivially for any review that edits nothing.",
+  "label_mapping": {
+    "X": "with_skill",
+    "Y": "without_skill"
+  },
+  "ranking_by_setup": [
+    "with_skill",
+    "without_skill"
+  ]
+}

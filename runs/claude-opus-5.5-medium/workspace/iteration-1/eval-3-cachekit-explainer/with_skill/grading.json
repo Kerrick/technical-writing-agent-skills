@@ -1,0 +1,95 @@
+{
+  "assertion_results": [
+    {
+      "text": "[9. Connect new concepts to what readers already know] The page opens from functools.lru_cache/functools.cache, says memoize is a thin wrapper over functools.cache, and states where cached differs from lru_cache (TTL, keying on positional arguments only).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The page doesn't open from functools. It opens with 'cachekit gives you two decorators for caching function results...', then a '## Terms used on this page' glossary. Only the third section, '## Start from `functools.lru_cache`', makes the connection. That section does have the substance: 'It is a direct wrapper around `functools.cache`', a table showing '**Keyword arguments in the cache key** ... **No**' and 'Entries expire ... After `ttl` seconds'. But the assertion asks the page to open from functools."
+    },
+    {
+      "text": "[13. Settle easily confused pairs where the confusion happens] A side-by-side comparison (table or equivalent) of memoize and cached appears in the page itself, covering at least keying, expiry, and boundedness.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Table rows: '**Keyword arguments in the cache key** | Yes | Yes | **No**', 'Entries expire | Never | Never | After `ttl` seconds', 'Bound on number of entries | None | None | None'."
+    },
+    {
+      "text": "[7. Warn about silent and breaking failures too] A warning callout flags that cached ignores keyword arguments in its key, silently returning a wrong result; the warning names that one failure.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'> **Warning:** `@cached` leaves keyword arguments out of the cache key. A call that changes only a keyword argument gets the result stored for a different keyword value. There's no error, just the wrong result.' It names only that failure."
+    },
+    {
+      "text": "[4. Show the wrong form beside the right one] The page shows the wrong usage (calling a @cached function that differs only by a keyword argument) next to a correct alternative, and explains why the wrong one returns a stale value.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "The wrong `ttl_price(101, currency=\"EUR\")  # Wrong: returns the cached USD price` is followed by the explanation 'The second call's positional arguments are also `(101,)`, so it's a hit, and it returns the USD price', and then by '### The fix: make cached arguments positional-only, with no defaults', whose correct sample prints 'computing price for 101 in EUR / 23.0'."
+    },
+    {
+      "text": "[26. Mark wrong and failing samples inside the block] The wrong sample is marked as wrong inside the code block (e.g. a # Wrong: comment).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`>>> ttl_price(101, currency=\"EUR\")  # Wrong: returns the cached USD price`, `# Wrong: every all-keyword call has the cache key ()`, and `@cached  # Wrong: missing (ttl=...)`."
+    },
+    {
+      "text": "[40. Say what isn't covered or done] The page states plainly that the caches are per process and not shared between worker processes, and that memoize never evicts entries.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'## Neither cache is shared between processes' ... 'each worker has its own separate cache'; '`@memoize` never removes an entry.'"
+    },
+    {
+      "text": "[43. Collect known limits] Known limitations and caveats are collected in a clearly titled section.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'## Known limits and interactions' collects shared results, exceptions, concurrent misses, methods, no cache_info, ttl=0."
+    },
+    {
+      "text": "[22. One term per concept, with any unavoidable second name declared once] The page uses one term for the cache key concept (and for other core concepts) consistently, without undeclared synonyms.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Terms used on this page' defines 'Cache key', 'Cache entry', 'Hit'/'Miss', 'TTL', and the 'memoize' ambiguity is declared once. The body consistently says 'cache key' and 'entry'."
+    },
+    {
+      "text": "[5. Show the longhand before the shortcut, and say how equivalent they are] The page shows longhand code for what @cached does (a dict keyed by args with timestamps) before or alongside the decorator, and says how exact the equivalence is.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Under 'How `@cached` works' it shows the wrapper (`store = {}  # cache key -> (time stored, result)` ... `store[args] = (now, value)`) and says: 'It is cachekit 4.0.1's code with two things left out: `functools.wraps` ... and the `cache_clear` attribute. Otherwise it behaves the same.'"
+    },
+    {
+      "text": "[23. Ask for predictions at the point of the concept] At the point the keyword-argument behavior is introduced, the reader is asked to predict the output before it is shown.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "At the trap: 'Before reading on, predict what the second call here returns:' comes before the output. Also at memoize: 'predict whether it will print `computing price ...`'."
+    },
+    {
+      "text": "[35. Flag teaching shortcuts] Any simplified illustrative implementation is flagged as such, with what production code would do instead.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "The longhand wrapper is flagged with what it omits (wraps, cache_clear). The example function is flagged: 'In real code this function would query a database or a rates service'. Calling decorators as functions is flagged: 'That's the same thing `@memoize` does when you put it on a `def`.'"
+    },
+    {
+      "text": "[14. Put optional depth in titled, consistent asides] Optional depth, if any, is in titled asides distinct from warnings.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'> **Aside: Why the cached parameters must not have defaults**' is titled and separate from the '> **Warning:**' callout."
+    },
+    {
+      "text": "[2. End lessons with a short, fixed closing that points forward] The page does not end with a conclusion that restates its content.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "It ends with '## Known limits and interactions', a list of mostly new points (shared returned objects, ttl=0), not a recap."
+    },
+    {
+      "text": "[10. Verify every fact against its source, and keep facts consistent] Every behavior stated about memoize and cached matches cachekit.py (e.g. expired entries are replaced on the next call, not evicted in the background).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "One false claim. 'On methods, `self` is part of the cache key. ... For `@cached` it means until an entry with the same cache key replaces it.' A replacing entry has the same key, which still holds `self`. In work/check.py, after an expired entry was replaced and the instance deleted, gc left it alive: 'instance alive: True'. Everything else checks out: doctest on all `>>>` blocks gave 'TestResults(failed=0, attempted=30)'; '`memoize() missing 1 required positional argument: 'fn'`' matches; ttl=0 'calls: 2 store: 1' matches 'never hits. It still stores an entry'."
+    }
+  ],
+  "summary": {
+    "passed": 12,
+    "failed": 2,
+    "total": 14,
+    "pass_rate": 0.8571
+  },
+  "blind_label": "Z"
+}

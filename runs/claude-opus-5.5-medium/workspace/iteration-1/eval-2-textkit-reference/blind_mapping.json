@@ -1,0 +1,8 @@
+{
+  "seed": 482734621,
+  "mapping": {
+    "X": "baseline",
+    "Y": "without_skill",
+    "Z": "with_skill"
+  }
+}

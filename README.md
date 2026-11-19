@@ -15,6 +15,8 @@ They're for developers who have an AI agent such as [Claude Code](https://claude
 - **A style guide** such as the [Google developer documentation style guide](https://developers.google.com/style) is written for people, and covers grammar and word choice at length. developer-docs is 161 lines, plus three reference files of 20 to 36 lines that the agent reads only for the kind of page it is writing. It covers how to plan, check, and finish a page: run every example, verify every fact against the code, and never leave a placeholder in a file.
 - **[Vale](https://vale.sh/)** lints prose against a style guide. readme-rewrite includes a script that checks for banned patterns, and when your project has a `.vale.ini`, the skill tells the agent to run Vale too and follow its rules where the two disagree.
 
+In the first round of evals, graded blind on Claude Opus 5.5 at medium effort, developer-docs passed 87% of its 71 assertions, against 56% for the docs skill the model wrote from memory and 46% with no skill. readme-rewrite passed all 19 of its assertions, against 74% with no skill. Graders ranked the skill's output first in all eight evals. Agents using a skill spent about 3.5 times the tokens of agents using none. The [results](runs/claude-opus-5.5-medium/workspace/iteration-1/benchmark.json) include every output and grade.
+
 ## Example: checking a README draft
 
 readme-rewrite includes `scripts/hunt.py`, which the agent runs on each README draft. You can run it yourself. Here it is on a test README in this repository, run from the skill's folder:

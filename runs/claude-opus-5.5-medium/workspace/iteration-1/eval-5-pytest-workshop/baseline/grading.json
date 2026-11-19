@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[6. Give the docs a map and each section a landing page] The landing page summarizes the course, lists all six modules with one line on what each covers, and sends different readers (unittest users, people new to fixtures) to different starting points or tells them what they can skip.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Summary, schedule and six module entries are present. Reader routing only covers advanced readers ('Modules 4\u20136 may still be useful on their own; you can join after lunch') and laggards (git tags). unittest users and fixture newcomers get no different starting point or skip guidance ('If you've used `unittest`, each module points out where pytest differs')."
+    },
+    {
+      "text": "[31. Bridge gaps in assumed knowledge] The course includes a dedicated bridging section or module for basics only some attendees have (e.g. unittest-to-pytest or fixture basics) that says who can skip it and invites readers to return when stuck.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No bridging section. 'What you need to know first' lists prerequisites, and unittest compatibility is folded into Module 6; nothing says who can skip a bridge or invites return when stuck."
+    },
+    {
+      "text": "[34. Say where to get help] The landing page or module 1 says where to get help from people and which channel to try first, and says how to report a mistake in the material.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Only setup help: 'If any step fails, post the full error message in TODO(verify): workshop chat channel before the workshop day' (a placeholder) and a hosted-environment fallback. No channel ordering for help during the day and no way to report a mistake in the material."
+    },
+    {
+      "text": "[9. Connect new concepts to what readers already know] Module 1 connects pytest concepts to their unittest counterparts (e.g. plain assert vs self.assertEqual) and flags where the unittest habit misleads.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Row 7 split screen with unittest version: 'You'd need a class that inherits from TestCase, a method that takes self, and self dot assert equal. In pytest, a test is a plain function... No special assert methods.' Row 15: 'We wrote a plain assert, and pytest still shows both sides. That's why you don't need assert equal.'"
+    },
+    {
+      "text": "[18. Let failures recur while each one teaches] The module 1 script includes a deliberately failing test, shows pytest's actual failure output, and uses it to teach reading the assertion diagnostics.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Row 12 writes 1700 on purpose; Listing G shows 'E       assert 1699 == 1700' / 'E        +  where 1699 = apply_discount(1999, 15)'; rows 14-16 teach reading '>' and 'E' lines and deciding 'Is the test wrong, or is the code wrong?'. Output is marked TODO(verify), unrun."
+    },
+    {
+      "text": "[15. Use \"we\" for shared narrative work] The script uses \"we\"/\"let's\" for shared work and reads as one person talking to another, not as neutral summary.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'We're working in the orders service.'; 'Let's add a second test.'; 'We wrote a plain assert'; 'My guess was wrong, not the code.'"
+    },
+    {
+      "text": "[27. Tell learners where difficulty is normal] The script names a spot where people commonly get stuck (e.g. test discovery naming rules) and says that is normal.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Row 11 names the naming-rule trap ('If you forget the prefix, pytest doesn't report an error... check the name first') but does not say it is common or normal. The 'trap' wording is only in the facilitator answer note."
+    },
+    {
+      "text": "[24. Show several solutions when judgment is the goal] Module 1 keeps a single path to the first passing test (no alternative approaches presented at that point).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Single path from tag module-1-start: write tests/test_pricing.py, run `pytest`. Listing C unittest version is 'shown, not typed' as comparison."
+    },
+    {
+      "text": "[2. End lessons with a short, fixed closing that points forward] Module 1 ends with a brief fixed closing (one sentence or short recap) and a pointer or preview of module 2.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Rows 18-20: short recap 'Here's what you can now do...', a lab prediction, then title card 'Next: Module 2: Share setup with fixtures' with 'Next, in module two, we'll test whole orders...'"
+    },
+    {
+      "text": "[12. Let readers feel the problem before giving them the feature] Before introducing a pytest feature (e.g. fixtures or parametrize, if previewed), the script or module plan shows the problem it solves in code the viewer has just written.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Module plan leads with problems: Module 2 'Most tests for the orders service need an order to work on. Building one in each test makes the tests long, and every one breaks when the order changes. You'll move that setup into a fixture.' Module 3 'instead of copying a test five times'. Script row 20: 'Each test will need an order... you'll use a fixture so you don't have to build it in every test.' Problem is described in prose, not yet shown in code written in module 1."
+    },
+    {
+      "text": "[38. Show commands and output the way readers will copy them] Commands and output in the video script are shown as a transcript block or split blocks, with the choice appropriate to a screencast and the prompt marker explained once.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Split blocks: ```shell pytest``` then ```text``` output (Listings D, G, I), with no prompt marker to copy; production note sets the on-screen prompt once: 'Clean shell prompt: `orders-service $`'. Listings published as copyable text. Pass relies on the marker requirement being moot for prompt-free split blocks."
+    },
+    {
+      "text": "[21. Avoid claims that age] Neither deliverable contains time-relative wording such as \"new\", \"latest\", or \"currently\".",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Grep hits only 'current time' (a test concern), 'new subtotal', narrative 'Now' and 'today' (the workshop day). 'Python 3.12 or later' is a version floor. No aging claims."
+    },
+    {
+      "text": "[47. Pin versions unless the docs track the current release] Any install command either pins the version the workshop was tested against or explains why it doesn't, since a one-day workshop is written against one version.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Install is 'pip install -r requirements.txt' under 'Install the pinned dependencies'; Versions section: 'TODO(verify): pytest version pinned in `requirements.txt`'. Pins via file; actual number is a placeholder."
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 4,
+    "total": 13,
+    "pass_rate": 0.6923
+  },
+  "blind_label": "Z"
+}

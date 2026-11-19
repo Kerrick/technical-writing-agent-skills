@@ -1,0 +1,45 @@
+{
+  "scores": {
+    "X": {
+      "organization": 9,
+      "accuracy": 8,
+      "usability": 9,
+      "polish": 9,
+      "overall": 9,
+      "notes": "Tight landing page with a 'Where to start' routing table, one-paragraph module entries, pinned install, and a help section. The script is timed and conversational, with two deliberate failures: an assert diff, and a silently uncollected test that teaches checking the 'collected' count. It ends with a checkpoint file and an exercise. Production notes explain the $ marker, labels and changed-line markers. Weaknesses: the help section has only one channel; pytest 9.2.0 and its output are unverified (the response says so); there is no bridging section."
+    },
+    "Y": {
+      "organization": 7,
+      "accuracy": 7,
+      "usability": 6,
+      "polish": 7,
+      "overall": 6,
+      "notes": "Clear, friendly script with a good walkthrough of the failure output, including the 'where' line. The landing page is longer, with 'You'll leave with' lines, but has no reader routing, no help or reporting channel, and an unpinned install while the sample output shows pytest 8.3.3. The $ marker is never explained. 'Welcome to the workshop' and 'Congratulations!' are mild filler."
+    },
+    "Z": {
+      "organization": 8,
+      "accuracy": 7,
+      "usability": 7,
+      "polish": 7,
+      "overall": 7,
+      "notes": "A professional production package: a Visual/Narration table, listings, start and end git tags, a schedule, and companion material. The problem-first module descriptions are strong, and the 'is the test or the code wrong?' lesson is valuable. But it has many TODO placeholders (repo URL, pytest version, chat channel), help covers setup only, and nothing routes unittest users or fixture newcomers. At about 7:15 it runs under the 8-minute brief. The table format is heavy for narration."
+    }
+  },
+  "ranking": [
+    "X",
+    "Z",
+    "Y"
+  ],
+  "reasoning": "X serves the stated mixed audience best. It routes readers by background, pins the version, explains the transcript convention, and its script teaches two kinds of failure, including the silent-skip trap that matters most to newcomers. Z is the most production-ready, but it depends on placeholders and an unbuilt repo, and does less for the audience split. Y reads well but leaves out routing, help, version pinning and the prompt-marker convention.",
+  "assertion_notes": "#31 (dedicated bridging section) failed all three. The brief does not obviously call for one, so it may be stricter than the task warrants. #12 is ambiguous: 'if previewed' plus 'script or module plan' lets prose problem statements pass. X and Z passed on prose framing, not on problem code the viewer has just written. #38's 'prompt marker explained once' is moot for prompt-free split blocks (Z). #21 passes trivially for all three. #24 passes for all three, since each shows a unittest comparison without offering it as a path. #18 asks for pytest's 'actual' failure output, but none of the outputs was run (all three say so). The pass reflects realistic format, not verified output.",
+  "label_mapping": {
+    "X": "with_skill",
+    "Y": "without_skill",
+    "Z": "baseline"
+  },
+  "ranking_by_setup": [
+    "with_skill",
+    "baseline",
+    "without_skill"
+  ]
+}

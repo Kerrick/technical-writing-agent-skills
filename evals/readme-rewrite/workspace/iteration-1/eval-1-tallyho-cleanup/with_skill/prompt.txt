@@ -1,0 +1,5 @@
+Read the skill at /Users/kerrick/Developer/technical-writing-agent-skill/skills/readme-rewrite/SKILL.md and follow it for this task. Its reference files and scripts are in that same folder; read them when SKILL.md says to.
+
+Task:
+
+the README for tallyho (evals/readme-rewrite/files/tallyho) has basically turned into a changelog of everything anyone ever added. can you clean it up?

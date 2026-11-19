@@ -1,0 +1,45 @@
+{
+  "scores": {
+    "X": {
+      "organization": 8,
+      "accuracy": 9,
+      "usability": 8,
+      "polish": 7,
+      "overall": 8,
+      "notes": "Compact, well-ordered single page: protection overview, three steps, optional tolerance section, migration section, troubleshooting. Its migration table of behavior differences (spacing, bytes secret, multiple v1, None header) is accurate and useful for experts. Tests ran 5/5. Weak points: no Flask link, no reference link, no 'what hookshot doesn't do' section, and an elided digest in the header sample."
+    },
+    "Y": {
+      "organization": 8,
+      "accuracy": 9,
+      "usability": 9,
+      "polish": 8,
+      "overall": 9,
+      "notes": "The most complete single page: terms for newcomers, error-message table, raw-body section with right and wrong forms, hand-rolled-to-hookshot mapping, optional rotation helper, and 'What hookshot doesn't do'. Links to Flask's install docs, no version pin, tests ran 5/5. It is somewhat long and has no step that sets tolerance with reasoning. Its rotation aside is a nice expert extra."
+    },
+    "Z": {
+      "organization": 7,
+      "accuracy": 8,
+      "usability": 6,
+      "polish": 6,
+      "overall": 6,
+      "notes": "Clean Di\u00e1taxis-style split into a how-to, a migration guide and an explanation page. Each is well written, but the task asked for one page serving both audiences. It pins `hookshot==3.4.0` despite the per-release docs and leaves several TODO(verify) markers in the published pages. Tests ran 3/3 and the curl walkthrough is a nice touch. The explanation page is strong for newcomers."
+    }
+  },
+  "ranking": [
+    "Y",
+    "X",
+    "Z"
+  ],
+  "reasoning": "Y best fits the brief: one page that serves newcomers and migrators, links Flask instead of duplicating it, leaves the install unpinned, states hookshot's limits, and its runnable example passes. X is nearly as accurate and tighter, but leaves out the external links and the limits section. Z is well crafted, but it ignores the one-page requirement and the per-release (unpinned) install, and it ships with TODO markers.",
+  "assertion_notes": "#7 asks for a 'warning callout'. All three cover re-serialized JSON prominently (Y with a whole section and table), but none uses a callout, so all fail on form rather than substance. #3 requires a link to reference, but no hookshot reference URL exists in the inputs. X and Z were failed for having no pointer at all; Y was passed for a non-link pointer ('Search for hookshot.verify...'), which is a judgment call. #36 and #20 likewise require links to pages the agents had no URL for (security treatment). #38 passes trivially when no prompt markers are used. #1 passed for all three; X's test requires the reader to set HOOKSHOT_SECRET, which the guide instructs. #37 for X hinges on whether a header sample in a fenced block counts as code.",
+  "label_mapping": {
+    "X": "without_skill",
+    "Y": "with_skill",
+    "Z": "baseline"
+  },
+  "ranking_by_setup": [
+    "with_skill",
+    "without_skill",
+    "baseline"
+  ]
+}

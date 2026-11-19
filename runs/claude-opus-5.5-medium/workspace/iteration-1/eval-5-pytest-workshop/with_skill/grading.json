@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[6. Give the docs a map and each section a landing page] The landing page summarizes the course, lists all six modules with one line on what each covers, and sends different readers (unittest users, people new to fixtures) to different starting points or tells them what they can skip.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "index.md opens with a course summary, lists modules 1-6 each with a short description, and has a 'Where to start' table: 'have only used `unittest`, or have never written a Python test | Module 1, then work through in order'; 'have run pytest before but never written a fixture | Skim module 1's closing checkpoint, then start module 2'; 'use fixtures and `parametrize` already | Module 4'."
+    },
+    {
+      "text": "[31. Bridge gaps in assumed knowledge] The course includes a dedicated bridging section or module for basics only some attendees have (e.g. unittest-to-pytest or fixture basics) that says who can skip it and invites readers to return when stuck.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No dedicated bridging section/module. Module 2 'Assumes no fixture experience' and module 1 covers unittest comparisons, but these are core modules. There is no section that says who can skip it and invites readers to return when stuck; the nearest is 'Each one begins by showing the code it starts from, so you can catch up if you skip ahead or fall behind.'"
+    },
+    {
+      "text": "[34. Say where to get help] The landing page or module 1 says where to get help from people and which channel to try first, and says how to report a mistake in the material.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "index.md 'Getting help': 'During the workshop, flag a facilitator in the room first.' and 'If you find a mistake in the course material, tell a facilitator so it gets fixed for the next group.' Script also: 'pause the video and flag a facilitator.' Only one channel, but it names it as first and covers reporting."
+    },
+    {
+      "text": "[9. Connect new concepts to what readers already know] Module 1 connects pytest concepts to their unittest counterparts (e.g. plain assert vs self.assertEqual) and flags where the unittest habit misleads.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "2:00 segment shows the unittest TestCase/self.assertEqual version, then the plain-assert version. At 3:45: 'With `unittest`, `assertEqual` tells you both values. But we used a plain `assert`, and normally a failed `assert` in Python just says `AssertionError`... So what do you think pytest will print?' then explains assert rewriting: 'why you don't need a family of `assertEqual`-style methods.' 6:30 shows TestCase classes still run under pytest."
+    },
+    {
+      "text": "[18. Let failures recur while each one teaches] The module 1 script includes a deliberately failing test, shows pytest's actual failure output, and uses it to teach reading the assertion diagnostics.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Break it on purpose' changes tax rate to 0.10; shows FAILURES block with '>       assert total == expected' and 'E       AssertionError: assert Decimal('49.48') == Decimal('48.58')'; narration: 'the line starting with `E` shows the comparison with the real values filled in'. A second failure-type (silent non-collection) is also taught. Output is unrun (response admits it), but realistic in form."
+    },
+    {
+      "text": "[15. Use \"we\" for shared narrative work] The script uses \"we\"/\"let's\" for shared work and reads as one person talking to another, not as neutral summary.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'we'll install pytest, write a test, watch it pass, and then break it on purpose'; 'Let's write the same test the pytest way.'; 'Let's read this from the top.' Conversational: 'That's what they're here for.'"
+    },
+    {
+      "text": "[27. Tell learners where difficulty is normal] The script names a spot where people commonly get stuck (e.g. test discovery naming rules) and says that is normal.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Install segment: 'If you see \"command not found: pytest\"... the usual cause is that the virtual environment isn't active... Nearly everyone hits this at least once.' 5:15: 'Now a trap that catches almost everyone.' (naming rule)."
+    },
+    {
+      "text": "[24. Show several solutions when judgment is the goal] Module 1 keeps a single path to the first passing test (no alternative approaches presented at that point).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "One install path (venv + pinned pip install), one test file, one `pytest` command to first green. The unittest version is a slide for comparison ('A slide, not a saved file'), not an alternative path."
+    },
+    {
+      "text": "[2. End lessons with a short, fixed closing that points forward] Module 1 ends with a brief fixed closing (one sentence or short recap) and a pointer or preview of module 2.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Ends: 'You should now be comfortable writing a test as a plain function, running it with `pytest`, and reading a failure. Next, in module 2, we'll notice how much setup our tests are starting to repeat, and fix it with fixtures.' plus card 'Next: Module 2 \u2014 Fixtures: shared setup without `setUp`.'"
+    },
+    {
+      "text": "[12. Let readers feel the problem before giving them the feature] Before introducing a pytest feature (e.g. fixtures or parametrize, if previewed), the script or module plan shows the problem it solves in code the viewer has just written.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Fixture preview is framed as the problem in the viewer's own code: 'in module 2, we'll notice how much setup our tests are starting to repeat, and fix it with fixtures.' Assert rewriting is introduced only after the viewer predicts plain assert would give just 'AssertionError'. Module plan for 3: 'Replace copy-pasted tests with one test...'. Weak: the repeated setup in the checkpoint code is minimal (repeated tax_rate/Decimal construction)."
+    },
+    {
+      "text": "[38. Show commands and output the way readers will copy them] Commands and output in the video script are shown as a transcript block or split blocks, with the choice appropriate to a screencast and the prompt marker explained once.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Transcript `console` blocks ('$ pytest' followed by output), suiting a screencast where command and output appear together. Production notes explain once: 'In the terminal blocks, `$` marks the prompt; type what follows it. Lines without `$` are output.'"
+    },
+    {
+      "text": "[21. Avoid claims that age] Neither deliverable contains time-relative wording such as \"new\", \"latest\", or \"currently\".",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Grep for new/newer/latest/currently/current/now/today/recent across files: only 'one new idea at a time', 'Python 3.10 or newer' (version floor), 'write new tests', 'start running... today' and narrative 'now' \u2014 none are time-relative claims about software that will age."
+    },
+    {
+      "text": "[47. Pin versions unless the docs track the current release] Any install command either pins the version the workshop was tested against or explains why it doesn't, since a one-day workshop is written against one version.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "index.md: 'The workshop was written and tested against **pytest 9.2.0**; install that version so your output matches the videos: $ python -m pip install \"pytest==9.2.0\"'; script repeats the pin: 'We're pinning version 9.2.0 so your output matches mine.'"
+    }
+  ],
+  "summary": {
+    "passed": 12,
+    "failed": 1,
+    "total": 13,
+    "pass_rate": 0.9231
+  },
+  "blind_label": "X"
+}

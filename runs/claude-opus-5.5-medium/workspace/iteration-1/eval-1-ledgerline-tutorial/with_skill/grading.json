@@ -1,0 +1,119 @@
+{
+  "assertion_results": [
+    {
+      "text": "[12. Let readers feel the problem before giving them the feature] Before summarize() appears, the reader computes per-account totals the laborious way (a hand-written loop) or is shown the cost of doing so in their Part 1 code.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Step 3 'Total every account by hand' has the reader write `totals = {}` / `for entry in ledger.entries(): totals[entry.account] = totals.get(entry.account, Decimal(\"0\")) + entry.amount` before summarize() appears in Step 4, then: 'But look at what it took: an empty dictionary, a loop, a `.get()` with a default... That's a lot of bookkeeping to write again in every script'."
+    },
+    {
+      "text": "[5. Show the longhand before the shortcut, and say how equivalent they are] The page shows the longhand loop that summarize() stands for and states whether the two are exactly or approximately equivalent, naming at least one difference (for example, sorting by account name or omitting accounts with no entries).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Step 4: '`Ledger.summarize()` does exactly what our Step 3 loop does, and then sorts the result by account name.' Callout 'How exact is the equivalence?': 'returns exactly what this code does: dict(sorted(totals.items()))' and 'it never adds an account that has no entries, which is where it differs from the one-account sum(...) in Step 2.' Names sorting difference."
+    },
+    {
+      "text": "[18. Let failures recur while each one teaches] The reader deliberately passes a float amount to add(), the page shows the exact TypeError message, and that error leads into the next step (using Decimal or str).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Step 1 warning shows `ledger.add(\"groceries\", -84.20, ...)`, then 'Python stops with a traceback that ends in: TypeError: amount must be Decimal, int, or str, not float' (verified: running it printed exactly that), then 'Wrap the amount in `Decimal` and pass it as a string'. Note: it's in a warning callout rather than an explicit 'run this' step, but the failure is shown and leads to the Decimal fix."
+    },
+    {
+      "text": "[26. Mark wrong and failing samples inside the block] The failing float sample is marked as wrong or meant to fail inside the code block itself, not only in prose, and the reader is warned before running it.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Inside the block: '# Wrong: -84.20 is a float. This line raises TypeError.' Preceded by the heading '**Warning: a bare decimal number raises `TypeError`.**' Other failing samples likewise marked ('# Wrong: \"utilities\" has no entries ... raises KeyError.')."
+    },
+    {
+      "text": "[23. Ask for predictions at the point of the concept] At least once, at the point a concept is shown, the page asks the reader to predict an output before revealing it, or to change one specific value and predict the result.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Step 4: 'Before you run it, make a prediction. The two dictionaries list their accounts in different orders. Will `summary == totals` print `True` or `False`?' Also Step 6: 'Try changing the November rent to Decimal(\"-1550.00\") and predict the new rent line'."
+    },
+    {
+      "text": "[25. Tell readers how to check their own work] Each checkpoint tells readers what to run and what output they should see.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Each run point says 'Run `python budget.py`. You should see:' followed by an output block (Steps 2, 3, 4, 5, Mistake 1, fix, Step 6); version check gives command and 'You should see: 2.1.0'."
+    },
+    {
+      "text": "[8. Show code changes by file size, with full-code checkpoints] Changed code is shown either as the whole short file with changes marked or as an anchored excerpt naming the file; the marking notation is explained the first time; at least one checkpoint shows the complete current code.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Changes are anchored excerpts naming the file: 'Add these lines to the end of `budget.py`', 'Replace the two lines you added in Step 2 with these'. No marking notation is used (so none needs explaining). Step 6: 'Here is the complete `budget.py` for this part. Replace your file with it:' with full code."
+    },
+    {
+      "text": "[15. Use \"we\" for shared narrative work] Shared build-along work uses \"we\" or \"let's\", with \"you\" for what the reader alone observes.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'we'll build on it', 'let's give the ledger a second month', 'let's walk every entry once', 'so we can compare the two'; reader observations use you: 'You should see', 'make a prediction'."
+    },
+    {
+      "text": "[28. Sequenced pages may build on earlier ones] The page links back to Part 1 and restates the starting code it builds on.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'In [Part 1](part-1.md) we created a `Ledger`...' and section 'Where we left off' restates the Part 1 script."
+    },
+    {
+      "text": "[34. Say where to get help] Near the start, the page tells readers where to get help from people.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No help channel anywhere on the page. The response itself says 'I didn't add a \"where to get help\" line because I don't know your support channels.'"
+    },
+    {
+      "text": "[27. Tell learners where difficulty is normal] The page names at least one place where readers commonly get stuck (for example, Decimal vs float) and says difficulty there is normal.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Intro: 'without getting caught by the two mistakes people most often make there'; 'It's tempting to write -84.20 without the Decimal(\"...\") wrapper'; Mistake 2: 'That output looks right, which is what makes this mistake easy to miss.'"
+    },
+    {
+      "text": "[33. Say where each name comes from] When Ledger, Decimal, or summarize first appear, the page says which module provides them (ledgerline or decimal).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'`Decimal` comes from Python's standard-library `decimal` module.' / '`Ledger` comes from `ledgerline`.'; summarize introduced as `Ledger.summarize()`, a method of the ledgerline Ledger."
+    },
+    {
+      "text": "[2. End lessons with a short, fixed closing that points forward] The page ends with a short closing (one sentence or brief recap) plus a pointer or preview of the next part, without walking back through the content.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Ends: 'You should now be comfortable getting per-account totals from a ledger with summarize(), for every account or only the ones you name. Continue to Part 3.' One-sentence close plus pointer; no walk-back."
+    },
+    {
+      "text": "[38. Show commands and output the way readers will copy them] Commands and their output are in separate blocks, because the prompt says the copy button grabs the whole block.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Commands (`python budget.py`, the version one-liner) are in their own blocks, output in separate blocks; Mistake 2 has the code block followed by a separate output block."
+    },
+    {
+      "text": "[1. Run every example as written] Every code sample, run in page order against evals/developer-docs/files/ledgerline.py, runs without errors except the deliberately failing one, and produces exactly the output the page shows.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Ran work/runx.py (python3 work/runx.py) against a copy of ledgerline.py, building budget.py stage by stage. Version printed '2.1.0'; step2 '-3000.00'; step3 \"{'salary': Decimal('8400.00'), 'rent': Decimal('-3000.00'), 'groceries': Decimal('-145.55')}\"; step4 the two dicts + 'True'; step5 last line \"{'groceries': Decimal('-145.55'), 'rent': Decimal('-3000.00')}\"; mistake1 KeyError: 'utilities' (intended); fix last lines dict + '0'; ['Rent'] -> '{}'; final 'groceries      -145.55 / rent          -3000.00 / salary         8400.00'; -1550 variant 'rent -3050.00'. Float sample: 'TypeError: amount must be Decimal, int, or str, not float' (intended). Minor: the Mistake 2 output block shows only the new line's output without saying 'last line', though the full script prints earlier lines too."
+    },
+    {
+      "text": "[37. Elisions in code must be valid code] No code block contains a bare ... elision; any omitted code is marked with a comment that says what belongs there.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No `...` appears in any code block; nothing is elided."
+    },
+    {
+      "text": "[11. Realistic names for real use; neutral names only for pure mechanism] Examples use realistic account names and memos (such as rent, salary) rather than foo/bar.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Accounts salary, rent, groceries, utilities; memos 'October paycheck', 'Market Street Grocer', 'Corner market'."
+    },
+    {
+      "text": "[44. Refer to other parts by stable label, never by position] The page never refers to other content as \"above\" or \"below\".",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No 'above'/'below' (grep for above|below|earlier|previous found none); refers to 'Step 3 loop', 'Step 2', 'Part 1'."
+    }
+  ],
+  "summary": {
+    "passed": 17,
+    "failed": 1,
+    "total": 18,
+    "pass_rate": 0.9444
+  },
+  "blind_label": "X"
+}

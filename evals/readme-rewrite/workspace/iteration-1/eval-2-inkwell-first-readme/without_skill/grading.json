@@ -1,0 +1,47 @@
+{
+  "assertion_results": [
+    {
+      "text": "Step 1: the install command uses the package name from pyproject.toml (inkwell-md), and the example imports the module name (inkwell)",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "README: \"pip install inkwell-md\" and \"from inkwell import render\"; \"The package is published on PyPI as `inkwell-md`, and you import it as `inkwell`\"."
+    },
+    {
+      "text": "Step 1: any image or link to a file in the repository uses an absolute URL, so it works on PyPI",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "License section uses a relative link: \"inkwell is licensed under the [Apache License 2.0](LICENSE).\" This breaks on PyPI. (Agent deliberately avoided the repo URL as a placeholder, but still left a relative file link.)"
+    },
+    {
+      "text": "Step 4: the first example calls render() as defined in src/inkwell/__init__.py and shows its output",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "First example: `html = render(\"# Hello\\n\\nThis is *inkwell*.\", title=\"Greeting\")` followed by an html block. Ran via `uv run --with markdown-it-py python3 work/run_first.py`: printed '<!doctype html><html><head><title>Greeting</title></head><body><h1>Hello</h1>\\n<p>This is <em>inkwell</em>.</p>\\n</body></html>', matching the README block (the agent says it did not run it, but it is correct)."
+    },
+    {
+      "text": "Step 5: PDF export is either left out or marked as not available yet, never presented as working",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Heading \"### `export_pdf(markdown, path)` (not available yet)\" and \"At the moment it raises `NotImplementedError` every time you call it.\""
+    },
+    {
+      "text": "Step 6: there are no invented badges, user counts, testimonials or adopters",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "README contains no badges, no user counts, testimonials or adopters lists."
+    },
+    {
+      "text": "Section plan: the license section names Apache-2.0, matching LICENSE and pyproject.toml",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"## License\\n\\ninkwell is licensed under the [Apache License 2.0](LICENSE).\" matches LICENSE and pyproject license = \"Apache-2.0\"."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 1,
+    "total": 6,
+    "pass_rate": 0.8333
+  },
+  "blind_label": "Y"
+}

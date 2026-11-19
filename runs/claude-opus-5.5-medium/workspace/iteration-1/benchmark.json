@@ -1,0 +1,519 @@
+{
+  "skill_name": "developer-docs",
+  "iteration": 1,
+  "model": "claude-opus-5-5",
+  "effort": "medium",
+  "runs_per_setup_per_eval": 1,
+  "note": "Iteration 1: one run per setup per eval, so stddev is across evals, not repeated runs. Tokens are input + output + cache read + cache creation, summed over every model the session used.",
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.868,
+        "stddev": 0.062
+      },
+      "assertions_passed": 62,
+      "assertions_total": 71,
+      "pooled_pass_rate": 0.8732,
+      "time_seconds": {
+        "mean": 225.9016,
+        "stddev": 25.5793
+      },
+      "tokens": {
+        "mean": 703766.2,
+        "stddev": 186248.5325
+      },
+      "output_tokens": {
+        "mean": 19068,
+        "stddev": 1417.6916
+      }
+    },
+    "baseline": {
+      "pass_rate": {
+        "mean": 0.567,
+        "stddev": 0.087
+      },
+      "assertions_passed": 40,
+      "assertions_total": 71,
+      "pooled_pass_rate": 0.5634,
+      "time_seconds": {
+        "mean": 164.5742,
+        "stddev": 63.986
+      },
+      "tokens": {
+        "mean": 525526.6,
+        "stddev": 200373.8623
+      },
+      "output_tokens": {
+        "mean": 12218.8,
+        "stddev": 4286.5448
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.4786,
+        "stddev": 0.1126
+      },
+      "assertions_passed": 33,
+      "assertions_total": 71,
+      "pooled_pass_rate": 0.4648,
+      "time_seconds": {
+        "mean": 82.4294,
+        "stddev": 19.8886
+      },
+      "tokens": {
+        "mean": 201597.6,
+        "stddev": 65127.5471
+      },
+      "output_tokens": {
+        "mean": 6737.6,
+        "stddev": 1558.9754
+      }
+    }
+  },
+  "delta": {
+    "with_skill_minus_baseline": {
+      "pass_rate": 0.301,
+      "time_seconds": 61.3274,
+      "tokens": 178239.6
+    },
+    "with_skill_minus_without_skill": {
+      "pass_rate": 0.3894,
+      "time_seconds": 143.4722,
+      "tokens": 502168.6
+    }
+  },
+  "per_eval": {
+    "eval-1-ledgerline-tutorial": {
+      "with_skill": {
+        "passed": 17,
+        "total": 18,
+        "pass_rate": 0.9444,
+        "tokens": 552754,
+        "output_tokens": 18538,
+        "time_seconds": 203.5,
+        "cost_usd": 0.770288
+      },
+      "baseline": {
+        "passed": 9,
+        "total": 18,
+        "pass_rate": 0.5,
+        "tokens": 639729,
+        "output_tokens": 11660,
+        "time_seconds": 157.5,
+        "cost_usd": 0.5738486
+      },
+      "without_skill": {
+        "passed": 5,
+        "total": 18,
+        "pass_rate": 0.2778,
+        "tokens": 281867,
+        "output_tokens": 6638,
+        "time_seconds": 83.8,
+        "cost_usd": 0.2944922
+      }
+    },
+    "eval-2-textkit-reference": {
+      "with_skill": {
+        "passed": 11,
+        "total": 13,
+        "pass_rate": 0.8462,
+        "tokens": 639861,
+        "output_tokens": 18048,
+        "time_seconds": 218.4,
+        "cost_usd": 0.7571184000000001
+      },
+      "baseline": {
+        "passed": 7,
+        "total": 13,
+        "pass_rate": 0.5385,
+        "tokens": 230532,
+        "output_tokens": 5385,
+        "time_seconds": 68.8,
+        "cost_usd": 0.2927848
+      },
+      "without_skill": {
+        "passed": 8,
+        "total": 13,
+        "pass_rate": 0.6154,
+        "tokens": 110694,
+        "output_tokens": 4081,
+        "time_seconds": 46.2,
+        "cost_usd": 0.1902238
+      }
+    },
+    "eval-3-cachekit-explainer": {
+      "with_skill": {
+        "passed": 12,
+        "total": 14,
+        "pass_rate": 0.8571,
+        "tokens": 703464,
+        "output_tokens": 20386,
+        "time_seconds": 230.5,
+        "cost_usd": 0.8356547999999999
+      },
+      "baseline": {
+        "passed": 9,
+        "total": 14,
+        "pass_rate": 0.6429,
+        "tokens": 371277,
+        "output_tokens": 11421,
+        "time_seconds": 131.1,
+        "cost_usd": 0.47539760000000003
+      },
+      "without_skill": {
+        "passed": 7,
+        "total": 14,
+        "pass_rate": 0.5,
+        "tokens": 165893,
+        "output_tokens": 6550,
+        "time_seconds": 81.0,
+        "cost_usd": 0.2608744
+      }
+    },
+    "eval-4-hookshot-howto": {
+      "with_skill": {
+        "passed": 10,
+        "total": 13,
+        "pass_rate": 0.7692,
+        "tokens": 562987,
+        "output_tokens": 17318,
+        "time_seconds": 204.2,
+        "cost_usd": 0.7018462000000001
+      },
+      "baseline": {
+        "passed": 6,
+        "total": 13,
+        "pass_rate": 0.4615,
+        "tokens": 591153,
+        "output_tokens": 14003,
+        "time_seconds": 212.5,
+        "cost_usd": 0.6000340000000001
+      },
+      "without_skill": {
+        "passed": 7,
+        "total": 13,
+        "pass_rate": 0.5385,
+        "tokens": 270335,
+        "output_tokens": 7611,
+        "time_seconds": 100.0,
+        "cost_usd": 0.3321682
+      }
+    },
+    "eval-5-pytest-workshop": {
+      "with_skill": {
+        "passed": 12,
+        "total": 13,
+        "pass_rate": 0.9231,
+        "tokens": 1059765,
+        "output_tokens": 21050,
+        "time_seconds": 273.0,
+        "cost_usd": 0.937392
+      },
+      "baseline": {
+        "passed": 9,
+        "total": 13,
+        "pass_rate": 0.6923,
+        "tokens": 794942,
+        "output_tokens": 18625,
+        "time_seconds": 253.1,
+        "cost_usd": 0.807881
+      },
+      "without_skill": {
+        "passed": 6,
+        "total": 13,
+        "pass_rate": 0.4615,
+        "tokens": 179199,
+        "output_tokens": 8808,
+        "time_seconds": 101.2,
+        "cost_usd": 0.32227620000000007
+      }
+    }
+  },
+  "assertions_differing": {
+    "eval-1-ledgerline-tutorial#1": {
+      "text": "[12. Let readers feel the problem before giving them the feature] Before summarize() appears, the reader computes per-account totals the laborious way (a hand-written loop) or is shown the cost of doing so in their Part 1 code.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-1-ledgerline-tutorial#2": {
+      "text": "[5. Show the longhand before the shortcut, and say how equivalent they are] The page shows the longhand loop that summarize() stands for and states whether the two are exactly or approximately equivalent, naming at least one difference (for example, sorting by account name or omitting accounts with no entries).",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-1-ledgerline-tutorial#3": {
+      "text": "[18. Let failures recur while each one teaches] The reader deliberately passes a float amount to add(), the page shows the exact TypeError message, and that error leads into the next step (using Decimal or str).",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-1-ledgerline-tutorial#4": {
+      "text": "[26. Mark wrong and failing samples inside the block] The failing float sample is marked as wrong or meant to fail inside the code block itself, not only in prose, and the reader is warned before running it.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-1-ledgerline-tutorial#5": {
+      "text": "[23. Ask for predictions at the point of the concept] At least once, at the point a concept is shown, the page asks the reader to predict an output before revealing it, or to change one specific value and predict the result.",
+      "with_skill": true,
+      "baseline": true,
+      "without_skill": false
+    },
+    "eval-1-ledgerline-tutorial#6": {
+      "text": "[25. Tell readers how to check their own work] Each checkpoint tells readers what to run and what output they should see.",
+      "with_skill": true,
+      "baseline": true,
+      "without_skill": false
+    },
+    "eval-1-ledgerline-tutorial#7": {
+      "text": "[8. Show code changes by file size, with full-code checkpoints] Changed code is shown either as the whole short file with changes marked or as an anchored excerpt naming the file; the marking notation is explained the first time; at least one checkpoint shows the complete current code.",
+      "with_skill": true,
+      "baseline": true,
+      "without_skill": false
+    },
+    "eval-1-ledgerline-tutorial#8": {
+      "text": "[15. Use \"we\" for shared narrative work] Shared build-along work uses \"we\" or \"let's\", with \"you\" for what the reader alone observes.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-1-ledgerline-tutorial#11": {
+      "text": "[27. Tell learners where difficulty is normal] The page names at least one place where readers commonly get stuck (for example, Decimal vs float) and says difficulty there is normal.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-1-ledgerline-tutorial#12": {
+      "text": "[33. Say where each name comes from] When Ledger, Decimal, or summarize first appear, the page says which module provides them (ledgerline or decimal).",
+      "with_skill": true,
+      "baseline": true,
+      "without_skill": false
+    },
+    "eval-1-ledgerline-tutorial#13": {
+      "text": "[2. End lessons with a short, fixed closing that points forward] The page ends with a short closing (one sentence or brief recap) plus a pointer or preview of the next part, without walking back through the content.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-1-ledgerline-tutorial#16": {
+      "text": "[37. Elisions in code must be valid code] No code block contains a bare ... elision; any omitted code is marked with a comment that says what belongs there.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": true
+    },
+    "eval-1-ledgerline-tutorial#18": {
+      "text": "[44. Refer to other parts by stable label, never by position] The page never refers to other content as \"above\" or \"below\".",
+      "with_skill": true,
+      "baseline": true,
+      "without_skill": false
+    },
+    "eval-2-textkit-reference#2": {
+      "text": "[42. State operational cost] dedupe_lines states that it holds every distinct line in memory, and natural_sort states it returns a new list (a copy) rather than sorting in place, with a note on cost for large inputs.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-2-textkit-reference#4": {
+      "text": "[39. Scale reference entries to their item] No entry contains an empty section or a section filled with \"None\"; entries share a fixed section order.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": true
+    },
+    "eval-2-textkit-reference#5": {
+      "text": "[46. Frame every example, and give reference a set of task examples] Each entry ends with more than one framed example (a sentence or heading saying what it shows), covering common tasks and notable options such as sep or placeholder.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-2-textkit-reference#8": {
+      "text": "[32. Show legacy forms for recognition] make_slug is shown, labeled deprecated or legacy, placed after the current functions, pointing to slugify, and noting it uses \"_\" as separator.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": true
+    },
+    "eval-2-textkit-reference#9": {
+      "text": "[16. One shared sample domain per set of examples] Examples across entries share one small sample domain (e.g. the same set of article titles) rather than new data each time.",
+      "with_skill": false,
+      "baseline": true,
+      "without_skill": false
+    },
+    "eval-2-textkit-reference#13": {
+      "text": "[4. Show the wrong form beside the right one] At least one entry shows a plausible wrong form beside the right one, labeled, with why it fails (for example, slicing text[:n] instead of truncate, or expecting dedupe_lines to ignore case).",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-3-cachekit-explainer#1": {
+      "text": "[9. Connect new concepts to what readers already know] The page opens from functools.lru_cache/functools.cache, says memoize is a thin wrapper over functools.cache, and states where cached differs from lru_cache (TTL, keying on positional arguments only).",
+      "with_skill": false,
+      "baseline": true,
+      "without_skill": true
+    },
+    "eval-3-cachekit-explainer#3": {
+      "text": "[7. Warn about silent and breaking failures too] A warning callout flags that cached ignores keyword arguments in its key, silently returning a wrong result; the warning names that one failure.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-3-cachekit-explainer#5": {
+      "text": "[26. Mark wrong and failing samples inside the block] The wrong sample is marked as wrong inside the code block (e.g. a # Wrong: comment).",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-3-cachekit-explainer#7": {
+      "text": "[43. Collect known limits] Known limitations and caveats are collected in a clearly titled section.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-3-cachekit-explainer#8": {
+      "text": "[22. One term per concept, with any unavoidable second name declared once] The page uses one term for the cache key concept (and for other core concepts) consistently, without undeclared synonyms.",
+      "with_skill": true,
+      "baseline": true,
+      "without_skill": false
+    },
+    "eval-3-cachekit-explainer#9": {
+      "text": "[5. Show the longhand before the shortcut, and say how equivalent they are] The page shows longhand code for what @cached does (a dict keyed by args with timestamps) before or alongside the decorator, and says how exact the equivalence is.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-3-cachekit-explainer#10": {
+      "text": "[23. Ask for predictions at the point of the concept] At the point the keyword-argument behavior is introduced, the reader is asked to predict the output before it is shown.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-3-cachekit-explainer#13": {
+      "text": "[2. End lessons with a short, fixed closing that points forward] The page does not end with a conclusion that restates its content.",
+      "with_skill": true,
+      "baseline": true,
+      "without_skill": false
+    },
+    "eval-3-cachekit-explainer#14": {
+      "text": "[10. Verify every fact against its source, and keep facts consistent] Every behavior stated about memoize and cached matches cachekit.py (e.g. expired entries are replaced on the next call, not evicted in the background).",
+      "with_skill": false,
+      "baseline": true,
+      "without_skill": true
+    },
+    "eval-4-hookshot-howto#1": {
+      "text": "[47. Pin versions unless the docs track the current release] The install command for hookshot has no exact version pin (a minimum constraint is acceptable only if justified), because the docs are built per release.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": true
+    },
+    "eval-4-hookshot-howto#2": {
+      "text": "[20. Keep one maintained copy of anything that changes] The guide does not reproduce Flask's installation steps; it links to Flask's own documentation and documents only how hookshot connects to Flask.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-4-hookshot-howto#5": {
+      "text": "[36. Cross-cutting topics: full treatment once, local consequences everywhere] The guide states, in a line or two at the relevant step, the security consequence that applies here (e.g. replay protection via tolerance, or that tolerance=0 disables it) and links to a fuller security treatment.",
+      "with_skill": false,
+      "baseline": true,
+      "without_skill": false
+    },
+    "eval-4-hookshot-howto#6": {
+      "text": "[30. Give reasoning where the reader will wonder] The choice of tolerance value is explained in a few sentences in a titled box or clearly marked skippable paragraph at the step where it is set.",
+      "with_skill": false,
+      "baseline": false,
+      "without_skill": true
+    },
+    "eval-4-hookshot-howto#7": {
+      "text": "[29. One page can serve beginners and experts] The guide starts with the simplest common use and moves to advanced material (e.g. migrating from a hand-rolled HMAC check, custom tolerance) in clearly titled, skippable sections, on one page rather than separate novice/expert pages.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": true
+    },
+    "eval-4-hookshot-howto#8": {
+      "text": "[3. One primary job per page; other kinds of material only in short, labeled sections] The guide stays task-focused: it does not paste a full reference table of hookshot's API; it links to reference instead.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-4-hookshot-howto#10": {
+      "text": "[40. Say what isn't covered or done] The guide states what hookshot does not do (e.g. it does not parse the payload, deduplicate deliveries, or read the Flask request for you).",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-4-hookshot-howto#13": {
+      "text": "[37. Elisions in code must be valid code] Any elided code in samples is a valid comment that says what belongs there.",
+      "with_skill": true,
+      "baseline": true,
+      "without_skill": false
+    },
+    "eval-5-pytest-workshop#1": {
+      "text": "[6. Give the docs a map and each section a landing page] The landing page summarizes the course, lists all six modules with one line on what each covers, and sends different readers (unittest users, people new to fixtures) to different starting points or tells them what they can skip.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-5-pytest-workshop#3": {
+      "text": "[34. Say where to get help] The landing page or module 1 says where to get help from people and which channel to try first, and says how to report a mistake in the material.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-5-pytest-workshop#7": {
+      "text": "[27. Tell learners where difficulty is normal] The script names a spot where people commonly get stuck (e.g. test discovery naming rules) and says that is normal.",
+      "with_skill": true,
+      "baseline": false,
+      "without_skill": false
+    },
+    "eval-5-pytest-workshop#10": {
+      "text": "[12. Let readers feel the problem before giving them the feature] Before introducing a pytest feature (e.g. fixtures or parametrize, if previewed), the script or module plan shows the problem it solves in code the viewer has just written.",
+      "with_skill": true,
+      "baseline": true,
+      "without_skill": false
+    },
+    "eval-5-pytest-workshop#11": {
+      "text": "[38. Show commands and output the way readers will copy them] Commands and output in the video script are shown as a transcript block or split blocks, with the choice appropriate to a screencast and the prompt marker explained once.",
+      "with_skill": true,
+      "baseline": true,
+      "without_skill": false
+    },
+    "eval-5-pytest-workshop#13": {
+      "text": "[47. Pin versions unless the docs track the current release] Any install command either pins the version the workshop was tested against or explains why it doesn't, since a one-day workshop is written against one version.",
+      "with_skill": true,
+      "baseline": true,
+      "without_skill": false
+    }
+  },
+  "assertions_always_pass": [
+    "eval-1-ledgerline-tutorial#9",
+    "eval-1-ledgerline-tutorial#14",
+    "eval-1-ledgerline-tutorial#15",
+    "eval-1-ledgerline-tutorial#17",
+    "eval-2-textkit-reference#1",
+    "eval-2-textkit-reference#3",
+    "eval-2-textkit-reference#7",
+    "eval-2-textkit-reference#10",
+    "eval-2-textkit-reference#11",
+    "eval-2-textkit-reference#12",
+    "eval-3-cachekit-explainer#2",
+    "eval-3-cachekit-explainer#4",
+    "eval-3-cachekit-explainer#6",
+    "eval-3-cachekit-explainer#11",
+    "eval-3-cachekit-explainer#12",
+    "eval-4-hookshot-howto#3",
+    "eval-4-hookshot-howto#9",
+    "eval-4-hookshot-howto#11",
+    "eval-4-hookshot-howto#12",
+    "eval-5-pytest-workshop#4",
+    "eval-5-pytest-workshop#5",
+    "eval-5-pytest-workshop#6",
+    "eval-5-pytest-workshop#8",
+    "eval-5-pytest-workshop#9",
+    "eval-5-pytest-workshop#12"
+  ],
+  "assertions_always_fail": [
+    "eval-1-ledgerline-tutorial#10",
+    "eval-2-textkit-reference#6",
+    "eval-4-hookshot-howto#4",
+    "eval-5-pytest-workshop#2"
+  ]
+}

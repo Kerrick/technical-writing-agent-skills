@@ -7,11 +7,11 @@ The developer-docs skill holds only what one model, at one effort level, doesn't
 | | Claude Opus 5.5, medium |
 | - | - |
 | Steps 1–9: baseline, reading, audit, merge, check, writing | Done. The skill passes the agent-skills validator, the leak check and the placement check. |
-| Output evals: new skill against baseline and no skill | Not yet run |
+| Output evals: new skill against baseline and no skill | Iteration 1, one run per setup: skill 87%, baseline 56%, no skill 46% of 71 assertions. Graders ranked the skill first in all five evals. In `workspace/iteration-1/`. |
 | Trigger evals (`evals/developer-docs/eval_queries.json`) | Not yet run |
 | Real tasks | Planned |
 
-readme-rewrite isn't made by the method, so it has no run. Its evals, in `evals/readme-rewrite/`, haven't been run yet either.
+readme-rewrite isn't made by the method, so it has no run. Its iteration-1 evals, in `evals/readme-rewrite/workspace/iteration-1/`, passed 19 of 19 assertions, against 14 with no skill.
 
 ## Layout
 
@@ -94,7 +94,7 @@ The skill must carry ideas, not any source's wording, and must not restate the b
 
 ## Evaluating
 
-Not yet run. The plan, following `method/vendor/agent-skills/references/evaluating-skills.md`:
+Iteration 1 has run for developer-docs and readme-rewrite, one run per setup. After it, six assertions in `evals/developer-docs/evals.json` that no output could pass were reworded: ones that needed a help channel or a page address no input gave, and ones that demanded one form (mutual links, a callout, a dedicated module) where the rule asks only for the effect. Iteration 1's grades used the earlier wording, which git history keeps. The procedure, following `method/vendor/agent-skills/references/evaluating-skills.md`:
 
 1. For each eval in `evals/developer-docs/evals.json`, run three fresh sub-agents: one told to read and follow the run's skill, one the run's baseline, one with no skill. Each gets its own copy of the eval's input file. Record each run's tokens and duration when it finishes.
 2. One fresh grader per eval sees the three outputs as X, Y and Z, not knowing which is which, plus the assertions. It writes `grading.json` per output with quoted evidence, and a blind comparison.
@@ -156,6 +156,13 @@ Every step can run without a person at the keyboard, through Claude Code's comma
 - Give a session only the tools a step needs with `--allowedTools`, keep it to the run's folders with `--add-dir`, and run it from `${WORK}`.
 
 For evals, start every run as a fresh session with `--disallowedTools Skill`, and give the skill by path in the prompt, so no installed skill can join the run.
+
+What the first eval run learned about headless sessions:
+
+- Use `--permission-mode acceptEdits` with an `--allowedTools` list. Never use `--dangerously-skip-permissions`: it removes every check, and Claude Code's auto mode blocks it anyway.
+- Without a tool, a session can't do the work: without Write it can't save its output, and without the right Bash commands it can't run its examples. Allow `uv run --with <package>`, so a run can install what its examples need without touching the system. Expect compound commands such as `cd … && …` to be denied, and allow the simple ones a step needs.
+- The eval prompts don't say where to save output. Add one sentence to every run's prompt, the same for every setup: "Save what you write as Markdown files in the outputs/ folder of the current directory."
+- Take each run's tokens and time from the JSON result's `duration_ms` and `modelUsage`.
 
 ## Releasing
 

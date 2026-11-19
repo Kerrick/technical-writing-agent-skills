@@ -1,0 +1,1 @@
+can you review the README in evals/readme-rewrite/files/tallyho and tell me what's wrong with it? don't change anything yet

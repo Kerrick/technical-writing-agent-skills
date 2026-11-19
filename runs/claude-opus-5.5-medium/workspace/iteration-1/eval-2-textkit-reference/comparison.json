@@ -1,0 +1,45 @@
+{
+  "scores": {
+    "Z": {
+      "organization": 8,
+      "accuracy": 9,
+      "usability": 9,
+      "polish": 8,
+      "overall": 8,
+      "notes": "Most complete page: summary table, a truncate-vs-shorten comparison on the same input, framed task examples, labeled wrong forms, and cost notes. Every output verified. Drawbacks: it is long for 'functions are small, don't make it bloated', with some edge trivia (superscript digits, the textwrap aside, warning-filter details), and make_slug is missing from the import line."
+    },
+    "Y": {
+      "organization": 8,
+      "accuracy": 8,
+      "usability": 6,
+      "polish": 7,
+      "overall": 7,
+      "notes": "Concise and well scaled. Parameter tables, deprecated entry last, accurate outputs. But it says `import textkit` and then calls bare `slugify(...)`, so the examples don't run as written. Examples are unframed and the sample data is unrelated across entries."
+    },
+    "X": {
+      "organization": 6,
+      "accuracy": 9,
+      "usability": 6,
+      "polish": 6,
+      "overall": 6,
+      "notes": "Accurate, runnable examples (textkit.-prefixed) and a mostly shared invoice domain. But the deprecated make_slug sits second, '**Raises** nothing.' filler appears, examples are unframed, a TODO(verify) marker would ship to the docs site, and the truncate/shorten distinction is only one sentence."
+    }
+  },
+  "ranking": [
+    "Z",
+    "Y",
+    "X"
+  ],
+  "reasoning": "All three are factually accurate against textkit.py; every shown output reproduced. Z does the most of what a reference reader needs: a side-by-side for the confusable pair, labeled pitfalls, cost notes, and framed examples per option. It costs length the user asked to avoid. Y is tight and well ordered but has an import/usage mismatch and bare examples. X has accurate content but structural problems: legacy entry placed early, null 'Raises nothing' sections, and a TODO left in published copy.",
+  "assertion_notes": "#42 is ambiguous about whether 'note on cost for large inputs' applies to natural_sort only or to the pair. It was graded as needing a natural_sort cost note, which fails X and Y. #13 requires 'each links to the other', which fails Z despite the best side-by-side treatment; this is arguably over-strict. #16 is judgment-based; X was passed because 4 of 5 entries share the invoice domain. #21 passes trivially for all (only 'new list' appears). #33 passes Y even though its examples contradict its import line.",
+  "label_mapping": {
+    "X": "baseline",
+    "Y": "without_skill",
+    "Z": "with_skill"
+  },
+  "ranking_by_setup": [
+    "with_skill",
+    "without_skill",
+    "baseline"
+  ]
+}

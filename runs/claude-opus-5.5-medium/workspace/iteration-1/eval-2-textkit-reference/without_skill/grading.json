@@ -1,0 +1,89 @@
+{
+  "assertion_results": [
+    {
+      "text": "[17. Document boundary behavior] Entries state boundary behavior with exact results, including at least: slugify on input with no ASCII-transliterable characters returning \"\", truncate on text already within width being unchanged, and truncate raising ValueError when width < len(ellipsis).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "slugify: 'Returns `\"\"` if nothing survives, for example when `text` is entirely non-Latin script' with `slugify(\"\u65e5\u672c\u8a9e\")` -> `''` (verified). truncate: 'If `text` already fits within `width`, it is returned unchanged with no ellipsis added.' and '**Raises** `ValueError` if `width < len(ellipsis)`.'"
+    },
+    {
+      "text": "[42. State operational cost] dedupe_lines states that it holds every distinct line in memory, and natural_sort states it returns a new list (a copy) rather than sorting in place, with a note on cost for large inputs.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "dedupe_lines: 'Every distinct line is held in memory, so memory use grows with the number of unique lines.' natural_sort: 'Returns a new sorted list ... `items` is not modified.' But there is no cost note for natural_sort on large inputs."
+    },
+    {
+      "text": "[45. Definitions first in lookup material] Each entry's description comes before its examples and fully defines the behavior on its own.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Each entry is signature, definition paragraph, parameter table/notes, then examples. e.g. shorten: 'Fits `text` into `width` characters by dropping whole words from the end and appending `placeholder`...' comes before the >>> block."
+    },
+    {
+      "text": "[39. Scale reference entries to their item] No entry contains an empty section or a section filled with \"None\"; entries share a fixed section order.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "No empty or 'None' sections (no 'Raises: None'; Raises appears only on truncate where it applies). Entries share the order signature \u2192 description \u2192 parameter table \u2192 edge notes \u2192 example; make_slug puts its deprecation callout first, which suits a legacy entry."
+    },
+    {
+      "text": "[46. Frame every example, and give reference a set of task examples] Each entry ends with more than one framed example (a sentence or heading saying what it shows), covering common tasks and notable options such as sep or placeholder.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Examples are bare >>> blocks with no framing sentences. dedupe_lines (`list(dedupe_lines([\"a\", \"b\", \"a\", \"A\", \"a \"]))`) and natural_sort have a single example each."
+    },
+    {
+      "text": "[13. Settle easily confused pairs where the confusion happens] The page distinguishes truncate (may cut mid-word) from shorten (cuts at a word boundary) at the point of confusion, for example with a side-by-side table on the same input, and each links to the other.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "truncate links to shorten ('To avoid cutting mid-word, use [`shorten`](#shorten).'), but shorten does not link back. There is no side-by-side on the same input; the summary table only lists each function separately."
+    },
+    {
+      "text": "[41. Change one thing at a time to show variants] At least one option (for example sep, ellipsis, or placeholder) is shown by keeping the input fixed and changing only that option, with the real output for each.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "`truncate(\"Hello, world\", 8)` -> 'Hello, \u2026' and `truncate(\"Hello, world\", 8, ellipsis=\"...\")` -> 'Hello...'. Verified in work/check.py ('Y OK')."
+    },
+    {
+      "text": "[32. Show legacy forms for recognition] make_slug is shown, labeled deprecated or legacy, placed after the current functions, pointing to slugify, and noting it uses \"_\" as separator.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Last section '## make_slug' with '> **Deprecated since 0.8.** Use [`slugify`](#slugify).' and 'Note that this uses an **underscore**, not `slugify`'s default hyphen.'"
+    },
+    {
+      "text": "[16. One shared sample domain per set of examples] Examples across entries share one small sample domain (e.g. the same set of article titles) rather than new data each time.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Each entry uses new data: 'Cr\u00e8me Br\u00fbl\u00e9e, 2nd ed.!', 'Hello, world', 'The quick brown fox jumps', '  a   b  ', ['a','b','a',...], ['file10','File2',...]. There is no shared domain."
+    },
+    {
+      "text": "[33. Say where each name comes from] The page states the module that provides the functions (textkit) and how to import them.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Everything below is importable from the top-level `textkit` module.' plus ```python\\nimport textkit```. (Inconsistency: the examples then call bare `slugify(...)`, which `import textkit` does not bind.)"
+    },
+    {
+      "text": "[10. Verify every fact against its source, and keep facts consistent] Every default value, exception type, and output shown matches textkit.py, and the page records that it documents version 0.9.2.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "All 12 shown outputs reproduced (work/check.py, every line 'Y OK'). Defaults match source, ValueError is correct, and 'Calling `make_slug` emits a `DeprecationWarning`' is correct. Header: 'Version 0.9.2.'"
+    },
+    {
+      "text": "[21. Avoid claims that age] The page contains no time-relative wording such as \"new\", \"recently\", or \"currently\".",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Grep for time-relative words found only 'Returns a new sorted list' (line 119), which is non-temporal."
+    },
+    {
+      "text": "[4. Show the wrong form beside the right one] At least one entry shows a plausible wrong form beside the right one, labeled, with why it fails (for example, slicing text[:n] instead of truncate, or expecting dedupe_lines to ignore case).",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "No labeled wrong form. make_slug shows '# before' / '# after' (both correct forms), and the dedupe_lines trailing-newline pitfall is prose only."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 5,
+    "total": 13,
+    "pass_rate": 0.6154
+  },
+  "blind_label": "Y"
+}

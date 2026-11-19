@@ -1,0 +1,1 @@
+the README for tallyho (evals/readme-rewrite/files/tallyho) has basically turned into a changelog of everything anyone ever added. can you clean it up?
