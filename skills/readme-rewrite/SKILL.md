@@ -4,7 +4,7 @@ description: Use when rewriting, substantially editing, restructuring, or review
 license: MIT-0
 metadata:
   author: setdef
-  version: "1.4"
+  version: "1.5"
 ---
 
 # Rewrite a README
@@ -23,7 +23,7 @@ If you are about to append a paragraph to a README you have not read in full, st
 
 In the first two modes, anything in the repository besides the code's behavior may echo the old README: other docs, package metadata, docstrings, comments, CLI help text. Use it only to find what to check. Take nothing from it as fact, structure, or wording.
 
-Where this skill says to ask the maintainer and no one can answer (you're running unattended), don't guess. Write your best draft from the evidence, mark each open point `[TO CONFIRM: ...]` in it, and list the questions when you report.
+The maintainer asked for the writing so they don't have to do it, so finish the README: never leave placeholders or questions in it. Where this skill says to ask and no one can answer (you're running unattended), don't guess. Take the answer the evidence supports that claims the least on the maintainer's behalf, write it as final, and list each such call in your report, so the maintainer can overturn it at a glance.
 
 ## Step 1: Ground every claim in the code
 
@@ -87,7 +87,7 @@ Move that material; don't delete it. Remove only what you've confirmed against t
 2. Beside what it describes: a folder's own README for material about that folder, or the docstrings and `--help` text for detail about an API or CLI.
 3. `CONTRIBUTING.md`, for how to contribute: setup, tests, and releases.
 4. The ecosystem's documentation location, only if the project's tooling uses it (for example, Sphinx's `docs/`, or RDoc's and YARD's `doc/`).
-5. Otherwise, ask the maintainer, or propose a location marked `[TO CONFIRM]`.
+5. Otherwise, the closest fit to the options above. Say which you chose and why in your report.
 
 Don't invent a new location, and don't copy one from another project because it worked there. Link each moved piece from the README's Documentation section, and say in your report what moved where.
 
