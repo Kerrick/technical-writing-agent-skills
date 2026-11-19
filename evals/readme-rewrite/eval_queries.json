@@ -1,0 +1,66 @@
+[
+  {
+    "query": "our README is a wall of text nobody reads, can you rewrite it so people actually get what the project does?",
+    "should_trigger": true
+  },
+  {
+    "query": "write a README for ~/code/pricewatch, it doesn't have one yet",
+    "should_trigger": true
+  },
+  {
+    "query": "can you look over README.rdoc and tell me what's off about it before I tag 2.0",
+    "should_trigger": true
+  },
+  {
+    "query": "the readme keeps getting a new paragraph every time someone ships a feature, fix it properly this time",
+    "should_trigger": true
+  },
+  {
+    "query": "I need a better intro and install section for the GitHub page of my CLI, the current one is from 2019",
+    "should_trigger": true
+  },
+  {
+    "query": "restructure README.md so the quick start comes first and the internals go somewhere else",
+    "should_trigger": true
+  },
+  {
+    "query": "my README reads like ChatGPT wrote it, can you make it sound like a person",
+    "should_trigger": true
+  },
+  {
+    "query": "we're publishing to npm tomorrow and the package page will show our README, can you get it in shape",
+    "should_trigger": true
+  },
+  {
+    "query": "write a CONTRIBUTING.md explaining how to run the tests and cut a release",
+    "should_trigger": false
+  },
+  {
+    "query": "draft the 3.2 release notes from the merged PRs",
+    "should_trigger": false
+  },
+  {
+    "query": "write an API reference page for the Client class in docs/api/client.md",
+    "should_trigger": false
+  },
+  {
+    "query": "add docstrings to every public function in src/inkwell",
+    "should_trigger": false
+  },
+  {
+    "query": "write a getting-started tutorial for our docs site that builds a small app",
+    "should_trigger": false
+  },
+  {
+    "query": "write the commit message for these README typo fixes",
+    "should_trigger": false
+  },
+  {
+    "query": "write a blog post announcing that our library hit 1.0",
+    "should_trigger": false
+  },
+  {
+    "query": "fix the broken link on line 40 of the README",
+    "should_trigger": false
+  }
+]

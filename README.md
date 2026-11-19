@@ -45,7 +45,8 @@ Copy them again after each `git pull`.
 | `skills/technical-writing/` | The default technical-writing skill |
 | `skills/readme-rewrite/` | The companion README skill. Not made by the method. |
 | `runs/<run>/` | One run of the method for one model and effort level: its baseline, every intermediate file, and (unless it's the default) its own skill. `runs/claude-opus-5.5-medium/` is the first. |
-| `evals/` | The evals every run is tested against: `evals.json`, `eval_queries.json` and their input files |
+| `evals/technical-writing/` | The evals every run is tested against: `evals.json`, `eval_queries.json` and their input files |
+| `evals/readme-rewrite/` | readme-rewrite's evals |
 | `method/prompts/` | Every prompt as the method now stands, with `${SLOTS}`. Each run's README records where that run differed. |
 | `method/sources.toml` | The seven sources: repositories, commits, paths, and every per-source prompt value |
 | `method/sources.md` | Why each source and scope was chosen |
@@ -59,8 +60,10 @@ Copy them again after each `git pull`.
 | - | - |
 | Steps 1–9: baseline, reading, audit, merge, check, writing | Done. The skill passes the agent-skills validator, the leak check and the placement check. |
 | Output evals: new skill against baseline and no skill | Not yet run |
-| Trigger evals (`evals/eval_queries.json`) | Not yet run |
+| Trigger evals (`evals/technical-writing/eval_queries.json`) | Not yet run |
 | Real tasks | Planned |
+
+readme-rewrite isn't made by the method, so it has no run. Its evals, in `evals/readme-rewrite/`, haven't been run yet either.
 
 ## Help wanted: spend your tokens
 
@@ -133,12 +136,12 @@ The skill must carry ideas, not any source's wording, and must not restate the b
 
 Not yet run. The plan, following `method/vendor/agent-skills/references/evaluating-skills.md`:
 
-1. For each eval in `evals/evals.json`, run three fresh sub-agents: one told to read and follow the run's skill, one the run's baseline, one with no skill. Each gets its own copy of the eval's input file. Record each run's tokens and duration when it finishes.
+1. For each eval in `evals/technical-writing/evals.json`, run three fresh sub-agents: one told to read and follow the run's skill, one the run's baseline, one with no skill. Each gets its own copy of the eval's input file. Record each run's tokens and duration when it finishes.
 2. One fresh grader per eval sees the three outputs as X, Y and Z, not knowing which is which, plus the assertions. It writes `grading.json` per output with quoted evidence, and a blind comparison.
 3. Aggregate pass rate, tokens and time per setup into `benchmark.json`, also broken down by each rule's Kind in the run's `kept.md`.
 4. Run each setup three times before trusting the differences.
 
-Put the workspace at `${RUN}/workspace/iteration-N/`. Keep `evals/` fixed across runs, or comparisons between models mean nothing. A run's skill replaces the default in `skills/` only if it beats it.
+Put the workspace at `${RUN}/workspace/iteration-N/`. Keep `evals/technical-writing/` fixed across runs, or comparisons between models mean nothing. A run's skill replaces the default in `skills/` only if it beats it.
 
 Real tasks count as evals too. For each, keep the target repo's commit, the brief word for word, the session ID, tokens and time, whether the skill triggered without being named, every correction given, and a separate commit for hand fixes. Then the task can be rerun with a later version of the skill, the baseline, or none.
 
@@ -153,7 +156,7 @@ For another model, effort level or provider:
 5. Run steps 1–2 on the target model at the target effort (`mise run prompt -- recall`, then `-- baseline`). Measure how much of the context the fork point already uses.
 6. Run steps 3–9, getting each prompt from `mise run prompt`. For each source: `reading`, check the file list it prints a note about, then `after-reading` if the source has one, then `compare`. Move the baseline into `${RUN}/baseline/` before step 9.
 7. Copy `<WORK>`'s files into `${RUN}/pipeline/`, with the findings in `${RUN}/pipeline/findings/`, write `${RUN}/README.md` the way the first run's does, and run `mise run check`.
-8. Evaluate against the same `evals/`, and against the current default.
+8. Evaluate against the same `evals/technical-writing/`, and against the current default.
 
 ## Lessons from the first run
 

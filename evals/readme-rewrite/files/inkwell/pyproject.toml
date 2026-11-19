@@ -1,0 +1,11 @@
+[project]
+name = "inkwell-md"
+version = "1.0.0"
+description = "Turn Markdown into tidy, self-contained HTML."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+dependencies = ["markdown-it-py>=3"]
+
+[project.urls]
+Repository = "https://github.com/example/inkwell"

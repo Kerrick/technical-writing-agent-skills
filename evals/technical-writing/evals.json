@@ -3,10 +3,10 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "I'm writing a multi-part tutorial for our little Python library ledgerline (source is in evals/files/ledgerline.py, v2.1.0). Part 1 had readers create a Ledger and add a few entries for rent and salary. Can you write Part 2? The goal is that by the end they use summarize() to get per-account totals. Our docs are plain Markdown on a site whose copy button grabs the whole code block.",
+      "prompt": "I'm writing a multi-part tutorial for our little Python library ledgerline (source is in evals/technical-writing/files/ledgerline.py, v2.1.0). Part 1 had readers create a Ledger and add a few entries for rent and salary. Can you write Part 2? The goal is that by the end they use summarize() to get per-account totals. Our docs are plain Markdown on a site whose copy button grabs the whole code block.",
       "expected_output": "A narrative Part 2 tutorial that links back to Part 1, restates its starting code, has the reader total accounts by hand first, then introduces summarize() as the fix, with checkpoints, a deliberate float error, and a short closing pointing to Part 3.",
       "files": [
-        "evals/files/ledgerline.py"
+        "evals/technical-writing/files/ledgerline.py"
       ],
       "assertions": [
         "[12. Let readers feel the problem before giving them the feature] Before summarize() appears, the reader computes per-account totals the laborious way (a hand-written loop) or is shown the cost of doing so in their Part 1 code.",
@@ -23,7 +23,7 @@
         "[33. Say where each name comes from] When Ledger, Decimal, or summarize first appear, the page says which module provides them (ledgerline or decimal).",
         "[2. End lessons with a short, fixed closing that points forward] The page ends with a short closing (one sentence or brief recap) plus a pointer or preview of the next part, without walking back through the content.",
         "[38. Show commands and output the way readers will copy them] Commands and their output are in separate blocks, because the prompt says the copy button grabs the whole block.",
-        "[1. Run every example as written] Every code sample, run in page order against evals/files/ledgerline.py, runs without errors except the deliberately failing one, and produces exactly the output the page shows.",
+        "[1. Run every example as written] Every code sample, run in page order against evals/technical-writing/files/ledgerline.py, runs without errors except the deliberately failing one, and produces exactly the output the page shows.",
         "[37. Elisions in code must be valid code] No code block contains a bare ... elision; any omitted code is marked with a comment that says what belongs there.",
         "[11. Realistic names for real use; neutral names only for pure mechanism] Examples use realistic account names and memos (such as rent, salary) rather than foo/bar.",
         "[44. Refer to other parts by stable label, never by position] The page never refers to other content as \"above\" or \"below\"."
@@ -31,10 +31,10 @@
     },
     {
       "id": 2,
-      "prompt": "write the API reference page for textkit (evals/files/textkit.py). it's going on our docs site next to the 0.9 user guide. functions are small so don't make it bloated",
+      "prompt": "write the API reference page for textkit (evals/technical-writing/files/textkit.py). it's going on our docs site next to the 0.9 user guide. functions are small so don't make it bloated",
       "expected_output": "A reference page with definition-first entries, small functions grouped in a table where suitable, boundary behavior and costs stated, truncate vs shorten distinguished, the deprecated make_slug shown last as legacy, and a set of task examples per entry.",
       "files": [
-        "evals/files/textkit.py"
+        "evals/technical-writing/files/textkit.py"
       ],
       "assertions": [
         "[17. Document boundary behavior] Entries state boundary behavior with exact results, including at least: slugify on input with no ASCII-transliterable characters returning \"\", truncate on text already within width being unchanged, and truncate raising ValueError when width < len(ellipsis).",
@@ -54,10 +54,10 @@
     },
     {
       "id": 3,
-      "prompt": "Our backend team keeps mixing up @memoize and @cached from our internal cachekit package (evals/files/cachekit.py). Most of them know functools.lru_cache well. Write a conceptual explainer page for our internal docs on how caching works in cachekit and when to use which.",
+      "prompt": "Our backend team keeps mixing up @memoize and @cached from our internal cachekit package (evals/technical-writing/files/cachekit.py). Most of them know functools.lru_cache well. Write a conceptual explainer page for our internal docs on how caching works in cachekit and when to use which.",
       "expected_output": "A conceptual explanation that opens from functools caching, maps each cachekit decorator to its stdlib counterpart, distinguishes memoize and cached in a table, flags the keyword-argument key trap with a warning and a wrong-vs-right example, and states what cachekit does not do.",
       "files": [
-        "evals/files/cachekit.py"
+        "evals/technical-writing/files/cachekit.py"
       ],
       "assertions": [
         "[9. Connect new concepts to what readers already know] The page opens from functools.lru_cache/functools.cache, says memoize is a thin wrapper over functools.cache, and states where cached differs from lru_cache (TTL, keying on positional arguments only).",
@@ -78,10 +78,10 @@
     },
     {
       "id": 4,
-      "prompt": "Need a how-to guide: \"Verify webhook signatures with hookshot\" for our Flask users. Library is evals/files/hookshot.py (3.4.0). Our docs are built per release so each version of the site matches that release. Some readers are brand new to webhooks, others already hand-roll HMAC checks and want to switch.",
+      "prompt": "Need a how-to guide: \"Verify webhook signatures with hookshot\" for our Flask users. Library is evals/technical-writing/files/hookshot.py (3.4.0). Our docs are built per release so each version of the site matches that release. Some readers are brand new to webhooks, others already hand-roll HMAC checks and want to switch.",
       "expected_output": "A task-focused how-to that installs hookshot without a pin, links to Flask's own install docs, verifies using the raw request body, keeps the secret out of code, explains tolerance briefly in a skippable box, warns about re-serialized bodies, and serves both audiences on one page.",
       "files": [
-        "evals/files/hookshot.py"
+        "evals/technical-writing/files/hookshot.py"
       ],
       "assertions": [
         "[47. Pin versions unless the docs track the current release] The install command for hookshot has no exact version pin (a minimum constraint is acceptable only if justified), because the docs are built per release.",
@@ -94,7 +94,7 @@
         "[3. One primary job per page; other kinds of material only in short, labeled sections] The guide stays task-focused: it does not paste a full reference table of hookshot's API; it links to reference instead.",
         "[38. Show commands and output the way readers will copy them] Command and output presentation is explained or consistent with one chosen convention, and the prompt marker, if any, is explained once.",
         "[40. Say what isn't covered or done] The guide states what hookshot does not do (e.g. it does not parse the payload, deduplicate deliveries, or read the Flask request for you).",
-        "[1. Run every example as written] The code, run against evals/files/hookshot.py with a body signed by hookshot.sign, verifies successfully as written, and any output shown matches.",
+        "[1. Run every example as written] The code, run against evals/technical-writing/files/hookshot.py with a body signed by hookshot.sign, verifies successfully as written, and any output shown matches.",
         "[11. Realistic names for real use; neutral names only for pure mechanism] Example payloads and names model a realistic webhook (e.g. an order or invoice event), not foo/bar.",
         "[37. Elisions in code must be valid code] Any elided code in samples is a valid comment that says what belongs there."
       ]

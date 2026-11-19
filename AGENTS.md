@@ -6,7 +6,7 @@ Read [README.md](README.md) for what this is and how the method runs, and [CONTR
 
 - **Runs are records.** Never edit a run's `baseline/`, `pipeline/` or findings files. Fix only line citations in `PLACEMENT.md`.
 - **Prompts are the method as it now stands.** Changing a prompt in `method/prompts/` changes the next run. Say why in the commit, and record any difference a past run had in that run's `README.md`, not in the prompt.
-- **Keep runs comparable.** Don't change `method/sources.toml` sources, scopes or commits, or `evals/`, as part of a run.
+- **Keep runs comparable.** Don't change `method/sources.toml` sources, scopes or commits, or `evals/technical-writing/`, as part of a run.
 - **Never install a technical-writing skill while running the method**, this repo's included. Install only `method/vendor/agent-skills`.
 - **`skills/technical-writing/` changes only when a run's evals beat it.** `skills/readme-rewrite/` isn't made by the method and changes the ordinary way.
 - **Python only**, run with `uv run`, standard library first. No shell scripts. Each mise task runs exactly one script in `method/scripts/`.

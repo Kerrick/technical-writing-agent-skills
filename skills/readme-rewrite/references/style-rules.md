@@ -19,7 +19,7 @@
 
 ## Procedure to hunt for them
 
-After drafting, search the file for each of: `own`, `honest`, `part`, `—`, `not .* but`, `decides`, `asks`, `takes`, `wants`, `knows`, `lets`, `allows`, `handles`, `deeper`, `forward`, `sideways`, `small`, `fast`, `simple`, `seamless`, `ADR`. For each hit, ask: who acts here? Fix or defend. Then read the headings alone, in order, as a list. They should tell the story and be plain.
+After drafting, run `uv run scripts/hunt.py <README>`. It searches the prose (not code) for every pattern above and prints each hit with its line. For each hit, ask: who acts here? Fix or defend. If you add a pattern to this list, add it to the script too. Then read the headings alone, in order, as a list. They should tell the story and be plain.
 
 ## Before and after
 

@@ -4,7 +4,7 @@ A **fresh session, not a fork**, on the target model and effort level, started i
 
 Before starting it, make sure no technical-writing skill is installed, including this repo's own `skills/technical-writing`. Otherwise its description is in the session's skill list, and the session could load it. The agent-skills skill, from `${AGENT_SKILLS}`, should still be installed.
 
-This is the prompt as the method now stands. The first run's differed in two ways, recorded in its run README: its writer wrote the skill straight into the run folder, and its item 5 had the writer create the repo's shared `evals/` (4–5 output evals with assertions naming the rules they test, plus about 20 trigger queries). Every later run uses those evals unchanged.
+This is the prompt as the method now stands. The first run's differed in two ways, recorded in its run README: its writer wrote the skill straight into the run folder, and its item 5 had the writer create the repo's shared `evals/technical-writing/` (4–5 output evals with assertions naming the rules they test, plus about 20 trigger queries). Every later run uses those evals unchanged.
 
 ```
 Load the agent-skills skill and read all of its reference files in full. Then read ${WORK}/kept.md in full, and nothing else in that folder or in this repo's runs/ directory.
@@ -15,7 +15,7 @@ Write a new skill to ${RUN}/skill/technical-writing/, following the agent-skills
 2. Backbone: a short workflow and a pre-publish checklist that the rules hang on. Put the "well known, often broken" rules in the checklist. Use each rule's "Applies to" to place it: rules for every page in SKILL.md; rules for one kind of page in a reference file for that kind, with SKILL.md saying when to read it. Turn each "Without it" into a gotcha where it's a mistake an agent would make. Add nothing else from your own knowledge beyond what the backbone needs to make sense. When in doubt, leave it out.
 3. Size: SKILL.md under 500 lines and 5,000 tokens. No reference file that nothing points to.
 4. Frontmatter: name technical-writing; a description in imperative form that says when to use it, for developer-facing tutorials, guides, reference, explanations, books, courses and video scripts, including requests that don't say "docs", and says it's not for READMEs (readme-rewrite) or UI microcopy; metadata with author: setdef and version: "0.1".
-5. Evals: don't write any. This repo's evals/ are shared by every run and must stay fixed.
+5. Evals: don't write any. This repo's evals/technical-writing/ are shared by every run and must stay fixed.
 6. Validate: run `uv run ${AGENT_SKILLS}/scripts/validate.py <skill dir>` and fix any errors until it passes.
 
 Finish by writing ${RUN}/PLACEMENT.md: a table of each rule's kept.md number and heading, and the file:line where the skill states it. Every rule must appear. Then report the line counts and the validator output.

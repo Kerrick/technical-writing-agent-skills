@@ -42,5 +42,5 @@ Check placement: `uv run method/scripts/check_placement.py runs/claude-opus-5.5-
 - Rails and PostgreSQL each crashed once at the context limit and were redone with narrower or split scopes. See `method/sources.md`.
 - Step 7's checker used the "deliberate" test before it was tightened. It also agreed with a by-hand check on only 9 of 13 entries, and its results were used.
 - Django's reading prompt asked for every page. The sub-agent returned 6.5 MB, and the fork was given the fixed scope now in `method/sources.toml` as its answer.
-- The writer wrote the skill straight into the run folder, and wrote the shared `evals/` as part of step 9.
+- The writer wrote the skill straight into the run folder, and wrote the shared `evals/technical-writing/` as part of step 9.
 - Output evals and trigger evals haven't been run.

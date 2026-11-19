@@ -1,0 +1,9 @@
+[project]
+name = "tallyho"
+version = "0.4.0"
+description = "Count the most common words in text files."
+requires-python = ">=3.11"
+license = "MIT"
+
+[project.scripts]
+tallyho = "tallyho.cli:main"

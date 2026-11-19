@@ -1,9 +1,10 @@
 ---
 name: readme-rewrite
-description: Rewrites or substantially edits a project README (README.md, README.rdoc, or similar) so it serves marketing, onboarding, and indexing, with every claim checked against the code. Use when a README has grown by appending, reads like stock AI prose, needs a fresh draft, when a project has no README yet, or when asked to edit, restructure, or review a README.
+description: Use when rewriting, substantially editing, restructuring, or reviewing a project README (README.md, README.rdoc, or similar), or writing the first one for a project that has none, including when a README has grown by appending or reads like stock AI prose. Makes the README serve marketing, onboarding, and indexing, with every claim checked against the code. Not for other documentation pages, such as tutorials, guides, or API reference (use technical-writing).
 license: MIT-0
 metadata:
-  version: "1.0"
+  author: setdef
+  version: "1.1"
 ---
 
 # Rewrite a README
@@ -24,6 +25,7 @@ If you are about to append a paragraph to a README you have not read in full, st
 - Treat other documentation (design notes, plans, older READMEs, changelogs) as leads, not evidence. Each can be out of date. Confirm against code or a run.
 - If code and docs disagree, trust the code. Report the disagreement to the maintainer.
 - If something is not built yet, check the code, then say so in one sentence (step 5).
+- Check where else the README is shown. If the manifest publishes it to a package registry (for example, `readme` in `pyproject.toml`), the registry shows it without the repository around it, and relative image paths and links can break there; PyPI doesn't resolve them. Use absolute URLs for those.
 
 ## Step 2: Name the audience and the three purposes
 
@@ -74,18 +76,14 @@ Build instructions for the project itself, test commands, architecture decision 
 
 ## Step 8: Disclose AI involvement as a fact
 
-If agents wrote or changed the code or docs, say so near the end, in a short paragraph, in the project's terms. See [references/ai-provenance.md](references/ai-provenance.md). Follow the maintainer's existing house pattern if one exists. Do not apologize and do not boast.
+If agents wrote or changed the code or docs, and the maintainer discloses AI involvement (their other projects do, or they say so; ask if you can't tell), say so near the end, in a short paragraph, in the project's terms. See [references/ai-provenance.md](references/ai-provenance.md). Follow the maintainer's existing house pattern if one exists. Do not apologize and do not boast.
 
 ## Step 9: Hunt for problems, then review
 
-1. Search the draft for each banned pattern in the style rules. Fix every hit. Do not stop at the first few.
+1. Run `uv run scripts/hunt.py <README>` from this skill's directory (or `python3 scripts/hunt.py`, with Python 3.11 or later). It lists every banned pattern from the style rules, by line. For each hit, ask who acts, then fix it or defend it. Run it again until every remaining hit is one you can defend.
 2. Read the draft once as the target reader who has never heard of the project. Note where you would stop reading.
 3. Run the review checklist in [references/review-checklist.md](references/review-checklist.md). It comes from detailed maintainer feedback on a real first draft.
 4. Re-run every command shown. Confirm every link resolves.
 5. If the maintainer reviews by file, edit the file at its real path, not a copy.
 
 When you change a README in a repo that has agent instructions, follow them. If they lack a rule against append-only edits, propose adding: "Editing README.md or README.rdoc requires reading both files in full first, then rewriting for coherence, not appending."
-
-## Reading list
-
-[references/principles.md](references/principles.md) lists the writing authorities and what each contributes. Load it when you need to justify a choice or settle a style question.

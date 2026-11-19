@@ -1,0 +1,67 @@
+{
+  "skill_name": "readme-rewrite",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "the README for tallyho (evals/readme-rewrite/files/tallyho) has basically turned into a changelog of everything anyone ever added. can you clean it up?",
+      "expected_output": "A rewritten README.md for users of the CLI, with commands and requirements that match the code, contributor material moved out, and the code/README disagreements reported.",
+      "files": [
+        "evals/readme-rewrite/files/tallyho/README.md",
+        "evals/readme-rewrite/files/tallyho/pyproject.toml",
+        "evals/readme-rewrite/files/tallyho/src/tallyho/__init__.py",
+        "evals/readme-rewrite/files/tallyho/src/tallyho/cli.py",
+        "evals/readme-rewrite/files/tallyho/tests/test_count.py",
+        "evals/readme-rewrite/files/tallyho/LICENSE"
+      ],
+      "assertions": [
+        "Step 1: every command shown uses flags that exist in src/tallyho/cli.py (--limit, not --top)",
+        "Step 1: the stated Python requirement matches pyproject.toml (3.11 or later, not 3.8)",
+        "Step 1: the response tells the user that the old README's --top flag and Python 3.8 requirement disagree with the code",
+        "Step 4: a first example near the top shows a real command and its output in the CLI's actual format",
+        "Step 5: no dated update log and no 'the latest version is' sentence remain",
+        "Step 7: test and release instructions are gone from the README, which at most points to a contributing guide in one or two sentences",
+        "Step 9: running scripts/hunt.py on the new README reports no 'announced honesty', 'em dash', 'self-praise' or 'internal citation' hits",
+        "Style rules: no sentence makes a non-agentic thing the actor (for example, 'the counter decides')"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "inkwell (evals/readme-rewrite/files/inkwell) has no README at all and we're about to publish it to PyPI. can you write one?",
+      "expected_output": "A first README.md written from the code, correct for both GitHub and PyPI, that doesn't overstate what the library does.",
+      "files": [
+        "evals/readme-rewrite/files/inkwell/pyproject.toml",
+        "evals/readme-rewrite/files/inkwell/src/inkwell/__init__.py",
+        "evals/readme-rewrite/files/inkwell/docs/demo.png",
+        "evals/readme-rewrite/files/inkwell/LICENSE"
+      ],
+      "assertions": [
+        "Step 1: the install command uses the package name from pyproject.toml (inkwell-md), and the example imports the module name (inkwell)",
+        "Step 1: any image or link to a file in the repository uses an absolute URL, so it works on PyPI",
+        "Step 4: the first example calls render() as defined in src/inkwell/__init__.py and shows its output",
+        "Step 5: PDF export is either left out or marked as not available yet, never presented as working",
+        "Step 6: there are no invented badges, user counts, testimonials or adopters",
+        "Section plan: the license section names Apache-2.0, matching LICENSE and pyproject.toml"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "can you review the README in evals/readme-rewrite/files/tallyho and tell me what's wrong with it? don't change anything yet",
+      "expected_output": "A review of the README, with no file changed, that finds its factual errors and its structural and style problems.",
+      "files": [
+        "evals/readme-rewrite/files/tallyho/README.md",
+        "evals/readme-rewrite/files/tallyho/pyproject.toml",
+        "evals/readme-rewrite/files/tallyho/src/tallyho/__init__.py",
+        "evals/readme-rewrite/files/tallyho/src/tallyho/cli.py",
+        "evals/readme-rewrite/files/tallyho/tests/test_count.py",
+        "evals/readme-rewrite/files/tallyho/LICENSE"
+      ],
+      "assertions": [
+        "The README file is unchanged",
+        "Step 1: the review reports that --top doesn't exist (the flag is --limit) and that the Python requirement is 3.11, checked against the code",
+        "Step 7: the review says the test and release sections are for contributors, not users",
+        "Step 9: the review flags the announced honesty, the self-praise, the em dashes and the ADR citation, citing lines",
+        "Review checklist: the review flags the dated update sections and the 'latest version' sentence"
+      ]
+    }
+  ]
+}

@@ -15,6 +15,7 @@ Truth
 - [ ] Does any wording state a current state as a policy, or a policy as a permanent fact? Keep "not yet available", "not accepted", and "never will" apart.
 - [ ] Do "first", "only", "best" claims hold? "The first app built with X" can read as "the first anyone built".
 - [ ] Does any sentence mislead about who installs or does what?
+- [ ] If a package registry also shows this README, do its images and links still work there?
 
 Clarity
 - [ ] Does every file, option, or tool get one line saying what it is, where it goes, and whether it is optional?
@@ -36,4 +37,4 @@ Structure
 Process
 - [ ] Did you read the old README fully (edit mode) or deliberately not (whole-cloth mode)?
 - [ ] Did you edit the file at its real path, so the maintainer can review it where they look?
-- [ ] Did you do the rewrite yourself with the full list of principles in hand, if you used a helper? Do not hand README writing to a weaker model without the principles. If a helper must draft, give it the reading list and audience, and review the result against this checklist.
+- [ ] If you used a helper, did you do the rewrite yourself with this skill in hand? Don't hand README writing to a weaker model without it. If a helper must draft, give it this skill and the audience, and review the result against this checklist.
