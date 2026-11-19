@@ -1,0 +1,124 @@
+{
+  "skill_name": "technical-writing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm writing a multi-part tutorial for our little Python library ledgerline (source is in evals/files/ledgerline.py, v2.1.0). Part 1 had readers create a Ledger and add a few entries for rent and salary. Can you write Part 2? The goal is that by the end they use summarize() to get per-account totals. Our docs are plain Markdown on a site whose copy button grabs the whole code block.",
+      "expected_output": "A narrative Part 2 tutorial that links back to Part 1, restates its starting code, has the reader total accounts by hand first, then introduces summarize() as the fix, with checkpoints, a deliberate float error, and a short closing pointing to Part 3.",
+      "files": [
+        "evals/files/ledgerline.py"
+      ],
+      "assertions": [
+        "[12. Let readers feel the problem before giving them the feature] Before summarize() appears, the reader computes per-account totals the laborious way (a hand-written loop) or is shown the cost of doing so in their Part 1 code.",
+        "[5. Show the longhand before the shortcut, and say how equivalent they are] The page shows the longhand loop that summarize() stands for and states whether the two are exactly or approximately equivalent, naming at least one difference (for example, sorting by account name or omitting accounts with no entries).",
+        "[18. Let failures recur while each one teaches] The reader deliberately passes a float amount to add(), the page shows the exact TypeError message, and that error leads into the next step (using Decimal or str).",
+        "[26. Mark wrong and failing samples inside the block] The failing float sample is marked as wrong or meant to fail inside the code block itself, not only in prose, and the reader is warned before running it.",
+        "[23. Ask for predictions at the point of the concept] At least once, at the point a concept is shown, the page asks the reader to predict an output before revealing it, or to change one specific value and predict the result.",
+        "[25. Tell readers how to check their own work] Each checkpoint tells readers what to run and what output they should see.",
+        "[8. Show code changes by file size, with full-code checkpoints] Changed code is shown either as the whole short file with changes marked or as an anchored excerpt naming the file; the marking notation is explained the first time; at least one checkpoint shows the complete current code.",
+        "[15. Use \"we\" for shared narrative work] Shared build-along work uses \"we\" or \"let's\", with \"you\" for what the reader alone observes.",
+        "[28. Sequenced pages may build on earlier ones] The page links back to Part 1 and restates the starting code it builds on.",
+        "[34. Say where to get help] Near the start, the page tells readers where to get help from people.",
+        "[27. Tell learners where difficulty is normal] The page names at least one place where readers commonly get stuck (for example, Decimal vs float) and says difficulty there is normal.",
+        "[33. Say where each name comes from] When Ledger, Decimal, or summarize first appear, the page says which module provides them (ledgerline or decimal).",
+        "[2. End lessons with a short, fixed closing that points forward] The page ends with a short closing (one sentence or brief recap) plus a pointer or preview of the next part, without walking back through the content.",
+        "[38. Show commands and output the way readers will copy them] Commands and their output are in separate blocks, because the prompt says the copy button grabs the whole block.",
+        "[1. Run every example as written] Every code sample, run in page order against evals/files/ledgerline.py, runs without errors except the deliberately failing one, and produces exactly the output the page shows.",
+        "[37. Elisions in code must be valid code] No code block contains a bare ... elision; any omitted code is marked with a comment that says what belongs there.",
+        "[11. Realistic names for real use; neutral names only for pure mechanism] Examples use realistic account names and memos (such as rent, salary) rather than foo/bar.",
+        "[44. Refer to other parts by stable label, never by position] The page never refers to other content as \"above\" or \"below\"."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "write the API reference page for textkit (evals/files/textkit.py). it's going on our docs site next to the 0.9 user guide. functions are small so don't make it bloated",
+      "expected_output": "A reference page with definition-first entries, small functions grouped in a table where suitable, boundary behavior and costs stated, truncate vs shorten distinguished, the deprecated make_slug shown last as legacy, and a set of task examples per entry.",
+      "files": [
+        "evals/files/textkit.py"
+      ],
+      "assertions": [
+        "[17. Document boundary behavior] Entries state boundary behavior with exact results, including at least: slugify on input with no ASCII-transliterable characters returning \"\", truncate on text already within width being unchanged, and truncate raising ValueError when width < len(ellipsis).",
+        "[42. State operational cost] dedupe_lines states that it holds every distinct line in memory, and natural_sort states it returns a new list (a copy) rather than sorting in place, with a note on cost for large inputs.",
+        "[45. Definitions first in lookup material] Each entry's description comes before its examples and fully defines the behavior on its own.",
+        "[39. Scale reference entries to their item] No entry contains an empty section or a section filled with \"None\"; entries share a fixed section order.",
+        "[46. Frame every example, and give reference a set of task examples] Each entry ends with more than one framed example (a sentence or heading saying what it shows), covering common tasks and notable options such as sep or placeholder.",
+        "[13. Settle easily confused pairs where the confusion happens] The page distinguishes truncate (may cut mid-word) from shorten (cuts at a word boundary) at the point of confusion, for example with a side-by-side table on the same input, and each links to the other.",
+        "[41. Change one thing at a time to show variants] At least one option (for example sep, ellipsis, or placeholder) is shown by keeping the input fixed and changing only that option, with the real output for each.",
+        "[32. Show legacy forms for recognition] make_slug is shown, labeled deprecated or legacy, placed after the current functions, pointing to slugify, and noting it uses \"_\" as separator.",
+        "[16. One shared sample domain per set of examples] Examples across entries share one small sample domain (e.g. the same set of article titles) rather than new data each time.",
+        "[33. Say where each name comes from] The page states the module that provides the functions (textkit) and how to import them.",
+        "[10. Verify every fact against its source, and keep facts consistent] Every default value, exception type, and output shown matches textkit.py, and the page records that it documents version 0.9.2.",
+        "[21. Avoid claims that age] The page contains no time-relative wording such as \"new\", \"recently\", or \"currently\".",
+        "[4. Show the wrong form beside the right one] At least one entry shows a plausible wrong form beside the right one, labeled, with why it fails (for example, slicing text[:n] instead of truncate, or expecting dedupe_lines to ignore case)."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Our backend team keeps mixing up @memoize and @cached from our internal cachekit package (evals/files/cachekit.py). Most of them know functools.lru_cache well. Write a conceptual explainer page for our internal docs on how caching works in cachekit and when to use which.",
+      "expected_output": "A conceptual explanation that opens from functools caching, maps each cachekit decorator to its stdlib counterpart, distinguishes memoize and cached in a table, flags the keyword-argument key trap with a warning and a wrong-vs-right example, and states what cachekit does not do.",
+      "files": [
+        "evals/files/cachekit.py"
+      ],
+      "assertions": [
+        "[9. Connect new concepts to what readers already know] The page opens from functools.lru_cache/functools.cache, says memoize is a thin wrapper over functools.cache, and states where cached differs from lru_cache (TTL, keying on positional arguments only).",
+        "[13. Settle easily confused pairs where the confusion happens] A side-by-side comparison (table or equivalent) of memoize and cached appears in the page itself, covering at least keying, expiry, and boundedness.",
+        "[7. Warn about silent and breaking failures too] A warning callout flags that cached ignores keyword arguments in its key, silently returning a wrong result; the warning names that one failure.",
+        "[4. Show the wrong form beside the right one] The page shows the wrong usage (calling a @cached function that differs only by a keyword argument) next to a correct alternative, and explains why the wrong one returns a stale value.",
+        "[26. Mark wrong and failing samples inside the block] The wrong sample is marked as wrong inside the code block (e.g. a # Wrong: comment).",
+        "[40. Say what isn't covered or done] The page states plainly that the caches are per process and not shared between worker processes, and that memoize never evicts entries.",
+        "[43. Collect known limits] Known limitations and caveats are collected in a clearly titled section.",
+        "[22. One term per concept, with any unavoidable second name declared once] The page uses one term for the cache key concept (and for other core concepts) consistently, without undeclared synonyms.",
+        "[5. Show the longhand before the shortcut, and say how equivalent they are] The page shows longhand code for what @cached does (a dict keyed by args with timestamps) before or alongside the decorator, and says how exact the equivalence is.",
+        "[23. Ask for predictions at the point of the concept] At the point the keyword-argument behavior is introduced, the reader is asked to predict the output before it is shown.",
+        "[35. Flag teaching shortcuts] Any simplified illustrative implementation is flagged as such, with what production code would do instead.",
+        "[14. Put optional depth in titled, consistent asides] Optional depth, if any, is in titled asides distinct from warnings.",
+        "[2. End lessons with a short, fixed closing that points forward] The page does not end with a conclusion that restates its content.",
+        "[10. Verify every fact against its source, and keep facts consistent] Every behavior stated about memoize and cached matches cachekit.py (e.g. expired entries are replaced on the next call, not evicted in the background)."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Need a how-to guide: \"Verify webhook signatures with hookshot\" for our Flask users. Library is evals/files/hookshot.py (3.4.0). Our docs are built per release so each version of the site matches that release. Some readers are brand new to webhooks, others already hand-roll HMAC checks and want to switch.",
+      "expected_output": "A task-focused how-to that installs hookshot without a pin, links to Flask's own install docs, verifies using the raw request body, keeps the secret out of code, explains tolerance briefly in a skippable box, warns about re-serialized bodies, and serves both audiences on one page.",
+      "files": [
+        "evals/files/hookshot.py"
+      ],
+      "assertions": [
+        "[47. Pin versions unless the docs track the current release] The install command for hookshot has no exact version pin (a minimum constraint is acceptable only if justified), because the docs are built per release.",
+        "[20. Keep one maintained copy of anything that changes] The guide does not reproduce Flask's installation steps; it links to Flask's own documentation and documents only how hookshot connects to Flask.",
+        "[19. Write every example as if it will be copied into production] The example reads the secret from configuration or the environment, not a hardcoded literal, and returns an error status on SignatureError; it uses no deprecated or insecure construct.",
+        "[7. Warn about silent and breaking failures too] A warning callout flags that passing re-serialized JSON (e.g. request.get_json()) instead of the raw body bytes makes verification fail.",
+        "[36. Cross-cutting topics: full treatment once, local consequences everywhere] The guide states, in a line or two at the relevant step, the security consequence that applies here (e.g. replay protection via tolerance, or that tolerance=0 disables it) and links to a fuller security treatment.",
+        "[30. Give reasoning where the reader will wonder] The choice of tolerance value is explained in a few sentences in a titled box or clearly marked skippable paragraph at the step where it is set.",
+        "[29. One page can serve beginners and experts] The guide starts with the simplest common use and moves to advanced material (e.g. migrating from a hand-rolled HMAC check, custom tolerance) in clearly titled, skippable sections, on one page rather than separate novice/expert pages.",
+        "[3. One primary job per page; other kinds of material only in short, labeled sections] The guide stays task-focused: it does not paste a full reference table of hookshot's API; it links to reference instead.",
+        "[38. Show commands and output the way readers will copy them] Command and output presentation is explained or consistent with one chosen convention, and the prompt marker, if any, is explained once.",
+        "[40. Say what isn't covered or done] The guide states what hookshot does not do (e.g. it does not parse the payload, deduplicate deliveries, or read the Flask request for you).",
+        "[1. Run every example as written] The code, run against evals/files/hookshot.py with a body signed by hookshot.sign, verifies successfully as written, and any output shown matches.",
+        "[11. Realistic names for real use; neutral names only for pure mechanism] Example payloads and names model a realistic webhook (e.g. an order or invoice event), not foo/bar.",
+        "[37. Elisions in code must be valid code] Any elided code in samples is a valid comment that says what belongs there."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "We're running a one-day workshop, \"Testing Python services with pytest\", for backend devs. Some have only used unittest, a few have never written a fixture. Please write (1) the course landing page that lists the six modules and (2) the narration script for the module 1 video, about 8 minutes, where they write and run their first test.",
+      "expected_output": "A landing page with a map of the modules, one line each, different starting points for different readers, a bridging section for unittest users, and help/report channels; plus a conversational module 1 video script with a single path to first success, a deliberate failing test, a normal-difficulty note, and a short closing pointing to module 2.",
+      "files": [],
+      "assertions": [
+        "[6. Give the docs a map and each section a landing page] The landing page summarizes the course, lists all six modules with one line on what each covers, and sends different readers (unittest users, people new to fixtures) to different starting points or tells them what they can skip.",
+        "[31. Bridge gaps in assumed knowledge] The course includes a dedicated bridging section or module for basics only some attendees have (e.g. unittest-to-pytest or fixture basics) that says who can skip it and invites readers to return when stuck.",
+        "[34. Say where to get help] The landing page or module 1 says where to get help from people and which channel to try first, and says how to report a mistake in the material.",
+        "[9. Connect new concepts to what readers already know] Module 1 connects pytest concepts to their unittest counterparts (e.g. plain assert vs self.assertEqual) and flags where the unittest habit misleads.",
+        "[18. Let failures recur while each one teaches] The module 1 script includes a deliberately failing test, shows pytest's actual failure output, and uses it to teach reading the assertion diagnostics.",
+        "[15. Use \"we\" for shared narrative work] The script uses \"we\"/\"let's\" for shared work and reads as one person talking to another, not as neutral summary.",
+        "[27. Tell learners where difficulty is normal] The script names a spot where people commonly get stuck (e.g. test discovery naming rules) and says that is normal.",
+        "[24. Show several solutions when judgment is the goal] Module 1 keeps a single path to the first passing test (no alternative approaches presented at that point).",
+        "[2. End lessons with a short, fixed closing that points forward] Module 1 ends with a brief fixed closing (one sentence or short recap) and a pointer or preview of module 2.",
+        "[12. Let readers feel the problem before giving them the feature] Before introducing a pytest feature (e.g. fixtures or parametrize, if previewed), the script or module plan shows the problem it solves in code the viewer has just written.",
+        "[38. Show commands and output the way readers will copy them] Commands and output in the video script are shown as a transcript block or split blocks, with the choice appropriate to a screencast and the prompt marker explained once.",
+        "[21. Avoid claims that age] Neither deliverable contains time-relative wording such as \"new\", \"latest\", or \"currently\".",
+        "[47. Pin versions unless the docs track the current release] Any install command either pins the version the workshop was tested against or explains why it doesn't, since a one-day workshop is written against one version."
+      ]
+    }
+  ]
+}

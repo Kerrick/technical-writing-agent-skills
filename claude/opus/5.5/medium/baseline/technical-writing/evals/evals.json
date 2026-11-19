@@ -1,0 +1,42 @@
+{
+  "skill_name": "technical-writing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "can you write docs for the retry middleware in lib/http/retry.rb? people keep asking in #help what the defaults are and whether it retries POSTs",
+      "expected_output": "A reference page for the retry middleware whose options, defaults, and retry behavior for non-idempotent methods match the source, plus a pointer to or draft of a short how-to if usage questions warrant one.",
+      "files": [],
+      "assertions": [
+        "Every option and default named in the output appears in lib/http/retry.rb",
+        "The output states explicitly whether POST requests are retried",
+        "Option entries share one consistent structure",
+        "The reference page contains no tutorial-style narrative steps"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I'm recording a YouTube series teaching beginners how to build their first CLI tool in Go. Script episode 1 for me, maybe 5 minutes.",
+      "expected_output": "A two-column (visual and narration) script for one episode with a single stated outcome, an opening that shows the result, narration sized to roughly five minutes, and a closing that points to the next episode.",
+      "files": [],
+      "assertions": [
+        "The script pairs each narration line with a planned visual",
+        "The episode states one outcome for the viewer",
+        "The first scene shows the finished result",
+        "Narration is between 500 and 800 words",
+        "Narration contains no visual back-references such as 'as shown above'"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Help me outline a book: 'Testing Rails Apps with Minitest'. Audience is devs who know Rails but have only written a few tests.",
+      "expected_output": "A book outline built backward from end capabilities, with one major capability per chapter, a running example project, ordered by concept dependencies, and a request to confirm the outline before drafting.",
+      "files": [],
+      "assertions": [
+        "The outline lists end capabilities as observable actions",
+        "Each chapter has a one-line outcome",
+        "One running project is used across chapters",
+        "The response asks the user to confirm the outline before chapters are drafted"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  { "query": "can u write a getting started tutorial for our rust crate `tidepool`? src is in ./crates/tidepool, people should end up with a working connection pool", "should_trigger": true },
+  { "query": "My editor at a tech publisher wants chapter 4 of my Go book reworked — it's the concurrency chapter and reviewers said readers get lost around channels. Draft is in ch04.md.", "should_trigger": true },
+  { "query": "Document every flag of our `deployctl` CLI. Run `deployctl --help` and the subcommand helps to get the details, output goes in docs/reference/cli.md", "should_trigger": true },
+  { "query": "Write the narration for a 10 minute screencast showing devs how to set up Stripe-style idempotency keys with our payments SDK", "should_trigger": true },
+  { "query": "I'm teaching a 4-week evening course on TypeScript generics for working JS devs. Can you plan the modules and write the week 1 handout + exercises?", "should_trigger": true },
+  { "query": "add docstrings to all the public functions in src/geo/projections.py, the team wants them to render nicely in our sphinx site", "should_trigger": true },
+  { "query": "people on our team keep asking why we use event sourcing in the billing service. write something for the internal docs that explains the reasoning and how the pieces fit", "should_trigger": true },
+  { "query": "Our docs site has 40 pages and nobody can find anything. Restructure docs/ and write landing pages for each section.", "should_trigger": true },
+  { "query": "how do I explain to new hires how our GraphQL dataloader batching works? need a page with examples they can run", "should_trigger": true },
+  { "query": "Write a how-to for rotating API keys with our Python client without downtime — customers keep filing tickets about it", "should_trigger": true },
+  { "query": "Rewrite the README for this repo, it's a mess and doesn't explain what the project does", "should_trigger": false },
+  { "query": "Fix the copy on the signup form — the error messages and button labels are confusing users", "should_trigger": false },
+  { "query": "write release notes for v2.3 from the commits since the last tag", "should_trigger": false },
+  { "query": "Can you write a blog post announcing our Series A for the company site?", "should_trigger": false },
+  { "query": "Generate an OpenAPI spec from the Express routes in server/routes/", "should_trigger": false },
+  { "query": "draft an ADR for switching our queue from RabbitMQ to SQS", "should_trigger": false },
+  { "query": "our mkdocs build is failing with a plugin error after upgrading, can you fix the config?", "should_trigger": false },
+  { "query": "Write the tooltip and empty-state text for the new dashboard widgets", "should_trigger": false },
+  { "query": "summarize this 30 page API design doc into a one-paragraph update for my manager", "should_trigger": false },
+  { "query": "Add a CONTRIBUTING.md and a code of conduct to the repo", "should_trigger": false }
+]
