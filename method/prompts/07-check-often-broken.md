@@ -7,7 +7,7 @@ It exists because the reading forks judged group 4, "where the source falls shor
 ```
 Don't change technical-writing. It's the baseline: a record of what you believed before reading anything. Its value depends on it staying exactly as you wrote it.
 
-Read ~/Developer/technical-writing-deltas/merged.md. In its "Kept" section, every entry whose Kind includes "baseline, often broken" names skill rules that some sources break. Sources are labeled by letter: A react-learn.md, B ember-guides.md, C django-docs.md, D rails-guides-1.md and rails-guides-2.md (one source), E rust-book.md, F mdn-js-guide.md, G postgres-manual.md, all in the same folder. Those files hold the evidence. Each names the source checkout and style guide it compared, and you may open them to check.
+Read {WORK}/merged.md. In its "Kept" section, every entry whose Kind includes "baseline, often broken" names skill rules that some sources break. Sources are labeled by letter: A react-learn.md, B ember-guides.md, C django-docs.md, D rails-guides-1.md and rails-guides-2.md (one source), E rust-book.md, F mdn-js-guide.md, G postgres-manual.md, all in the same folder. Those files hold the evidence. Each names the source checkout and style guide it compared, and you may open them to check.
 
 For each such entry and each source listed as breaking it, classify the breakage exactly one way:
 
@@ -20,7 +20,7 @@ Then classify each entry from its sources' results:
 - Two or more deliberate: it becomes a correction candidate. State, in general terms, what those sources do by design.
 - Otherwise: if the entry is also a correction in its own right, keep it as a correction only; if not, mark it "redundant with the skill" and cite the skill line.
 
-Write ~/Developer/technical-writing-deltas/often-broken-check.md: a table of entry, source, class and evidence, then for each entry its result. Then end with a section "## For the writer": the results stated in general terms, with no quotes, no source names or technology, and no examples taken from the sources, so it can be given to a writer who has never seen the evidence.
+Write {WORK}/often-broken-check.md: a table of entry, source, class and evidence, then for each entry its result. Then end with a section "## For the writer": the results stated in general terms, with no quotes, no source names or technology, and no examples taken from the sources, so it can be given to a writer who has never seen the evidence.
 ```
 
 ## Tighten "deliberate" next time
@@ -30,4 +30,4 @@ This run's checker agreed with a by-hand check on 9 of 13 entries. All four disa
 - **Put a number on "nearly every page":** the pattern appears on at least 80% of pages of that kind, counted.
 - **It must contradict the rule:** a template whose content mostly follows the rule doesn't count.
 
-Check: `python3 scripts/extract_section.py "## For the writer" often-broken-check.md > for-the-writer.md`, then `python3 scripts/leak_check.py for-the-writer.md` passes.
+Check: `python3 method/scripts/extract_section.py "## For the writer" often-broken-check.md > for-the-writer.md`, then `python3 method/scripts/leak_check.py for-the-writer.md` passes.

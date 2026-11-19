@@ -12,7 +12,7 @@ Seven documentation sets, chosen to differ in kind: framework guides with tutori
 | F | MDN JavaScript Guide and reference | `mdn/content` | `54ef250b` | `mdn-js-guide.md` |
 | G | PostgreSQL manual | `postgres/postgres` | `8303f2e` | `postgres-manual.md` |
 
-Letters are the anonymous labels used from the audit onward. Clone each repository into `~/Developer/` and check out the commit.
+Letters are the anonymous labels used from the audit onward. Clone each repository into `{SRC}/` and check out the commit.
 
 ## Budget
 
@@ -41,7 +41,7 @@ One fork holds about 1.2–1.5 MB of source text. React Learn (1.45 MB) fit with
 The reading-order prompt as sent (it says `.md`, though Django's docs are `.txt`; the sub-agent found them anyway):
 
 ```
-Now, send a Sonnet sub-agent out to ~/Developer/django/docs/ to give you the .md filenames to read, in the correct order, and nothing more, so you can read them all and have read everything a human would've read by clicking Documentation and going page-by-page on docs.djangoproject.com.
+Now, send a Sonnet sub-agent out to {SRC}/django/docs/ to give you the .md filenames to read, in the correct order, and nothing more, so you can read them all and have read everything a human would've read by clicking Documentation and going page-by-page on docs.djangoproject.com.
 ```
 
 The sub-agent returned 681 files, about 6.5 MB, and the fork asked how to proceed. Django has no single reading path beyond the tutorial, and its docs (4.9 MB without release notes) are about four forks' worth. The fork read a fixed sample instead, given as its answer:
@@ -80,10 +80,10 @@ Too big for one fork (3.2 MB, 2.4 MB without release notes). The first attempt c
 
 ### E: The Rust Programming Language
 
-- **Reading path:** "going page-by-page on doc.rust-lang.org/book", with `~/Developer/book/src/` as the folder. The fork read all 112 files, from the title page through Appendix G. About 1.22 MB.
-- **Listings:** the chapters pull in about 0.30 MB of code and compiler output (669 files under `listings/`) at build time. Don't read them all. Prefix the comparison with: "Don't read all the listings. Where a difference you're about to record depends on what a listing or its output.txt actually shows, open that one listing (or grep across ~/Developer/book/listings/) to check, and cite it. Otherwise work from the prose."
+- **Reading path:** "going page-by-page on doc.rust-lang.org/book", with `{SRC}/book/src/` as the folder. The fork read all 112 files, from the title page through Appendix G. About 1.22 MB.
+- **Listings:** the chapters pull in about 0.30 MB of code and compiler output (669 files under `listings/`) at build time. Don't read them all. Prefix the comparison with: "Don't read all the listings. Where a difference you're about to record depends on what a listing or its output.txt actually shows, open that one listing (or grep across {SRC}/book/listings/) to check, and cite it. Otherwise work from the prose."
 - **Style guide:** `style-guide.md` and `CONTRIBUTING.md`.
-- **Focus:** "The book is long-form, which the skill covers in references/books.md and references/learning-science.md. Pay particular attention to how it differs from those files."
+- **Focus:** "The book is long-form, which the skill covers in its guidance on books and on learning, wherever it puts that. Pay particular attention to how the book differs from that guidance."
 - **House:** Rust, its tooling (Cargo, rustc, mdBook), or the book's audience.
 - **Names to exclude:** Rust, Cargo, the Rust book.
 - **License:** MIT and Apache-2.0, dual-licensed.
@@ -95,9 +95,9 @@ Too big for one fork (3.2 MB, 2.4 MB without release notes). The first attempt c
   ```
   Before comparing, read two more parts of MDN in full, so you've seen its reference pages as well as its Guide:
 
-  1. Every page under ~/Developer/content/files/en-us/web/javascript/reference/global_objects/promise/, starting with index.md, then the constructor, static methods, and instance methods in the order index.md lists them.
-  2. The same for ~/Developer/content/files/en-us/web/javascript/reference/global_objects/map/.
-  3. These templates from ~/Developer/content/files/en-us/mdn/writing_guidelines/page_structures/page_types/: javascript_class_page_template, javascript_constructor_page_template, javascript_static_method_page_template, javascript_instance_method_page_template (each is index.md in that folder).
+  1. Every page under {SRC}/content/files/en-us/web/javascript/reference/global_objects/promise/, starting with index.md, then the constructor, static methods, and instance methods in the order index.md lists them.
+  2. The same for {SRC}/content/files/en-us/web/javascript/reference/global_objects/map/.
+  3. These templates from {SRC}/content/files/en-us/mdn/writing_guidelines/page_structures/page_types/: javascript_class_page_template, javascript_constructor_page_template, javascript_static_method_page_template, javascript_instance_method_page_template (each is index.md in that folder).
 
   Read them in full; then wait for my next message.
   ```
@@ -113,13 +113,13 @@ Too big for one fork (3.2 MB, 2.4 MB without release notes). The first attempt c
 The first attempt (all of Part I and Part II) crashed in the function reference tables (`func/`, 1.2 MB). The second used a fixed scope in `doc/src/sgml/`, about 1.1 MB:
 
 ```
-Now, send a Sonnet sub-agent out to ~/Developer/postgres/doc/src/sgml/ to give you the .sgml filenames to read, in the correct order, and nothing more, so you can read everything a human would've read by going page-by-page on postgresql.org/docs/current through these parts only: the tutorial (start, query, advanced), then the SQL Language chapters syntax, ddl, dml, queries, datatype (with the files it includes: json, array, rowtypes, rangetypes, in the order it includes them), typeconv, indices and mvcc. Then add exactly one function section, func/func-string.sgml, as a sample of the reference tables, and docguide.sgml last; it's the documentation style guide. Skip the rest of func/, textsearch and perform.
+Now, send a Sonnet sub-agent out to {SRC}/postgres/doc/src/sgml/ to give you the .sgml filenames to read, in the correct order, and nothing more, so you can read everything a human would've read by going page-by-page on postgresql.org/docs/current through these parts only: the tutorial (start, query, advanced), then the SQL Language chapters syntax, ddl, dml, queries, datatype (with the files it includes: json, array, rowtypes, rangetypes, in the order it includes them), typeconv, indices and mvcc. Then add exactly one function section, func/func-string.sgml, as a sample of the reference tables, and docguide.sgml last; it's the documentation style guide. Skip the rest of func/, textsearch and perform.
 ```
 
 Then, with room left, before comparing:
 
 ```
-Don't fold anything into the skill; I'll explain why in my next message. First read these SQL command reference pages in full, in this order, from ~/Developer/postgres/doc/src/sgml/ref/: select.sgml, insert.sgml, update.sgml, delete.sgml, create_table.sgml, create_index.sgml. Each covers a command a chapter you've read already taught, so notice how the reference page and the chapter divide the work. Then wait for my next message.
+Don't fold anything into the skill; I'll explain why in my next message. First read these SQL command reference pages in full, in this order, from {SRC}/postgres/doc/src/sgml/ref/: select.sgml, insert.sgml, update.sgml, delete.sgml, create_table.sgml, create_index.sgml. Each covers a command a chapter you've read already taught, so notice how the reference page and the chapter divide the work. Then wait for my next message.
 ```
 
 - **Style guide:** `docguide.sgml`, read as part of the pages.

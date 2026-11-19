@@ -18,13 +18,13 @@ from pathlib import Path
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        prog="python3 scripts/check_placement.py",
+        prog="python3 method/scripts/check_placement.py",
         description="Check that every kept rule is placed in the skill.",
         epilog=(
             "exit codes: 0 all placed, 1 problems found, 2 bad arguments\n\n"
             "example:\n"
-            "  python3 scripts/check_placement.py claude/opus/5.5/medium/PLACEMENT.md \\\n"
-            "    claude/opus/5.5/medium/pipeline/kept.md claude/opus/5.5/medium"
+            "  python3 method/scripts/check_placement.py runs/claude-opus-5.5-medium/PLACEMENT.md \\\n"
+            "    runs/claude-opus-5.5-medium/pipeline/kept.md skills"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )

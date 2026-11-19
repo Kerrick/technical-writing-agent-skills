@@ -38,9 +38,9 @@ def relabel(line: str) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        prog="python3 scripts/build_kept.py",
+        prog="python3 method/scripts/build_kept.py",
         description="Build the writer's kept.md from merged.md.",
-        epilog="example:\n  python3 scripts/build_kept.py pipeline/merged.md -o pipeline/kept.md",
+        epilog="example:\n  python3 method/scripts/build_kept.py runs/claude-opus-5.5-medium/pipeline/merged.md -o kept.md",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("merged", type=Path)

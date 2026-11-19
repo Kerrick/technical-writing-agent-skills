@@ -24,13 +24,13 @@ DEFAULT_NAMES = [
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        prog="python3 scripts/leak_check.py",
+        prog="python3 method/scripts/leak_check.py",
         description="Find source or technology names in clean-room files.",
         epilog=(
             "exit codes: 0 clean, 1 names found, 2 bad arguments\n\n"
             "examples:\n"
-            "  python3 scripts/leak_check.py pipeline/kept.md\n"
-            "  python3 scripts/leak_check.py --names vue,nuxt pipeline/abstracted-full.md"
+            "  python3 method/scripts/leak_check.py runs/claude-opus-5.5-medium/pipeline/kept.md\n"
+            "  python3 method/scripts/leak_check.py --names vue,nuxt pipeline/abstracted-full.md"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )

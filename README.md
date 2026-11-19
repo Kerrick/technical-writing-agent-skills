@@ -1,40 +1,86 @@
 # Technical writing agent skill
 
-An [Agent Skill](https://agentskills.io) for developer-facing documentation (tutorials, how-to guides, reference, explanations, books, courses and video scripts), plus the method that made it.
+An [Agent Skill](https://agentskills.io) for developer-facing documentation: tutorials, how-to guides, API and CLI reference, explanations, books, courses and video scripts. This repo also holds the method that made it, so it can be made again for other models.
 
-The skill holds only what a given model doesn't already do: rules that seven famous documentation sets follow and the model's own idea of good docs leaves out, corrects, or knows but skips. It assumes its reader already knows standard technical writing practice. That gap differs by model and effort level, so each skill lives under the model it was made for: `<provider>/<model>/<version>/<effort>/`.
+The skill holds only what a given model doesn't already do: rules that seven famous documentation sets follow and the model's own idea of good docs leaves out, corrects, or knows but skips. It assumes its reader already knows standard technical writing practice. That gap differs by model and effort level. The default skill was made for **Claude Opus 5.5 at medium effort**, and works best there.
+
+## Install
+
+With the [skills CLI](https://github.com/vercel-labs/skills), for any supported agent:
+
+```
+npx skills add Kerrick/technical-writing-agent-skill -g
+```
+
+It asks which agents to install for. `-g` installs it for your user rather than one project.
+
+With git, on macOS or Linux, clone the repo and link the skill into your agent's skills folder. Linking means a `git pull` updates it.
+
+```
+git clone https://github.com/Kerrick/technical-writing-agent-skill.git ~/src/technical-writing-agent-skill
+ln -s ~/src/technical-writing-agent-skill/skills/technical-writing ~/.claude/skills/technical-writing
+```
+
+That's the folder for Claude Code. Agents that read `~/.agents/skills` (Codex, for example) use that folder instead.
+
+On Windows, clone the repo the same way, then copy the skill folder:
+
+```
+Copy-Item -Recurse skills\technical-writing $HOME\.claude\skills\
+```
+
+Copy it again after each `git pull`.
+
+The skill doesn't cover READMEs; use a README skill alongside it.
+
+## Layout
 
 | Path | What it is |
 | - | - |
-| `claude/opus/5.5/medium/technical-writing/` | The skill, for Claude Opus 5.5 at medium effort, with its evals |
-| `claude/opus/5.5/medium/baseline/technical-writing/` | The baseline: the skill the same model wrote from memory, which the new skill is defined against |
-| `claude/opus/5.5/medium/pipeline/` | Every intermediate file, in the order the steps made them |
-| `claude/opus/5.5/medium/pipeline/findings/` | One comparison per source, with quoted evidence (see [Licensing](#licensing)) |
-| `claude/opus/5.5/medium/PLACEMENT.md` | Where the skill states each rule it was given |
-| `prompts/` | Every prompt, word for word as run |
-| `sources.md` | The seven sources: repositories, commits, scopes and per-source prompt values |
-| `scripts/` | The extraction and check steps |
-
-## Using the skill
-
-Install it as a symlink, so improvements here reach every agent:
-
-```
-ln -s ~/Developer/technical-writing-agent-skill/claude/opus/5.5/medium/technical-writing ~/.agents/skills/technical-writing
-```
-
-Use it with the model and effort level it was made for. Never install the baseline at the same time: they share a name, and the new skill assumes its reader hasn't seen the baseline.
+| `skills/technical-writing/` | The default skill, the only one the skills CLI offers |
+| `runs/<run>/` | One run of the method for one model and effort level: its baseline, every intermediate file, and (unless it's the default) its own skill. `runs/claude-opus-5.5-medium/` is the first. |
+| `evals/` | The evals every run is tested against: `evals.json`, `eval_queries.json` and their input files |
+| `method/prompts/` | Every prompt, word for word as run, with `{SLOTS}` for paths |
+| `method/sources.md` | The seven sources: repositories, commits, scopes and per-source prompt values |
+| `method/scripts/` | The extraction and check steps |
+| `method/vendor/agent-skills/` | A pinned copy of the agent-skills skill, which steps 2 and 9 load |
 
 ## Status
 
-| Step | Done for Opus 5.5 medium? |
+| | Claude Opus 5.5, medium |
 | - | - |
-| Steps 1–9 below: baseline, reading, audit, merge, check, writing | Yes. The skill passes the validator, the leak check and the placement check. |
-| Output evals: new skill against baseline and no skill | Not yet run. See [Evaluating](#evaluating). |
-| Trigger evals (`evals/eval_queries.json`) | Not yet run. |
-| Real tasks | Planned: docs for two of the author's repos. |
+| Steps 1–9: baseline, reading, audit, merge, check, writing | Done. The skill passes the agent-skills validator, the leak check and the placement check. |
+| Output evals: new skill against baseline and no skill | Not yet run |
+| Trigger evals (`evals/eval_queries.json`) | Not yet run |
+| Real tasks | Planned |
 
 ## The method
+
+### What it needs
+
+Any agent harness that can do four things:
+
+1. **Fork:** copy a session at a point, so many sessions start from the same state. (Claude Code: `/fork`.)
+2. **Rewind:** return a session to an earlier message, dropping what came after. (Claude Code: press Esc twice, or `/rewind`.)
+3. **Show context use:** how full a session's context is. (Claude Code: `/context`.)
+4. **Run a cheaper sub-agent** for mechanical work like listing files. (Claude Code: a Sonnet sub-agent.)
+
+Plus `python3` for `method/scripts/`, `uv` for the agent-skills validator, and `uvx` for `reuse`.
+
+### Slots
+
+The prompts use these, so they work on any machine:
+
+| Slot | Meaning |
+| - | - |
+| `{SRC}` | The folder holding the source checkouts from `method/sources.md` |
+| `{WORK}` | An empty working folder for this run, outside any skills folder |
+| `{RUN}` | This run's folder: `runs/<provider>-<model>-<version>-<effort>/` in this repo |
+| `{AGENT_SKILLS}` | `method/vendor/agent-skills/`, installed as a skill |
+
+`runs/claude-opus-5.5-medium/README.md` gives the values from the first run.
+
+### Steps
 
 Each step runs in one of three kinds of context, and what a context may see is the point of the design:
 
@@ -44,15 +90,15 @@ Each step runs in one of three kinds of context, and what a context may see is t
 
 | # | Step | Context | Reads | Writes |
 | - | - | - | - | - |
-| 1 | [Recall](prompts/01-recall.md) | New session | Nothing | Nothing |
-| 2 | [Baseline](prompts/02-baseline.md) | Same session | The agent-skills skill | The baseline skill. **The fork point.** |
-| 3 | [Reading order](prompts/03-reading-order.md) | One fork per source | A Sonnet sub-agent's file list, then the pages | Nothing |
-| 4 | [Compare](prompts/04-compare.md) | Same fork | The source's style guide | `findings/<source>.md` |
-| 5 | [Audit](prompts/05-audit.md) | New fork | All findings files, with quotes | `abstracted-full.md`: anonymized, no quotes |
-| 6 | [Merge](prompts/06-merge.md) | New fork | `abstracted-full.md` only | `merged.md` |
-| 7 | [Check "often broken"](prompts/07-check-often-broken.md) | New fork | `merged.md`, the findings, the source checkouts | `often-broken-check.md` |
-| 8 | [Apply the check](prompts/08-apply-check.md) | Script, then the merge fork | `for-the-writer.md` only | Updated `merged.md`; then `kept.md` by script |
-| 9 | [Write](prompts/09-write.md) | **Fresh session** | The agent-skills skill and `kept.md` only | The skill, its evals, `PLACEMENT.md` |
+| 1 | [Recall](method/prompts/01-recall.md) | New session | Nothing | Nothing |
+| 2 | [Baseline](method/prompts/02-baseline.md) | Same session | The agent-skills skill | The baseline skill. **The fork point.** |
+| 3 | [Reading order](method/prompts/03-reading-order.md) | One fork per source | A sub-agent's file list, then the pages | Nothing |
+| 4 | [Compare](method/prompts/04-compare.md) | Same fork | The source's style guide | `{WORK}/<source>.md` |
+| 5 | [Audit](method/prompts/05-audit.md) | New fork | All findings files, with quotes | `abstracted-full.md`: anonymized, no quotes |
+| 6 | [Merge](method/prompts/06-merge.md) | New fork | `abstracted-full.md` only | `merged.md` |
+| 7 | [Check "often broken"](method/prompts/07-check-often-broken.md) | New fork | `merged.md`, the findings, the source checkouts | `often-broken-check.md` |
+| 8 | [Apply the check](method/prompts/08-apply-check.md) | Script, then the merge fork | `for-the-writer.md` only | Updated `merged.md`; then `kept.md` by script |
+| 9 | [Write](method/prompts/09-write.md) | **Fresh session** | The agent-skills skill and `kept.md` only | `{RUN}/skill/technical-writing/` and `{RUN}/PLACEMENT.md` |
 | 10 | [Evaluate](#evaluating) | Fresh sub-agents | One skill each (or none) | Outputs, grades, `benchmark.json` |
 
 The rules that decide what goes into the skill are fixed in advance, in the merge prompt (step 6) and the check prompt (step 7):
@@ -67,19 +113,19 @@ Fixing them in advance means the only judgment calls left are the ones written i
 
 The skill must carry ideas, not any source's wording, and must not restate the baseline. Two kinds of contamination are kept out:
 
-- **Source wording.** Only steps 3–5 and 7 see the sources or quotes from them. Everything after that reads files made by `scripts/` or written under a no-quotes, no-names rule, and `scripts/leak_check.py` checks each of them.
-- **The baseline.** The writer (step 9) is a fresh session, not a fork. A fork of the baseline's author would pull the baseline's structure and wording back into a skill meant to leave them out. Its only input, `kept.md`, has the baseline citations and process notes stripped out by `scripts/build_kept.py`. No technical-writing skill may be installed while it runs.
+- **Source wording.** Only steps 3–5 and 7 see the sources or quotes from them. Everything after that reads files made by `method/scripts/` or written under a no-quotes, no-names rule, and `method/scripts/leak_check.py` checks each of them.
+- **The baseline.** The writer (step 9) is a fresh session, not a fork. A fork of the baseline's author would pull the baseline's structure and wording back into a skill meant to leave them out. Its only input, `kept.md`, has the baseline citations and process notes stripped out by `method/scripts/build_kept.py`. No technical-writing skill may be installed while it runs, this repo's included.
 
 ## Evaluating
 
-Not yet run. The plan, following agent-skills' `references/evaluating-skills.md`:
+Not yet run. The plan, following `method/vendor/agent-skills/references/evaluating-skills.md`:
 
-1. For each eval in `technical-writing/evals/evals.json`, run three fresh sub-agents: one told to read and follow the new skill's `SKILL.md`, one the baseline's, one with no skill. Each gets its own copy of the eval's input file. Record each run's tokens and duration from its completion notice; nothing else stores them.
+1. For each eval in `evals/evals.json`, run three fresh sub-agents: one told to read and follow the run's skill, one the run's baseline, one with no skill. Each gets its own copy of the eval's input file. Record each run's tokens and duration when it finishes.
 2. One fresh grader per eval sees the three outputs as X, Y and Z, not knowing which is which, plus the assertions. It writes `grading.json` per output with quoted evidence, and a blind comparison.
-3. Aggregate pass rate, tokens and time per setup into `benchmark.json`, also broken down by each rule's Kind in `kept.md`.
+3. Aggregate pass rate, tokens and time per setup into `benchmark.json`, also broken down by each rule's Kind in the run's `kept.md`.
 4. Run each setup three times before trusting the differences.
 
-Put the workspace at `claude/opus/5.5/medium/workspace/iteration-N/`. The evals were written by the new skill's writer and test its rules. Keep them fixed when comparing models, or the comparison means nothing.
+Put the workspace at `{RUN}/workspace/iteration-N/`. Keep `evals/` fixed across runs, or comparisons between models mean nothing. A run's skill replaces the default in `skills/` only if it beats it.
 
 Real tasks count as evals too. For each, keep the target repo's commit, the brief word for word, the session ID, tokens and time, whether the skill triggered without being named, every correction given, and a separate commit for hand fixes. Then the task can be rerun with a later version of the skill, the baseline, or none.
 
@@ -87,36 +133,38 @@ Real tasks count as evals too. For each, keep the target repo's commit, the brie
 
 For another model, effort level or provider:
 
-1. Make `<provider>/<model>/<version>/<effort>/` and an empty working folder. The prompts use `~/Developer/technical-writing-deltas/` as the working folder; change that path everywhere if you use another.
-2. Uninstall any technical-writing skill.
-3. Run steps 1–2 on the target model at the target effort. Move the baseline out of the installed skills folder into `baseline/` before step 9.
-4. Run steps 3–9 with the same sources, scopes and commits from `sources.md`, and the same prompts. Change only paths and model names.
-5. Copy the working folder's files into `pipeline/` (findings into `pipeline/findings/`).
-6. Evaluate with the same eval set as earlier models.
+1. Make `runs/<provider>-<model>-<version>-<effort>/` and an empty `{WORK}` folder. Clone the sources into `{SRC}` at the commits in `method/sources.md`.
+2. Install `method/vendor/agent-skills` as a skill. Uninstall every technical-writing skill.
+3. Run steps 1–2 on the target model at the target effort. Measure how much of the context the fork point already uses.
+4. Run steps 3–9 with the same sources, scopes and prompts, filling in the slots. Move the baseline into `{RUN}/baseline/` before step 9.
+5. Copy `{WORK}`'s files into `{RUN}/pipeline/`, with the findings in `{RUN}/pipeline/findings/`, and write `{RUN}/README.md` the way the first run's does.
+6. Evaluate against the same `evals/`, and against the current default.
 
 ## Lessons from the first run
 
-- **Measure before reading.** One fork holds about 1.2–1.5 MB of source. Two forks crashed above that. Split or narrow any scope over about 1.2 MB, and check the Sonnet sub-agent's file list (folder, count, skipped sections) before the fork reads anything.
-- **Never compact a reading fork.** The comparison needs exact wording. If one crashes, rewind it to the reading-order message (conversation only), narrow the scope, and fork that point again.
+- **Measure before reading.** A reading fork needs room for its pages and then the comparison. In the first run, with a 1M-token window, about 1.2–1.5 MB of source fit, and two forks crashed above that. Check the fork point's context use first, keep each scope well under the rest, and check the sub-agent's file list (folder, count, skipped sections) before the fork reads anything.
+- **Never compact a reading fork.** The comparison needs exact wording. If one runs out of room, rewind it to the reading-order message, narrow the scope, and fork that point again.
 - **Check each findings file before ending its fork.** Run the leak check on its Abstracted section and verify two claims against the source. A fork can still fix a weak claim; once it's gone, nothing can.
-- **Ask every source about mixing modes.** The baseline's "one mode per page" rule was the one real conflict. The first three forks had to be asked for their position afterwards. The template now asks.
-- **A reader judging the baseline sides with it.** Readers are forks of the baseline's author, so their "where the source falls short" group leans toward the baseline. Step 7 exists to re-decide those items on evidence. Tighten its "deliberate" test as described in [its prompt](prompts/07-check-often-broken.md#tighten-deliberate-next-time).
+- **Ask every source about mixing modes.** The baseline's "one kind of documentation per page" rule was the one real conflict. The template now asks every source for its position.
+- **A reader judging the baseline sides with it.** Readers are forks of the baseline's author, so their "where the source falls short" group leans toward the baseline. Step 7 re-decides those items on evidence. Tighten its "deliberate" test as described in [its prompt](method/prompts/07-check-often-broken.md#tighten-deliberate-next-time).
 - **Silence isn't a choice.** A style guide that doesn't forbid something hasn't endorsed it. Only templates, style guides, or a pattern on nearly every page of a kind count as deliberate.
 - **The writer must not be the author.** The baseline's author is the best judge of what's redundant, and that judgment belongs in the merge. Writing belongs to a session that has never seen the baseline.
-- **Keep ad-hoc judgment out.** In the first run, a by-hand check of the "often broken" entries agreed with the checker fork on only 9 of 13, and the checker had the better evidence each time. Checks done outside a fixed prompt aren't repeatable for the next model, so every check in the pipeline is now a prompt or a script.
+- **Keep ad-hoc judgment out.** In the first run, a by-hand check of the "often broken" entries agreed with the checker fork on only 9 of 13, and the checker had the better evidence each time. Checks done outside a fixed prompt aren't repeatable for the next model, so every check is a prompt or a script.
 
 ## Licensing
 
 The repo follows the [REUSE specification](https://reuse.software/): `REUSE.toml` gives each file's copyright and license, and `LICENSES/` holds every license text. Check it with `uvx reuse@6.2.0 lint`.
 
-Everything is dedicated to the public domain under [CC0 1.0](LICENSES/CC0-1.0.txt), except the findings files described below. Agents wrote most of the text and code, so how much copyright exists in it is unclear; CC0 waives whatever does.
+Everything is dedicated to the public domain under [CC0 1.0](LICENSES/CC0-1.0.txt), except the files described below. Agents wrote most of the text and code, so how much copyright exists in it is unclear; CC0 waives whatever does.
 
-The findings files in `pipeline/findings/` quote their sources, and each opens with a notice naming its source, copyright holder and license. The quotes are short and used to compare and criticize. React (CC BY 4.0), Ember (MIT), Django (BSD 3-Clause), Rust (MIT or Apache-2.0) and PostgreSQL (PostgreSQL License) are permissive. Rails (CC BY-SA 4.0) and MDN (CC BY-SA 2.5) are share-alike, so the three files that quote them are licensed under those licenses. That applies per file, not to the rest of the repo.
+The findings files in `runs/*/pipeline/findings/` quote their sources, and each opens with a notice naming its source, copyright holder and license. The quotes are short and used to compare and criticize. React (CC BY 4.0), Ember (MIT), Django (BSD 3-Clause), Rust (MIT or Apache-2.0) and PostgreSQL (PostgreSQL License) are permissive. Rails (CC BY-SA 4.0) and MDN (CC BY-SA 2.5) are share-alike, so the three files that quote them are licensed under those licenses. That applies per file, not to the rest of the repo.
 
-Everything from `abstracted-full.md` onward, the skill included, contains no source wording; `scripts/leak_check.py` checks the files that matter.
+`method/vendor/agent-skills/` is licensed under [CC BY 4.0](LICENSES/CC-BY-4.0.txt). Its references are adapted from the Agent Skills documentation, and its `NOTICE.md` gives the credit and lists the changes.
+
+Everything from `abstracted-full.md` onward, the skill included, contains no source wording; `method/scripts/leak_check.py` checks the files that matter.
 
 ## How this was made
 
 > I use three words for how code and prose comes to exist. Code or prose I wrote, I typed by hand, with nothing generated. Code or prose I wrought, an AI agent generated while I iterated with it, and I reviewed every change before committing it, so I take responsibility for every diff. Code or prose I requested, an agent built with little or no review from me, in the style of a "dark factory."
 
-I wrote the prompts that start the method: the recall and baseline prompts in `prompts/01-recall.md` and `prompts/02-baseline.md`, and the reading-order prompts in `sources.md`. Everything else I requested. Agents (Claude Opus 5.5, with Claude Sonnet 5.5 listing files to read) wrote both skills, the findings and pipeline files, the evals, the other prompts, `sources.md`, the scripts, `REUSE.toml` and this README. The idea of a skill made only of the gap between a model's own baseline and famous documentation is mine, and so is each decision along the way; much of the pipeline's design came from an agent's proposals that I accepted, changed or rejected. In place of my review stand the agent-skills validator, `scripts/leak_check.py`, `scripts/check_placement.py`, `reuse lint`, and an agent's spot checks of each findings file's evidence against its source checkout. Under [declare-ai](https://declare-ai.org/1.0.0/assess.html), this is creative assistance.
+I wrote the prompts that start the method: the recall and baseline prompts in `method/prompts/01-recall.md` and `method/prompts/02-baseline.md`, and the reading-order prompts in `method/sources.md`. Everything else I requested. Agents (Claude Opus 5.5, with Claude Sonnet 5.5 listing files to read) wrote both skills, the findings and pipeline files, the evals, the other prompts, `method/sources.md`, the scripts, `REUSE.toml` and this README. The idea of a skill made only of the gap between a model's own baseline and famous documentation is mine, and so is each decision along the way; much of the pipeline's design came from an agent's proposals that I accepted, changed or rejected. In place of my review stand the agent-skills validator, `method/scripts/leak_check.py`, `method/scripts/check_placement.py`, `reuse lint`, and an agent's spot checks of each findings file's evidence against its source checkout. Under [declare-ai](https://declare-ai.org/1.0.0/assess.html), this is creative assistance.

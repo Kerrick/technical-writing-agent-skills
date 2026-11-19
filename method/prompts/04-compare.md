@@ -22,7 +22,7 @@ Every difference needs evidence: the file and a short quote, or a description of
 
 Also note anything the skill says that {SOURCE} clearly confirms, but only one line each, and only where it actually backs up something unusual in the skill.
 
-If any page combines explanation, how-to and reference, describe how in a section "## Observed, not counted" just before "## Abstracted", with evidence and the skill line it differs from (SKILL.md:44). Include where the docs instead keep those apart. If you'd count it as a correction, say so in one sentence; if not, say why. If they don't, write that instead.
+If any page combines explanation, how-to and reference, describe how in a section "## Observed, not counted" just before "## Abstracted", with evidence and the line of the skill's rule about keeping each page to one kind of documentation it differs from, if the skill has such a rule (file:line). Include where the docs instead keep those apart. If you'd count it as a correction, say so in one sentence; if not, say why. If they don't, write that instead.
 
 {LICENSE}
 
@@ -43,6 +43,6 @@ If the fork's summary offers to edit the skill, open with "No, don't fold anythi
 
 Before ending each fork, check its file. The fork can still fix a weak claim; once it's ended, nothing can.
 
-- `python3 scripts/extract_section.py "## Abstracted" <file> | python3 scripts/leak_check.py /dev/stdin` passes. (Run with `--names` for the source's own terms.)
+- `python3 method/scripts/extract_section.py "## Abstracted" <file> | python3 method/scripts/leak_check.py /dev/stdin` passes. (Run with `--names` for the source's own terms.)
 - Two or more evidence claims, checked against the source checkout: at least one principle and one shortfall.
 - It has an "Observed, not counted" section, or says why not.

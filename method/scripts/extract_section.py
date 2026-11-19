@@ -17,12 +17,12 @@ from pathlib import Path
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        prog="python3 scripts/extract_section.py",
+        prog="python3 method/scripts/extract_section.py",
         description="Print the body of one Markdown section.",
         epilog=(
             "exit codes: 0 found, 1 heading not found, 2 bad arguments\n\n"
             "example:\n"
-            '  python3 scripts/extract_section.py "## For the writer" often-broken-check.md > for-the-writer.md'
+            '  python3 method/scripts/extract_section.py "## For the writer" often-broken-check.md > for-the-writer.md'
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
