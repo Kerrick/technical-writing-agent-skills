@@ -74,7 +74,13 @@ ln -s ~/src/technical-writing-agent-skills/skills/skill-authoring ~/.claude/skil
 
 On Windows, use `npx skills`, which copies the folders for you.
 
-To use the variant made for Claude Sonnet 5.5, link it in place of the default developer-docs:
+To use the variant made for Claude Sonnet 5.5 in place of the default developer-docs, install it from its folder:
+
+```
+npx skills add https://github.com/Kerrick/technical-writing-agent-skills/tree/main/runs/claude-sonnet-5.5-medium/skill/developer-docs -g
+```
+
+Or, from a clone, link it instead of the default:
 
 ```
 ln -s ~/src/technical-writing-agent-skills/runs/claude-sonnet-5.5-medium/skill/developer-docs ~/.claude/skills/developer-docs
