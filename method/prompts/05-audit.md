@@ -16,7 +16,7 @@ Write ${WORK}/abstracted-full.md for a writer who will never see these files or 
 
 Same constraints as the Abstracted sections: no quotes, no names of the source or its technology, no examples taken from the source. Nothing that would let a reader identify which documentation it came from.
 
-End with a "## Audit" section: how many rules you revised and removed, per source, with one line each on why.
+End with a "## Audit" section: how many rules you read, revised and removed, per source, with one line each on why. For a source read in several files, count each file's rules and give the total.
 ```
 
 Check: `uv run method/scripts/leak_check.py abstracted-full.md` passes, and a sample of the [revised] reasons in "## Audit" hold up against the findings files.

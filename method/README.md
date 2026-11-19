@@ -152,7 +152,10 @@ Every step can run without a person at the keyboard, through Claude Code's comma
 - Start a session with a known ID: `claude -p --model <model> --effort <level> --session-id <uuid> --output-format json "<prompt>" < /dev/null`.
 - Continue it: `claude -p --resume <uuid> ... "<next prompt>"`.
 - Fork it: `claude -p --resume <uuid> --fork-session ... "<prompt>"`. The fork starts from everything the session had, gets its own ID, and leaves the original unchanged. Forks don't see each other.
-- Measure context: each `--output-format json` result reports `usage` (`input_tokens`, `cache_read_input_tokens`, `cache_creation_input_tokens`), in place of `/context`.
+- Put the prompt right after `-p`. `--allowedTools` and `--add-dir` take several values, so a prompt placed after them is read as one of their values.
+- Measure context from the session's transcript, not the JSON result: in Claude Code, the last assistant message's usage in `~/.claude/projects/<cwd>/<session>.jsonl`. The result's `usage` is summed over the session's calls. `modelUsage.<model>.contextWindow` gives the window.
+- Count cost from running totals. A continued session's `total_cost_usd` and `modelUsage` are totals for the whole session so far, and a fork's include the session it was forked from. A session's cost is its last result's total, minus its parent's total at the fork point; adding up every result counts earlier calls again.
+- Check a reading list before the fork reads it: run the reading-order message with `--max-turns 1`, check the list, then continue the session with: "The list is correct. Read every file on it, in that order, in full. Then wait for my next message."
 - Give a session only the tools a step needs with `--allowedTools`, keep it to the run's folders with `--add-dir`, and run it from `${WORK}`.
 
 For evals, start every run as a fresh session with `--disallowedTools Skill`, and give the skill by path in the prompt, so no installed skill can join the run.

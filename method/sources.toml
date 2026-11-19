@@ -63,7 +63,7 @@ reading = """Now, send a ${LISTER} sub-agent out to ${SRC}/django/docs/ to give 
 7. internals/contributing/writing-documentation.txt last: it's Django's own documentation style guide
 
 Skip releases/, the rest of topics/ and ref/, misc/ and the rest of internals/."""
-reading_check = "About 81 files."
+reading_check = "About 85 files."
 name = "the Django docs"
 plural = true
 style_guide = "You've already read Django's documentation style guide, internals/contributing/writing-documentation.txt. Don't re-read it; treat it as the stated intent behind the pages you read."
@@ -119,7 +119,7 @@ repo = "https://github.com/rust-lang/book.git"
 commit = "9be09363472786e3252f7c8419c6a5d972194a12"
 paths = ["src", "listings"]
 reading = "Now, send a ${LISTER} sub-agent out to ${SRC}/book/src/ to give you the .md filenames to read, in the correct order, and nothing more, so you can read them all and have read everything a human would've read by going page-by-page on doc.rust-lang.org/book."
-reading_check = "About 112 files, from the title page through Appendix G, in SUMMARY.md order."
+reading_check = "About 111 files, from the title page through Appendix G, in SUMMARY.md order."
 name = "the Rust book"
 plural = false
 prefix = "Don't read all the listings. Where a difference you're about to record depends on what a listing or its output.txt actually shows, open that one listing (or grep across ${SRC}/book/listings/) to check, and cite it. Otherwise work from the prose."

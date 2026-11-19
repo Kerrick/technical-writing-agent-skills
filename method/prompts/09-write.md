@@ -19,7 +19,7 @@ Write a new skill to ${RUN}/skill/developer-docs/, following the agent-skills sk
 6. Evals: don't write any. This repo's evals/developer-docs/ are shared by every run and must stay fixed.
 7. Validate: run `uv run ${AGENT_SKILLS}/scripts/validate.py <skill dir>` and fix any errors until it passes.
 
-Finish by writing ${RUN}/PLACEMENT.md: a table of each rule's kept.md number and heading, and the file:line where the skill states it. Every rule must appear. Then report the line counts and the validator output.
+Finish by writing ${RUN}/PLACEMENT.md: a table of each rule's kept.md number and heading, and where the skill states it, as a path and line relative to ${RUN}/skill/, such as `developer-docs/SKILL.md:24`, one or more per rule. Every rule must appear. Then report the line counts and the validator output.
 ```
 
 Check:

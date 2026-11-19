@@ -48,6 +48,48 @@ SPDX-FileCopyrightText = ["2026 Kerrick Long", "1996-2026 PostgreSQL Global Deve
 SPDX-License-Identifier = "CC0-1.0 AND PostgreSQL"
 
 [[annotations]]
+path = "runs/claude-sonnet-5.5-medium/pipeline/findings/react-learn.md"
+precedence = "override"
+SPDX-FileCopyrightText = ["2026 Kerrick Long", "React documentation contributors"]
+SPDX-License-Identifier = "CC0-1.0 AND CC-BY-4.0"
+
+[[annotations]]
+path = "runs/claude-sonnet-5.5-medium/pipeline/findings/ember-guides.md"
+precedence = "override"
+SPDX-FileCopyrightText = ["2026 Kerrick Long", "2019 Ember Learning Team"]
+SPDX-License-Identifier = "CC0-1.0 AND MIT"
+
+[[annotations]]
+path = "runs/claude-sonnet-5.5-medium/pipeline/findings/django-docs.md"
+precedence = "override"
+SPDX-FileCopyrightText = ["2026 Kerrick Long", "Django Software Foundation and individual contributors"]
+SPDX-License-Identifier = "CC0-1.0 AND BSD-3-Clause"
+
+[[annotations]]
+path = ["runs/claude-sonnet-5.5-medium/pipeline/findings/rails-guides-1.md", "runs/claude-sonnet-5.5-medium/pipeline/findings/rails-guides-2.md"]
+precedence = "override"
+SPDX-FileCopyrightText = ["2026 Kerrick Long", "Ruby on Rails Guides contributors"]
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "runs/claude-sonnet-5.5-medium/pipeline/findings/rust-book.md"
+precedence = "override"
+SPDX-FileCopyrightText = ["2026 Kerrick Long", "2010 The Rust Project Developers"]
+SPDX-License-Identifier = "CC0-1.0 AND (MIT OR Apache-2.0)"
+
+[[annotations]]
+path = "runs/claude-sonnet-5.5-medium/pipeline/findings/mdn-js-guide.md"
+precedence = "override"
+SPDX-FileCopyrightText = ["2026 Kerrick Long", "Mozilla Contributors"]
+SPDX-License-Identifier = "CC-BY-SA-2.5"
+
+[[annotations]]
+path = "runs/claude-sonnet-5.5-medium/pipeline/findings/postgres-manual.md"
+precedence = "override"
+SPDX-FileCopyrightText = ["2026 Kerrick Long", "1996-2026 PostgreSQL Global Development Group", "1994 The Regents of the University of California"]
+SPDX-License-Identifier = "CC0-1.0 AND PostgreSQL"
+
+[[annotations]]
 path = "method/vendor/agent-skills/**"
 precedence = "override"
 SPDX-FileCopyrightText = ["2026 Kerrick Long", "Agent Skills project contributors"]

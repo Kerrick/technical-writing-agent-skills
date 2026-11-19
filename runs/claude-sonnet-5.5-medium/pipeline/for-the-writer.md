@@ -1,0 +1,18 @@
+
+These results come from comparing a set of baseline documentation-writing rules with seven large published documentation sets. For each rule the sets were seen breaking, I asked whether the breaking was a mistake, a deliberate house choice, or just uneven practice.
+
+**Keep as written. Real documentation breaks these by accident.** In each case the breakage was an outright error or an inconsistency that plain checking, or the set's own conventions, would have caught.
+- Run or compile every sample, and compare the real output with what the surrounding text says it shows.
+- Walk each page from its stated starting point and confirm that everything it promises or relies on is actually present.
+- Use one term per concept, spelled identically in prose, code and cross-references, and update every occurrence, including sibling pages, when anything is renamed.
+- Make every link and cross-reference resolve to the thing it names, and recheck them after any restructuring or renaming.
+- Paste output only from a real run of the code shown, and do not freeze environment details that age.
+- Do not let content go stale for avoidable reasons: version numbers, support claims and time-relative wording in running prose, and statements that a newer page contradicts.
+
+**Keep the rule but change its emphasis.** The rule was not broken often by accident. The useful finding is a limit on how far it goes.
+- Shared facts belong in one place that other pages link to. The exception is the single costliest trap. Repeat that where the reader first meets the feature, in a length that suits the page, and treat each copy as something to recheck when its source changes.
+- Prose should stay literal enough to survive translation and non-native readers. In teaching and community pages, a warm personal voice is legitimate: address the reader, pose the problem before the answer, and prefer concrete statements to stacked superlatives. Light humour is acceptable there, and lookup pages stay plain.
+
+**Relax this one, after weighing it.** The rule to keep prompt characters out of command examples and to put output in a separate block is stricter than what established documentation sets do on purpose. Two of them mark command lines with a prompt character inside the code block as their standard form, and one of those mandates it in its style guide for every command block. In its step-by-step lessons, the other also shows the real captured output directly beneath the command in the same block for most commands. The evidence shows the practice and its consistency. It does not show what readers end up copying, so treat this as a candidate change rather than a settled one.
+
+**No change needed. The baseline already covers these.** The departures found were scattered, appeared on some pages and not others, and had no written convention behind them. They were also not frequent enough to count as a pattern. The rules are: avoid words that minimise difficulty or announce that something is obvious; state prerequisites and the version a page is true for; give exercises a checkable outcome, a separate solution and a difficulty marker; use reserved or plainly fake placeholder values; give the learner a known-good state to compare against or return to; and show recovery at the step where failure is common. One caveat applies to the prerequisite-and-version rule and the exercise rule. Many pages simply leave the element out. I did not treat omission as a deliberate choice without a written convention behind it. If very frequent omission should count as design, those two rules need a proper count before they are left alone.
