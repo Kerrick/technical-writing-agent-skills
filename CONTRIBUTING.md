@@ -22,7 +22,7 @@ What the first contributions cost, in API prices, from each session's own record
 
 Evals are the cheap contribution, which is one more reason they come first. Orchestrating mostly runs scripts and collects results, so give it a cheaper model than the one doing the reading and writing.
 
-On a subscription plan, the same work counts against usage limits instead. One step of a trial on GPT-6-Luna through Codex, reading and comparing about 270 KB of documentation, used about 4.9M tokens, mostly cached rereads.
+On a subscription plan, the same work counts against usage limits instead. One step of a trial on GPT-6-Luna through Codex, reading and comparing about 270 KB of documentation, used about 4.9M tokens, mostly cached rereads. With the baseline, that came to about 5.2M tokens, and it moved a ChatGPT Plus plan's 5-hour usage bar by 1% and its weekly bar not at all.
 
 ## Contributing a run
 

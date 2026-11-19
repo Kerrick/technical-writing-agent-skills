@@ -8,6 +8,7 @@ A partial run, to learn whether the method is worth running on a small model, on
 | 3, read the Ember Guides' Getting Started and Tutorial sections | 1.80M (1.67M) | 7.1K |
 | 4, compare | 3.12M (2.97M) | 16.4K |
 
+- **Plan usage.** The whole trial, about 5.2M tokens, moved the ChatGPT Plus plan's 5-hour usage bar from 100% to 99% left and didn't move the weekly bar. On that plan, GPT-6-Luna's mostly cached tokens count lightly against the limits.
 - **Window.** GPT-6-Luna's context window is 272K tokens, about 258K usable. A fork holds about 300 KB of documentation after the baseline and room to compare, so the trial read one coherent part of the Ember Guides, about 270 KB, instead of all of it.
 - **Baseline.** `baseline/technical-writing/SKILL.md`, 85 lines, valid.
 - **Findings.** `pipeline/findings/ember-guides-part1.md`. Its claims check out against the source, but it found six general principles, mostly from the Ember style guide, no corrections, and one shortfall. It missed the tutorial's most distinctive move, having learners do a task by hand before the abstraction that replaces it, though the pages it read show it repeatedly. From all of the Ember Guides, Claude Opus 5.5 found 14 principles and 8 corrections.
