@@ -11,7 +11,7 @@ description: >-
   (use readme-rewrite) or for UI microcopy.
 license: CC0-1.0
 metadata:
-  author: setdef
+  author: Kerrick Long
   version: "0.1"
 ---
 

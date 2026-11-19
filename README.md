@@ -13,6 +13,7 @@ Each skill tells the agent to use the other for the other kind of page.
 
 ### How they compare with other guides
 
+- With no skill, your agent writes docs from what it already knows about writing them. developer-docs adds only rules the model didn't already follow when the method measured it, and readme-rewrite adds a procedure and checks for one kind of page. Evals that would show how much that changes an agent's output haven't been run yet.
 - The [Diátaxis](https://diataxis.fr/) framework sorts documentation into tutorials, how-to guides, reference, and explanation. developer-docs uses the same kinds of page, and adds rules for each one, such as how to mark a code sample that is meant to fail.
 - The [Google developer documentation style guide](https://developers.google.com/style) is written for people and covers grammar and word choice at length. developer-docs leaves out what the model already does, so it stays at 161 lines, plus three reference files of 20 to 36 lines that the agent reads only for the kind of page it is writing.
 - [Vale](https://vale.sh/) lints prose against a style guide. readme-rewrite doesn't replace it: if your project has a `.vale.ini`, the skill tells the agent to run Vale too and to follow its rules where the two disagree.
