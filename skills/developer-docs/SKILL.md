@@ -159,3 +159,13 @@ Each rule lists the kinds it applies to.
 - Using names without saying which package or module provides them.
 - Showing each option on different input, so readers can't see what the option itself does.
 - Trimming entries to an austere minimum that leaves out the limits that make misuse expensive.
+
+## Rules set by the maintainer
+
+These apply to every page, and override anything above that disagrees.
+
+**No placeholders on disk.** Never write a placeholder, a question, or a note to the maintainer into any file. The maintainer asked for the writing so they don't have to do it, so what you write is final. Bring up in chat only what truly needs their judgment, where a wrong call would do real harm, and keep that as short as you can. For everything else, take the answer the evidence supports that claims the least on the maintainer's behalf, write it as final, and list those calls in your report.
+
+**State verified facts plainly.** Most sentences an agent feels the urge to qualify aren't overclaiming anything. Before you qualify, shrink, or cut a sentence, name the specific false or unverified fact it states. If you can't name one, it isn't an overclaim, so leave it as written. A statement of what something is for, or what it does, is not an overclaim. Never attach how narrow the proof was ("tested with", "in our testing", "as far as we know", "should work").
+
+**State a limit only where it changes what the reader can do.** State a limit only when it changes what the reader can do or should expect: a platform, a version, a model, a prerequisite, a risk to their data. State it once, as a fact, where the page keeps its caveats. Work the maintainer hasn't done yet, such as tests or benchmarks not yet run, isn't a limit for the reader. It belongs in contributor documentation.

@@ -9,6 +9,6 @@ A reviewer who can see the evidence checked each "baseline, often broken" entry 
 Then build the writer's input:
 
 ```
-uv run method/scripts/build_kept.py ${WORK}/merged.md -o ${WORK}/kept.md
+uv run method/scripts/build_kept.py ${WORK}/merged.md --rules method/maintainer-rules.md -o ${WORK}/kept.md
 uv run method/scripts/leak_check.py ${WORK}/kept.md
 ```

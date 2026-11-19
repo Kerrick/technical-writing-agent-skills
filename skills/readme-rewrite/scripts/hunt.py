@@ -33,6 +33,7 @@ RULES = {
     "stock opener or closer": r"\b(in today's|whether you('| a)re|happy \w+ing)\b",
     "hedge stack": r"\b(might|may|could) (possibly|potentially|perhaps)\b|\bin some cases,? generally\b",
     "internal citation": r"\bADR[- ]?\d+|\bdecision \d+\b",
+    "proof hedging": r"\b(tested|verified|confirmed) (with|on|only|against)\b|\bin (our|my) testing\b|\bas far as (we|I) know\b|\bshould (just )?work\b",
 }
 PATTERNS = {name: re.compile(rule, re.IGNORECASE) for name, rule in RULES.items()}
 

@@ -45,4 +45,5 @@ Check placement: `uv run method/scripts/check_placement.py runs/claude-opus-5.5-
 - The writer wrote the skill straight into the run folder, and wrote the shared `evals/developer-docs/` as part of step 9.
 - The writer named the skill `technical-writing`, as its prompt said. It was renamed `developer-docs` afterwards, a name that says which documentation it covers. The baseline keeps the name the model gave it.
 - After the run, the maintainer ruled that no skill may direct an agent to write placeholders to disk. The skill's "Mark anything you couldn't verify" became "Leave out anything you couldn't verify", and the writer prompt now forbids such rules.
+- The three rules in `method/maintainer-rules.md` were added to the skill by hand, as its last section, after the run. Later runs get them through `build_kept.py --rules`.
 - Output evals and trigger evals haven't been run.

@@ -13,6 +13,9 @@ the sources learns nothing about either. Relabels Kind for that reader:
   correction              -> overrides common advice
   baseline, often broken  -> well known, often broken
 
+With --rules, appends the maintainer's rules after the method's, numbered on
+from them, with the Kind "set by the maintainer".
+
 Exit codes:
   0  written
   1  merged.md has no "## Kept" section, or an entry has no Kind
@@ -44,11 +47,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         prog="uv run method/scripts/build_kept.py",
         description="Build the writer's kept.md from merged.md.",
-        epilog="example:\n  uv run method/scripts/build_kept.py runs/claude-opus-5.5-medium/pipeline/merged.md -o kept.md",
+        epilog="example:\n  uv run method/scripts/build_kept.py runs/claude-opus-5.5-medium/pipeline/merged.md --rules method/maintainer-rules.md -o kept.md",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("merged", type=Path)
     parser.add_argument("-o", "--output", type=Path, required=True)
+    parser.add_argument("--rules", type=Path, help="maintainer rules to append (method/maintainer-rules.md)")
     args = parser.parse_args()
 
     text = args.merged.read_text()
@@ -77,6 +81,22 @@ def main() -> int:
     except ValueError as error:
         print(f"Error: {error}", file=sys.stderr)
         return 1
+
+    if args.rules:
+        number = sum(1 for line in out if line.startswith("### "))
+        for block in re.split(r"\n(?=### )", args.rules.read_text())[1:]:
+            lines = block.strip().splitlines()
+            number += 1
+            out += ["", f"### {number}. {lines[0][4:].strip()}"]
+            field = None
+            for line in lines[1:]:
+                match = re.match(r"- \*\*([^*]+):\*\*", line)
+                if match:
+                    field = match.group(1)
+                    if field == "Applies to":
+                        out.append("- **Kind:** set by the maintainer.")
+                if field in FIELDS:
+                    out.append(line)
 
     args.output.write_text("\n".join(out).strip() + "\n")
     print(f"Wrote {sum(1 for l in out if l.startswith('### '))} rules to {args.output}")

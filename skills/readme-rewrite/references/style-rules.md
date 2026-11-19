@@ -14,6 +14,7 @@
 - **Stock openers and closers.** "In today's world", "Whether you are ... or ...", "Happy shipping".
 - **Your private shorthand.** Words like "deeper", "forward", "sideways", "upstream" used as metaphors for links or flow.
 - **Hedge stacks.** "might possibly", "in some cases generally". Say when, or leave it out.
+- **Proof hedging.** "Tested with Claude Code", "in our testing", "as far as we know", "should work". Before you qualify, shrink, or cut a sentence, name the false or unverified fact it states. If you can't, it isn't an overclaim: leave it as written. A statement of what something is for, or what it does, is not an overclaim.
 - **Self-praise.** "Powerful", "seamless", "robust", "blazing". Show evidence.
 - **Internal citations.** "(see decision 5)", "(ADR 10)" in a user-facing README.
 

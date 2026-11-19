@@ -4,7 +4,7 @@ description: Use when rewriting, substantially editing, restructuring, or review
 license: MIT-0
 metadata:
   author: Kerrick Long
-  version: "1.6"
+  version: "1.7"
 ---
 
 # Rewrite a README
@@ -72,6 +72,7 @@ Core rules:
 - Write status for users: what works today, on which platforms, what is planned. A version badge replaces "version X is the latest".
 - Do not announce virtue with words like "honest", "frankly", or "to be clear". Say the fact.
 - Do not claim what you have not tested. Mark unbuilt features as not available, with one line, or leave them out.
+- State a limit only when it changes what the reader can do or should expect: a platform, a version, a model, a prerequisite, a risk to their data. Work the maintainer hasn't done yet, such as tests or benchmarks not yet run, isn't a limit for the reader. It belongs in contributor docs.
 
 ## Step 6: Use evidence, not invented proof
 
