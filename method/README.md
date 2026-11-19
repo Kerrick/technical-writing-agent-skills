@@ -28,6 +28,7 @@ readme-rewrite isn't made by the method, so it has no run. Its iteration-1 evals
 | `method/sources.toml` | The seven sources (eight reading forks, since Rails is split in two): repositories, commits, paths, and every per-source prompt value |
 | `method/sources.md` | Why each source and scope was chosen |
 | `method/scripts/` | Fetching sources, filling prompts, extracting files and every check, in Python |
+| `method/harness/` | Scripts agents wrote to drive headless runs and evals, kept as used |
 | `mise.toml` | Tool versions and tasks: `mise run check`, `mise run fetch`, `mise run prompt` |
 | `method/vendor/agent-skills/` | A pinned copy of the agent-skills skill, which steps 2 and 9 load |
 
@@ -179,6 +180,16 @@ The same mechanics work in OpenAI's Codex CLI (tried with codex-cli 0.170.0):
 - Continue it: `codex exec <options> resume <thread_id> "<prompt>"`. Fork it: `codex exec <options> fork <thread_id> "<prompt>"`. The options go before `resume` or `fork`, which reject them after. A fork recalls everything the session had, and forks don't see each other.
 - Each `turn.completed` event reports `usage`. On a ChatGPT plan, Codex counts usage against the plan's limits rather than billing tokens, so check how much a step uses before running the rest.
 - Models depend on how you sign in: with a ChatGPT account, `gpt-6.2-luna` was refused while `gpt-6-luna`, `gpt-reserve` and `gpt-6.2-sol` worked. `~/.codex/models_cache.json` lists what Codex offers.
+
+## Next experiments
+
+In order, each cheaper than the next, and each deciding whether the next is worth its cost:
+
+1. **Fix rule 4, then rerun only the Sonnet run's merge, check and writer.** Keep a rule the baseline states unless evals show the baseline helps, and feed back the clusters it dropped as redundant. There's no rereading of sources, so it costs a few dollars. If the new skill closes the gap to the default on Sonnet (51% against 80%), the shortfall was the method, not Sonnet's reading.
+2. **Run iterations 2 and 3 of the existing evals,** so the differences rest on three runs per setup.
+3. **Then, if either points that way, a hybrid run:** the target model's baseline, with the strongest model reading, auditing, merging and writing. Forks can't cross models, so the readers would get the baseline's files as given context instead of forking its session. An all-Fable run would likely do worse for Opus and Sonnet: its baseline would state more rules, so rule 4 would drop rules that Fable states and smaller models don't follow.
+
+The GPT-6-Luna trial (`runs/openai-gpt-6-luna-medium/`) found accurate but shallow findings, so a full run on a small model isn't on this list.
 
 ## Releasing
 

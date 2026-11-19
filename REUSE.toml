@@ -106,3 +106,9 @@ path = "skills/skill-authoring/**"
 precedence = "override"
 SPDX-FileCopyrightText = ["2026 Kerrick Long", "Agent Skills project contributors"]
 SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = "runs/openai-gpt-6-luna-medium/pipeline/findings/ember-guides-part1.md"
+precedence = "override"
+SPDX-FileCopyrightText = ["2026 Kerrick Long", "2019 Ember Learning Team"]
+SPDX-License-Identifier = "CC0-1.0 AND MIT"

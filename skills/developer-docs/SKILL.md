@@ -12,7 +12,7 @@ description: >-
 license: CC0-1.0
 metadata:
   author: Kerrick Long
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Developer docs
