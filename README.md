@@ -54,6 +54,10 @@ The skill doesn't cover READMEs; use a README skill alongside it.
 | Trigger evals (`evals/eval_queries.json`) | Not yet run |
 | Real tasks | Planned |
 
+## Help wanted: spend your tokens
+
+Each model needs its own run, and a run takes a dozen or so long sessions. If you have tokens to spare on Fable 5.2, Sonnet 5.5, Astra 6.2, Sol 6.2, Gemini 4 Neon, or anything else, a run on your model is the most useful thing you can contribute. So is running the evals for the first run, which nobody has done yet. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## The method
 
 ### What it needs
