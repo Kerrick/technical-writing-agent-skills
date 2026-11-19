@@ -1,66 +1,259 @@
 # Specification
 
-Read this before writing frontmatter or laying out a skill's files. Adapted from the Agent Skills specification; [NOTICE.md](../NOTICE.md) gives the credit and the changes.
+> The complete format specification for Agent Skills.
 
-## Layout
+## Directory structure
 
-A skill is a directory holding at least a `SKILL.md` file. It may hold any other files. The conventional folders:
+A skill is a directory containing, at minimum, a `SKILL.md` file:
 
-| Folder | Holds |
-| - | - |
-| `scripts/` | Code the agent runs. Self-contained, or with its dependencies documented; helpful error messages; edge cases handled. |
-| `references/` | Documentation the agent reads on demand. Keep each file focused: smaller files cost less context. |
-| `assets/` | Static resources: templates, images, data files such as schemas or lookup tables. |
+```
+skill-name/
+├── SKILL.md          # Required: metadata + instructions
+├── scripts/          # Optional: executable code
+├── references/       # Optional: documentation
+├── assets/           # Optional: templates, resources
+└── ...               # Any additional files or directories
+```
 
-## Frontmatter
+## `SKILL.md` format
 
-`SKILL.md` starts with YAML frontmatter, then Markdown.
+The `SKILL.md` file must contain YAML frontmatter followed by Markdown content.
+
+### Frontmatter
 
 | Field | Required | Constraints |
 | - | - | - |
-| `name` | Yes | 1–64 characters. Lowercase letters, digits, and hyphens. No leading, trailing, or consecutive hyphens. Must match the parent directory's name. |
-| `description` | Yes | 1–1024 characters. Says what the skill does and when to use it, with the keywords that identify its tasks. |
-| `license` | No | A license name, or the name of a bundled license file. Keep it short. |
-| `compatibility` | No | 1–500 characters. Environment requirements: intended product, system packages, network access. Most skills don't need it. |
-| `metadata` | No | A map from string keys to string values, for properties the spec doesn't define. Use key names unlikely to clash. |
-| `allowed-tools` | No | A space-separated string of pre-approved tools, such as `Bash(git:*) Read`. Experimental; support varies by agent. |
+| `name` | Yes | Max 64 characters. Lowercase letters, numbers, and hyphens only. Must not start or end with a hyphen. |
+| `description` | Yes | Max 1024 characters. Non-empty. Describes what the skill does and when to use it. |
+| `license` | No | License name or reference to a bundled license file. |
+| `compatibility` | No | Max 500 characters. Indicates environment requirements (intended product, system packages, network access, etc.). |
+| `metadata` | No | Arbitrary key-value mapping for additional metadata (a map from string keys to string values). |
+| `allowed-tools` | No | Space-separated string of pre-approved tools the skill may use. (Experimental) |
 
-No other top-level fields are allowed.
+**Minimal example:**
 
-```markdown
+```markdown SKILL.md
+---
+name: skill-name
+description: A description of what this skill does and when to use it.
+---
+```
+
+**Example with optional fields:**
+
+```markdown SKILL.md
 ---
 name: pdf-processing
 description: Extract PDF text, fill forms, merge files. Use when handling PDFs.
 license: Apache-2.0
-compatibility: Requires Python 3.11+ and uv
 metadata:
   author: example-org
   version: "1.0"
 ---
 ```
 
-Valid names: `pdf-processing`, `data-analysis`, `code-review`. Invalid: `PDF-Processing` (uppercase), `-pdf` (leading hyphen), `pdf--processing` (consecutive hyphens).
+#### `name` field
 
-A weak description: `Helps with PDFs.` A strong one says what and when: `Extracts text and tables from PDF files, fills PDF forms, and merges multiple PDFs. Use when working with PDF documents or when the user mentions PDFs, forms, or document extraction.`
+The required `name` field:
 
-## Body
+* Must be 1-64 characters
+* May only contain unicode lowercase alphanumeric characters (`a-z`, `0-9`) and hyphens (`-`)
+* Must not start or end with a hyphen (`-`)
+* Must not contain consecutive hyphens (`--`)
+* Must match the parent directory name
 
-The body has no format restrictions. Steps, examples of inputs and outputs, and edge cases are the usual content. The agent loads the whole file when the skill activates.
+**Valid examples:**
+
+```yaml
+name: pdf-processing
+```
+
+```yaml
+name: data-analysis
+```
+
+```yaml
+name: code-review
+```
+
+**Invalid examples:**
+
+```yaml
+name: PDF-Processing  # uppercase not allowed
+```
+
+```yaml
+name: -pdf  # cannot start with hyphen
+```
+
+```yaml
+name: pdf--processing  # consecutive hyphens not allowed
+```
+
+#### `description` field
+
+The required `description` field:
+
+* Must be 1-1024 characters
+* Should describe both what the skill does and when to use it
+* Should include specific keywords that help agents identify relevant tasks
+
+**Good example:**
+
+```yaml
+description: Extracts text and tables from PDF files, fills PDF forms, and merges multiple PDFs. Use when working with PDF documents or when the user mentions PDFs, forms, or document extraction.
+```
+
+**Poor example:**
+
+```yaml
+description: Helps with PDFs.
+```
+
+#### `license` field
+
+The optional `license` field:
+
+* Specifies the license applied to the skill
+* We recommend keeping it short (either the name of a license or the name of a bundled license file)
+
+**Example:**
+
+```yaml
+license: Proprietary. LICENSE.txt has complete terms
+```
+
+#### `compatibility` field
+
+The optional `compatibility` field:
+
+* Must be 1-500 characters if provided
+* Should only be included if your skill has specific environment requirements
+* Can indicate intended product, required system packages, network access needs, etc.
+
+**Examples:**
+
+```yaml
+compatibility: Designed for Claude Code (or similar products)
+```
+
+```yaml
+compatibility: Requires git, docker, jq, and access to the internet
+```
+
+```yaml
+compatibility: Requires Python 3.14+ and uv
+```
+
+> [!NOTE]
+>
+> Most skills do not need the `compatibility` field.
+
+#### `metadata` field
+
+The optional `metadata` field:
+
+* A map from string keys to string values
+* Clients can use this to store additional properties not defined by the Agent Skills spec
+* We recommend making your key names reasonably unique to avoid accidental conflicts
+
+**Example:**
+
+```yaml
+metadata:
+  author: example-org
+  version: "1.0"
+```
+
+#### `allowed-tools` field
+
+The optional `allowed-tools` field:
+
+* A space-separated string of tools that are pre-approved to run
+* Experimental. Support for this field may vary between agent implementations
+
+**Example:**
+
+```yaml
+allowed-tools: Bash(git:*) Bash(jq:*) Read
+```
+
+### Body content
+
+The Markdown body after the frontmatter contains the skill instructions. There are no format restrictions. Write whatever helps agents perform the task effectively.
+
+Recommended sections:
+
+* Step-by-step instructions
+* Examples of inputs and outputs
+* Common edge cases
+
+Note that the agent will load this entire file once it's decided to activate a skill. Consider splitting longer `SKILL.md` content into referenced files.
+
+## Optional directories
+
+A skill directory may contain any files and directories beyond the required `SKILL.md`. The conventions below are recommendations for organizing common types of content.
+
+### `scripts/`
+
+Contains executable code that agents can run. Scripts should:
+
+* Be self-contained or clearly document dependencies
+* Include helpful error messages
+* Handle edge cases gracefully
+
+Supported languages depend on the agent implementation. Common options include Python, Bash, and JavaScript.
+
+### `references/`
+
+Contains additional documentation that agents can read when needed:
+
+* `REFERENCE.md` - Detailed technical reference
+* `FORMS.md` - Form templates or structured data formats
+* Domain-specific files (`finance.md`, `legal.md`, etc.)
+
+Keep individual [reference files](#file-references) focused. Agents load these on demand, so smaller files mean less use of context.
+
+### `assets/`
+
+Contains static resources:
+
+* Templates (document templates, configuration templates)
+* Images (diagrams, examples)
+* Data files (lookup tables, schemas)
 
 ## Progressive disclosure
 
-Agents load a skill in three stages:
+Agents load skills *progressively*, pulling in more detail only as a task calls for it. Skills should be structured to take advantage of this:
 
-1. **Metadata** (about 100 tokens): `name` and `description`, for every installed skill, at startup.
-2. **Instructions** (under 5,000 tokens recommended): the `SKILL.md` body, when the skill activates.
-3. **Resources** (as needed): other files, only when the instructions call for them.
+1. **Metadata** (\~100 tokens): The `name` and `description` fields are loaded at startup for all skills
+2. **Instructions** (\< 5000 tokens recommended): The full `SKILL.md` body is loaded when the skill is activated
+3. **Resources** (as needed): Files (e.g. those in `scripts/`, `references/`, or `assets/`) are loaded only when required
 
-Keep `SKILL.md` under 500 lines, and move detailed material to separate files.
+Keep your main `SKILL.md` under 500 lines. Move detailed reference material to separate files.
 
 ## File references
 
-Refer to the skill's own files by paths relative to the skill root, such as `references/REFERENCE.md` or `scripts/extract.py`. Keep references one level deep from `SKILL.md`; avoid chains of files that point to more files.
+When referencing other files in your skill, use relative paths from the skill root:
+
+```markdown SKILL.md
+See [the reference guide](references/REFERENCE.md) for details.
+
+Run the extraction script:
+scripts/extract.py
+```
+
+Keep file references one level deep from `SKILL.md`. Avoid deeply nested reference chains.
 
 ## Validation
 
-The skill's `scripts/validate.py` checks the frontmatter against these rules with the reference library, `skills-ref`. To run the library directly, use `uvx --from skills-ref@0.1.1 agentskills validate ./my-skill`: the package is `skills-ref`, but its command is `agentskills`.
+Use the [skills-ref](https://github.com/agentskills/agentskills/tree/main/skills-ref) reference library to validate your skills:
+
+```bash
+uvx --from skills-ref@0.1.1 agentskills validate ./my-skill
+```
+
+The PyPI package is named `skills-ref`, but its command is `agentskills`. This skill bundles the same check as `scripts/validate.py`.
+
+This checks that your `SKILL.md` frontmatter is valid and follows all naming conventions.
+
