@@ -139,6 +139,22 @@ The findings files in `runs/*/pipeline/findings/` quote their sources, and each 
 
 Everything from `abstracted-full.md` onward, the skill included, contains no source wording; `method/scripts/leak_check.py` checks the files that matter.
 
+## Variants for other models
+
+`skills/developer-docs/` is the default, made for one model. Every other run's skill stays in its own `runs/<run>/skill/developer-docs/`, and is installed from a clone by path. A run's skill replaces the default only if it beats the default on the default's own model. A skill made for another model is a variant, not a replacement.
+
+## Running it headless
+
+Every step can run without a person at the keyboard, through Claude Code's command line (v2.1.311). These commands were tried for the first time with Claude Sonnet 5.5:
+
+- Start a session with a known ID: `claude -p --model <model> --effort <level> --session-id <uuid> --output-format json "<prompt>" < /dev/null`.
+- Continue it: `claude -p --resume <uuid> ... "<next prompt>"`.
+- Fork it: `claude -p --resume <uuid> --fork-session ... "<prompt>"`. The fork starts from everything the session had, gets its own ID, and leaves the original unchanged. Forks don't see each other.
+- Measure context: each `--output-format json` result reports `usage` (`input_tokens`, `cache_read_input_tokens`, `cache_creation_input_tokens`), in place of `/context`.
+- Give a session only the tools a step needs with `--allowedTools`, keep it to the run's folders with `--add-dir`, and run it from `${WORK}`.
+
+For evals, start every run as a fresh session with `--disallowedTools Skill`, and give the skill by path in the prompt, so no installed skill can join the run.
+
 ## Releasing
 
 Both skills share the repository's version, in each `SKILL.md`'s `metadata.version`.
