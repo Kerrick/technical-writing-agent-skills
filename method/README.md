@@ -138,3 +138,11 @@ The findings files in `runs/*/pipeline/findings/` quote their sources, and each 
 `skills/readme-rewrite/` is licensed under [MIT-0](../LICENSES/MIT-0.txt), as its frontmatter says. `method/vendor/agent-skills/` is licensed under [CC BY 4.0](../LICENSES/CC-BY-4.0.txt). Its references are adapted from the Agent Skills documentation, and its `NOTICE.md` gives the credit and lists the changes.
 
 Everything from `abstracted-full.md` onward, the skill included, contains no source wording; `method/scripts/leak_check.py` checks the files that matter.
+
+## Releasing
+
+Both skills share the repository's version, in each `SKILL.md`'s `metadata.version`.
+
+1. Set every skill's `metadata.version` to the new version, and run `mise run check`.
+2. Build the ZIPs: `mise run release -- <version>`. It refuses if any skill is at another version, and writes one ZIP per skill to `dist/`, which git ignores.
+3. Publish: `gh release create v<version> dist/*.zip --title v<version> --notes-file <notes>`.

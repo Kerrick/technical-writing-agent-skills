@@ -70,6 +70,8 @@ ln -s ~/src/technical-writing-agent-skills/skills/readme-rewrite ~/.claude/skill
 
 On Windows, use `npx skills`, which copies the folders for you.
 
+Each [release](https://github.com/Kerrick/technical-writing-agent-skills/releases) also has a ZIP of each skill, holding its folder, for installing without git or Node.js: unzip it into your agent's skills folder.
+
 ## Usage
 
 Ask your agent for documentation the way you usually would, such as "write a quickstart for this library", "document the CLI flags", or "the README has turned into a changelog, can you clean it up?" Your agent picks a skill by comparing your request with each skill's description. To be sure it uses one, name it: "use readme-rewrite to review README.md".
