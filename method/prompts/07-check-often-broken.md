@@ -5,7 +5,7 @@ A new fork of the baseline point. It may read the findings files and the source 
 It exists because the reading forks judged group 4, "where the source falls short", themselves. They're forks of the baseline's author, so they tend to side with the baseline. This step makes the call on evidence instead.
 
 ```
-Don't change technical-writing. It's the baseline: a record of what you believed before reading anything. Its value depends on it staying exactly as you wrote it.
+Don't change the skill you wrote. It's the baseline: a record of what you believed before reading anything. Its value depends on it staying exactly as you wrote it.
 
 Read ${WORK}/merged.md. In its "Kept" section, every entry whose Kind includes "baseline, often broken" names skill rules that some sources break. Sources are labeled by letter: A react-learn.md, B ember-guides.md, C django-docs.md, D rails-guides-1.md and rails-guides-2.md (one source), E rust-book.md, F mdn-js-guide.md, G postgres-manual.md, all in the same folder. Those files hold the evidence. Each names the source checkout and style guide it compared, and you may open them to check.
 

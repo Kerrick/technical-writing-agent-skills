@@ -1,6 +1,6 @@
 # Run: Claude Opus 5.5, medium effort
 
-The first run of the method, finished 2026-11-18. Its skill is the current default, at [`skills/technical-writing/`](../../skills/technical-writing/). This folder has no `skill/` copy of its own while it's the default.
+The first run of the method, finished 2026-11-18. Its skill is the current default, at [`skills/developer-docs/`](../../skills/developer-docs/). This folder has no `skill/` copy of its own while it's the default.
 
 ## What was used
 
@@ -17,7 +17,7 @@ The first run of the method, finished 2026-11-18. Its skill is the current defau
 | Slot | Value in this run |
 | - | - |
 | `${SRC}` | `~/Developer` |
-| `${WORK}` | `~/Developer/technical-writing-deltas` |
+| `${WORK}` | `~/Developer/developer-docs-deltas` |
 | `${RUN}` | `~/Developer/technical-writing-agent-skill/claude/opus/5.5/medium` (the layout before `runs/`) |
 | `${AGENT_SKILLS}` | `~/.agents/skills/agent-skills` |
 
@@ -42,5 +42,6 @@ Check placement: `uv run method/scripts/check_placement.py runs/claude-opus-5.5-
 - Rails and PostgreSQL each crashed once at the context limit and were redone with narrower or split scopes. See `method/sources.md`.
 - Step 7's checker used the "deliberate" test before it was tightened. It also agreed with a by-hand check on only 9 of 13 entries, and its results were used.
 - Django's reading prompt asked for every page. The sub-agent returned 6.5 MB, and the fork was given the fixed scope now in `method/sources.toml` as its answer.
-- The writer wrote the skill straight into the run folder, and wrote the shared `evals/technical-writing/` as part of step 9.
+- The writer wrote the skill straight into the run folder, and wrote the shared `evals/developer-docs/` as part of step 9.
+- The writer named the skill `technical-writing`, as its prompt said. It was renamed `developer-docs` afterwards, a name that says which documentation it covers. The baseline keeps the name the model gave it.
 - Output evals and trigger evals haven't been run.

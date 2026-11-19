@@ -3,7 +3,7 @@
 A new fork of the baseline point, which must never open the findings files. It needs the baseline in context, because rule 4 asks whether the baseline already states a rule. Once `merged.md` has been updated by [8. Apply the check](08-apply-check.md), it can be ended: the writer is a different, fresh session.
 
 ```
-Don't change technical-writing. It's the baseline: a record of what you believed before reading anything. Its value depends on it staying exactly as you wrote it.
+Don't change the skill you wrote. It's the baseline: a record of what you believed before reading anything. Its value depends on it staying exactly as you wrote it.
 
 Read ${WORK}/abstracted-full.md in full, and read nothing else in that folder. It holds what seven famous documentation sources, labeled A–G, showed about your skill, checked against evidence you won't see. For each source it has four sections: "Rules" (things your skill missed, or corrections to things it states), "Baseline rules broken" (rules your skill states that the source itself breaks), "Confirmed" (skill lines the source backs up), and "On mixing modes" (the source's position on the skill's rule about keeping each page to one kind of documentation). You haven't seen the sources, and you don't need to.
 

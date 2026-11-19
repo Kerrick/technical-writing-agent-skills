@@ -1,6 +1,6 @@
 ---
 name: readme-rewrite
-description: Use when rewriting, substantially editing, restructuring, or reviewing a project README (README.md, README.rdoc, or similar), or writing the first one for a project that has none, including when a README has grown by appending or reads like stock AI prose. Makes the README serve marketing, onboarding, and indexing, with every claim checked against the code. Not for other documentation pages, such as tutorials, guides, or API reference (use technical-writing).
+description: Use when rewriting, substantially editing, restructuring, or reviewing a project README (README.md, README.rdoc, or similar), or writing the first one for a project that has none, including when a README has grown by appending or reads like stock AI prose. Makes the README serve marketing, onboarding, and indexing, with every claim checked against the code. Not for other documentation pages, such as tutorials, guides, or API reference (use developer-docs).
 license: MIT-0
 metadata:
   author: setdef

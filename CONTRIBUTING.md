@@ -15,9 +15,9 @@ Follow [Repeating it](METHOD.md#repeating-it) in METHOD.md. Expect a dozen or so
 A pull request for a run adds one folder, `runs/<provider>-<model>-<version>-<effort>/`, containing:
 
 - `README.md`, like [the first run's](runs/claude-opus-5.5-medium/README.md): model, effort, context window, harness and version, sub-agent model, the value of each slot, and anything you did differently from the method as written.
-- `baseline/technical-writing/`, exactly as the model wrote it.
+- `baseline/<name>/`, the baseline skill exactly as the model wrote and named it.
 - `pipeline/`, with every intermediate file, and `pipeline/findings/` with one file per source.
-- `skill/technical-writing/` and `PLACEMENT.md`.
+- `skill/developer-docs/` and `PLACEMENT.md`.
 - `workspace/`, if you ran the evals.
 
 Before opening it, run:
@@ -33,9 +33,9 @@ For `reuse lint` to pass, add your findings files to `REUSE.toml` the way the fi
 ## Rules that keep runs comparable
 
 - **Same sources, scopes, commits and prompts.** Change only what the slots stand for. If something has to change (a source is gone, a scope won't fit your model's window), say what and why in your run's README.
-- **Same evals.** Don't edit `evals/technical-writing/` as part of a run. Propose eval changes in their own pull request, since they affect every run.
-- **No technical-writing skill installed while you run it**, including this repo's. Install only `method/vendor/agent-skills`.
-- **Don't change the default.** `skills/technical-writing/` changes only when a run's evals beat the current default's, in a pull request of its own.
+- **Same evals.** Don't edit `evals/developer-docs/` as part of a run. Propose eval changes in their own pull request, since they affect every run.
+- **No developer-docs skill or baseline installed while you run it**, including this repo's. Install only `method/vendor/agent-skills`.
+- **Don't change the default.** `skills/developer-docs/` changes only when a run's evals beat the current default's, in a pull request of its own.
 
 ## Other changes
 

@@ -1,5 +1,5 @@
 ---
-name: technical-writing
+name: developer-docs
 description: >-
   Use when planning, drafting, revising, or reviewing developer-facing teaching
   and reference material: tutorials, quickstarts, how-to guides, API and CLI
@@ -17,7 +17,7 @@ metadata:
 
 # Technical writing
 
-These rules add to standard technical-writing practice; they don't restate it. Where a rule here conflicts with advice you would usually follow, follow the rule here.
+These rules add to standard developer-docs practice; they don't restate it. Where a rule here conflicts with advice you would usually follow, follow the rule here.
 
 ## Workflow
 

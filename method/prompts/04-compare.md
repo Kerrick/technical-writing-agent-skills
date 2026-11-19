@@ -5,7 +5,7 @@ The second message to each reading fork, once it has read every page. It writes 
 Don't fill it in by hand: `uv run method/scripts/prompt.py compare --source <key> --src ${SRC} --work ${WORK}` prints it filled in, with the per-source values from [sources.toml](../sources.toml). `${does}`, `${shows}`, `${falls}` and `${confirms}` become the right verb for a singular or plural source name. An empty `${FOCUS}` is dropped. A source's `prefix` goes before the first paragraph, and its `first_paragraph_extra` is added to the end of the first paragraph.
 
 ```
-Don't change technical-writing. It's the baseline: a record of what you believed before reading. Its value depends on it staying exactly as you wrote it.
+Don't change the skill you wrote. It's the baseline: a record of what you believed before reading. Its value depends on it staying exactly as you wrote it.
 
 ${STYLE_GUIDE}
 

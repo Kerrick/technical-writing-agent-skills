@@ -3,7 +3,7 @@
 A new fork of the baseline point. It reads every findings file in full, evidence and quotes included, and writes `abstracted-full.md`, the only thing later clean-room steps see. It must be a different context from the merger and the writer.
 
 ```
-Don't change technical-writing. It's the baseline: a record of what you believed before reading anything. Its value depends on it staying exactly as you wrote it.
+Don't change the skill you wrote. It's the baseline: a record of what you believed before reading anything. Its value depends on it staying exactly as you wrote it.
 
 Read all eight files in ${WORK}/ that compare a documentation source against your skill, in full: react-learn.md, ember-guides.md, django-docs.md, rails-guides-1.md, rails-guides-2.md, rust-book.md, mdn-js-guide.md, postgres-manual.md. Ignore any other file there. Don't open the documentation sources themselves.
 

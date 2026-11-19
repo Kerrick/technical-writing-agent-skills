@@ -4,7 +4,7 @@
 # ///
 """Run every check the repo has, for the default skill and every run.
 
-For every skill in skills/ and each runs/<run>/skill/technical-writing: the
+For every skill in skills/ and each runs/<run>/skill/developer-docs: the
 agent-skills validator. For the skills the method made: the leak check. For each run with a
 PLACEMENT.md: the placement check, and the leak check on the files clean-room
 steps read. Then REUSE compliance for the whole repo.
@@ -52,7 +52,7 @@ def main() -> int:
         results.append(run(f"validate {skill.relative_to(ROOT)}", ["uv", "run", "-q", str(VALIDATE), str(skill)]))
 
     # Skills made by the method must carry no source wording.
-    made = [ROOT / "skills" / "technical-writing", *sorted(ROOT.glob("runs/*/skill/technical-writing"))]
+    made = [ROOT / "skills" / "developer-docs", *sorted(ROOT.glob("runs/*/skill/developer-docs"))]
     for skill in made:
         name = skill.relative_to(ROOT)
         if skill.parent.name == "skill":

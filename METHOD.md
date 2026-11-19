@@ -1,6 +1,6 @@
 # How the skill is made
 
-The technical-writing skill holds only what one model, at one effort level, doesn't already do about documentation. This file explains how such a skill is made, how to make one for another model, and what the first run taught. To install and use the skills, see the [README](README.md).
+The developer-docs skill holds only what one model, at one effort level, doesn't already do about documentation. This file explains how such a skill is made, how to make one for another model, and what the first run taught. To install and use the skills, see the [README](README.md).
 
 ## Status
 
@@ -8,7 +8,7 @@ The technical-writing skill holds only what one model, at one effort level, does
 | - | - |
 | Steps 1–9: baseline, reading, audit, merge, check, writing | Done. The skill passes the agent-skills validator, the leak check and the placement check. |
 | Output evals: new skill against baseline and no skill | Not yet run |
-| Trigger evals (`evals/technical-writing/eval_queries.json`) | Not yet run |
+| Trigger evals (`evals/developer-docs/eval_queries.json`) | Not yet run |
 | Real tasks | Planned |
 
 readme-rewrite isn't made by the method, so it has no run. Its evals, in `evals/readme-rewrite/`, haven't been run yet either.
@@ -17,10 +17,10 @@ readme-rewrite isn't made by the method, so it has no run. Its evals, in `evals/
 
 | Path | What it is |
 | - | - |
-| `skills/technical-writing/` | The default technical-writing skill |
+| `skills/developer-docs/` | The default developer-docs skill |
 | `skills/readme-rewrite/` | The companion README skill. Not made by the method. |
 | `runs/<run>/` | One run of the method for one model and effort level: its baseline, every intermediate file, and (unless it's the default) its own skill. `runs/claude-opus-5.5-medium/` is the first. |
-| `evals/technical-writing/` | The evals every run is tested against: `evals.json`, `eval_queries.json` and their input files |
+| `evals/developer-docs/` | The evals every run is tested against: `evals.json`, `eval_queries.json` and their input files |
 | `evals/readme-rewrite/` | readme-rewrite's evals |
 | `method/prompts/` | Every prompt as the method now stands, with `${SLOTS}`. Each run's README records where that run differed. |
 | `method/sources.toml` | The seven sources: repositories, commits, paths, and every per-source prompt value |
@@ -72,7 +72,7 @@ Each step runs in one of three kinds of context, and what a context may see is t
 | 6 | [Merge](method/prompts/06-merge.md) | New fork | `abstracted-full.md` only | `merged.md` |
 | 7 | [Check "often broken"](method/prompts/07-check-often-broken.md) | New fork | `merged.md`, the findings, the source checkouts | `often-broken-check.md` |
 | 8 | [Apply the check](method/prompts/08-apply-check.md) | Script, then the merge fork | `for-the-writer.md` only | Updated `merged.md`; then `kept.md` by script |
-| 9 | [Write](method/prompts/09-write.md) | **Fresh session** | The agent-skills skill and `kept.md` only | `${RUN}/skill/technical-writing/` and `${RUN}/PLACEMENT.md` |
+| 9 | [Write](method/prompts/09-write.md) | **Fresh session** | The agent-skills skill and `kept.md` only | `${RUN}/skill/developer-docs/` and `${RUN}/PLACEMENT.md` |
 | 10 | [Evaluate](#evaluating) | Fresh sub-agents | One skill each (or none) | Outputs, grades, `benchmark.json` |
 
 The rules that decide what goes into the skill are fixed in advance, in the merge prompt (step 6) and the check prompt (step 7):
@@ -88,18 +88,18 @@ Fixing them in advance means the only judgment calls left are the ones written i
 The skill must carry ideas, not any source's wording, and must not restate the baseline. Two kinds of contamination are kept out:
 
 - **Source wording.** Only steps 3–5 and 7 see the sources or quotes from them. Everything after that reads files made by `method/scripts/` or written under a no-quotes, no-names rule, and `method/scripts/leak_check.py` checks each of them.
-- **The baseline.** The writer (step 9) is a fresh session, not a fork. A fork of the baseline's author would pull the baseline's structure and wording back into a skill meant to leave them out. Its only input, `kept.md`, has the baseline citations and process notes stripped out by `method/scripts/build_kept.py`. No technical-writing skill may be installed while it runs, this repo's included.
+- **The baseline.** The writer (step 9) is a fresh session, not a fork. A fork of the baseline's author would pull the baseline's structure and wording back into a skill meant to leave them out. Its only input, `kept.md`, has the baseline citations and process notes stripped out by `method/scripts/build_kept.py`. Neither the baseline nor any developer-docs skill may be installed while it runs, this repo's included.
 
 ## Evaluating
 
 Not yet run. The plan, following `method/vendor/agent-skills/references/evaluating-skills.md`:
 
-1. For each eval in `evals/technical-writing/evals.json`, run three fresh sub-agents: one told to read and follow the run's skill, one the run's baseline, one with no skill. Each gets its own copy of the eval's input file. Record each run's tokens and duration when it finishes.
+1. For each eval in `evals/developer-docs/evals.json`, run three fresh sub-agents: one told to read and follow the run's skill, one the run's baseline, one with no skill. Each gets its own copy of the eval's input file. Record each run's tokens and duration when it finishes.
 2. One fresh grader per eval sees the three outputs as X, Y and Z, not knowing which is which, plus the assertions. It writes `grading.json` per output with quoted evidence, and a blind comparison.
 3. Aggregate pass rate, tokens and time per setup into `benchmark.json`, also broken down by each rule's Kind in the run's `kept.md`.
 4. Run each setup three times before trusting the differences.
 
-Put the workspace at `${RUN}/workspace/iteration-N/`. Keep `evals/technical-writing/` fixed across runs, or comparisons between models mean nothing. A run's skill replaces the default in `skills/` only if it beats it.
+Put the workspace at `${RUN}/workspace/iteration-N/`. Keep `evals/developer-docs/` fixed across runs, or comparisons between models mean nothing. A run's skill replaces the default in `skills/` only if it beats it.
 
 Real tasks count as evals too. For each, keep the target repo's commit, the brief word for word, the session ID, tokens and time, whether the skill triggered without being named, every correction given, and a separate commit for hand fixes. Then the task can be rerun with a later version of the skill, the baseline, or none.
 
@@ -110,11 +110,11 @@ For another model, effort level or provider:
 1. Clone this repo and run `mise install` (or install uv).
 2. Fetch the sources: `mise run fetch -- <SRC>`. It makes shallow, sparse clones at the pinned commits, and leaves any existing checkout alone.
 3. Make `runs/<provider>-<model>-<version>-<effort>/` and an empty `<WORK>` folder.
-4. Install `method/vendor/agent-skills` as a skill. Uninstall every technical-writing skill.
+4. Install `method/vendor/agent-skills` as a skill. Uninstall every developer-docs skill and any baseline.
 5. Run steps 1–2 on the target model at the target effort (`mise run prompt -- recall`, then `-- baseline`). Measure how much of the context the fork point already uses.
 6. Run steps 3–9, getting each prompt from `mise run prompt`. For each source: `reading`, check the file list it prints a note about, then `after-reading` if the source has one, then `compare`. Move the baseline into `${RUN}/baseline/` before step 9.
 7. Copy `<WORK>`'s files into `${RUN}/pipeline/`, with the findings in `${RUN}/pipeline/findings/`, write `${RUN}/README.md` the way the first run's does, and run `mise run check`.
-8. Evaluate against the same `evals/technical-writing/`, and against the current default.
+8. Evaluate against the same `evals/developer-docs/`, and against the current default.
 
 ## Lessons from the first run
 
