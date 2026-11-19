@@ -69,7 +69,7 @@ Iteration 1, one run per setup, on Claude Sonnet 5.5 at medium effort, graded bl
 | The default skill, made for Opus 5.5 | 57 of 71 (80%) |
 | No skill | 37 of 71 (53%) |
 
-Graders ranked the default first in all five evals. This run's skill holds 33 rules, against the default's 50, and lacks most of the teaching rules the evals check. Sonnet with no skill fails those rules too, so they were real gaps the run should have found. The likely cause is the merge's rule 4, which drops a rule the baseline already states: this run's baseline scored no better than no skill, so Sonnet doesn't do what its baseline says. The evals were written from the first run's rules, which favors the default's coverage, but doesn't explain why Sonnet's own gaps went unfound. Results are in `workspace/iteration-1/`.
+Graders ranked the default first in all five evals. This run's skill holds 33 rules, against the default's 50, and lacks most of the teaching rules the evals check. Sonnet with no skill fails those rules too, so they were real gaps. `pipeline/merged.md` records why each went. Rule 4 dropped two as already stated by the baseline: "show the problem or failure before the remedy", which four sources backed, and "open with the outcome and close with a recap", which two backed. This run's baseline scored no better than no skill, so Sonnet doesn't do what its baseline says. Rule 2 dropped three more because only one source found each: prediction prompts, where to get help, and naming difficulty honestly. The evals were written from the first run's rules, which favors the default's coverage, but doesn't explain why Sonnet's own gaps went unfound. Results are in `workspace/iteration-1/`.
 
 ## How this run differed from the method as written
 
