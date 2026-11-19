@@ -71,6 +71,7 @@ Core rules:
 - Keep caveats in a section for caveats (Compatibility, Limitations). Do not mix them into "Who it is for" or "Alternatives".
 - Write status for users: what works today, on which platforms, what is planned. A version badge replaces "version X is the latest".
 - Do not announce virtue with words like "honest", "frankly", or "to be clear". Say the fact.
+- Before you qualify, shrink, or cut a sentence, name the false or unverified fact it states. If you can't, it isn't an overclaim: leave it as written. A statement of what something is for, or what it does, is not an overclaim.
 - Do not claim what you have not tested. Mark unbuilt features as not available, with one line, or leave them out.
 - State a limit only when it changes what the reader can do or should expect: a platform, a version, a model, a prerequisite, a risk to their data. Work the maintainer hasn't done yet, such as tests or benchmarks not yet run, isn't a limit for the reader. It belongs in contributor docs.
 
