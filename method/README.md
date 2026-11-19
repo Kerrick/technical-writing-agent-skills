@@ -1,6 +1,6 @@
 # How the skill is made
 
-The developer-docs skill holds only what one model, at one effort level, doesn't already do about documentation. This file explains how such a skill is made, how to make one for another model, and what the first run taught. To install and use the skills, see the [README](README.md).
+The developer-docs skill holds only what one model, at one effort level, doesn't already do about documentation. This file explains how such a skill is made, how to make one for another model, and what the first run taught. To install and use the skills, see the [README](../README.md).
 
 ## Status
 
@@ -23,7 +23,7 @@ readme-rewrite isn't made by the method, so it has no run. Its evals, in `evals/
 | `evals/developer-docs/` | The evals every run is tested against: `evals.json`, `eval_queries.json` and their input files |
 | `evals/readme-rewrite/` | readme-rewrite's evals |
 | `method/prompts/` | Every prompt as the method now stands, with `${SLOTS}`. Each run's README records where that run differed. |
-| `method/sources.toml` | The seven sources: repositories, commits, paths, and every per-source prompt value |
+| `method/sources.toml` | The seven sources (eight reading forks, since Rails is split in two): repositories, commits, paths, and every per-source prompt value |
 | `method/sources.md` | Why each source and scope was chosen |
 | `method/scripts/` | Fetching sources, filling prompts, extracting files and every check, in Python |
 | `mise.toml` | Tool versions and tasks: `mise run check`, `mise run fetch`, `mise run prompt` |
@@ -64,15 +64,15 @@ Each step runs in one of three kinds of context, and what a context may see is t
 
 | # | Step | Context | Reads | Writes |
 | - | - | - | - | - |
-| 1 | [Recall](method/prompts/01-recall.md) | New session | Nothing | Nothing |
-| 2 | [Baseline](method/prompts/02-baseline.md) | Same session | The agent-skills skill | The baseline skill. **The fork point.** |
-| 3 | [Reading order](method/prompts/03-reading-order.md) | One fork per source | A sub-agent's file list, then the pages | Nothing |
-| 4 | [Compare](method/prompts/04-compare.md) | Same fork | The source's style guide | `${WORK}/<source>.md` |
-| 5 | [Audit](method/prompts/05-audit.md) | New fork | All findings files, with quotes | `abstracted-full.md`: anonymized, no quotes |
-| 6 | [Merge](method/prompts/06-merge.md) | New fork | `abstracted-full.md` only | `merged.md` |
-| 7 | [Check "often broken"](method/prompts/07-check-often-broken.md) | New fork | `merged.md`, the findings, the source checkouts | `often-broken-check.md` |
-| 8 | [Apply the check](method/prompts/08-apply-check.md) | Script, then the merge fork | `for-the-writer.md` only | Updated `merged.md`; then `kept.md` by script |
-| 9 | [Write](method/prompts/09-write.md) | **Fresh session** | The agent-skills skill and `kept.md` only | `${RUN}/skill/developer-docs/` and `${RUN}/PLACEMENT.md` |
+| 1 | [Recall](prompts/01-recall.md) | New session | Nothing | Nothing |
+| 2 | [Baseline](prompts/02-baseline.md) | Same session | The agent-skills skill | The baseline skill. **The fork point.** |
+| 3 | [Reading order](prompts/03-reading-order.md) | One fork per source | A sub-agent's file list, then the pages | Nothing |
+| 4 | [Compare](prompts/04-compare.md) | Same fork | The source's style guide | `${WORK}/<source>.md` |
+| 5 | [Audit](prompts/05-audit.md) | New fork | All findings files, with quotes | `abstracted-full.md`: anonymized, no quotes |
+| 6 | [Merge](prompts/06-merge.md) | New fork | `abstracted-full.md` only | `merged.md` |
+| 7 | [Check "often broken"](prompts/07-check-often-broken.md) | New fork | `merged.md`, the findings, the source checkouts | `often-broken-check.md` |
+| 8 | [Apply the check](prompts/08-apply-check.md) | Script, then the merge fork | `for-the-writer.md` only | Updated `merged.md`; then `kept.md` by script |
+| 9 | [Write](prompts/09-write.md) | **Fresh session** | The agent-skills skill and `kept.md` only | `${RUN}/skill/developer-docs/` and `${RUN}/PLACEMENT.md` |
 | 10 | [Evaluate](#evaluating) | Fresh sub-agents | One skill each (or none) | Outputs, grades, `benchmark.json` |
 
 The rules that decide what goes into the skill are fixed in advance, in the merge prompt (step 6) and the check prompt (step 7):
@@ -122,7 +122,7 @@ For another model, effort level or provider:
 - **Never compact a reading fork.** The comparison needs exact wording. If one runs out of room, rewind it to the reading-order message, narrow the scope, and fork that point again.
 - **Check each findings file before ending its fork.** Run the leak check on its Abstracted section and verify two claims against the source. A fork can still fix a weak claim; once it's gone, nothing can.
 - **Ask every source about mixing modes.** The baseline's "one kind of documentation per page" rule was the one real conflict. The template now asks every source for its position.
-- **A reader judging the baseline sides with it.** Readers are forks of the baseline's author, so their "where the source falls short" group leans toward the baseline. Step 7 re-decides those items on evidence, and its "deliberate" test now requires a count and a contradiction of the rule ([why](method/prompts/07-check-often-broken.md#changes-since-the-first-run)).
+- **A reader judging the baseline sides with it.** Readers are forks of the baseline's author, so their "where the source falls short" group leans toward the baseline. Step 7 re-decides those items on evidence, and its "deliberate" test now requires a count and a contradiction of the rule ([why](prompts/07-check-often-broken.md#changes-since-the-first-run)).
 - **Silence isn't a choice.** A style guide that doesn't forbid something hasn't endorsed it. Only templates, style guides, or a pattern on nearly every page of a kind count as deliberate.
 - **The writer must not be the author.** The baseline's author is the best judge of what's redundant, and that judgment belongs in the merge. Writing belongs to a session that has never seen the baseline.
 - **Keep ad-hoc judgment out.** In the first run, a by-hand check of the "often broken" entries agreed with the checker fork on only 9 of 13, and the checker had the better evidence each time. Checks done outside a fixed prompt aren't repeatable for the next model, so every check is a prompt or a script.
@@ -131,10 +131,10 @@ For another model, effort level or provider:
 
 The repo follows the [REUSE specification](https://reuse.software/): `REUSE.toml` gives each file's copyright and license, and `LICENSES/` holds every license text. Check it with `mise run check`, which runs `uvx reuse@6.2.0 lint` along with the other checks.
 
-Everything is dedicated to the public domain under [CC0 1.0](LICENSES/CC0-1.0.txt), except the files described below. Agents wrote most of the text and code, so how much copyright exists in it is unclear; CC0 waives whatever does.
+Everything is dedicated to the public domain under [CC0 1.0](../LICENSES/CC0-1.0.txt), except the files described below. Agents wrote most of the text and code, so how much copyright exists in it is unclear; CC0 waives whatever does.
 
 The findings files in `runs/*/pipeline/findings/` quote their sources, and each opens with a notice naming its source, copyright holder and license. The quotes are short and used to compare and criticize. React (CC BY 4.0), Ember (MIT), Django (BSD 3-Clause), Rust (MIT or Apache-2.0) and PostgreSQL (PostgreSQL License) are permissive. Rails (CC BY-SA 4.0) and MDN (CC BY-SA 2.5) are share-alike, so the three files that quote them are licensed under those licenses. That applies per file, not to the rest of the repo.
 
-`skills/readme-rewrite/` is licensed under [MIT-0](LICENSES/MIT-0.txt), as its frontmatter says. `method/vendor/agent-skills/` is licensed under [CC BY 4.0](LICENSES/CC-BY-4.0.txt). Its references are adapted from the Agent Skills documentation, and its `NOTICE.md` gives the credit and lists the changes.
+`skills/readme-rewrite/` is licensed under [MIT-0](../LICENSES/MIT-0.txt), as its frontmatter says. `method/vendor/agent-skills/` is licensed under [CC BY 4.0](../LICENSES/CC-BY-4.0.txt). Its references are adapted from the Agent Skills documentation, and its `NOTICE.md` gives the credit and lists the changes.
 
 Everything from `abstracted-full.md` onward, the skill included, contains no source wording; `method/scripts/leak_check.py` checks the files that matter.

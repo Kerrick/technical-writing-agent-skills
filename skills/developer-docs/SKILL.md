@@ -15,7 +15,7 @@ metadata:
   version: "0.1"
 ---
 
-# Technical writing
+# Developer docs
 
 These rules add to standard developer-docs practice; they don't restate it. Where a rule here conflicts with advice you would usually follow, follow the rule here.
 

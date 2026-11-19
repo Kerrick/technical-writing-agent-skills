@@ -4,20 +4,20 @@ The skill in this repo was made for one model at one effort level. Every other m
 
 ## Most wanted
 
-1. **Eval results for the existing run.** `runs/claude-opus-5.5-medium/` has never been evaluated, so nobody knows yet whether the method beats its own baseline. This is the single most useful contribution. See [Evaluating](METHOD.md#evaluating).
+1. **Eval results for the existing run.** `runs/claude-opus-5.5-medium/` has never been evaluated, so nobody knows yet whether the method beats its own baseline. This is the single most useful contribution. See [Evaluating](method/README.md#evaluating).
 2. **A run on another model.** Any model, any effort level, any provider. Wanted especially: Fable 5.2, Sonnet 5.5, Astra 6.2, Sol 6.2, Gemini 4 Neon.
-3. **Real-task results.** You used the skill to document a real project; tell us what happened, recorded as [Evaluating](METHOD.md#evaluating) describes for real tasks.
+3. **Real-task results.** You used the skill to document a real project; tell us what happened, recorded as [Evaluating](method/README.md#evaluating) describes for real tasks.
 
 ## Contributing a run
 
-Follow [Repeating it](METHOD.md#repeating-it) in METHOD.md. Expect a dozen or so long sessions; most of the cost is the reading forks, one per source, each of which reads up to about half its context window of documentation.
+Follow [Repeating it](method/README.md#repeating-it) in method/README.md. Expect a dozen or so long sessions; most of the cost is the reading forks, one per source, each of which reads up to about half its context window of documentation.
 
 A pull request for a run adds one folder, `runs/<provider>-<model>-<version>-<effort>/`, containing:
 
 - `README.md`, like [the first run's](runs/claude-opus-5.5-medium/README.md): model, effort, context window, harness and version, sub-agent model, the value of each slot, and anything you did differently from the method as written.
 - `baseline/<name>/`, the baseline skill exactly as the model wrote and named it.
 - `pipeline/`, with every intermediate file, and `pipeline/findings/` with one file per source.
-- `skill/developer-docs/` and `PLACEMENT.md`.
+- `skill/developer-docs/` and `PLACEMENT.md`. (The first run has no `skill/` folder only because its skill is the current default, in `skills/developer-docs/`.)
 - `workspace/`, if you ran the evals.
 
 Before opening it, run:

@@ -31,10 +31,12 @@ Structure
 - [ ] Are caveats in the caveats section, not mixed into "who it is for"?
 - [ ] Is status short and about users, with a badge instead of a version sentence?
 - [ ] Is Contributing a pointer to CONTRIBUTING?
+- [ ] Did everything you took out of the README, other than what you confirmed is false, land somewhere the repository already uses or beside what it describes, with a link from the README?
 - [ ] Is the license section clear to someone who will build work with the project?
 - [ ] Does the AI disclosure follow the house pattern?
 
 Process
-- [ ] Did you read the old README fully (edit mode) or deliberately not (whole-cloth mode)?
+- [ ] Did you keep to your mode: no reading the old README in any form before the draft was done (draft blind, from scratch), or reading every README-like file in full first (edit mode)?
+- [ ] In draft blind, then reconcile: did you check everything the old README said that the draft didn't, and keep what passed?
 - [ ] Did you edit the file at its real path, so the maintainer can review it where they look?
 - [ ] If you used a helper, did you do the rewrite yourself with this skill in hand? Don't hand README writing to a weaker model without it. If a helper must draft, give it this skill and the audience, and review the result against this checklist.

@@ -1,10 +1,10 @@
 ---
 name: readme-rewrite
-description: Use when rewriting, substantially editing, restructuring, or reviewing a project README (README.md, README.rdoc, or similar), or writing the first one for a project that has none, including when a README has grown by appending or reads like stock AI prose. Makes the README serve marketing, onboarding, and indexing, with every claim checked against the code. Not for other documentation pages, such as tutorials, guides, or API reference (use developer-docs).
+description: Use when rewriting, substantially editing, restructuring, or reviewing a project README (README.md, README.rdoc, or similar), rewriting one from scratch, or writing the first one for a project that has none, including when a README has grown by appending or reads like stock AI prose. Makes the README serve marketing, onboarding, and indexing, with every claim checked against the code. Not for other documentation pages, such as tutorials, guides, or API reference (use developer-docs).
 license: MIT-0
 metadata:
   author: setdef
-  version: "1.2"
+  version: "1.4"
 ---
 
 # Rewrite a README
@@ -13,10 +13,17 @@ A README grows bad by appending. Each session adds a paragraph, none reads the w
 
 ## Step 0: Choose the mode
 
-- **Edit mode (default).** Read every README-like file in full before changing anything: README.md, README.rdoc, README.txt, and any sibling that describes the project. Do not search for the paragraph to change and patch it. Read first, then rewrite so the whole file stays coherent.
-- **Whole-cloth mode.** If the project has no README, or the maintainer says to start fresh, do not read the old README. Its structure and phrasing will pull your draft toward it. Write only from the code (step 1).
+- **Draft blind, then reconcile (default).**
+  1. Draft from the code alone (steps 1 to 9), without reading the old README in any form: not the file, not `git show`, `git log -p` or `git diff` on it, not a search whose output prints its lines, not its rendered page. Its structure and phrasing would pull your draft toward it. Write the draft to a new file, so you never have to open the old one to replace it.
+  2. When the draft has passed step 9, read the old README in full, as a checklist rather than a model. For each thing it says that the draft doesn't, check it against the code and ask whether the reader needs it. Add what passes, in the draft's structure. Keep wording the maintainer chose on purpose, such as an existing disclosure. Then move the draft over the old file.
+- **From-scratch mode.** If the project has no README, or the maintainer wants a fresh start ("rewrite it from scratch", "start over", "throw out the old one"), do part 1 only, and never read the old README.
+- **Edit mode.** For a review, or a narrow change the maintainer asked for ("fix the install section"), read every README-like file in full first: README.md, README.rdoc, README.txt, and any sibling that describes the project. Do not search for the paragraph to change and patch it. Change what was asked, so the whole file stays coherent.
 
 If you are about to append a paragraph to a README you have not read in full, stop.
+
+In the first two modes, anything in the repository besides the code's behavior may echo the old README: other docs, package metadata, docstrings, comments, CLI help text. Use it only to find what to check. Take nothing from it as fact, structure, or wording.
+
+Where this skill says to ask the maintainer and no one can answer (you're running unattended), don't guess. Write your best draft from the evidence, mark each open point `[TO CONFIRM: ...]` in it, and list the questions when you report.
 
 ## Step 1: Ground every claim in the code
 
@@ -70,9 +77,19 @@ Core rules:
 
 Use what exists: CI badges, test counts you ran, release downloads, real projects that use it (only if you can verify), benchmarks you ran. No made-up testimonials, user counts, or logos. If there is no social proof yet, show the CI matrix and a working example instead.
 
-## Step 7: Keep contributor material out
+## Step 7: Keep contributor material out, without losing it
 
-Build instructions for the project itself, test commands, architecture decision records, release procedure, internal CI details, and design history go in CONTRIBUTING and developer docs. The README's Contributing section is a pointer: one or two sentences and a link. Do not cite internal records (ADR numbers, plan files) in a user-facing README. Cite them only where readers need them, and link instead.
+Build instructions for the project itself, test commands, architecture decision records, release procedure, internal CI details, and design history don't belong in the README. The README's Contributing section is a pointer: one or two sentences and a link. Do not cite internal records (ADR numbers, plan files) in a user-facing README.
+
+Move that material; don't delete it. Remove only what you've confirmed against the code is false or obsolete, and report each removal. To choose where each piece goes, take the first of these that fits:
+
+1. Where the repository already keeps that kind of material: an existing CONTRIBUTING, docs folder, changelog, ADR folder, or wiki.
+2. Beside what it describes: a folder's own README for material about that folder, or the docstrings and `--help` text for detail about an API or CLI.
+3. `CONTRIBUTING.md`, for how to contribute: setup, tests, and releases.
+4. The ecosystem's documentation location, only if the project's tooling uses it (for example, Sphinx's `docs/`, or RDoc's and YARD's `doc/`).
+5. Otherwise, ask the maintainer, or propose a location marked `[TO CONFIRM]`.
+
+Don't invent a new location, and don't copy one from another project because it worked there. Link each moved piece from the README's Documentation section, and say in your report what moved where.
 
 ## Step 8: Disclose AI involvement as a fact
 
