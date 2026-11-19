@@ -169,6 +169,15 @@ What the first eval run learned about headless sessions:
 - The eval prompts don't say where to save output. Add one sentence to every run's prompt, the same for every setup: "Save what you write as Markdown files in the outputs/ folder of the current directory."
 - Take each run's tokens and time from the JSON result's `duration_ms` and `modelUsage`.
 
+## Running it with Codex
+
+The same mechanics work in OpenAI's Codex CLI (tried with codex-cli 0.170.0):
+
+- Start a session: `codex exec --json -m <model> -c model_reasoning_effort=<level> -s <sandbox> --skip-git-repo-check "<prompt>" < /dev/null`. The first JSON event's `thread_id` is the session's ID.
+- Continue it: `codex exec <options> resume <thread_id> "<prompt>"`. Fork it: `codex exec <options> fork <thread_id> "<prompt>"`. The options go before `resume` or `fork`, which reject them after. A fork recalls everything the session had, and forks don't see each other.
+- Each `turn.completed` event reports `usage`. On a ChatGPT plan, Codex counts usage against the plan's limits rather than billing tokens, so check how much a step uses before running the rest.
+- Models depend on how you sign in: with a ChatGPT account, `gpt-6.2-luna` was refused while `gpt-6-luna`, `gpt-reserve` and `gpt-6.2-sol` worked. `~/.codex/models_cache.json` lists what Codex offers.
+
 ## Releasing
 
 Both skills share the repository's version, in each `SKILL.md`'s `metadata.version`.
