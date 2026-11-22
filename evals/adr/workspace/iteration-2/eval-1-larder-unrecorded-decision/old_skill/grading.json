@@ -1,0 +1,77 @@
+{
+  "assertion_results": [
+    {
+      "text": "[Workflow step 2: Follow the log that exists] Exactly one new file is added under docs/decisions/, named with a four-digit number and a dashed title, with the same front-matter fields (status, date, deciders) and section headings as the two existing records.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json adds one file under docs/decisions/: '0010-devices-share-the-database-file-through-the-users-own-sync-service.md'. The other added file is under docs/research/. Front matter has status/date/deciders plus an extra 'consulted: Jun Akiyama'. Headings: Context and Problem Statement, Decision Drivers, Considered Options, Decision Outcome, ### Consequences, ### Confirmation, plus '## More Information'."
+    },
+    {
+      "text": "[Workflow step 3: Take the next number] The new record is numbered 0010, because docs/research/2026-06-12-barcode-lookup.md names a deleted former ADR 0009. It is not 0007 or 0009.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Filename starts with 0010. response.md: 'The highest I found is the deleted 0009, so I used 0010.'"
+    },
+    {
+      "text": "[When the record is thin: no alternative weighed] The record says plainly that no alternative was weighed when the decision was made.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Only option 1 was considered when the decision was made.' and 'neither was discussed'."
+    },
+    {
+      "text": "[When the record is thin: later research] Every alternative the record describes (such as a hosted sync server) is labelled as found or researched after the decision, with a date, and is not given as a reason the decision was made.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Options 2 and 3 come from later research ([docs/research/2026-11-22-device-sync-options.md]...), and were not weighed against it.' The dated research note says 'Written for ADR 0010, eight months after the decision... nothing here was a reason for that decision.'"
+    },
+    {
+      "text": "[When the record is thin: record only the reasons it had] The record attributes to Mira Okafor no reason beyond what notes/2026-03-sync.md records (people asked to use larder on two computers; the file is the whole pantry). It doesn't say she chose it for cost, privacy, or simplicity.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'The only reason recorded is that the file is the whole pantry... No reason was recorded for preferring it to a sync server or to merging.' The drivers ('must see one pantry', 'had to ship in 0.4') come from the notes ('We ship that in 0.4'). The no-server and no-user-data points sit under Consequences, not reasons."
+    },
+    {
+      "text": "[Workflow step 5: Confidence] A Confidence statement is present, and it doesn't claim that the chosen approach is better than the alternatives.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Confidence: high that a pantry kept in a synced folder shows up on every device...; Low that this is the best option, since no comparison was made.' Also 'This record does not claim that option 1 is better than either.'"
+    },
+    {
+      "text": "[Workflow step 5: Consequences] The consequences include that two devices writing before a sync leave a conflict copy, which larder doesn't merge, so the user must pick one file and can lose entries.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'When two devices write before syncing, the service keeps both... larder stops on start when it finds a conflict copy... It doesn't merge them, so the changes in the copy the user deletes are lost.'"
+    },
+    {
+      "text": "[Workflow step 5: Confirmation] The Confirmation section names tests/test_sync.py or the start-up check in src/larder/sync.py, and claims nothing those don't check (they detect conflict copies; they don't test syncing).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'tests/test_sync.py checks that a Dropbox conflict copy is found and that other .db files are ignored. No test covers the iCloud or Syncthing names, or checks that larder runs this check on start.' It claims nothing beyond detection."
+    },
+    {
+      "text": "[When the record is thin: deciders] The deciders field names Mira Okafor, and doesn't present Jun Akiyama as having chosen the approach.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'deciders: Mira Okafor (maintainer)', 'consulted: Jun Akiyama'. Jun isn't presented as having chosen the approach."
+    },
+    {
+      "text": "[Workflow step 5: one decision in about a page] The new record is 80 lines or fewer and doesn't restate how conflict detection works beyond a pointer to docs/design/storage.md or src/larder/sync.py.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "wc -l gives 50 lines. Mechanism is a pointer: 'How larder finds the file and checks it on start is in [docs/design/storage.md]'. Consequences say only 'larder recognises three naming patterns' without listing them."
+    },
+    {
+      "text": "[Style: no placeholders] No file the agent wrote or changed contains TODO, TBD, a bracketed placeholder, or a question to the maintainer.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Same grep over outputs/X/files: no TODO, TBD or placeholder brackets. The only '?' is the problem statement ('How does a household see the same pantry on more than one device?')."
+    }
+  ],
+  "summary": {
+    "passed": 11,
+    "failed": 0,
+    "total": 11,
+    "pass_rate": 1.0
+  },
+  "blind_label": "X"
+}

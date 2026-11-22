@@ -1,0 +1,28 @@
+{
+  "total_tokens": 301951,
+  "output_tokens": 8062,
+  "duration_ms": 78532,
+  "wall_ms": 78971,
+  "num_turns": 10,
+  "total_cost_usd": 0.43524159999999995,
+  "session_id": "5cd25122-a9c7-4e07-8084-a47134d28983",
+  "is_error": false,
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 16,
+      "outputTokens": 8062,
+      "cacheReadInputTokens": 266288,
+      "cacheCreationInputTokens": 27585,
+      "webSearchRequests": 0,
+      "costUSD": 0.43524159999999995,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2768,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 27585,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

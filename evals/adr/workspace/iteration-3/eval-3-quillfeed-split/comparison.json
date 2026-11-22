@@ -1,0 +1,35 @@
+{
+  "scores": {
+    "W": {
+      "accuracy": 9,
+      "restraint": 9,
+      "usefulness": 9,
+      "concision": 9,
+      "overall": 9,
+      "notes": "Clean split; ADR keeps decision verbatim; design doc is a present-tense spec with no history. Correctly caught that Confirmation misdescribed tests/test_store.py and fixed it. Clear section map and flags its own undo-able choices. Minor: reply says ADR is 44 lines, wc -l gives 42; dropping the level-9 rationale entirely loses a small 'why'."
+    },
+    "X": {
+      "accuracy": 7,
+      "restraint": 6,
+      "usefulness": 7,
+      "concision": 6,
+      "overall": 6,
+      "notes": "Good ADR (motivating incident moved into Context is reasonable). But the design doc carries spike-run IDs, a '15 April' anecdote and a removed-migration section, i.e. history in a how-it-is doc; longest design doc (72 lines). Left the false Confirmation claim untouched. Reply lacks a compact map."
+    },
+    "Y": {
+      "accuracy": 8,
+      "restraint": 7,
+      "usefulness": 8,
+      "concision": 8,
+      "overall": 7,
+      "notes": "Design doc is clean and keeps level-9 rationale as present fact. Fixed false Confirmation. But reintroduced History into the ADR as 'More Information' with compression-level tuning numbers, which is detailed design. Thorough section map and useful side findings."
+    }
+  },
+  "ranking": [
+    "W",
+    "Y",
+    "X"
+  ],
+  "reasoning": "W does the split most faithfully: ADR only the decision, design doc pure spec, citations and index right, accurate correction of Confirmation verified against the test file. Y is close but keeps History content in the ADR. X leaves history (spike IDs, migration) in the design doc and misses the incorrect Confirmation.",
+  "assertion_notes": "Assertion 1 is judgement-dependent when history content is folded into other sections: X put the BLOB-stall incident into Context (graded pass as decision motivation), Y kept a renamed History as 'More Information' (graded fail). Assertion 9's title-match passes trivially since the index already had the target wording. Assertion 3 doesn't cover Confirmation rewrites, which W and Y both made (correctly)."
+}

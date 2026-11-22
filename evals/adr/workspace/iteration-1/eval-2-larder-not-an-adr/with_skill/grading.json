@@ -1,0 +1,41 @@
+{
+  "assertion_results": [
+    {
+      "text": "[Workflow step 1: Test the decision] No file is added under docs/decisions/, and neither existing ADR is changed.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json: \"added\": [], \"deleted\": [], \"modified\" only [\"evals/adr/files/larder/docs/design/cli-output.md\"]. No file under docs/decisions/ added; 0002 and 0006 untouched."
+    },
+    {
+      "text": "[Workflow step 1: record it in the design document for its subject] docs/design/cli-output.md now states both rules: output goes through say() in src/larder/ui.py, not bare print(), and units are printed abbreviated.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "diff vs input docs/design/cli-output.md: added \"Everything larder prints goes through `say()` in `src/larder/ui.py`. No other module calls `print()`.\" and under Units \"larder always prints a unit by its abbreviation (`mg`, `g`, `kg`, `ml`, `l`), never spelled out: `250 ml`, not `250 millilitres`.\" Both rules stated."
+    },
+    {
+      "text": "[Workflow step 1: say why it didn't pass] The reply tells the user that no ADR was written and why: the rules are conventions or detailed design, resolve no architecturally significant requirement, or would cost little to undo.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "response.md: \"I didn't write an ADR.\" and \"a decision only gets a record if it settles a requirement that shapes the system's structure and would be expensive to undo... Changing either later means editing some strings and calls, not rewriting a layer\". Says no ADR and why (convention, cheap to undo)."
+    },
+    {
+      "text": "[Style: state facts as they are now] The text added to the design document states the rules as how output works, without narrating that they were agreed on Friday or how the team got there.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Added text is present-tense fact (\"Everything larder prints goes through `say()`\", \"larder always prints a unit by its abbreviation\"). grep -rniE \"TODO|TBD|\\[[^]]*\\]|\\?|friday|agreed\" on outputs/W/files: no output \u2014 no mention of Friday or agreement."
+    },
+    {
+      "text": "[Style: no placeholders] No file the agent wrote or changed contains TODO, TBD, a bracketed placeholder, or a question to the maintainer.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "grep -rniE \"TODO|TBD|\\[[^]]*\\]|\\?|friday|agreed\" outputs/W/files returned nothing: no TODO, TBD, bracketed placeholder or question in the changed file."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "blind_label": "W"
+}

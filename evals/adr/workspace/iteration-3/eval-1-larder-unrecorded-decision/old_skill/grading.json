@@ -1,0 +1,77 @@
+{
+  "assertion_results": [
+    {
+      "text": "[Workflow step 2: Follow the log that exists] Exactly one new file is added under docs/decisions/, named with a four-digit number and a dashed title, with the same front-matter fields (status, date, deciders) and section headings as the two existing records.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json adds exactly one file under docs/decisions/: '0010-devices-share-the-database-file-through-the-users-own-sync-service.md' (the other added file is in docs/research/). Front matter has status/date/deciders (plus an extra 'consulted: Jun Akiyama'); headings: Context and Problem Statement, Decision Drivers, Considered Options, Decision Outcome, ### Consequences, ### Confirmation, all matching 0002/0006, plus an added '## More Information'. All the required fields and headings are present. The extras are standard optional MADR parts, and X and Y add More Information too."
+    },
+    {
+      "text": "[Workflow step 3: Take the next number] The new record is numbered 0010, because docs/research/2026-06-12-barcode-lookup.md names a deleted former ADR 0009. It is not 0007 or 0009.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Filename begins '0010-'. Response: 'The highest I found is the deleted 0009, so I used 0010.'"
+    },
+    {
+      "text": "[When the record is thin: no alternative weighed] The record says plainly that no alternative was weighed when the decision was made.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Considered Options: 'Only option 1 was considered when the decision was made.' Outcome: 'neither was discussed.'"
+    },
+    {
+      "text": "[When the record is thin: later research] Every alternative the record describes (such as a hosted sync server) is labelled as found or researched after the decision, with a date, and is not given as a reason the decision was made.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Options 2 and 3 come from later research ([docs/research/2026-11-22-device-sync-options.md]), and were not weighed against it.' The research note is headed '(2026-11-22)': 'Written for ADR 0010, eight months after the decision ... nothing here was a reason for that decision.' The alternatives aren't given as reasons."
+    },
+    {
+      "text": "[When the record is thin: record only the reasons it had] The record attributes to Mira Okafor no reason beyond what notes/2026-03-sync.md records (people asked to use larder on two computers; the file is the whole pantry). It doesn't say she chose it for cost, privacy, or simplicity.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Outcome: 'The only reason recorded is that the file is the whole pantry ... No reason was recorded for preferring it to a sync server or to merging.' Drivers are the users' request and 'had to ship in 0.4' (the notes say 'We ship that in 0.4'). The record never says Mira chose it for cost, privacy or simplicity. The 'maintainers run no service' line sits under Consequences, not reasons."
+    },
+    {
+      "text": "[Workflow step 5: Confidence] A Confidence statement is present, and it doesn't claim that the chosen approach is better than the alternatives.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Confidence: high that a pantry kept in a synced folder shows up on every device ... Low that this is the best option, since no comparison was made.' Also: 'This record does not claim that option 1 is better than either.'"
+    },
+    {
+      "text": "[Workflow step 5: Consequences] The consequences include that two devices writing before a sync leave a conflict copy, which larder doesn't merge, so the user must pick one file and can lose entries.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'When two devices write before syncing, the service keeps both ... larder stops on start when it finds a conflict copy ... It doesn't merge them, so the changes in the copy the user deletes are lost.'"
+    },
+    {
+      "text": "[Workflow step 5: Confirmation] The Confirmation section names tests/test_sync.py or the start-up check in src/larder/sync.py, and claims nothing those don't check (they detect conflict copies; they don't test syncing).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Confirmation: '`tests/test_sync.py` checks that a Dropbox conflict copy is found and that other `.db` files are ignored. No test covers the iCloud or Syncthing names, or checks that larder runs this check on start.' This is accurate, and it makes no claim to test syncing."
+    },
+    {
+      "text": "[When the record is thin: deciders] The deciders field names Mira Okafor, and doesn't present Jun Akiyama as having chosen the approach.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'deciders: Mira Okafor (maintainer)'. Jun is listed only as 'consulted: Jun Akiyama', not as having chosen the approach."
+    },
+    {
+      "text": "[Workflow step 5: one decision in about a page] The new record is 80 lines or fewer and doesn't restate how conflict detection works beyond a pointer to docs/design/storage.md or src/larder/sync.py.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "wc -l: 50 lines. The Outcome points to docs/design/storage.md for how larder checks the file. Consequences mention 'larder recognises three naming patterns' as a cost but don't list the markers or describe the mechanism."
+    },
+    {
+      "text": "[Style: no placeholders] No file the agent wrote or changed contains TODO, TBD, a bracketed placeholder, or a question to the maintainer.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "grep -rnE 'TODO|TBD|\\[[A-Za-z _-]+\\]([^(]|$)|\\?' over outputs/W/files matched only line 12, the template's problem-statement question. No TODO, TBD, placeholders or questions to the maintainer in either file."
+    }
+  ],
+  "summary": {
+    "passed": 11,
+    "failed": 0,
+    "total": 11,
+    "pass_rate": 1.0
+  },
+  "blind_label": "W"
+}

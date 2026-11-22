@@ -55,8 +55,8 @@ For `reuse lint` to pass, add your findings files to `REUSE.toml` the way the fi
 
 ## Other changes
 
-Fixes to the method, the scripts, the docs or readme-rewrite are welcome as ordinary pull requests. readme-rewrite isn't made by the method, so it changes the ordinary way. A change to a prompt changes what the next run does, so explain what went wrong with the old wording.
+Fixes to the method, the scripts, the docs, or any skill but developer-docs are welcome as ordinary pull requests. Only developer-docs is made by the method; every other skill changes the ordinary way. A change to a prompt changes what the next run does, so explain what went wrong with the old wording.
 
 ## License
 
-By contributing, you dedicate your contribution to the public domain under [CC0 1.0](LICENSES/CC0-1.0.txt), like the rest of the repo. Quoted source material in findings files keeps its source's license, as [Licensing](README.md#license) describes.
+By contributing, you offer your contribution under the license of each file it changes or adds to, as [`REUSE.toml`](REUSE.toml) gives it. For most of the repo, that dedicates it to the public domain under [CC0 1.0](LICENSES/CC0-1.0.txt). Quoted source material in findings files keeps its source's license, as [Licensing](README.md#license) describes.

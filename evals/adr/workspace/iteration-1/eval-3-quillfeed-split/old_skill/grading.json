@@ -1,0 +1,71 @@
+{
+  "assertion_results": [
+    {
+      "text": "[Splitting step 3: keep the ADR for the decision that passes] doc/adr/003.md still exists under that number, holds only the decision to keep article bodies as compressed files on disk indexed in SQLite, and no longer contains the table layout, file naming, retention, cleanup schedule, or history sections.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "doc/adr/003.md exists (changes.json lists it as modified, not deleted). Its headings are Context, Decision Drivers, Considered Options, Decision Outcome, Consequences, Confirmation, More Information; no Table layout/File naming/Retention/Cleanup schedule/History sections. More Information (line 44) carries the BLOB-backup stall and compression sizes as evidence for the decision, and line 46 links out: 'The table layout, file naming, retention, and nightly cleanup are in [doc/design/storage.md]'. The History section is gone; the evidence kept supports the decision itself."
+    },
+    {
+      "text": "[Splitting step 3: keep every option, reason, and consequence] The shortened ADR 003 still lists all three options (files on disk, BLOBs in SQLite, an S3-compatible object store), the measured reason (a 41 GB database copied in 19 minutes against 310 MB in 9 seconds), and both bad consequences (a backup is two things; a row and its file don't change together).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Lines 21-23 list all three options incl. 'Bodies in an S3-compatible object store'. Line 27: 'a 41 GB database that took 19 minutes to copy. With bodies as files, the database was 310 MB and copied in 9 seconds.' Line 35: 'a backup is now two things, the database and the bodies folder'; line 36: 'nothing makes a row and its file change together'."
+    },
+    {
+      "text": "[Splitting step 3: add none] The shortened ADR 003 has no option, reason, or consequence that the original didn't state.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Options, outcome and consequences match the original line for line (sentences split only). The Confirmation rewrite ('No test checks this yet') corrects a false claim that tests/test_store.py checks size (input test only checks the folder); it is not a new option, reason or consequence. More Information facts (11-minute stall, 38/14/11 GB, 4 ms) all come from the original History."
+    },
+    {
+      "text": "[Splitting step 3: fix a title that names a topic] The ADR's title states the decision as a sentence, not \"Storage\".",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Line 7: '# ADR 003: Article bodies are compressed files on disk, indexed in SQLite'."
+    },
+    {
+      "text": "[Splitting step 2: group the detailed design into design documents] A design document under doc/design/ holds the articles table's columns, the file naming rule (SHA-256, two-hex-digit subfolder, .zst), the 90-day retention default with retention_days and starred articles, and the nightly cleanup with the monthly VACUUM.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "doc/design/storage.md: full articles table (lines 7-18); 'SHA-256 of the uncompressed body, in hex, with `.zst` appended' and 'a subfolder named for the first two hex digits' (lines 26-28); 'kept for 90 days', 'retention_days', 'Bodies of starred articles are always kept' (line 36); nightly cleanup at 03:00 with 'on the first night of each month, runs `VACUUM`' (lines 42-46)."
+    },
+    {
+      "text": "[Splitting step 2: a plain specification of how things are now] That design document has no history: no spike run IDs (2026-04-09-a and the like), no account of BLOBs being tried first, and no removed migration.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "grep for '2026-04-|BLOB|0\\.3\\.0|0\\.5\\.0|15 April' over W's doc/design returned no matches. Line 30's 'Level 19 makes storing an article take about 60 ms' is stated as a present reason, with no run ID, no BLOB-first account and no migration."
+    },
+    {
+      "text": "[Splitting step 1: the rest is detailed design] No second ADR is created for retention, file naming, or cleanup.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json adds only doc/design/storage.md; no new file under doc/adr/."
+    },
+    {
+      "text": "[Splitting step 4: rewrite every citation] In src/quillfeed/store.py, the comments about file naming and retention now name the design document by path instead of ADR 003's sections, and the citation for why bodies are files still names ADR 003.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "store.py line 8: 'See doc/design/storage.md, \"Body files\"'; line 14: '(doc/design/storage.md, \"Retention\")'; line 1 still has '(ADR 003)' for why bodies are files."
+    },
+    {
+      "text": "[Splitting step 4: update the index] doc/README.md lists the new design document, and its line for ADR 003 matches the ADR's title.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "doc/README.md line 16: '[design/storage.md](design/storage.md): how articles are stored, kept, and cleaned up.'; line 11 'Article bodies are compressed files on disk, indexed in SQLite' matches the ADR title exactly."
+    },
+    {
+      "text": "[Splitting step 5: map every section] The reply maps each section of the old ADR (table layout, file naming, retention, cleanup schedule, history) to where it went, or says it was dropped and why.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "response.md table: 'Table layout | storage.md, \"The articles table\"', 'File naming | storage.md, \"Body files\"', 'Retention', 'Cleanup schedule | storage.md, \"Nightly cleanup\"', and History split three ways, with the dropped part ('spike run IDs, the 0.3.0 and 0.5.0 migration notes | Dropped. Git history still has them...')."
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "pass_rate": 1.0
+  },
+  "blind_label": "W"
+}

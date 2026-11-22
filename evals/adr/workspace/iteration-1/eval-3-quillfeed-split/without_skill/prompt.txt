@@ -1,0 +1,1 @@
+doc/adr/003.md in quillfeed (evals/adr/files/quillfeed) is 75 lines of very long paragraphs now and more than half of it is table layouts, file naming and the cleanup schedule. can you sort that out?

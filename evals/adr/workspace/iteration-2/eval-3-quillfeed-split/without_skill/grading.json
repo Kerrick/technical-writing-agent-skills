@@ -1,0 +1,71 @@
+{
+  "assertion_results": [
+    {
+      "text": "[Splitting step 3: keep the ADR for the decision that passes] doc/adr/003.md still exists under that number, holds only the decision to keep article bodies as compressed files on disk indexed in SQLite, and no longer contains the table layout, file naming, retention, cleanup schedule, or history sections.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Headings: Context and Problem Statement, Decision Drivers, Considered Options, Decision Outcome, Consequences, Confirmation. No Table layout/File naming/Retention/Cleanup schedule/History section. Context line 15 adds the history backstory ('We first stored bodies as BLOBs... On 2 April it ran into the morning fetch'), but that is the problem that prompted this decision, so it fits Context; no tuning or migration detail stays."
+    },
+    {
+      "text": "[Splitting step 3: keep every option, reason, and consequence] The shortened ADR 003 still lists all three options (files on disk, BLOBs in SQLite, an S3-compatible object store), the measured reason (a 41 GB database copied in 19 minutes against 310 MB in 9 seconds), and both bad consequences (a backup is two things; a row and its file don't change together).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Three options verbatim; line 33 '41 GB database that took 19 minutes to copy. With bodies as files, the database was 310 MB and copied in 9 seconds'; consequences 'a backup is now two things' and 'nothing makes a row and its file change together'."
+    },
+    {
+      "text": "[Splitting step 3: add none] The shortened ADR 003 has no option, reason, or consequence that the original didn't state.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "The added Context sentences come from the original History; no new option, reason or consequence."
+    },
+    {
+      "text": "[Splitting step 3: fix a title that names a topic] The ADR's title states the decision as a sentence, not \"Storage\".",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Title: '# ADR 003: Article bodies are compressed files on disk, indexed in SQLite'."
+    },
+    {
+      "text": "[Splitting step 2: group the detailed design into design documents] A design document under doc/design/ holds the articles table's columns, the file naming rule (SHA-256, two-hex-digit subfolder, .zst), the 90-day retention default with retention_days and starred articles, and the nightly cleanup with the monthly VACUUM.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "storage.md: 'Table layout' with the column table; 'File naming': 'SHA-256 of the uncompressed body, in hex, with `.zst` appended', 'subfolder named for the first two hex digits'; 'Retention': '90 days... `retention_days`... Starred articles are kept regardless'; 'Cleanup schedule': '03:00 local time... Runs `VACUUM`, on the first night of each month only'."
+    },
+    {
+      "text": "[Splitting step 2: a plain specification of how things are now] That design document has no history: no spike run IDs (2026-04-09-a and the like), no account of BLOBs being tried first, and no removed migration.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "grep on Y's storage.md matches: line 39 'They were added on 15 April, after `ls bodies/` hung a terminal.'; lines 49-52 spike run table '2026-04-09-a', '2026-04-11-b', '2026-04-12-c', '2026-04-12-d'; line 70 '## Migration from BLOBs' / 'Release 0.3.0 moved existing bodies out of the database. Its code was removed in 0.5.0.' The design doc contains history: run IDs and the removed migration."
+    },
+    {
+      "text": "[Splitting step 1: the rest is detailed design] No second ADR is created for retention, file naming, or cleanup.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json added only doc/design/storage.md; no new ADR."
+    },
+    {
+      "text": "[Splitting step 4: rewrite every citation] In src/quillfeed/store.py, the comments about file naming and retention now name the design document by path instead of ADR 003's sections, and the citation for why bodies are files still names ADR 003.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "store.py: 'The naming is doc/design/storage.md, \"File naming\"' and '(doc/design/storage.md, \"Retention\")'; module docstring keeps '(ADR 003)'."
+    },
+    {
+      "text": "[Splitting step 4: update the index] doc/README.md lists the new design document, and its line for ADR 003 matches the ADR's title.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "README.md adds '- [design/storage.md](design/storage.md): how articles and their bodies are stored.'; the 003 row matches the title exactly."
+    },
+    {
+      "text": "[Splitting step 5: map every section] The reply maps each section of the old ADR (table layout, file naming, retention, cleanup schedule, history) to where it went, or says it was dropped and why.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "response.md: 'The table layout, file naming, retention and cleanup schedule are in a new design doc', with a storage.md bullet for each; History: 'The problem that started this... is now in Context... The rest of the history was tuning, so it went to the design doc.'"
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 1,
+    "total": 10,
+    "pass_rate": 0.9
+  },
+  "blind_label": "Y"
+}

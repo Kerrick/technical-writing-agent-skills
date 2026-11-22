@@ -1,0 +1,128 @@
+{
+  "skill_name": "adr",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "we never wrote down why larder (evals/adr/files/larder) syncs between devices by having people put the database file in their Dropbox or iCloud folder instead of us running a sync server. Mira decided it back in March, and as far as I can tell from notes/2026-03-sync.md nobody looked at anything else. can you write the ADR for it?",
+      "expected_output": "One new ADR in docs/decisions/, numbered 0010 and shaped like the two existing records, that records the decision with Mira Okafor as decider, says no alternative was weighed at the time, reports any alternatives as later research with a date, lists the conflict-copy cost, and claims no more confidence than the notes and tests support.",
+      "files": [
+        "evals/adr/files/larder/README.md",
+        "evals/adr/files/larder/docs/decisions/0002-keep-all-data-in-one-sqlite-file.md",
+        "evals/adr/files/larder/docs/decisions/0006-quantities-are-stored-in-base-units.md",
+        "evals/adr/files/larder/docs/design/cli-output.md",
+        "evals/adr/files/larder/docs/design/storage.md",
+        "evals/adr/files/larder/docs/research/2026-06-12-barcode-lookup.md",
+        "evals/adr/files/larder/notes/2026-03-sync.md",
+        "evals/adr/files/larder/src/larder/__init__.py",
+        "evals/adr/files/larder/src/larder/sync.py",
+        "evals/adr/files/larder/src/larder/ui.py",
+        "evals/adr/files/larder/tests/test_quantities.py",
+        "evals/adr/files/larder/tests/test_storage.py",
+        "evals/adr/files/larder/tests/test_sync.py"
+      ],
+      "assertions": [
+        "[Workflow step 2: Follow the log that exists] Exactly one new file is added under docs/decisions/, named with a four-digit number and a dashed title, with the same front-matter fields (status, date, deciders) and section headings as the two existing records.",
+        "[Workflow step 3: Take the next number] The new record is numbered 0010, because docs/research/2026-06-12-barcode-lookup.md names a deleted former ADR 0009. It is not 0007 or 0009.",
+        "[When the record is thin: no alternative weighed] The record says plainly that no alternative was weighed when the decision was made.",
+        "[When the record is thin: later research] Every alternative the record describes (such as a hosted sync server) is labelled as found or researched after the decision, with a date, and is not given as a reason the decision was made.",
+        "[When the record is thin: record only the reasons it had] The record attributes to Mira Okafor no reason beyond what notes/2026-03-sync.md records (people asked to use larder on two computers; the file is the whole pantry). It doesn't say she chose it for cost, privacy, or simplicity.",
+        "[Workflow step 5: Confidence] A Confidence statement is present, and it doesn't claim that the chosen approach is better than the alternatives.",
+        "[Workflow step 5: Consequences] The consequences include that two devices writing before a sync leave a conflict copy, which larder doesn't merge, so the user must pick one file and can lose entries.",
+        "[Workflow step 5: Confirmation] The Confirmation section names tests/test_sync.py or the start-up check in src/larder/sync.py, and claims nothing those don't check (they detect conflict copies; they don't test syncing).",
+        "[When the record is thin: deciders] The deciders field names Mira Okafor, and doesn't present Jun Akiyama as having chosen the approach.",
+        "[Workflow step 5: one decision in about a page] The new record is 80 lines or fewer and doesn't restate how conflict detection works beyond a pointer to docs/design/storage.md or src/larder/sync.py.",
+        "[Style: no placeholders] No file the agent wrote or changed contains TODO, TBD, a bracketed placeholder, or a question to the maintainer."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "add an ADR to larder (evals/adr/files/larder) for the thing we agreed on friday: everything the CLI prints goes through the say() helper in src/larder/ui.py instead of bare print(), and units are always printed abbreviated (g, kg, ml, l), never spelled out. thanks!",
+      "expected_output": "No new ADR. The two rules are written into docs/design/cli-output.md as plain statements of how output works, and the reply explains that a convention that is cheap to undo doesn't pass the test for an ADR.",
+      "files": [
+        "evals/adr/files/larder/README.md",
+        "evals/adr/files/larder/docs/decisions/0002-keep-all-data-in-one-sqlite-file.md",
+        "evals/adr/files/larder/docs/decisions/0006-quantities-are-stored-in-base-units.md",
+        "evals/adr/files/larder/docs/design/cli-output.md",
+        "evals/adr/files/larder/docs/design/storage.md",
+        "evals/adr/files/larder/docs/research/2026-06-12-barcode-lookup.md",
+        "evals/adr/files/larder/notes/2026-03-sync.md",
+        "evals/adr/files/larder/src/larder/__init__.py",
+        "evals/adr/files/larder/src/larder/sync.py",
+        "evals/adr/files/larder/src/larder/ui.py",
+        "evals/adr/files/larder/tests/test_quantities.py",
+        "evals/adr/files/larder/tests/test_storage.py",
+        "evals/adr/files/larder/tests/test_sync.py"
+      ],
+      "assertions": [
+        "[Workflow step 1: Test the decision] No file is added under docs/decisions/, and neither existing ADR is changed.",
+        "[Workflow step 1: record it in the design document for its subject] docs/design/cli-output.md now states both rules: output goes through say() in src/larder/ui.py, not bare print(), and units are printed abbreviated.",
+        "[Workflow step 1: say why it didn't pass] The reply tells the user that no ADR was written and why: the rules are conventions or detailed design, resolve no architecturally significant requirement, or would cost little to undo.",
+        "[Style: state facts as they are now] The text added to the design document states the rules as how output works, without narrating that they were agreed on Friday or how the team got there.",
+        "[Style: no placeholders] No file the agent wrote or changed contains TODO, TBD, a bracketed placeholder, or a question to the maintainer."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "doc/adr/003.md in quillfeed (evals/adr/files/quillfeed) is 75 lines of very long paragraphs now and more than half of it is table layouts, file naming and the cleanup schedule. can you sort that out?",
+      "expected_output": "ADR 003 shortened to the one storage decision, with every option, reason and consequence kept and a title that states the decision; the table layout, file naming, retention and cleanup rules moved into a design document written as how things are now; code and index citations repointed; and a report that maps each old section to its new home.",
+      "files": [
+        "evals/adr/files/quillfeed/README.md",
+        "evals/adr/files/quillfeed/doc/README.md",
+        "evals/adr/files/quillfeed/doc/adr/001.md",
+        "evals/adr/files/quillfeed/doc/adr/002.md",
+        "evals/adr/files/quillfeed/doc/adr/003.md",
+        "evals/adr/files/quillfeed/doc/design/fetching.md",
+        "evals/adr/files/quillfeed/notes/2026-10-fetch-queue.md",
+        "evals/adr/files/quillfeed/src/quillfeed/__init__.py",
+        "evals/adr/files/quillfeed/src/quillfeed/fetch.py",
+        "evals/adr/files/quillfeed/src/quillfeed/store.py",
+        "evals/adr/files/quillfeed/tests/test_fetch_spacing.py",
+        "evals/adr/files/quillfeed/tests/test_store.py"
+      ],
+      "assertions": [
+        "[Splitting step 3: keep the ADR for the decision that passes] doc/adr/003.md still exists under that number, holds only the decision to keep article bodies as compressed files on disk indexed in SQLite, and no longer contains the table layout, file naming, retention, cleanup schedule, or history sections.",
+        "[Splitting step 3: keep every option, reason, and consequence] The shortened ADR 003 still lists all three options (files on disk, BLOBs in SQLite, an S3-compatible object store), the measured reason (a 41 GB database copied in 19 minutes against 310 MB in 9 seconds), and both bad consequences (a backup is two things; a row and its file don't change together).",
+        "[Splitting step 3: add none] The shortened ADR 003 has no option, reason, or consequence that the original didn't state.",
+        "[Splitting step 3: fix a title that names a topic] The ADR's title states the decision as a sentence, not \"Storage\".",
+        "[Splitting step 2: group the detailed design into design documents] A design document under doc/design/ holds the articles table's columns, the file naming rule (SHA-256, two-hex-digit subfolder, .zst), the 90-day retention default with retention_days and starred articles, and the nightly cleanup with the monthly VACUUM.",
+        "[Splitting step 2: a plain specification of how things are now] That design document has no history: no spike run IDs (2026-04-09-a and the like), no account of BLOBs being tried first, and no removed migration.",
+        "[Splitting step 1: the rest is detailed design] No second ADR is created for retention, file naming, or cleanup.",
+        "[Splitting step 4: rewrite every citation] In src/quillfeed/store.py, the comments about file naming and retention now name the design document by path instead of ADR 003's sections, and the citation for why bodies are files still names ADR 003.",
+        "[Splitting step 4: update the index] doc/README.md lists the new design document, and its line for ADR 003 matches the ADR's title.",
+        "[Splitting step 5: map every section] The reply maps each section of the old ADR (table layout, file naming, retention, cleanup schedule, history) to where it went, or says it was dropped and why."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "we shipped the per-host fetch queue in quillfeed (evals/adr/files/quillfeed) a few weeks ago, see src/quillfeed/fetch.py and notes/2026-10-fetch-queue.md, so ADR 002 is just wrong now. can you fix up the decision log?",
+      "expected_output": "A new ADR 004 that states the fetching decision whole from the October notes, with ADR 002 deleted and every citation of it in the code, the design document and the index rewritten to 004.",
+      "files": [
+        "evals/adr/files/quillfeed/README.md",
+        "evals/adr/files/quillfeed/doc/README.md",
+        "evals/adr/files/quillfeed/doc/adr/001.md",
+        "evals/adr/files/quillfeed/doc/adr/002.md",
+        "evals/adr/files/quillfeed/doc/adr/003.md",
+        "evals/adr/files/quillfeed/doc/design/fetching.md",
+        "evals/adr/files/quillfeed/notes/2026-10-fetch-queue.md",
+        "evals/adr/files/quillfeed/src/quillfeed/__init__.py",
+        "evals/adr/files/quillfeed/src/quillfeed/fetch.py",
+        "evals/adr/files/quillfeed/src/quillfeed/store.py",
+        "evals/adr/files/quillfeed/tests/test_fetch_spacing.py",
+        "evals/adr/files/quillfeed/tests/test_store.py"
+      ],
+      "assertions": [
+        "[When a decision changes: write a new ADR with the next number] A new record doc/adr/004.md exists, with the heading form and front-matter fields of the existing records, and it states the per-host queue decision.",
+        "[When a decision changes: restate the whole decision] ADR 004 reads without ADR 002: it gives the problem, the drivers (a new article within 15 minutes; fits in one process) and the decision in full, and doesn't describe itself as a list of changes to ADR 002.",
+        "[When a decision changes: delete the old record] doc/adr/002.md is deleted. It isn't kept with a superseded or deprecated status, and no dated note was added to it.",
+        "[When a decision changes: rewrite every citation] No file under src/ or doc/ still cites ADR 002 as the current decision: src/quillfeed/fetch.py (its module docstring and the run_once docstring), doc/design/fetching.md, and the table in doc/README.md cite ADR 004.",
+        "[Workflow step 6: check every fact] The module docstring of src/quillfeed/fetch.py no longer says that one poller walks every feed in turn.",
+        "[Workflow step 5: options that were really weighed] ADR 004 lists the three options from the notes (a queue per host with spaced requests; one poller that sleeps between feeds on a host; WebSub only), with the reasons the notes give for the two that lost: a walk went from 6 to 70 minutes, and 9% of feeds advertise a hub. It adds no option the notes don't have.",
+        "[When the record is thin: deciders] ADR 004 names Dana Whitlock as the decider, and doesn't credit Tom\u00e1s Reyes with the decision (he tested option 2 and built option 1).",
+        "[Workflow step 5: Consequences] ADR 004 lists the two costs in the notes: one thread per host with something due (340 at the peak), and no single loop to look at when fetching stops.",
+        "[Workflow step 5: Confirmation] ADR 004's Confirmation names tests/test_fetch_spacing.py, and doesn't name tests/test_poller.py, which the repository doesn't have.",
+        "[When a decision changes: status] ADR 004's status is accepted, with nothing else in that field.",
+        "[Workflow step 8: report] The reply says that ADR 002 was deleted and lists the citations that were rewritten."
+      ]
+    }
+  ]
+}

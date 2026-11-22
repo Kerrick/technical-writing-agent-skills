@@ -1,0 +1,77 @@
+{
+  "assertion_results": [
+    {
+      "text": "[Workflow step 2: Follow the log that exists] Exactly one new file is added under docs/decisions/, named with a four-digit number and a dashed title, with the same front-matter fields (status, date, deciders) and section headings as the two existing records.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json adds one file under docs/decisions/: '0007-devices-share-a-pantry-through-the-users-file-sync.md'. Front matter: status/date/deciders. All the required headings are present, plus '## More Information'."
+    },
+    {
+      "text": "[Workflow step 3: Take the next number] The new record is numbered 0010, because docs/research/2026-06-12-barcode-lookup.md names a deleted former ADR 0009. It is not 0007 or 0009.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Filename is '0007-devices-share-a-pantry-through-the-users-file-sync.md'. Response: 'I used 0007 because the folder only has 0002 and 0006.' It missed the deleted former ADR 0009."
+    },
+    {
+      "text": "[When the record is thin: no alternative weighed] The record says plainly that no alternative was weighed when the decision was made.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Considered Options: 'No other option was considered. The notes say: \"Nothing else was discussed for sync.\"'"
+    },
+    {
+      "text": "[When the record is thin: later research] Every alternative the record describes (such as a hosted sync server) is labelled as found or researched after the decision, with a date, and is not given as a reason the decision was made.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "It mentions a sync server and a merge built into larder ('A sync server run by the maintainers, or a merge built into larder, were not evaluated'; More Information: 'a merge of conflict copies or a sync service would be a new decision'), but never labels them as found or researched later, and gives no date."
+    },
+    {
+      "text": "[When the record is thin: record only the reasons it had] The record attributes to Mira Okafor no reason beyond what notes/2026-03-sync.md records (people asked to use larder on two computers; the file is the whole pantry). It doesn't say she chose it for cost, privacy, or simplicity.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "The Decision Outcome gives a reason the notes don't record: 'Chosen: option 1. It needs no new code: larder already reads and writes the file at whatever path...' (simplicity). The Decision Drivers are imported from ADR 0002 ('Installing larder must not mean installing or running anything else'), and the record says 'this option follows from them'. It flags that they weren't discussed, but it still frames them as why the option was chosen."
+    },
+    {
+      "text": "[Workflow step 5: Confidence] A Confidence statement is present, and it doesn't claim that the chosen approach is better than the alternatives.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Confidence: medium. ... No other option was compared, so there is no evidence on whether another would be better.'"
+    },
+    {
+      "text": "[Workflow step 5: Consequences] The consequences include that two devices writing before a sync leave a conflict copy, which larder doesn't merge, so the user must pick one file and can lose entries.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'two devices that write before syncing produce two files. larder does not merge them. ... the purchases in the other copy are lost unless the user enters them again.'"
+    },
+    {
+      "text": "[Workflow step 5: Confirmation] The Confirmation section names tests/test_sync.py or the start-up check in src/larder/sync.py, and claims nothing those don't check (they detect conflict copies; they don't test syncing).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Confirmation names both 'refuse_if_conflicted in src/larder/sync.py' and 'tests/test_sync.py checks that a Dropbox conflict copy is found ... No test covers the sync-conflict or 2.db patterns, or the start-up refusal itself.' The start-up claim rests on docs/design/storage.md, and the record makes no claim to test syncing."
+    },
+    {
+      "text": "[When the record is thin: deciders] The deciders field names Mira Okafor, and doesn't present Jun Akiyama as having chosen the approach.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'deciders: Mira Okafor (maintainer)'. Jun isn't listed."
+    },
+    {
+      "text": "[Workflow step 5: one decision in about a page] The new record is 80 lines or fewer and doesn't restate how conflict detection works beyond a pointer to docs/design/storage.md or src/larder/sync.py.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "wc -l: 50 lines, under the limit. But the record restates how detection works: '`src/larder/sync.py` recognises three patterns (`conflicted copy`, `sync-conflict`, ` 2.db`)', and Confirmation describes refuse_if_conflicted's behaviour. That copies the code's MARKERS instead of pointing to it."
+    },
+    {
+      "text": "[Style: no placeholders] No file the agent wrote or changed contains TODO, TBD, a bracketed placeholder, or a question to the maintainer.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "The grep matched only the problem-statement question at line 11. The storage.md edit is just a pointer. No TODO, TBD, placeholders or questions."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 4,
+    "total": 11,
+    "pass_rate": 0.6364
+  },
+  "blind_label": "Y"
+}

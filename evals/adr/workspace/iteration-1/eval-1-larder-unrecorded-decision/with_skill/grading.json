@@ -1,0 +1,77 @@
+{
+  "assertion_results": [
+    {
+      "text": "[Workflow step 2: Follow the log that exists] Exactly one new file is added under docs/decisions/, named with a four-digit number and a dashed title, with the same front-matter fields (status, date, deciders) and section headings as the two existing records.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json adds exactly one file under docs/decisions/: '0010-devices-share-the-database-file-through-the-users-file-syncing-service.md'. Front matter has 'status: accepted', 'date: 2026-11-22', 'deciders: Mira Okafor (maintainer)'. grep '^#' shows every heading the existing records have (Context and Problem Statement, Decision Drivers, Considered Options, Decision Outcome, ### Consequences, ### Confirmation), plus an added '## More Information' / '### Later research (2026-11-22)'. That superset is the MADR optional section, so I accept it."
+    },
+    {
+      "text": "[Workflow step 3: Take the next number] The new record is numbered 0010, because docs/research/2026-06-12-barcode-lookup.md names a deleted former ADR 0009. It is not 0007 or 0009.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "File is named '0010-...'. The response says: 'docs/research/2026-06-12-barcode-lookup.md mentions a deleted \"former ADR 0009\", so this one is 0010.'"
+    },
+    {
+      "text": "[When the record is thin: no alternative weighed] The record says plainly that no alternative was weighed when the decision was made.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Considered Options: 'No other option was weighed. The meeting that decided it, on 14 March 2026, records that nothing else was discussed.'"
+    },
+    {
+      "text": "[When the record is thin: later research] Every alternative the record describes (such as a hosted sync server) is labelled as found or researched after the decision, with a date, and is not given as a reason the decision was made.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "The alternatives appear only under '### Later research (2026-11-22)': 'These alternatives were found after the decision. They were never its reason, and nobody has compared them with option 1.' The title's 'not through a larder server' only names the contrast and gives no reason."
+    },
+    {
+      "text": "[When the record is thin: record only the reasons it had] The record attributes to Mira Okafor no reason beyond what notes/2026-03-sync.md records (people asked to use larder on two computers; the file is the whole pantry). It doesn't say she chose it for cost, privacy, or simplicity.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "Decision Outcome is restrained: 'The only reason recorded is Mira's: \"The file is the whole pantry.\"' But Decision Drivers lists '* Installing larder must not mean installing or running anything else (ADR 0002).' as a driver of this decision, with no caveat. The 2026-03 notes record no such driver. Listing a no-install/simplicity driver under a decision Mira made attributes a reason the notes do not support."
+    },
+    {
+      "text": "[Workflow step 5: Confidence] A Confidence statement is present, and it doesn't claim that the chosen approach is better than the alternatives.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Confidence: the deciders didn't record any. Today's evidence shows that the approach works when only one device writes between syncs, and that it loses writes ... Nothing compares this option with any other.' This makes no claim of superiority."
+    },
+    {
+      "text": "[Workflow step 5: Consequences] The consequences include that two devices writing before a sync leave a conflict copy, which larder doesn't merge, so the user must pick one file and can lose entries.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Bad, because two devices that write before syncing leave two files. larder does not merge them, so the user keeps one and loses what was written to the other.'"
+    },
+    {
+      "text": "[Workflow step 5: Confirmation] The Confirmation section names tests/test_sync.py or the start-up check in src/larder/sync.py, and claims nothing those don't check (they detect conflict copies; they don't test syncing).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Confirmation: '`tests/test_sync.py` fails if `find_conflict_copies` stops finding a Dropbox conflict copy beside the database, or starts flagging an unrelated `.db` file. No test covers the other conflict-copy names or checks that larder runs the check on start. Nothing checks that larder stays without a server.' This matches the two tests exactly and claims no sync testing."
+    },
+    {
+      "text": "[When the record is thin: deciders] The deciders field names Mira Okafor, and doesn't present Jun Akiyama as having chosen the approach.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'deciders: Mira Okafor (maintainer)'. Jun is not in the front matter. The response says 'Jun ... didn't choose how sync works, so Jun isn't listed as a decider.'"
+    },
+    {
+      "text": "[Workflow step 5: one decision in about a page] The new record is 80 lines or fewer and doesn't restate how conflict detection works beyond a pointer to docs/design/storage.md or src/larder/sync.py.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "wc -l: 52 lines. Detection is not explained. It points to 'docs/design/storage.md' and says only that the list of names lives in 'src/larder/sync.py'."
+    },
+    {
+      "text": "[Style: no placeholders] No file the agent wrote or changed contains TODO, TBD, a bracketed placeholder, or a question to the maintainer.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Ran `grep -rnE \"TODO|TBD|\\[[A-Z ]+\\]|\\?$|\\? \" outputs/W/files`: the only hits are the Context and Problem Statement question (line 11/12, 'How does one pantry reach more than one device?'), which is the template's problem question, the same as in 0002/0006, and not a question to the maintainer. No TODO, TBD or bracketed placeholder. The changed storage.md and sync.py are clean too."
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 1,
+    "total": 11,
+    "pass_rate": 0.9091
+  },
+  "blind_label": "W"
+}

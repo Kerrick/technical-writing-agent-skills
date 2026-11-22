@@ -1,0 +1,10 @@
+{
+  "added": [
+    "evals/adr/files/larder/docs/decisions/0010-devices-share-the-database-file-through-the-users-file-syncing-service.md"
+  ],
+  "modified": [
+    "evals/adr/files/larder/docs/design/storage.md",
+    "evals/adr/files/larder/src/larder/sync.py"
+  ],
+  "deleted": []
+}

@@ -1,0 +1,35 @@
+{
+  "scores": {
+    "W": {
+      "accuracy": 9,
+      "restraint": 7,
+      "usefulness": 9,
+      "concision": 7,
+      "overall": 8,
+      "notes": "New Printing section with rationale tied to colour; units rule adds explicit list and an invented-but-flagged 'count is a bare number' rule. Reply surfaces judgment calls clearly and offers an enforcement test, but is longer and adds an extra unrequested count rule; 'Friday's decision' framing in reply fine."
+    },
+    "X": {
+      "accuracy": 9,
+      "restraint": 7,
+      "usefulness": 8,
+      "concision": 7,
+      "overall": 8,
+      "notes": "Similar to W; good grounding in README and ADR 0006 cross-reference. Also adds unrequested 'count is a bare number'. Reply third bullet ('I wasn't there on Friday') is a useful honest reason. Slightly verbose."
+    },
+    "Y": {
+      "accuracy": 9,
+      "restraint": 9,
+      "usefulness": 8,
+      "concision": 9,
+      "overall": 9,
+      "notes": "Minimal two-sentence additions placed in sensible spots, no extra invented rules; units listed explicitly. Reply cites README distinction and both ADR tests, offers enforcement test and an ADR path. Missing the 'why say()' rationale that W/X added, a small loss for later readers."
+    }
+  },
+  "ranking": [
+    "Y",
+    "W",
+    "X"
+  ],
+  "reasoning": "All three made the correct call and edited only cli-output.md with present-tense rules. Y is the most restrained and concise, adding exactly the two rules. W and X add a helpful rationale linking say() to colour handling but also introduce a 'count is a bare number' rule the user didn't state (W flags it; X just states it). W's reply is the most transparent about judgment calls; X's is well grounded in repo docs. Differences are small.",
+  "assertion_notes": "All assertions passed for all labels, so they don't separate them here. Assertion 3 accepts any of three reasons, so it's lenient. Assertion 4 only checks narration, not whether extra invented rules (e.g., counts) were added."
+}

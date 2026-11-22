@@ -1,0 +1,35 @@
+{
+  "scores": {
+    "X": {
+      "accuracy": 9,
+      "restraint": 8,
+      "usefulness": 9,
+      "concision": 7,
+      "overall": 9,
+      "notes": "The ADR is faithful to the notes and keeps the one recorded reason. Its two-part confidence is honest. It moves the alternatives into a separate dated research note, which is the right place for them, though that adds a second file the user didn't ask for. The extra 'consulted' front-matter field departs from the log's shape. The response flags that nothing in the code calls refuse_if_conflicted. Its revisit trigger is invented but reasonable."
+    },
+    "W": {
+      "accuracy": 8,
+      "restraint": 7,
+      "usefulness": 8,
+      "concision": 7,
+      "overall": 8,
+      "notes": "It has the right number and is careful about the reasons in the outcome, and its 'Later research' section is clearly labelled. But the alternatives in that section (cr-sqlite, Turso) come from the model's own knowledge and are unverified. It lists an uncaveated ADR 0002 driver. It dates the record 2026-11-22, not the decision date. It also edited src/larder/sync.py, which is unnecessary scope creep. Its Confirmation is the most precise of the three, and its response is candid about what was inferred."
+    },
+    "Y": {
+      "accuracy": 6,
+      "restraint": 7,
+      "usefulness": 6,
+      "concision": 7,
+      "overall": 6,
+      "notes": "It used the wrong number (0007, a likely collision with the deleted 0009 history), and the response even invites a check it could have done itself. It gives 'needs no new code' as the outcome's reason and drops Mira's actual line. It duplicates the code's marker list. Its caveat on the borrowed drivers is good, its consequences are solid, and it restrained itself on the mid-write risk."
+    }
+  },
+  "ranking": [
+    "X",
+    "W",
+    "Y"
+  ],
+  "reasoning": "X keeps closest to what the notes support and handles the later alternatives most cleanly, in a dated research note linked from the ADR. W is nearly as good, but it lets an unrecorded driver into the record, adds alternatives from general knowledge, and touches source code it didn't need to. Y misses the numbering trap, states an unrecorded reason in the outcome, and repeats implementation detail.",
+  "assertion_notes": "Assertion 1 does not say whether extra sections or fields (More Information, X's 'consulted') break 'same front-matter fields and section headings'. I read it as a superset requirement. Assertion 5 is a judgement call where a Decision Driver is listed without a caveat (W). I counted it as an attributed reason. Assertion 10's 'restate how conflict detection works' is fuzzy. I failed only Y, which reproduced the marker list verbatim. Assertion 11's grep for '?' matches the template's problem-statement question in every record, so the check needs a human read. Assertion 8 doesn't address that storage.md's claim of a start-up check is unverified in the code (Y repeats it as fact)."
+}

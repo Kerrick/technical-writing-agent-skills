@@ -1,0 +1,353 @@
+{
+  "skill_name": "adr",
+  "iteration": 3,
+  "model": "claude-opus-5-5",
+  "effort": "medium",
+  "grader_model": "claude-opus-5-5",
+  "runs_per_setup_per_eval": 1,
+  "note": "One run per setup per eval, so stddev is across evals, not repeated runs. Tokens are input + output + cache read + cache creation.",
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0
+      },
+      "assertions_passed": 37,
+      "assertions_total": 37,
+      "pooled_pass_rate": 1.0,
+      "ranked_first": 3,
+      "time_seconds": {
+        "mean": 75.1225,
+        "stddev": 30.5682
+      },
+      "tokens": {
+        "mean": 320739.5,
+        "stddev": 159835.7552
+      },
+      "cost_usd": 1.5389
+    },
+    "old_skill": {
+      "pass_rate": {
+        "mean": 0.975,
+        "stddev": 0.0433
+      },
+      "assertions_passed": 36,
+      "assertions_total": 37,
+      "pooled_pass_rate": 0.973,
+      "ranked_first": 1,
+      "time_seconds": {
+        "mean": 66.2963,
+        "stddev": 29.0022
+      },
+      "tokens": {
+        "mean": 233549.75,
+        "stddev": 70263.2497
+      },
+      "cost_usd": 1.5825
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.8386,
+        "stddev": 0.1334
+      },
+      "assertions_passed": 30,
+      "assertions_total": 37,
+      "pooled_pass_rate": 0.8108,
+      "ranked_first": 0,
+      "time_seconds": {
+        "mean": 59.1135,
+        "stddev": 19.9821
+      },
+      "tokens": {
+        "mean": 196783.75,
+        "stddev": 48026.1306
+      },
+      "cost_usd": 1.2677
+    }
+  },
+  "per_eval": {
+    "eval-1-larder-unrecorded-decision": {
+      "with_skill": {
+        "passed": 11,
+        "failed": 0,
+        "total": 11,
+        "pass_rate": 1.0,
+        "tokens": 579235,
+        "time_seconds": 117.0,
+        "cost_usd": 0.5725237
+      },
+      "old_skill": {
+        "passed": 11,
+        "failed": 0,
+        "total": 11,
+        "pass_rate": 1.0,
+        "tokens": 283525,
+        "time_seconds": 102.1,
+        "cost_usd": 0.5715267999999999
+      },
+      "without_skill": {
+        "passed": 7,
+        "failed": 4,
+        "total": 11,
+        "pass_rate": 0.6364,
+        "tokens": 187884,
+        "time_seconds": 53.4,
+        "cost_usd": 0.35338959999999997
+      }
+    },
+    "eval-2-larder-not-an-adr": {
+      "with_skill": {
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "pass_rate": 1.0,
+        "tokens": 148723,
+        "time_seconds": 31.3,
+        "cost_usd": 0.1698412
+      },
+      "old_skill": {
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "pass_rate": 1.0,
+        "tokens": 135685,
+        "time_seconds": 24.6,
+        "cost_usd": 0.2946442
+      },
+      "without_skill": {
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "pass_rate": 1.0,
+        "tokens": 128198,
+        "time_seconds": 29.9,
+        "cost_usd": 0.287877
+      }
+    },
+    "eval-3-quillfeed-split": {
+      "with_skill": {
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "pass_rate": 1.0,
+        "tokens": 245555,
+        "time_seconds": 70.7,
+        "cost_usd": 0.360887
+      },
+      "old_skill": {
+        "passed": 9,
+        "failed": 1,
+        "total": 10,
+        "pass_rate": 0.9,
+        "tokens": 314617,
+        "time_seconds": 82.2,
+        "cost_usd": 0.4137044
+      },
+      "without_skill": {
+        "passed": 9,
+        "failed": 1,
+        "total": 10,
+        "pass_rate": 0.9,
+        "tokens": 262367,
+        "time_seconds": 69.6,
+        "cost_usd": 0.2915206
+      }
+    },
+    "eval-4-quillfeed-decision-changed": {
+      "with_skill": {
+        "passed": 11,
+        "failed": 0,
+        "total": 11,
+        "pass_rate": 1.0,
+        "tokens": 309445,
+        "time_seconds": 81.5,
+        "cost_usd": 0.43568860000000004
+      },
+      "old_skill": {
+        "passed": 11,
+        "failed": 0,
+        "total": 11,
+        "pass_rate": 1.0,
+        "tokens": 200372,
+        "time_seconds": 56.3,
+        "cost_usd": 0.30259299999999995
+      },
+      "without_skill": {
+        "passed": 9,
+        "failed": 2,
+        "total": 11,
+        "pass_rate": 0.8182,
+        "tokens": 208686,
+        "time_seconds": 83.6,
+        "cost_usd": 0.3348958
+      }
+    }
+  },
+  "per_rule": {
+    "Workflow step 2: Follow the log that exists": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Workflow step 3: Take the next number": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "0/1"
+    },
+    "When the record is thin: no alternative weighed": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "When the record is thin: later research": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "0/1"
+    },
+    "When the record is thin: record only the reasons it had": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "0/1"
+    },
+    "Workflow step 5: Confidence": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Workflow step 5: Consequences": {
+      "with_skill": "2/2",
+      "old_skill": "2/2",
+      "without_skill": "2/2"
+    },
+    "Workflow step 5: Confirmation": {
+      "with_skill": "2/2",
+      "old_skill": "2/2",
+      "without_skill": "2/2"
+    },
+    "When the record is thin: deciders": {
+      "with_skill": "2/2",
+      "old_skill": "2/2",
+      "without_skill": "2/2"
+    },
+    "Workflow step 5: one decision in about a page": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "0/1"
+    },
+    "Style: no placeholders": {
+      "with_skill": "2/2",
+      "old_skill": "2/2",
+      "without_skill": "2/2"
+    },
+    "Workflow step 1: Test the decision": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Workflow step 1: record it in the design document for its subject": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Workflow step 1: say why it didn't pass": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Style: state facts as they are now": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Splitting step 3: keep the ADR for the decision that passes": {
+      "with_skill": "1/1",
+      "old_skill": "0/1",
+      "without_skill": "1/1"
+    },
+    "Splitting step 3: keep every option, reason, and consequence": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Splitting step 3: add none": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Splitting step 3: fix a title that names a topic": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Splitting step 2: group the detailed design into design documents": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Splitting step 2: a plain specification of how things are now": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "0/1"
+    },
+    "Splitting step 1: the rest is detailed design": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Splitting step 4: rewrite every citation": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Splitting step 4: update the index": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Splitting step 5: map every section": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "When a decision changes: write a new ADR with the next number": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "When a decision changes: restate the whole decision": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "When a decision changes: delete the old record": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "0/1"
+    },
+    "When a decision changes: rewrite every citation": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Workflow step 6: check every fact": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Workflow step 5: options that were really weighed": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "When a decision changes: status": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "1/1"
+    },
+    "Workflow step 8: report": {
+      "with_skill": "1/1",
+      "old_skill": "1/1",
+      "without_skill": "0/1"
+    }
+  }
+}

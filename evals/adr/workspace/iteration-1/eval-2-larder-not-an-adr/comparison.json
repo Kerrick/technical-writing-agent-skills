@@ -1,0 +1,35 @@
+{
+  "scores": {
+    "W": {
+      "accuracy": 9,
+      "restraint": 8,
+      "usefulness": 9,
+      "concision": 7,
+      "overall": 8,
+      "notes": "Correct rules with a cross-reference to Colour. Reply accurately notes a future ADR would be 0010+ because the research note mentions a deleted ADR 0009 \u2014 a careful read of the inputs. Offers an enforcement test. Reply is a bit long, with a 'choices you may want to change' list."
+    },
+    "X": {
+      "accuracy": 7,
+      "restraint": 7,
+      "usefulness": 9,
+      "concision": 7,
+      "overall": 7,
+      "notes": "Best doc text: it gives the reason for say() (colour/NO_COLOR check), which helps a later reader. But it adds an unrequested claim, 'A count is printed as a bare number' (the input only says a bare number is accepted), and the reply offers to write the ADR as '0007', which ignores the deleted ADR 0009 named in docs/research. Grounds the reasoning well in the README and ADR 0006."
+    },
+    "Y": {
+      "accuracy": 9,
+      "restraint": 9,
+      "usefulness": 8,
+      "concision": 9,
+      "overall": 8,
+      "notes": "Most restrained, minimal edits: two plain sentences in the right places. Reply is clear, quotes the README split between decisions/ and design/, offers an enforcement test, and asks for real alternatives before writing an ADR. No numbering error. Lacks X's 'why say()' rationale in the doc."
+    }
+  },
+  "ranking": [
+    "Y",
+    "W",
+    "X"
+  ],
+  "reasoning": "All three made the right call and pass every assertion. Y is the tightest and has no inaccuracies. W is equally accurate, and its ADR-numbering note shows a close reading of the inputs, but it is wordier. X's doc text is the most useful because it explains why say() matters, but it adds an unsupported claim about counts and proposes reusing number 0007 despite the deleted 0009.",
+  "assertion_notes": "The assertions don't tell the outputs apart; all pass. Assertion 3 accepts any of three reasons, so it's an easy bar. Assertion 5's 'question to the maintainer' applies to files only; the questions in the replies (offers to write an ADR) are allowed. None of the assertions checks for additions beyond the two rules, such as X's line about counts."
+}

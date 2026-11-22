@@ -1,0 +1,35 @@
+{
+  "scores": {
+    "Y": {
+      "accuracy": 9,
+      "restraint": 8,
+      "usefulness": 9,
+      "concision": 8,
+      "overall": 9,
+      "notes": "Complete, faithful 004 with all three drivers, three options and both costs. Confidence section honestly flags the 90-feeds-per-15-minutes arithmetic against the notes' claim without changing the recorded reason. Reply clearly reports deletion and citations, plus code/design mismatches. Reply's opening line 'The old poller decision is now ADR 004' is a little misleading."
+    },
+    "X": {
+      "accuracy": 8,
+      "restraint": 9,
+      "usefulness": 8,
+      "concision": 7,
+      "overall": 8,
+      "notes": "Clean deletion and citation rewrite; strict about sourcing to the notes, so it drops the 'fits in one process' driver, which is still a live constraint (ADR 001) a later reader needs. Honest 'deciders didn't state' confidence. Reply is long, with many judgment-call bullets."
+    },
+    "W": {
+      "accuracy": 8,
+      "restraint": 6,
+      "usefulness": 7,
+      "concision": 7,
+      "overall": 6,
+      "notes": "004 content is strong and catches the 90-feed arithmetic as a Bad consequence, but it keeps 002 as superseded with a dated note and a struck-through index row, which is the opposite of the expected log maintenance. Context is framed relative to ADR 002, and 'supersedes' adds a non-standard front-matter field."
+    }
+  },
+  "ranking": [
+    "Y",
+    "X",
+    "W"
+  ],
+  "reasoning": "Y and X both delete 002 and rewrite every citation. Y's record is the most complete restatement, keeping the one-process driver. X leaves that driver out on a strict reading of the notes. W writes a good 004, but it keeps 002 superseded and still indexed, so the log has two fetching records.",
+  "assertion_notes": "Assertion 1 ('front-matter fields of the existing records') doesn't say whether extra fields such as 'consulted' or 'supersedes' count against a record. All three add 'consulted', so I graded it as requiring the existing fields to be present. Assertion 4 is passed by W on a literal reading: its 002 row is marked superseded, not current. Assertion 3 already penalizes the kept record. Assertion 2 requires the 'fits in one process' driver even though the October notes don't restate it, so X fails for being faithful to the notes."
+}

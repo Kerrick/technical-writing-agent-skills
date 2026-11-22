@@ -1,0 +1,71 @@
+{
+  "assertion_results": [
+    {
+      "text": "[Splitting step 3: keep the ADR for the decision that passes] doc/adr/003.md still exists under that number, holds only the decision to keep article bodies as compressed files on disk indexed in SQLite, and no longer contains the table layout, file naming, retention, cleanup schedule, or history sections.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "grep \"^#\" on X doc/adr/003.md: no Table layout, File naming, Retention, Cleanup schedule or History heading; grep for retention_days|VACUUM|SHA-256|2026-04|level 3|38 GB matched only the date. Context now includes \"We first stored bodies as BLOBs in that database... On 2 April it ran into the morning fetch, and the reader stalled for 11 minutes.\" -- this is the motivating problem for the same decision, not a separate section; the History section itself is gone. Borderline pass."
+    },
+    {
+      "text": "[Splitting step 3: keep every option, reason, and consequence] The shortened ADR 003 still lists all three options (files on disk, BLOBs in SQLite, an S3-compatible object store), the measured reason (a 41 GB database copied in 19 minutes against 310 MB in 9 seconds), and both bad consequences (a backup is two things; a row and its file don't change together).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Lines 21-23: \"1. Bodies as zstd-compressed files on disk...\", \"2. Bodies as BLOB columns in the SQLite database\", \"3. Bodies in an S3-compatible object store\"; outcome: \"a 41 GB database that took 19 minutes to copy... the database was 310 MB and copied in 9 seconds\"; consequences: \"Bad, because a backup is now two things...\" and \"Bad, because nothing makes a row and its file change together\". All present in X 003.md (lines 25-46)."
+    },
+    {
+      "text": "[Splitting step 3: add none] The shortened ADR 003 has no option, reason, or consequence that the original didn't state.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Options, reasons and consequences are the original text with sentences split (\"...copy. With bodies as files...\"; \"...missing.\" split). The BLOB-stall sentences moved into Context come from the original History; nothing new as option/reason/consequence."
+    },
+    {
+      "text": "[Splitting step 3: fix a title that names a topic] The ADR's title states the decision as a sentence, not \"Storage\".",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "doc/adr/003.md line 7: \"# ADR 003: Article bodies are compressed files on disk, indexed in SQLite\" (was \"# ADR 003: Storage\")."
+    },
+    {
+      "text": "[Splitting step 2: group the detailed design into design documents] A design document under doc/design/ holds the articles table's columns, the file naming rule (SHA-256, two-hex-digit subfolder, .zst), the 90-day retention default with retention_days and starred articles, and the nightly cleanup with the monthly VACUUM.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "X doc/design/storage.md: \"## Table layout\" with column table; \"SHA-256 of the uncompressed body, in hex, with `.zst` appended\", \"subfolder named for the first two hex digits\"; \"90 days from `fetched_at` by default... `retention_days`... Starred articles are kept regardless.\"; \"Every night at 03:00... 3. Runs `VACUUM`, on the first night of each month only.\""
+    },
+    {
+      "text": "[Splitting step 2: a plain specification of how things are now] That design document has no history: no spike run IDs (2026-04-09-a and the like), no account of BLOBs being tried first, and no removed migration.",
+      "verdict": "FAIL",
+      "passed": false,
+      "evidence": "grep on X doc/design/storage.md matched: line 49 \"| 2026-04-09-a | none | 38 GB | |\" (and -b, -c, -d runs), line 39 \"They were added on 15 April, after `ls bodies/` hung a terminal.\", line 70 \"## Migration from BLOBs\", line 72 \"Release 0.3.0 moved existing bodies out of the database. Its code was removed in 0.5.0.\" Spike IDs and removed migration present."
+    },
+    {
+      "text": "[Splitting step 1: the rest is detailed design] No second ADR is created for retention, file naming, or cleanup.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json added only \"evals/adr/files/quillfeed/doc/design/storage.md\"; no new file under doc/adr/ (ls of doc/adr shows only 003.md modified)."
+    },
+    {
+      "text": "[Splitting step 4: rewrite every citation] In src/quillfeed/store.py, the comments about file naming and retention now name the design document by path instead of ADR 003's sections, and the citation for why bodies are files still names ADR 003.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "store.py: \"The naming is doc/design/storage.md, \\\"File naming\\\".\" and \"(doc/design/storage.md, \\\"Retention\\\")\"; module docstring still \"(ADR 003)\"."
+    },
+    {
+      "text": "[Splitting step 4: update the index] doc/README.md lists the new design document, and its line for ADR 003 matches the ADR's title.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "\"| [003](adr/003.md) | Article bodies are compressed files on disk, indexed in SQLite |\" matches the ADR title; added \"- [design/storage.md](design/storage.md): ...\" under Design."
+    },
+    {
+      "text": "[Splitting step 5: map every section] The reply maps each section of the old ADR (table layout, file naming, retention, cleanup schedule, history) to where it went, or says it was dropped and why.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "response.md maps sections: design doc bullets \"Table layout...\", \"File naming...\", \"Retention.\", \"Cleanup schedule, as three numbered nightly steps.\"; History: \"The problem that started this ... is now in Context... The rest of the history was tuning, so it went to the design doc.\" Every old section accounted for (no table, but each named with destination)."
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 1,
+    "total": 10,
+    "pass_rate": 0.9
+  },
+  "blind_label": "X"
+}

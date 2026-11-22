@@ -1,0 +1,1 @@
+we shipped the per-host fetch queue in quillfeed (evals/adr/files/quillfeed) a few weeks ago, see src/quillfeed/fetch.py and notes/2026-10-fetch-queue.md, so ADR 002 is just wrong now. can you fix up the decision log?

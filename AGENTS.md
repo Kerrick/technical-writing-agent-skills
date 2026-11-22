@@ -9,7 +9,7 @@ Read [README.md](README.md) for what this is, [method/README.md](method/README.m
 - **Keep runs comparable.** Don't change `method/sources.toml` sources, scopes or commits, or `evals/developer-docs/`, as part of a run.
 - **Never install the baseline or a developer-docs skill while running the method**, this repo's included. Install only `method/vendor/agent-skills`.
 - **The maintainer's rules are in `method/maintainer-rules.md`.** Every skill follows them. Add a rule there when the maintainer corrects the same habit twice, not in one skill alone.
-- **`skills/developer-docs/` changes only when a run's evals beat it,** or when the maintainer sets a rule for every skill, recorded in that run's README. `skills/readme-rewrite/` isn't made by the method and changes the ordinary way.
+- **`skills/developer-docs/` changes only when a run's evals beat it,** or when the maintainer sets a rule for every skill, recorded in that run's README. Every other skill in `skills/` isn't made by the method and changes the ordinary way.
 - **Python only**, run with `uv run`, standard library first. No shell scripts. Each mise task runs exactly one script in `method/scripts/`.
 - **No fixed paths or baseline line numbers in prompts.** Use the `${SLOTS}` in method/README.md, and describe a baseline rule by what it says.
 - **Pin to public, exact versions:** full commit hashes reachable upstream, exact tool versions. Prefer the newest stable release.

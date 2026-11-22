@@ -4,7 +4,7 @@ description: Use when rewriting, substantially editing, restructuring, or review
 license: MIT-0
 metadata:
   author: Kerrick Long
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Rewrite a README

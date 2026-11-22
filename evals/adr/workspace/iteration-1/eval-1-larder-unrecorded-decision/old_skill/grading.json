@@ -1,0 +1,77 @@
+{
+  "assertion_results": [
+    {
+      "text": "[Workflow step 2: Follow the log that exists] Exactly one new file is added under docs/decisions/, named with a four-digit number and a dashed title, with the same front-matter fields (status, date, deciders) and section headings as the two existing records.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json adds exactly one file under docs/decisions/: '0010-devices-share-the-database-file-through-the-users-own-sync-service.md'. The other added file is under docs/research/. Front matter has status, date and deciders, plus an extra 'consulted: Jun Akiyama'. All existing headings are present, plus '## More Information'. I accept the extra field and section as a superset, but they are a mild departure from the two existing records."
+    },
+    {
+      "text": "[Workflow step 3: Take the next number] The new record is numbered 0010, because docs/research/2026-06-12-barcode-lookup.md names a deleted former ADR 0009. It is not 0007 or 0009.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Named '0010-...'. The response says: 'The highest I found is the deleted 0009, so I used 0010.'"
+    },
+    {
+      "text": "[When the record is thin: no alternative weighed] The record says plainly that no alternative was weighed when the decision was made.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Only option 1 was considered when the decision was made.' and 'No reason was recorded for preferring it to a sync server or to merging, because neither was discussed.'"
+    },
+    {
+      "text": "[When the record is thin: later research] Every alternative the record describes (such as a hosted sync server) is labelled as found or researched after the decision, with a date, and is not given as a reason the decision was made.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Options 2 and 3 come from later research ([docs/research/2026-11-22-device-sync-options.md](...)), and were not weighed against it.' The date is in the linked note's name, and the note says it was 'Written for ADR 0010, eight months after the decision ... nothing here was a reason for that decision.'"
+    },
+    {
+      "text": "[When the record is thin: record only the reasons it had] The record attributes to Mira Okafor no reason beyond what notes/2026-03-sync.md records (people asked to use larder on two computers; the file is the whole pantry). It doesn't say she chose it for cost, privacy, or simplicity.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Outcome: 'The only reason recorded is that the file is the whole pantry ... This record does not claim that option 1 is better than either.' Drivers: 'A household using larder on several devices must see one pantry.' and 'The answer had to ship in 0.4.' (the notes say 'We ship that in 0.4'), then 'No other driver was recorded.' The 'Good, because ... hold no user data' bullet is a consequence and is not given as her reason."
+    },
+    {
+      "text": "[Workflow step 5: Confidence] A Confidence statement is present, and it doesn't claim that the chosen approach is better than the alternatives.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'Confidence: high that a pantry kept in a synced folder shows up on every device; users have done this since 0.4. Low that this is the best option, since no comparison was made.'"
+    },
+    {
+      "text": "[Workflow step 5: Consequences] The consequences include that two devices writing before a sync leave a conflict copy, which larder doesn't merge, so the user must pick one file and can lose entries.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'When two devices write before syncing, the service keeps both ... (issue 41). Since 0.4.1, larder stops on start ... tells the user to keep one. It doesn't merge them, so the changes in the copy the user deletes are lost.'"
+    },
+    {
+      "text": "[Workflow step 5: Confirmation] The Confirmation section names tests/test_sync.py or the start-up check in src/larder/sync.py, and claims nothing those don't check (they detect conflict copies; they don't test syncing).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'`tests/test_sync.py` checks that a Dropbox conflict copy is found and that other `.db` files are ignored. No test covers the iCloud or Syncthing names, or checks that larder runs this check on start.'"
+    },
+    {
+      "text": "[When the record is thin: deciders] The deciders field names Mira Okafor, and doesn't present Jun Akiyama as having chosen the approach.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'deciders: Mira Okafor (maintainer)' and 'consulted: Jun Akiyama'. Being consulted does not present Jun as the one who chose."
+    },
+    {
+      "text": "[Workflow step 5: one decision in about a page] The new record is 80 lines or fewer and doesn't restate how conflict detection works beyond a pointer to docs/design/storage.md or src/larder/sync.py.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "wc -l: 50 lines. It points to docs/design/storage.md for 'checks it on start'. The consequence says only 'larder recognises three naming patterns' and does not list or explain them."
+    },
+    {
+      "text": "[Style: no placeholders] No file the agent wrote or changed contains TODO, TBD, a bracketed placeholder, or a question to the maintainer.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Ran `grep -rnE \"TODO|TBD|\\[[A-Z ]+\\]|\\?$|\\? \" outputs/X/files`: the only hits are the Context and Problem Statement question (line 11/12, 'How does a household see the same pantry on more than one device?'), which is the template's problem question, the same as in 0002/0006, and not a question to the maintainer. No TODO, TBD or bracketed placeholder. The research note has no hits."
+    }
+  ],
+  "summary": {
+    "passed": 11,
+    "failed": 0,
+    "total": 11,
+    "pass_rate": 1.0
+  },
+  "blind_label": "X"
+}

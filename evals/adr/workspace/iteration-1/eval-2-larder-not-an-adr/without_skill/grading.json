@@ -1,0 +1,41 @@
+{
+  "assertion_results": [
+    {
+      "text": "[Workflow step 1: Test the decision] No file is added under docs/decisions/, and neither existing ADR is changed.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json: \"added\": [], \"deleted\": [], \"modified\" only [\"evals/adr/files/larder/docs/design/cli-output.md\"]. No ADR added; existing ADRs unchanged."
+    },
+    {
+      "text": "[Workflow step 1: record it in the design document for its subject] docs/design/cli-output.md now states both rules: output goes through say() in src/larder/ui.py, not bare print(), and units are printed abbreviated.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "diff vs input docs/design/cli-output.md: added \"Everything larder prints goes through `say()` in `src/larder/ui.py`. No other module calls `print()`.\" and \"Units are always printed abbreviated: `1.5 kg`, never `1.5 kilograms`.\" Both rules stated."
+    },
+    {
+      "text": "[Workflow step 1: say why it didn't pass] The reply tells the user that no ADR was written and why: the rules are conventions or detailed design, resolve no architecturally significant requirement, or would cost little to undo.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "response.md: \"I didn't write an ADR.\" ... \"Sending all output through `say()` and abbreviating units are output conventions. Either one could be changed in an afternoon.\" Says no ADR and why (convention, cheap to undo)."
+    },
+    {
+      "text": "[Style: state facts as they are now] The text added to the design document states the rules as how output works, without narrating that they were agreed on Friday or how the team got there.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Added text: \"Everything larder prints goes through `say()`...\", \"Units are always printed abbreviated\" \u2014 present-tense statements. grep for friday|agreed on outputs/X/files: no output."
+    },
+    {
+      "text": "[Style: no placeholders] No file the agent wrote or changed contains TODO, TBD, a bracketed placeholder, or a question to the maintainer.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "grep -rniE \"TODO|TBD|\\[[^]]*\\]|\\?|friday|agreed\" outputs/X/files returned nothing."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "blind_label": "X"
+}

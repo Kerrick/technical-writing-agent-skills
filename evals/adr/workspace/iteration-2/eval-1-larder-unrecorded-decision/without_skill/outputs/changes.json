@@ -1,0 +1,9 @@
+{
+  "added": [
+    "evals/adr/files/larder/docs/decisions/0007-devices-share-a-pantry-through-the-users-file-sync.md"
+  ],
+  "modified": [
+    "evals/adr/files/larder/docs/design/storage.md"
+  ],
+  "deleted": []
+}

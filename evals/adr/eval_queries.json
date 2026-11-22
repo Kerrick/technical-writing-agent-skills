@@ -1,0 +1,82 @@
+[
+  {
+    "query": "we picked Postgres over DynamoDB for the orders service last sprint and I want that written down before everyone forgets why. docs/decisions is where they go",
+    "should_trigger": true
+  },
+  {
+    "query": "write an ADR for moving auth from sessions to JWTs, context is in #eng-platform thread I pasted in notes/jwt.md",
+    "should_trigger": true
+  },
+  {
+    "query": "docs/adr/0012-event-bus.md is like 400 lines and has the whole topic naming scheme in it. can you cut it down to an actual decision",
+    "should_trigger": true
+  },
+  {
+    "query": "is this worth an ADR? we're standardizing on pnpm instead of npm in the monorepo",
+    "should_trigger": true
+  },
+  {
+    "query": "review the three decision records Priyanka added in PR 318 before I approve, be picky",
+    "should_trigger": true
+  },
+  {
+    "query": "ADR 7 says we deploy with Capistrano but we moved to Kamal in march. the decision log needs fixing",
+    "should_trigger": true
+  },
+  {
+    "query": "nobody remembers why the ingest pipeline is in Go when everything else is Ruby. can you dig through the history and record the reasoning somewhere permanent",
+    "should_trigger": true
+  },
+  {
+    "query": "set up a decision log for this repo, MADR style, and write the first record for choosing SQLite",
+    "should_trigger": true
+  },
+  {
+    "query": "two of the agents both created 0031 in doc/adr yesterday and now there are duplicates. sort out the numbering",
+    "should_trigger": true
+  },
+  {
+    "query": "our architecture decisions folder still has a bunch of superseded ones lying around, what should happen to those?",
+    "should_trigger": true
+  },
+  {
+    "query": "write the design doc for the new rate limiter: token bucket per API key, limits in config/limits.yml, how the middleware reads them",
+    "should_trigger": false
+  },
+  {
+    "query": "the README for this gem needs a section on why you'd pick it over the alternatives",
+    "should_trigger": false
+  },
+  {
+    "query": "add a CHANGELOG entry for dropping Ruby 3.1 support",
+    "should_trigger": false
+  },
+  {
+    "query": "help me decide between Redis and Postgres LISTEN/NOTIFY for the job queue. what are the tradeoffs?",
+    "should_trigger": false
+  },
+  {
+    "query": "write an RFC proposing we split the monolith's billing module into its own service, for discussion at thursday's arch review",
+    "should_trigger": false
+  },
+  {
+    "query": "document the retry and backoff settings in config/fetch.yml in the reference docs",
+    "should_trigger": false
+  },
+  {
+    "query": "turn my notes on how we do migrations into a skill so the agent stops getting it wrong",
+    "should_trigger": false
+  },
+  {
+    "query": "summarize what was decided in yesterday's planning meeting from the transcript in notes/2026-11-20.txt and email it to the team",
+    "should_trigger": false
+  },
+  {
+    "query": "add a comment above the retry loop in fetch.py explaining why we cap it at five attempts",
+    "should_trigger": false
+  },
+  {
+    "query": "write a postmortem for tuesday's outage, timeline is in incidents/2026-11-17.md",
+    "should_trigger": false
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "scores": {
+    "W": {
+      "accuracy": 7,
+      "restraint": 5,
+      "usefulness": 6,
+      "concision": 7,
+      "overall": 5,
+      "notes": "The 004 record is solid and accurate, but W kept 002 as superseded with an added banner and a struck-through index row, which goes against the log's model of one current record per decision. The 004 context is framed around 002 and adds a 'supersedes' field. W does flag the 90-feed / 15-minute conflict, the code/design mismatches and the missing test. It drops the notes' claim that option 1 keeps the 15-minute promise and gives its own reasoning instead."
+    },
+    "X": {
+      "accuracy": 7,
+      "restraint": 6,
+      "usefulness": 8,
+      "concision": 6,
+      "overall": 7,
+      "notes": "Cleanest standalone 004 with no reference to 002. It deletes 002 and rewrites every citation. But it imports the March 'timer per feed' option, which the notes don't weigh. Its Confidence paragraph is long, and it adds a Confirmation gap statement. The reply is thorough and catches the ADR 001 missing test and the missing fetch-status command, but it runs long."
+    },
+    "Y": {
+      "accuracy": 9,
+      "restraint": 8,
+      "usefulness": 8,
+      "concision": 8,
+      "overall": 9,
+      "notes": "Faithful to the notes: three options, the right reasons, Dana as decider. Calibrated confidence flags the 90-feed limit. 002 is deleted, all citations are rewritten, and the reply is clear. Small issues: an extra 'consulted' field, and the reply's first line says 'The old poller decision is now ADR 004', which is slightly wrong wording."
+    }
+  },
+  "ranking": [
+    "Y",
+    "X",
+    "W"
+  ],
+  "reasoning": "Y does everything the task wants, with the least invention and a compact, accurate record and reply. X is as complete on citations but adds an option the notes never weighed and is wordier. W writes a good 004 but doesn't delete 002 (keeps it as superseded), which is the core of the requested log fix under this convention.",
+  "assertion_notes": "Assertion 2 is judgment-based: W's 004 frames its context on 'Under ADR 002' and says '(carried over from ADR 002)', yet it explains enough to read on its own. It passed narrowly. Assertion 4's 'cites ADR 002 as the current decision' lets W's struck-through '(superseded by 004)' index row pass, so assertion 3 carries the penalty for keeping 002. Assertion 1's 'front-matter fields of the existing records' doesn't say whether extra fields (consulted, supersedes) are allowed. They were treated as allowed. Assertion 11 fails automatically for any output that didn't delete 002."
+}

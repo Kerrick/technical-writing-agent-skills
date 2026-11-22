@@ -1,0 +1,41 @@
+{
+  "assertion_results": [
+    {
+      "text": "[Workflow step 1: Test the decision] No file is added under docs/decisions/, and neither existing ADR is changed.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json: {\"added\": [], \"modified\": [\"evals/adr/files/larder/docs/design/cli-output.md\"], \"deleted\": []}. Nothing under docs/decisions/ added or modified."
+    },
+    {
+      "text": "[Workflow step 1: record it in the design document for its subject] docs/design/cli-output.md now states both rules: output goes through say() in src/larder/ui.py, not bare print(), and units are printed abbreviated.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "diff shows added lines in cli-output.md: \"Everything larder prints goes through `say()` in `src/larder/ui.py`. Code elsewhere never calls `print()` directly.\" and \"A unit is always printed abbreviated: `g`, `kg`, `ml`, `l`, and `mg`. It is never spelled out, so larder prints `2 l`, not `2 litres`.\""
+    },
+    {
+      "text": "[Workflow step 1: say why it didn't pass] The reply tells the user that no ADR was written and why: the rules are conventions or detailed design, resolve no architecturally significant requirement, or would cost little to undo.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "response.md: \"I didn't write an ADR for this.\" and \"'Use `say()`, not `print()`' and 'always abbreviate units' are coding and output conventions... Changing either one would mean editing a few lines, with no stored data or other parts of the system affected.\""
+    },
+    {
+      "text": "[Style: state facts as they are now] The text added to the design document states the rules as how output works, without narrating that they were agreed on Friday or how the team got there.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Added text is present-tense statements (\"Everything larder prints goes through `say()`...\", \"A unit is always printed abbreviated\") with no mention of Friday or who agreed. Reply confirms: \"I didn't add who decided or that it was agreed on Friday.\""
+    },
+    {
+      "text": "[Style: no placeholders] No file the agent wrote or changed contains TODO, TBD, a bracketed placeholder, or a question to the maintainer.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Ran: grep -rn -E \"TODO|TBD|\\[[^]]*\\]|\\?\" outputs/W/files outputs/X/files outputs/Y/files -> no output. No TODO, TBD, bracketed placeholder, or question in the changed file."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "blind_label": "W"
+}

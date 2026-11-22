@@ -1,0 +1,77 @@
+{
+  "assertion_results": [
+    {
+      "text": "[When a decision changes: write a new ADR with the next number] A new record doc/adr/004.md exists, with the heading form and front-matter fields of the existing records, and it states the per-host queue decision.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json added doc/adr/004.md. Front matter has status/date/deciders like 001-003 (plus consulted); heading '# ADR 004: Each host has its own fetch queue and one worker'; Considered option 1 is 'A queue per host, each with one worker that leaves at least 10 seconds between requests' and it is chosen."
+    },
+    {
+      "text": "[When a decision changes: restate the whole decision] ADR 004 reads without ADR 002: it gives the problem, the drivers (a new article within 15 minutes; fits in one process) and the decision in full, and doesn't describe itself as a list of changes to ADR 002.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Context gives the problem without relying on 002 ('Many feeds share a host... on 6 October all three hosts answered 429... what fetches feeds, and when, so that no host is sent a burst?'). Drivers: 'A new article shows up within 15 minutes.', 'Fetching must fit in the one process.' Decision outcome is full. grep for '002' in W's files found no match, so it never frames itself as changes to 002."
+    },
+    {
+      "text": "[When a decision changes: delete the old record] doc/adr/002.md is deleted. It isn't kept with a superseded or deprecated status, and no dated note was added to it.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "changes.json: \"deleted\": [\"evals/adr/files/quillfeed/doc/adr/002.md\"]; no 002.md under outputs/W/files."
+    },
+    {
+      "text": "[When a decision changes: rewrite every citation] No file under src/ or doc/ still cites ADR 002 as the current decision: src/quillfeed/fetch.py (its module docstring and the run_once docstring), doc/design/fetching.md, and the table in doc/README.md cite ADR 004.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "grep -rn -e 002 ... outputs/W/files found no '002' anywhere. fetch.py: '(ADR 004)' in module docstring and 'after the spacing ADR 004 requires' in run_once; fetching.md: 'Fetching follows ADR 004.'; README table: '| [004](adr/004.md) | Each host has its own fetch queue and one worker |'."
+    },
+    {
+      "text": "[Workflow step 6: check every fact] The module docstring of src/quillfeed/fetch.py no longer says that one poller walks every feed in turn.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "fetch.py module docstring: \"Fetch feeds. Each host has its own queue and one worker (ADR 004).\" The only 'walks every feed' grep hit in W's files is option 2 in 004.md."
+    },
+    {
+      "text": "[Workflow step 5: options that were really weighed] ADR 004 lists the three options from the notes (a queue per host with spaced requests; one poller that sleeps between feeds on a host; WebSub only), with the reasons the notes give for the two that lost: a walk went from 6 to 70 minutes, and 9% of feeds advertise a hub. It adds no option the notes don't have.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Options 1-3: per-host queue; 'One poller that walks every feed in turn and sleeps 10 seconds between two feeds on the same host'; 'No polling: subscribe with WebSub'. Reasons: 'one walk went from 6 minutes to 70'; 'only 216 of the 2,400 feeds (9%) advertise a hub'. There are no other options."
+    },
+    {
+      "text": "[When the record is thin: deciders] ADR 004 names Dana Whitlock as the decider, and doesn't credit Tom\u00e1s Reyes with the decision (he tested option 2 and built option 1).",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'deciders: Dana Whitlock (maintainer)' / 'consulted: Tom\u00e1s Reyes'. Tom\u00e1s isn't credited with the decision."
+    },
+    {
+      "text": "[Workflow step 5: Consequences] ADR 004 lists the two costs in the notes: one thread per host with something due (340 at the peak), and no single loop to look at when fetching stops.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'one thread per host with something due, 340 at the peak'; 'when fetching stops there is no longer one loop to look at'."
+    },
+    {
+      "text": "[Workflow step 5: Confirmation] ADR 004's Confirmation names tests/test_fetch_spacing.py, and doesn't name tests/test_poller.py, which the repository doesn't have.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "Confirmation: '`tests/test_fetch_spacing.py` fails if a host's queue sends its second request without first waiting `SPACING_SECONDS`'. grep found no test_poller in W's files."
+    },
+    {
+      "text": "[When a decision changes: status] ADR 004's status is accepted, with nothing else in that field.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "'status: accepted'"
+    },
+    {
+      "text": "[Workflow step 8: report] The reply says that ADR 002 was deleted and lists the citations that were rewritten.",
+      "verdict": "PASS",
+      "passed": true,
+      "evidence": "response.md: '**Deleted:** `doc/adr/002.md`' and '**Citations updated:** the index in `doc/README.md`, the line in `doc/design/fetching.md`, and the two docstrings in `src/quillfeed/fetch.py`.'"
+    }
+  ],
+  "summary": {
+    "passed": 11,
+    "failed": 0,
+    "total": 11,
+    "pass_rate": 1.0
+  },
+  "blind_label": "W"
+}

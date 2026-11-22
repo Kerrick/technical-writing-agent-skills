@@ -1,0 +1,35 @@
+{
+  "scores": {
+    "Y": {
+      "accuracy": 9,
+      "restraint": 9,
+      "usefulness": 9,
+      "concision": 9,
+      "overall": 9,
+      "notes": "ADR left almost verbatim, with one pointer line. The design doc is a clean present-tense spec. It caught and fixed the false Confirmation claim. The reply maps every section and offers to add back the level-9 reason that was dropped. It flags ADR 002 drift without touching it."
+    },
+    "W": {
+      "accuracy": 9,
+      "restraint": 7,
+      "usefulness": 9,
+      "concision": 8,
+      "overall": 8,
+      "notes": "Clean design doc, and it keeps the level-19 reason as a present-tense rationale. It fixed the false Confirmation. It added a 'More Information' section to the ADR holding history evidence, which brings back narrative the split meant to remove, and it lightly reworded sentences. The reply is thorough and notes the missing tests in ADRs 001/002."
+    },
+    "X": {
+      "accuracy": 7,
+      "restraint": 6,
+      "usefulness": 6,
+      "concision": 7,
+      "overall": 6,
+      "notes": "Moved history into both the ADR Context and the design doc: a spike-run table with run IDs, '15 April' anecdote, a removed-migration section. The design doc is no longer a statement of how things are now. It kept the false Confirmation claim unchanged."
+    }
+  },
+  "ranking": [
+    "Y",
+    "W",
+    "X"
+  ],
+  "reasoning": "All three split the ADR correctly, retitled it, repointed citations and updated the index. Y is the most restrained and gives the clearest specification. W is close but adds history-flavoured evidence back into the ADR. X brought spike-run history and the dead migration into the design doc, and it missed the inaccurate Confirmation that both W and Y caught by checking tests/test_store.py.",
+  "assertion_notes": "Assertion 1 ('no longer contains... history sections') is ambiguous when the History section is gone but some of its content (the 2 April stall, compression sizes) was moved into Context or 'More Information' as evidence. W and X were passed because the History section itself is gone. Assertion 3 doesn't cover the Confirmation rewrite; W and Y changed it to match the real test, which is a correction, not an addition. Assertions 7 and 9 pass for nearly any split: the README index title already matched the ADR's new title."
+}

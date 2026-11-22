@@ -14,7 +14,7 @@ description: >-
 license: CC-BY-4.0
 metadata:
   author: Kerrick Long
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Skill authoring

@@ -135,6 +135,6 @@ With Claude Code's command line (v2.1.311):
 - **Start** a session with a known ID: `claude -p --model <model> --effort <level> --session-id <uuid> --output-format json "<prompt>" < /dev/null`.
 - **Continue** it: `claude -p --resume <uuid> … "<next prompt>"`.
 - **Fork** it: `claude -p --resume <uuid> --fork-session … "<prompt>"`. The fork gets everything the session had and its own ID, and leaves the original unchanged.
-- **Measure context** from the result's `usage`: `input_tokens`, `cache_read_input_tokens`, `cache_creation_input_tokens`.
+- **Measure context** from the session's transcript, not the JSON result: add `input_tokens`, `cache_read_input_tokens`, and `cache_creation_input_tokens` in the last assistant message's `usage` in `~/.claude/projects/<cwd>/<session>.jsonl`. The result's `usage` is summed over the session's calls.
 - **Limit** a session with `--allowedTools`, keep it to the run's folders with `--add-dir`, and start it from the run's working folder.
 - **For every eval run,** add `--disallowedTools Skill` and give the skill by path in the prompt.

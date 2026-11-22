@@ -1,0 +1,5 @@
+Read the skill at /private/tmp/claude-501/-Users-kerrick-Developer-technical-writing-agent-skill/d8d5c394-1abb-4904-8736-76bc345708e8/scratchpad/adr-evals/snap/old/adr/SKILL.md and follow it for this task. Its reference files are in that same folder; read them when SKILL.md says to.
+
+Task:
+
+doc/adr/003.md in quillfeed (evals/adr/files/quillfeed) is 75 lines of very long paragraphs now and more than half of it is table layouts, file naming and the cleanup schedule. can you sort that out?

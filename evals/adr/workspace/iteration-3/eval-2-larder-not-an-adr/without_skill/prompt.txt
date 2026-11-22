@@ -1,0 +1,1 @@
+add an ADR to larder (evals/adr/files/larder) for the thing we agreed on friday: everything the CLI prints goes through the say() helper in src/larder/ui.py instead of bare print(), and units are always printed abbreviated (g, kg, ml, l), never spelled out. thanks!

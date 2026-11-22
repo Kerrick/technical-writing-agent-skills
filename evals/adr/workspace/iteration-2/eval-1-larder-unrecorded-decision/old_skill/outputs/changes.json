@@ -1,0 +1,8 @@
+{
+  "added": [
+    "evals/adr/files/larder/docs/decisions/0010-devices-share-the-database-file-through-the-users-own-sync-service.md",
+    "evals/adr/files/larder/docs/research/2026-11-22-device-sync-options.md"
+  ],
+  "modified": [],
+  "deleted": []
+}

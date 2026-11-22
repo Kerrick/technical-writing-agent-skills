@@ -1,0 +1,5 @@
+Read the skill at /private/tmp/claude-501/-Users-kerrick-Developer-technical-writing-agent-skill/d8d5c394-1abb-4904-8736-76bc345708e8/scratchpad/adr-evals/snap/new3/adr/SKILL.md and follow it for this task. Its reference files are in that same folder; read them when SKILL.md says to.
+
+Task:
+
+we never wrote down why larder (evals/adr/files/larder) syncs between devices by having people put the database file in their Dropbox or iCloud folder instead of us running a sync server. Mira decided it back in March, and as far as I can tell from notes/2026-03-sync.md nobody looked at anything else. can you write the ADR for it?

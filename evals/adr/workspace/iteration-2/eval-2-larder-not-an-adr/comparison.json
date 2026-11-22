@@ -1,0 +1,35 @@
+{
+  "scores": {
+    "W": {
+      "accuracy": 9,
+      "restraint": 8,
+      "usefulness": 9,
+      "concision": 7,
+      "overall": 8,
+      "notes": "Minimal, accurate doc edits. Reply correctly notes the next ADR number must be after deleted ADR 0009 (from docs/research note) and flags mg inclusion. Reply is the longest, with a 'judgment calls' list that is useful but a bit heavy."
+    },
+    "X": {
+      "accuracy": 7,
+      "restraint": 8,
+      "usefulness": 9,
+      "concision": 8,
+      "overall": 8,
+      "notes": "Best doc edit: new Printing section explains why say() matters (colour/NO_COLOR check), linking to existing Colour section. But reply offers to write the ADR as '0007', which would reuse a number given the research note says former ADR 0009 existed and was deleted. Good point that an ADR would require inventing rejected options."
+    },
+    "Y": {
+      "accuracy": 9,
+      "restraint": 9,
+      "usefulness": 8,
+      "concision": 9,
+      "overall": 8,
+      "notes": "Tight, correct edits listing the abbreviations explicitly; clear reply quoting the README's split between decisions/ and design/. Avoids the numbering error. Slightly less explanatory doc text than X. Reply references 'the skill's test' (ignored per instructions)."
+    }
+  },
+  "ranking": [
+    "Y",
+    "W",
+    "X"
+  ],
+  "reasoning": "All three made the right call and pass every assertion. Y is the cleanest: concise, accurate, well-justified from repo docs. W is equally accurate and catches the ADR-number subtlety, but is wordier. X has the most informative doc text, but its offer to number a future ADR 0007 ignores the deleted ADR 0009 noted in docs/research, a factual slip.",
+  "assertion_notes": "Assertions 1 and 5 are mechanical and pass trivially for any agent that only edits the design doc. Assertion 4 is satisfied by any terse rule statement. None of the assertions distinguish quality of the reasoning or reply accuracy (e.g., X's ADR numbering slip)."
+}

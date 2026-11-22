@@ -1,0 +1,35 @@
+{
+  "scores": {
+    "W": {
+      "accuracy": 8,
+      "restraint": 9,
+      "usefulness": 9,
+      "concision": 9,
+      "overall": 9,
+      "notes": "Cleanest split. The ADR is word for word the original plus one link, and the design doc is pure present tense. It caught the false Confirmation claim and fixed it honestly. Two deductions: it changed the front-matter date to 2026-11-22 (and flagged it), which arguably misdates an April decision, and it dropped the zstd level 3/9/19 rationale entirely, though it said so. The reply maps every section, and its notes about ADR 002 are useful and left unchanged."
+    },
+    "X": {
+      "accuracy": 9,
+      "restraint": 7,
+      "usefulness": 8,
+      "concision": 7,
+      "overall": 7,
+      "notes": "Good design doc that keeps the level-19 reason as a present-tense rationale. Fixed the false Confirmation. But it added a 'More Information' section to the ADR that brings back History: the 2 April stall and the compression sizes, which are tuning detail. It also lightly reworded the Context and the Consequences. Most thorough mapping of History in the reply."
+    },
+    "Y": {
+      "accuracy": 6,
+      "restraint": 6,
+      "usefulness": 7,
+      "concision": 7,
+      "overall": 6,
+      "notes": "Reasonable ADR, with the triggering incident moved into Context. But the design doc keeps the spike run IDs, the '15 April... hung a terminal' backstory and a 'Migration from BLOBs' section about removed code, so it isn't a spec of how things are now. It left the false Confirmation (claims a test that doesn't exist) unflagged."
+    }
+  },
+  "ranking": [
+    "W",
+    "X",
+    "Y"
+  ],
+  "reasoning": "All three got the core split right: retitled ADR, a new doc/design/storage.md, repointed docstrings, updated index. W draws the cleanest line between decision and design and fixes the wrong Confirmation. X is close behind but puts history back into the ADR under a new heading. Y carries history into the design doc and misses the false test claim that W and X both caught.",
+  "assertion_notes": "Assertion 1 ('no longer contains ... history sections') is ambiguous when history content moves under another heading. X (a More Information section with tuning numbers) was graded FAIL. Y (the incident leading to the decision, folded into Context) was graded PASS, since that is arguably proper context. Assertion 3 doesn't count fixing a factually wrong Confirmation as 'adding'; W and X both did this, and it improves accuracy. Assertions 7-9 passed for every label and don't tell them apart. No assertion checks the false Confirmation claim (tests/test_store.py has no 2 KB growth test), which is the main accuracy difference."
+}

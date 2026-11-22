@@ -1,0 +1,35 @@
+{
+  "scores": {
+    "X": {
+      "accuracy": 9,
+      "restraint": 9,
+      "usefulness": 8,
+      "concision": 9,
+      "overall": 9,
+      "notes": "This is the most faithful to the notes: one driver, one option, the one recorded reason, and 'the deciders didn't record any' confidence. It's the only one that cites the tests honestly, saying nothing tests that two devices end up with the same pantry. The later research is dated and quarantined. One weakness: the date is 2026-11-22 rather than the decision date, which is defensible but less helpful, and the decision date only appears in More Information. The sync.py docstring edit is a small, reasonable cross-link. The research cites external sources that weren't fully verified, and the response discloses that."
+    },
+    "W": {
+      "accuracy": 8,
+      "restraint": 6,
+      "usefulness": 9,
+      "concision": 7,
+      "overall": 8,
+      "notes": "This is accurate on the decision and honest about the missing comparison. It noticed that nothing calls refuse_if_conflicted. It's the most useful to a later reader, because the separate dated research note explains the event-union merge. But it adds unsupported consequences ('a service may upload the file while SQLite is still writing it') and an unverified claim that SQLite's documentation advises against this. Listing later-research options inside Considered Options blurs the line, even with a label. The extra research file and the 'consulted' field go beyond what was asked."
+    },
+    "Y": {
+      "accuracy": 6,
+      "restraint": 5,
+      "usefulness": 6,
+      "concision": 7,
+      "overall": 5,
+      "notes": "It took the wrong number (0007), missing the deleted 0009. It borrows ADR 0002's drivers and gives 'It needs no new code' as the reason, which supplies rationale the notes don't record. It copies the marker strings from sync.py. It is honest that no alternative was weighed, and it rightly left the SQLite-corruption speculation out of the record."
+    }
+  },
+  "ranking": [
+    "X",
+    "W",
+    "Y"
+  ],
+  "reasoning": "X and W both pass every assertion. X ranks first for restraint: it records only what the notes say and confines alternatives to a dated, clearly separated subsection. W is richer and its research note is useful, but it adds speculative consequences and puts unweighed options into Considered Options. Y gets the number wrong and invents rationale through borrowed drivers.",
+  "assertion_notes": "Assertion 1 ('same front-matter fields and section headings'): all three add a '## More Information' section, and W adds a 'consulted' field. Read literally, all three would fail. I graded it as requiring the existing fields and headings to be present, which makes it non-discriminating. Assertion 10's 'doesn't restate how conflict detection works' is a judgment call: Y lists the exact marker strings (FAIL), while W's 'recognises three naming patterns' was judged a cost, not a restatement (PASS). Assertion 4 for Y depends on whether naming alternatives as 'not evaluated' counts as describing them; I judged that it does, so the missing later-research label and date fail it. Assertion 8: Y's claim that the check runs on start is backed by storage.md, but W and X noticed that no code calls refuse_if_conflicted, and the assertion doesn't capture that."
+}

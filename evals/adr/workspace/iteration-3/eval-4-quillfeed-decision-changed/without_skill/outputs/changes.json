@@ -1,0 +1,12 @@
+{
+  "added": [
+    "evals/adr/files/quillfeed/doc/adr/004.md"
+  ],
+  "modified": [
+    "evals/adr/files/quillfeed/doc/README.md",
+    "evals/adr/files/quillfeed/doc/adr/002.md",
+    "evals/adr/files/quillfeed/doc/design/fetching.md",
+    "evals/adr/files/quillfeed/src/quillfeed/fetch.py"
+  ],
+  "deleted": []
+}

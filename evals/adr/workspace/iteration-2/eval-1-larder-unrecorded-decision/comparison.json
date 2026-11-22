@@ -1,0 +1,35 @@
+{
+  "scores": {
+    "W": {
+      "accuracy": 6,
+      "restraint": 7,
+      "usefulness": 6,
+      "concision": 7,
+      "overall": 6,
+      "notes": "Wrong number (0007), missing the deleted 0009 named in the research note. It states as fact that larder 'since 0.4.1... stops on start-up', but nothing in src calls refuse_if_conflicted, and it didn't catch that. It borrows ADR 0002's drivers into Decision Drivers. That move is disclosed but blurs which reasons were real. It copies the MARKERS strings into the ADR. Good: an honest 'No other option was considered' quote, medium confidence with reasons, and a helpful pointer added to storage.md."
+    },
+    "X": {
+      "accuracy": 8,
+      "restraint": 6,
+      "usefulness": 8,
+      "concision": 7,
+      "overall": 8,
+      "notes": "Correct 0010, clean separation of the March decision from dated later research, and split confidence. It caught that refuse_if_conflicted is never called, but only in the reply; the ADR's Consequences still say 'Since 0.4.1, larder stops on start'. It added a whole research note with unmeasured general-knowledge claims ('SQLite's own documentation advises...'), and the ADR adds a mid-write-corruption consequence that no input supports. Both go beyond what was asked or recorded, though they are clearly labelled."
+    },
+    "Y": {
+      "accuracy": 9,
+      "restraint": 6,
+      "usefulness": 8,
+      "concision": 7,
+      "overall": 8,
+      "notes": "Most faithful to the notes. Drivers quote Mira verbatim, 'Confidence: the deciders didn't state any', and the Confirmation says plainly that no code calls refuse_if_conflicted. It kept the mid-sync risk out. Weaknesses: date set to today, against the log's convention of using the decision date (it flagged this). It edited src/larder/sync.py's docstring without being asked. The verbose deciders/informed front-matter values depart from the existing shape. The later research (session extension, cr-sqlite) cites external pages rather than the obvious hosted-server alternative the user mentioned."
+    }
+  },
+  "ranking": [
+    "Y",
+    "X",
+    "W"
+  ],
+  "reasoning": "Y and X both get the number right and keep later research separate and dated. Y sticks most closely to the inputs: it quotes the notes, reports the uncalled start-up check inside the ADR itself, and invents no risks. X is slightly more useful to a future reader because its research note covers the alternative the user named (a sync server) and merging. But it adds unsupported risk claims and leaves an inaccurate start-up claim in the Consequences. W misnumbers the record, describes alternatives without dating them as research, and doesn't catch the uncalled check.",
+  "assertion_notes": "Assertion 1 says the record should have 'the same front-matter fields' and section headings. All three add a '## More Information' section absent from 0002/0006, and X and Y add extra front-matter keys (consulted/informed). I graded it as 'contains the required fields and headings'; under a strict reading all three would fail. Assertion 8 calls 'the start-up check in src/larder/sync.py' real, but no caller exists in the inputs, so the assertion can't separate W (which asserts start-up behaviour) from Y (which reports it as unverified). Assertion 10's 'restate how conflict detection works' is a judgment call; W failed for listing the three MARKERS strings. Assertion 5 is borderline for W: it borrows ADR 0002's drivers but explicitly disclaims them. Assertion 11 is mechanically true for all three; the only '?' is the required problem-statement question."
+}

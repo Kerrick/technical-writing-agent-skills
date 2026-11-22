@@ -11,6 +11,8 @@ The developer-docs skill holds only what one model, at one effort level, doesn't
 | Trigger evals (`evals/developer-docs/eval_queries.json`) | Not yet run |
 | Real tasks | Planned |
 
+adr isn't made by the method either. Its evals ran three times in `evals/adr/workspace/`, with the skill revised after the first two from the assertions it failed, so the third round shows those fixes landed and is not an independent measure. In it, adr passed 37 of 37 assertions, against 30 with no skill and 36 for `old_skill`, the maintainer's earlier private ADR skill that it replaces. Only adr's own runs were repeated; the other two setups' outputs are from the first round, graded again each time.
+
 readme-rewrite isn't made by the method, so it has no run. Its iteration-1 evals, in `evals/readme-rewrite/workspace/iteration-1/`, passed 19 of 19 assertions, against 14 with no skill.
 
 ## Layout
@@ -19,16 +21,18 @@ readme-rewrite isn't made by the method, so it has no run. Its iteration-1 evals
 | - | - |
 | `skills/developer-docs/` | The default developer-docs skill |
 | `skills/readme-rewrite/` | The companion README skill. Not made by the method. |
+| `skills/adr/` | The companion skill for Architecture Decision Records. Not made by the method. |
 | `skills/skill-authoring/` | The companion skill for writing skills. Not made by the method. |
 | `runs/<run>/` | One run of the method for one model and effort level: its baseline, every intermediate file, and (unless it's the default) its own skill. `runs/claude-opus-5.5-medium/` is the first. |
 | `evals/developer-docs/` | The evals every run is tested against: `evals.json`, `eval_queries.json` and their input files |
 | `evals/readme-rewrite/` | readme-rewrite's evals |
+| `evals/adr/` | adr's evals |
 | `evals/skill-authoring/` | skill-authoring's evals |
 | `method/prompts/` | Every prompt as the method now stands, with `${SLOTS}`. Each run's README records where that run differed. |
 | `method/sources.toml` | The seven sources (eight reading forks, since Rails is split in two): repositories, commits, paths, and every per-source prompt value |
 | `method/sources.md` | Why each source and scope was chosen |
 | `method/scripts/` | Fetching sources, filling prompts, extracting files and every check, in Python |
-| `method/harness/` | Scripts agents wrote to drive headless runs and evals, kept as used |
+| `method/harness/` | Scripts agents wrote to drive headless runs and evals, kept as used. `run_skill_evals.py` runs, grades, and aggregates any skill's output evals. |
 | `mise.toml` | Tool versions and tasks: `mise run check`, `mise run fetch`, `mise run prompt` |
 | `method/vendor/agent-skills/` | A pinned copy of the agent-skills skill, which steps 2 and 9 load |
 
@@ -140,7 +144,7 @@ Everything is dedicated to the public domain under [CC0 1.0](../LICENSES/CC0-1.0
 
 The findings files in `runs/*/pipeline/findings/` quote their sources, and each opens with a notice naming its source, copyright holder and license. The quotes are short and used to compare and criticize. React (CC BY 4.0), Ember (MIT), Django (BSD 3-Clause), Rust (MIT or Apache-2.0) and PostgreSQL (PostgreSQL License) are permissive. Rails (CC BY-SA 4.0) and MDN (CC BY-SA 2.5) are share-alike, so the three files that quote them are licensed under those licenses. That applies per file, not to the rest of the repo.
 
-`skills/readme-rewrite/` is licensed under [MIT-0](../LICENSES/MIT-0.txt), as its frontmatter says. `method/vendor/agent-skills/` is licensed under [CC BY 4.0](../LICENSES/CC-BY-4.0.txt). Its references are adapted from the Agent Skills documentation, and its `NOTICE.md` gives the credit and lists the changes.
+Each skill's license is the one its frontmatter names: `skills/readme-rewrite/` is under [MIT-0](../LICENSES/MIT-0.txt), and `skills/skill-authoring/`, which adapts the Agent Skills documentation, is under [CC BY 4.0](../LICENSES/CC-BY-4.0.txt). `method/vendor/agent-skills/` is licensed under [CC BY 4.0](../LICENSES/CC-BY-4.0.txt). Its references are adapted from the Agent Skills documentation, and its `NOTICE.md` gives the credit and lists the changes.
 
 Everything from `abstracted-full.md` onward, the skill included, contains no source wording; `method/scripts/leak_check.py` checks the files that matter.
 
@@ -193,7 +197,7 @@ The GPT-6-Luna trial (`runs/openai-gpt-6-luna-medium/`) found accurate but shall
 
 ## Releasing
 
-Both skills share the repository's version, in each `SKILL.md`'s `metadata.version`.
+Every skill shares the repository's version, in each `SKILL.md`'s `metadata.version`.
 
 1. Set every skill's `metadata.version` to the new version, and run `mise run check`.
 2. Build the ZIPs: `mise run release -- <version>`. It refuses if any skill is at another version, and writes one ZIP per skill to `dist/`, which git ignores.

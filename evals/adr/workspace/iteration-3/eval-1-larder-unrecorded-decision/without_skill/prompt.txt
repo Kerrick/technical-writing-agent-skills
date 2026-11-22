@@ -1,0 +1,1 @@
+we never wrote down why larder (evals/adr/files/larder) syncs between devices by having people put the database file in their Dropbox or iCloud folder instead of us running a sync server. Mira decided it back in March, and as far as I can tell from notes/2026-03-sync.md nobody looked at anything else. can you write the ADR for it?
