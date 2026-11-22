@@ -73,11 +73,12 @@ Core rules:
 - Do not announce virtue with words like "honest", "frankly", or "to be clear". Say the fact.
 - Before you qualify, shrink, or cut a sentence, name the false or unverified fact it states. If you can't, it isn't an overclaim: leave it as written. A statement of what something is for, or what it does, is not an overclaim.
 - Do not claim what you have not tested. Mark unbuilt features as not available, with one line, or leave them out.
-- State a limit only when it changes what the reader can do or should expect: a platform, a version, a model, a prerequisite, a risk to their data. Work the maintainer hasn't done yet, such as tests or benchmarks not yet run, isn't a limit for the reader. It belongs in contributor docs.
+- State a limit only when it changes what the reader can do or should expect: a platform, a version, a model, a prerequisite, a risk to their data.
+- Don't narrate the project's proof. Proof narration is a sentence about how far the project's own testing has got. It either apologizes ("untested", "no app has been through a store's review yet", "no CI job runs on the oldest version") or boasts ("on every change, CI builds each example and runs it on a clean machine", a test count, a list of the devices it has run on). Both tell the reader about the maintainer's work, not about what the reader can do. Cut it, or move it to contributor docs (step 7), and keep only the fact it implies for the reader, such as a platform or a minimum version, stated as a fact. The AI disclosure (step 8) is the one place that names the project's checks.
 
 ## Step 6: Use evidence, not invented proof
 
-Use what exists: CI badges, test counts you ran, release downloads, real projects that use it (only if you can verify), benchmarks you ran. No made-up testimonials, user counts, or logos. If there is no social proof yet, show the CI matrix and a working example instead.
+Use what exists: CI badges, release downloads, real projects that use it (only if you can verify), benchmarks you ran, with their numbers. No made-up testimonials, user counts, or logos. If there is no social proof yet, show a working example with its output. A CI badge is all the evidence of testing a reader needs, since it links to the runs.
 
 ## Step 7: Keep contributor material out, without losing it
 

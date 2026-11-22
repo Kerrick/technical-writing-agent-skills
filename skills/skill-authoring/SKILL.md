@@ -79,7 +79,9 @@ A skill holds only what its target model doesn't already do. Everything else cos
 
 **State verified facts plainly.** Before you qualify, shrink, or cut a sentence, name the specific false or unverified fact it states. If you can't name one, it isn't an overclaim, so leave it as written. A statement of what something is for, or what it does, is not an overclaim. Never attach how narrow the proof was ("tested with", "in our testing", "should work").
 
-**State a limit only where it changes what the reader can do.** A platform, a version, a model, a prerequisite, a risk to their data: state it once, as a fact, where the skill keeps its caveats, such as the `compatibility` field. Work not yet done on the skill, such as evals not yet run, isn't a limit for the agent using it. It belongs in contributor documentation.
+**State a limit only where it changes what the reader can do.** A platform, a version, a model, a prerequisite, a risk to their data: state it once, as a fact, where the skill keeps its caveats, such as the `compatibility` field.
+
+**Don't narrate the skill's proof.** Proof narration is a sentence in a skill about how far its own testing has got. It either apologizes ("evals not yet run", "untested on other models") or boasts ("passes all its evals", "proven on three projects"). Neither tells the agent using the skill what to do. Keep it in contributor documentation, and state in the skill only the fact it implies, such as the model the skill is for. Have the skill hold agents to the same rule in the pages they write for users.
 
 **Explain the why where the agent must judge.** Give the reason behind a rule the agent will have to apply to cases you didn't foresee. Be prescriptive, with exact commands, where the operation is fragile.
 
@@ -98,6 +100,7 @@ Agents decide whether to load a skill from its description alone. Write it as an
 - [ ] **Links.** Every link resolves inside the skill folder or is a public URL; every reference is linked from SKILL.md with when to read it.
 - [ ] **No placeholders.** No file in the skill or its evals holds a placeholder, a question, or a note to the user, and no instruction tells an agent to write one.
 - [ ] **No diluted facts.** Every qualifier names a false or unverified fact; every stated limit changes what the agent can do.
+- [ ] **No proof narration.** No sentence in the skill apologizes for, or boasts about, how far its own testing has got.
 - [ ] **Scripts run as an agent would run them:** from the skill directory, with the command the skill gives, including `--help`. Delete what the test left behind, such as `__pycache__/`.
 - [ ] **Licensing.** Adapted text is credited in `NOTICE.md`, and the `license` field matches.
 - [ ] No gotcha below describes the skill.
@@ -111,7 +114,7 @@ Agents decide whether to load a skill from its description alone. Write it as an
 - Adding a reference file and never saying when to read it, so the agent never does, or always does.
 - Offering a menu of tools with no default, so the agent tries several.
 - Carrying a source's instruction to "mark it with TODO" into the skill, which hands the work back to the user.
-- Writing "evals not yet run" or "this may not work" into SKILL.md, which tells the agent nothing it can act on.
+- Narrating the skill's proof in SKILL.md, apologizing ("evals not yet run", "this may not work") or boasting ("passes all its evals"), which tells the agent nothing it can act on.
 - Putting a gotcha in a reference file whose trigger the agent won't recognize until it's too late.
 - Testing a skill in a session where an installed copy, or a sibling skill, can load too, so results measure the wrong thing.
 - Keeping evals inside the skill folder, where an agent under evaluation can read the assertions, and every install ships them.

@@ -3,13 +3,14 @@
 Derived from line-by-line maintainer feedback on a first draft, generalized. Run every item.
 
 Audience
-- [ ] Is every section for the reader who might use the project? A section on CI internals, decision records, or release gates is for maintainers. Move it or retitle and recast it as user-facing (for example, Compatibility).
+- [ ] Is every section for the reader who might use the project? A section on CI internals, decision records, or release gates is for maintainers. Move it to contributor docs, and keep in Compatibility only the platforms and versions the reader can use.
 - [ ] Does any sentence tell readers to create something they already have?
 - [ ] Is there any internal citation (ADR, plan, decision number)? Remove it.
 - [ ] Would a reader skip a section because the heading looks internal?
 
 Truth
 - [ ] Is each command one you ran? Does each claim match the code?
+- [ ] Does any sentence narrate the project's proof, apologizing ("untested", "not yet through review") or boasting ("CI runs every example on every change", a test count)? Cut it or move it to contributor docs, and keep only the fact it implies for the reader.
 - [ ] Is anything listed that the code does not yet do? Remove or mark it as not available.
 - [ ] Does any sentence say the opposite of what the code or license says? (For example, a license that does or does not reach work built with the tool.) Verify with the license text. If it stays unclear, ask the maintainer and write nothing misleading in the meantime.
 - [ ] Does any wording state a current state as a policy, or a policy as a permanent fact? Keep "not yet available", "not accepted", and "never will" apart.

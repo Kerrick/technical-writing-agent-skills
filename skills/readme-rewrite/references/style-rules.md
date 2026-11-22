@@ -14,6 +14,7 @@
 - **Stock openers and closers.** "In today's world", "Whether you are ... or ...", "Happy shipping".
 - **Your private shorthand.** Words like "deeper", "forward", "sideways", "upstream" used as metaphors for links or flow.
 - **Hedge stacks.** "might possibly", "in some cases generally". Say when, or leave it out.
+- **Proof narration.** How far the project's own testing has got, as an apology ("untested", "not yet tried on", "no one has submitted one to the store yet") or a boast ("CI builds and runs every example on every change", a test count, a list of what has run where). Cut it or move it to contributor docs. Keep the fact it implies (a platform, a minimum version, a prerequisite) as a plain statement in the caveats section.
 - **Proof hedging.** "Tested with Claude Code", "in our testing", "as far as we know", "should work". Before you qualify, shrink, or cut a sentence, name the false or unverified fact it states. If you can't, it isn't an overclaim: leave it as written. A statement of what something is for, or what it does, is not an overclaim.
 - **Self-praise.** "Powerful", "seamless", "robust", "blazing". Show evidence.
 - **Internal citations.** "(see decision 5)", "(ADR 10)" in a user-facing README.
@@ -37,7 +38,12 @@ Stock phrasing:
 Section written for the wrong reader:
 
 > Before: What CI checks on every push. Each job builds on its own runner (ADR 7).
-> After: Compatibility. Foo builds for Linux, macOS, and Windows. Its tests run on all three for every change. Foo doesn't support cross-compiling, so you'll need to package your app on each operating system you want to support.
+> After: Compatibility. Foo builds for Linux, macOS, and Windows. Foo doesn't support cross-compiling, so you'll need to package your app on each operating system you want to support.
+
+Proof narration:
+
+> Before: Foo supports macOS 14 and newer. No CI job runs on macOS 14, so nothing proves that yet. On every change, CI builds each example and runs it on macOS 15.
+> After: Foo supports macOS 14 and newer.
 
 ## Other rules
 

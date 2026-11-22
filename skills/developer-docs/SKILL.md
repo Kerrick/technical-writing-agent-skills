@@ -91,7 +91,9 @@ When the other material is large, or readers need it on its own, give it its own
 
 **State verified facts plainly.** Most sentences an agent feels the urge to qualify aren't overclaiming anything. Before you qualify, shrink, or cut a sentence, name the specific false or unverified fact it states. If you can't name one, it isn't an overclaim, so leave it as written. A statement of what something is for, or what it does, is not an overclaim. Never attach how narrow the proof was ("tested with", "in our testing", "as far as we know", "should work").
 
-**State a limit only where it changes what the reader can do.** State a limit only when it changes what the reader can do or should expect: a platform, a version, a model, a prerequisite, a risk to their data. State it once, as a fact, where the page keeps its caveats. Work the maintainer hasn't done yet, such as tests or benchmarks not yet run, isn't a limit for the reader. It belongs in contributor documentation.
+**State a limit only where it changes what the reader can do.** State a limit only when it changes what the reader can do or should expect: a platform, a version, a model, a prerequisite, a risk to their data. State it once, as a fact, where the page keeps its caveats.
+
+**Don't narrate the project's proof.** Proof narration is a sentence, in a page for users, about how far the project's own testing has got. It either apologizes ("untested", "not yet tried on Windows", "no CI job runs on the oldest version") or boasts ("CI builds and runs every example on every change", a test count, a list of the machines it has run on). Both tell the reader about the maintainer's work, not about what the reader can do. Cut it, or move it to contributor documentation, and keep only the fact it implies for the reader, such as a platform or a minimum version, stated plainly where the page keeps its caveats. A measured result the reader can weigh, such as a benchmark with its numbers, is evidence, not proof narration.
 
 ## Rules for several kinds of page
 
@@ -128,6 +130,7 @@ Each rule lists the kinds it applies to.
 
 - [ ] **No placeholders.** Nothing in any file is a placeholder, a question, or a note to the maintainer; anything that truly needs their judgment is in your chat report.
 - [ ] **No diluted facts.** Every qualifier you added points to a specific false or unverified fact; every limit you state changes what the reader can do.
+- [ ] **No proof narration.** No sentence apologizes for, or boasts about, how far the project's own testing has got.
 - [ ] **Run every example as written.** Run every command and code sample in page order, starting from the state the page declares. Check that each one runs without syntax errors, produces the output the page shows, and needs no code the page never gives. Setup data may live in a separate file that ships with the material, as long as the page says where it is and that data produces the output shown. Repeat the run on a clean environment whenever a dependency changes.
 - [ ] **Verify every fact against its source, and keep facts consistent.** Take every name, type, default, error, output, and version from a source you have checked: code, schema, `--help`, tests, or changelog. Make prose agree with the code it describes, check every cross-reference against the content it points to, record which version you documented, and keep facts and version statements consistent across pages. Leave out anything you couldn't verify; never write a placeholder for it. If the reader needs it, say in chat what you'd need to confirm it.
 - [ ] **Avoid claims that age.** Remove statements that depend on when they were written ("new", "recently", "currently", "as of this writing"); they become false later, and readers can't tell when. Keep version-specific details in a few places so updates touch little, and remove dated material when it expires. Books need this most.
@@ -137,7 +140,7 @@ Each rule lists the kinds it applies to.
 
 - Leaving markers like `TODO(verify)` or `[TO CONFIRM]` in the files, which hands the work back to the person who asked for it.
 - Qualifying, shrinking, or cutting sentences that were true as written, so readers trust the page less than the evidence deserves.
-- Apologizing in user-facing pages for work not yet done, which tells the reader nothing they can act on.
+- Narrating the project's proof in user-facing pages, apologizing for tests not yet run or boasting about what CI does, which tells the reader nothing they can act on.
 - Publishing snippets that fail, or that show output the code doesn't produce, because they were never run.
 - Writing plausible names and outputs from memory; letting sections drift onto different versions of the API.
 - Writing "the new X API", which becomes false and confusing a release later.
