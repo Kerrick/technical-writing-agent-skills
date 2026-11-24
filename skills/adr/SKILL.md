@@ -43,7 +43,7 @@ A decision log is worth reading only while it is short and true. Most decisions 
    Records are few: a project's whole log is usually a handful. When several decisions pass, rank them by cost to undo and record the top few. Apply the same test to every existing ADR you touch. One that no longer passes goes to a design document and is deleted ([references/splitting.md](references/splitting.md)).
 2. **Follow the log that exists.** Read its index or rules and two of its records. Copy their folder, file naming, heading form, front-matter fields, bullet style, and the way code cites them. Only when the repository has no log, use `docs/decisions/NNNN-title-with-dashes.md` and the template in [references/template.md](references/template.md).
 3. **Take the next number** after the highest ever used, deleted records included. Never reuse one. Git history has them: `git log --all --format= --name-only -- <adr dir> | sort -u | tail -1` when numbers are zero-padded. Also search the docs for a "former ADR" with a higher number than any file.
-4. **Gather what was recorded:** who decided, when, which options were weighed, and the reasons given at the time. Sources are notes, issues, commit messages, pull requests, and the user's words in this conversation. Keep what a record says apart from what you infer.
+4. **Gather what was recorded:** who decided, when, which options were weighed, and the reasons given at the time. Sources are notes, issues, commit messages, pull requests, and what the user tells you in this conversation. Keep what a record says apart from what you infer.
 5. **Write the record** to [references/template.md](references/template.md), or the log's own form. It holds one decision in about a page: the problem, the options that were weighed, the one chosen and why, and what it costs.
    - **The title states the decision as one short sentence,** not a topic.
    - **Drivers are the ones the deciders had,** taken from the requirement, not from the chosen option's strengths.
@@ -66,7 +66,7 @@ Most mistakes in an after-the-fact ADR are inventions that read well.
 - **Drivers nobody recorded:** a driver is a reason too. List the ones the record gives, and say no other was recorded. A driver of another ADR isn't a driver of this one unless the record says so, or this record replaces that one.
 - **Deciders:** name who made this decision, and say what each decided. Someone who set a constraint didn't choose the mechanism. If the record doesn't say who decided, write that.
 - **Confidence the deciders never stated:** write that it wasn't recorded, then give what the evidence shows today.
-- **Quotations:** quote a person only from the record or from this conversation, word for word. A paraphrase relayed by another session isn't a quotation.
+- **Quotations:** quote a person only from the written record the log's readers can open (a note, an issue, a commit message, a pull request), word for word. This conversation is private. Take the decision and its reasons from it, write them in the record's own words, and neither quote it nor tell what was said in it. A paraphrase relayed by another session isn't a quotation.
 
 Never backdate a reason, and never write what you inferred as what was decided.
 
@@ -110,6 +110,7 @@ Never write a placeholder, an open question, or a note to the maintainer into an
 - Inventing an option that could never have been chosen, so the list reaches two.
 - Presenting alternatives found today as the reasons for a decision made earlier.
 - Naming the maintainer as the decider of a mechanism an agent chose within the maintainer's constraint.
+- Quoting the user's words from the conversation in a record, or recounting what they said, where everyone who opens the repository reads it.
 - Writing "Confidence: high" for a decision whose deciders never said, or claiming proof that no test gives.
 - Putting notes in `status`, such as "accepted; its retry rule superseded by ADR 23".
 - Taking the next number from the files present, and reusing a deleted record's number.
