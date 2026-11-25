@@ -40,16 +40,16 @@ These rules add to standard developer-docs practice; they don't restate it. Wher
 - a labeled section of shared concepts on a reference landing page, kept apart from the member listing;
 - a motivating example, a short explanation, and a compact usage summary on a single-feature page, in the same order for every feature.
 
-When the other material is large, or readers need it on its own, give it its own page and link both ways. Don't paste reference catalogs or copies of reference tables into a walkthrough. Don't let a task exist only inside a reference entry: give every common task its own task page.
+When the other material is large, or readers need it on its own, give it a separate page and link both ways. Don't paste reference catalogs or copies of reference tables into a walkthrough. Don't let a task exist only inside a reference entry: give every common task a separate task page.
 
-**One page can serve beginners and experts.** Start with the simplest, most common use, move steadily to advanced uses, set material only some readers need apart in clearly titled sidebars they can skip, and leave rare edge cases to the reference. This matters most on feature guides.
+**One page can be for beginners and experts.** Start with the simplest, most common use, move steadily to advanced uses, set material only some readers need apart in clearly titled sidebars they can skip, and leave rare edge cases to the reference. This matters most on feature guides.
 
 **Say what isn't covered or done.** State plainly what the tool or feature does not do, and which responsibilities stay with the reader. When a page leaves out something a reader might expect, say so at that point and link to where it's covered.
 
 **No restating conclusions.** Outside a sequence of lessons, don't end a page with a conclusion that restates it. (Lessons in a sequence get a fixed closing; see [references/lessons.md](references/lessons.md).)
 
 **Keep one maintained copy of anything that changes**, and point to it instead of copying it:
-- For a step that depends on another project's software, document only how it connects to yours and link to that project's own instructions.
+- For a step that depends on another project's software, document only how it connects to yours and link to that project's instructions.
 - Keep FAQ answers to a sentence or two, with a link to the page that holds the full answer.
 - When teaching a subset of a large API, say it's a subset and link the complete list.
 - Teach the command or introspection that prints the current, complete answer.
@@ -59,17 +59,17 @@ When the other material is large, or readers need it on its own, give it its own
 
 ### Examples and code
 
-**Frame every example.** Introduce every example with a heading or a sentence naming the task or behavior it demonstrates and what to watch for, and follow it with an explanation of the result.
+**Frame every example.** Introduce every example with a heading or a sentence that states the task or behavior it demonstrates and what to watch for, and follow it with an explanation of the result.
 
 **Realistic names for real use; neutral names only for pure mechanism.** Use realistic domain names (`invoice`, `customer_id`) when an example models real use, shows a task, or works on data the reader can't see. Use neutral placeholder names only when all three hold: the example demonstrates pure structure or mechanism (nesting, inheritance, how an operator behaves), no domain fits, and the data is tiny and fully shown. Keep names consistent across a running example.
 
-**Write every example as if it will be copied into production.** Use the currently recommended approach, with current safe and accessible practice built into ordinary examples, and give a line of reasoning where a practice isn't obvious. Attach each caveat, such as a security risk, to the example that raises it. Never use a deprecated or risky construct to save space. Move superseded approaches out of the main text, leaving a one-line pointer to the documentation for the version that used them.
+**Write every example as if it will be copied into production.** Use the currently recommended approach, with current safe and accessible practice built into ordinary examples, and give a line of reasoning where a practice isn't obvious. Attach each caveat, such as a security risk, to the example it's about. Never use a deprecated or risky construct to save space. Move superseded approaches out of the main text, leaving a one-line pointer to the documentation for the version that had them.
 
 **Show the wrong form beside the right one.** Wherever readers predictably reach for a plausible but wrong form, show it next to the correct one, label which is wrong, and explain why it fails. Do this on every page type, including reference and conceptual pages, as often as real traps occur, and especially when the wrong form runs without error but gives a wrong result. Naive attempt, its failure, why it fails, then the fix: a regular teaching move, not a one-time device.
 
 **Mark wrong and failing samples inside the block.** Mark every sample that is incorrect, discouraged, or meant to fail inside the code block itself, for example with a `# Wrong:` comment, and use the same marking every time. Warn before the reader runs a sample that is meant to fail. Someone who copies or runs only the block should still see the warning.
 
-**Elisions must be valid code.** When you omit part of a sample, mark the gap with something the language accepts, usually a comment, and say what belongs there, so a pasted snippet still parses and runs.
+**Elisions must be valid code.** When you omit part of a sample, mark the gap with something valid in the language, usually a comment, and say what belongs there, so a pasted snippet still parses and runs.
 
 **Show commands and output the way readers will copy them.** Use separate blocks for command and output when the docs platform's copy action would pick up prompts and output along with the command. When the copy action strips them, or the material is print-first narrative, use one transcript block showing command and result together. Explain the prompt marker once.
 
@@ -77,15 +77,15 @@ When the other material is large, or readers need it on its own, give it its own
 
 ### Callouts and terms
 
-**Warn about silent and breaking failures too.** Use a warning callout for data loss, security, and money, and also for anything that breaks the application or silently gives a wrong result: code that looks right but does something else, mistakes that fail silently, skipped or overwritten files, settings unsafe in production, hangs, crashes, and code that isn't meant to be copied. Each warning names one failure. Use lighter types (note, tip) for everything else, and keep warnings rare enough that readers still notice them.
+**Warn about silent and breaking failures too.** Use a warning callout for data loss, security, and money, and also for anything that breaks the application or silently gives a wrong result: code that looks right but does something else, mistakes that fail silently, skipped or overwritten files, settings unsafe in production, hangs, crashes, and code that isn't meant to be copied. Each warning is about one failure. Use lighter types (note, tip) for everything else, and keep warnings rare enough that readers still notice them.
 
-**Put optional depth in titled, consistent asides.** Put shortcuts, tangents, and advanced options in one consistent, visually distinct kind of aside, separate from warnings. Give each aside a descriptive title saying what's inside, such as the question it answers, so readers can choose to skip it. Give each callout type a fixed meaning that tells readers whether they can skip it: essential context, optional extra, or warning. Keep asides few.
+**Put optional depth in titled, consistent asides.** Put shortcuts, tangents, and advanced options in one consistent, visually distinct kind of aside, separate from warnings. Give each aside a descriptive title saying what's inside, such as the question it answers, so readers can choose to skip it. Give each callout type a fixed meaning, so readers know whether they can skip it: essential context, optional extra, or warning. Keep asides few.
 
 **One term per concept.** Use one term per concept, define it on first use, and never vary it for elegance. When a second name is unavoidable, declare the equivalence once, prominently, near the start, saying which term is exact and why:
 - When commands, directories, or tools use a different or older name, keep your one term in prose.
 - When a precise term has a more natural synonym, both may appear once the synonym is declared.
 
-**Settle easily confused pairs where the confusion happens.** Where two forms, components, methods, options, or terms are easy to confuse, including terms readers use as if they meant the same thing, put the distinction at the point of confusion. A side-by-side table that labels which is which works well. Say that the loose usage exists, show a case where the difference matters, and link each item to the other. Don't leave the distinction only on a separate comparison page.
+**Settle easily confused pairs where the confusion happens.** Where two forms, components, methods, options, or terms are easy to confuse, including terms readers use as if they meant the same thing, put the distinction at the point of confusion. A side-by-side table, with which is which labeled, works well. Say that the loose usage exists, show a case where the difference matters, and link each item to the other. Don't leave the distinction only on a separate comparison page.
 
 **No placeholders on disk.** Never write a placeholder, a question, or a note to the maintainer into any file. The maintainer asked for the writing so they don't have to do it, so what you write is final. Bring up in chat only what truly needs their judgment, where a wrong call would do real harm, and keep that as short as you can. For everything else, take the answer the evidence supports that claims the least on the maintainer's behalf, write it as final, and list those calls in your report.
 
@@ -93,7 +93,7 @@ When the other material is large, or readers need it on its own, give it its own
 
 **State a limit only where it changes what the reader can do.** State a limit only when it changes what the reader can do or should expect: a platform, a version, a model, a prerequisite, a risk to their data. State it once, as a fact, where the page keeps its caveats.
 
-**Don't narrate the project's proof.** Proof narration is a sentence, in a page for users, about how far the project's own testing has got. It either apologizes ("untested", "not yet tried on Windows", "no CI job runs on the oldest version") or boasts ("CI builds and runs every example on every change", a test count, a list of the machines it has run on). Both tell the reader about the maintainer's work, not about what the reader can do. Cut it, or move it to contributor documentation, and keep only the fact it implies for the reader, such as a platform or a minimum version, stated plainly where the page keeps its caveats. A measured result the reader can weigh, such as a benchmark with its numbers, is evidence, not proof narration.
+**Don't narrate the project's proof.** Proof narration is a sentence, in a page for users, about how far the project's testing has got. It either apologizes ("untested", "not yet tried on Windows", "no CI job runs on the oldest version") or boasts ("CI builds and runs every example on every change", a test count, a list of the machines it has run on). Both are about the maintainer's work, not about what the reader can do. Cut it, or move it to contributor documentation, and keep only the fact it implies for the reader, such as a platform or a minimum version, stated plainly where the page keeps its caveats. A measured result the reader can weigh, such as a benchmark with its numbers, is evidence, not proof narration.
 
 ## Rules for several kinds of page
 
@@ -116,11 +116,11 @@ Each rule lists the kinds it applies to.
 
 **Ask for predictions at the point of the concept** (tutorial, explanation, book, video). Where a concept is shown, not only in end-of-chapter exercises, stop and ask the reader what will happen before you show it. Or invite them to change one specific value or line, predict the result, and check it with the real tool.
 
-**Flag teaching shortcuts** (tutorial, explanation, book, video). When a teaching example takes a shortcut (skipped error handling, a simplified algorithm, ignored edge cases, incomplete markup, a partial implementation), say so next to it and say what production code would do instead.
+**Flag teaching shortcuts** (tutorial, explanation, book, video). When you take a shortcut in a teaching example (skipped error handling, a simplified algorithm, ignored edge cases, incomplete markup, a partial implementation), say so next to it and say what production code would do instead.
 
 **Show legacy forms for recognition** (reference, tutorial, book). Show the older forms of an API that readers will meet in existing code, labeled as older or legacy, so readers can recognize and translate them. Keep the emphasis on the current way, usually by placing older forms last, and don't present them as an equal option.
 
-**Say where each name comes from** (tutorial, reference, book). When a new name appears in code, say which package, module, or import provides it. In reference for a library that loads in pieces, state for each item which module provides it. Tell learners that this is what to search for when they need help or documentation.
+**Say where each name comes from** (tutorial, reference, book). When a new name appears in code, say which package, module, or import provides it. In reference for a library that is loaded in pieces, state for each item which module provides it. Tell learners that this is what to search for when they need help or documentation.
 
 **Change one thing at a time to show variants** (reference, explanation). To show what an option or variant changes, keep the input fixed, change one thing at a time, and show the real output for each, one after another. Mark exactly which parts of the output the option adds or changes.
 
@@ -130,17 +130,17 @@ Each rule lists the kinds it applies to.
 
 - [ ] **No placeholders.** Nothing in any file is a placeholder, a question, or a note to the maintainer; anything that truly needs their judgment is in your chat report.
 - [ ] **No diluted facts.** Every qualifier you added points to a specific false or unverified fact; every limit you state changes what the reader can do.
-- [ ] **No proof narration.** No sentence apologizes for, or boasts about, how far the project's own testing has got.
-- [ ] **Run every example as written.** Run every command and code sample in page order, starting from the state the page declares. Check that each one runs without syntax errors, produces the output the page shows, and needs no code the page never gives. Setup data may live in a separate file that ships with the material, as long as the page says where it is and that data produces the output shown. Repeat the run on a clean environment whenever a dependency changes.
+- [ ] **No proof narration.** No sentence is an apology for, or a boast about, how far the project's testing has got.
+- [ ] **Run every example as written.** Run every command and code sample in page order, starting from the state the page declares. Check that each one runs without syntax errors, produces the output the page shows, and needs no code missing from the page. Setup data may live in a separate file that comes with the material, as long as the page says where it is and that data produces the output shown. Repeat the run on a clean environment whenever a dependency changes.
 - [ ] **Verify every fact against its source, and keep facts consistent.** Take every name, type, default, error, output, and version from a source you have checked: code, schema, `--help`, tests, or changelog. Make prose agree with the code it describes, check every cross-reference against the content it points to, record which version you documented, and keep facts and version statements consistent across pages. Leave out anything you couldn't verify; never write a placeholder for it. If the reader needs it, say in chat what you'd need to confirm it.
 - [ ] **Avoid claims that age.** Remove statements that depend on when they were written ("new", "recently", "currently", "as of this writing"); they become false later, and readers can't tell when. Keep version-specific details in a few places so updates touch little, and remove dated material when it expires. Books need this most.
 - [ ] No gotcha below, or in the reference file you read, describes the draft.
 
 ## Gotchas
 
-- Leaving markers like `TODO(verify)` or `[TO CONFIRM]` in the files, which hands the work back to the person who asked for it.
+- Leaving markers like `TODO(verify)` or `[TO CONFIRM]` in the files, so the work goes back to the person who asked for it.
 - Qualifying, shrinking, or cutting sentences that were true as written, so readers trust the page less than the evidence deserves.
-- Narrating the project's proof in user-facing pages, apologizing for tests not yet run or boasting about what CI does, which tells the reader nothing they can act on.
+- Narrating the project's proof in user-facing pages, apologizing for tests not yet run or boasting about what CI does, though the reader can act on none of it.
 - Publishing snippets that fail, or that show output the code doesn't produce, because they were never run.
 - Writing plausible names and outputs from memory; letting sections drift onto different versions of the API.
 - Writing "the new X API", which becomes false and confusing a release later.
@@ -156,7 +156,7 @@ Each rule lists the kinds it applies to.
 - Labeling wrong code only in the surrounding prose; readers who copy the block take the wrong version.
 - Writing a bare `...` inside code, so pasted snippets fail with syntax errors.
 - Always splitting commands from their output, even where one transcript would read better and copy cleanly.
-- Pinning every install, so current-release docs install outdated packages; or leaving one-version docs unpinned, so they break on the next major release.
+- Pinning every install, so readers of current-release docs install outdated packages; or leaving one-version docs unpinned, so they break on the next major release.
 - Leaving silent wrong-result traps unflagged because they don't involve data loss, security, or money.
 - Cluttering the main path with optional detail, or cutting it, so readers can't tell what is safe to skip.
 - Using undeclared synonyms that read as different things, or hiding that the tools use another name.
