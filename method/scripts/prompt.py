@@ -16,7 +16,7 @@ Steps:
   after-reading   extra reading some sources do before comparing     (--source)
   compare         step 4, second message to a reading fork          (--source)
   audit           step 5, a new fork
-  merge           step 6, a new fork
+  merge           step 6, a new fork (in compose mode, with the layered-sources rules)
   check           step 7, a new fork
   apply           step 8, back to the merge fork
   write           step 9, a fresh session
@@ -55,6 +55,30 @@ def first_block(path: Path) -> str:
     if not match:
         raise SystemExit(f"Error: no fenced prompt block in {path}")
     return match.group(1).rstrip("\n")
+
+
+def merge_prompt(mode: str, sources: list[dict]) -> str:
+    """The merge prompt; in compose mode, with rules 2 and 3 from its "Layered sources" block."""
+    text = first_block(PROMPTS / FILES["merge"])
+    if mode == "corroborate":
+        return text
+    blocks = re.findall(r"^```[^\n]*\n(.*?)^```", (PROMPTS / FILES["merge"]).read_text(), re.M | re.S)
+    if len(blocks) < 2:
+        raise SystemExit(f"Error: {FILES['merge']} has no layered-sources block for compose mode")
+    lines = text.split("\n")
+    for rule in blocks[1].strip().split("\n"):
+        number = rule.split(".", 1)[0] + ". "
+        hits = [i for i, line in enumerate(lines) if line.startswith(number)]
+        if len(hits) != 1:
+            raise SystemExit(f"Error: can't find rule {number.strip()} to replace in the merge prompt")
+        lines[hits[0]] = rule
+    layers = {}
+    for s in sources:
+        if not s.get("layer"):
+            raise SystemExit(f"Error: compose mode needs a layer for every source; {s['key']} has none")
+        layers.setdefault(s["letter"], s["layer"])
+    described = " ".join(f"Source {letter} owns {layer}." for letter, layer in sorted(layers.items()))
+    return Template("\n".join(lines)).safe_substitute(LAYERS=described)
 
 
 def compare_prompt(source: dict) -> str:
@@ -110,7 +134,11 @@ def main() -> int:
     parser.add_argument("--list-sources", action="store_true", help="list source keys and exit")
     args = parser.parse_args()
 
-    sources = tomllib.loads((ROOT / "method" / "sources.toml").read_text())["source"]
+    config = tomllib.loads((ROOT / "method" / "sources.toml").read_text())
+    sources, mode = config["source"], config.get("mode", "corroborate")
+    if mode not in ("corroborate", "compose"):
+        print(f"Error: mode in method/sources.toml must be corroborate or compose, not {mode!r}", file=sys.stderr)
+        return 1
     by_key = {s["key"]: s for s in sources}
 
     if args.list_sources:
@@ -135,6 +163,8 @@ def main() -> int:
             text = source["after_reading"]
         else:
             text = compare_prompt(source)
+    elif args.step == "merge":
+        text = merge_prompt(mode, sources)
     else:
         text = first_block(PROMPTS / FILES[args.step])
 

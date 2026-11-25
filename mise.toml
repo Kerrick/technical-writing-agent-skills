@@ -18,6 +18,10 @@ run = "uv run -q method/scripts/fetch_sources.py"
 description = "Print one step's prompt, filled in: mise run prompt -- compare --source rails-1 --src ~/tw/sources --work ~/tw/work"
 run = "uv run -q method/scripts/prompt.py"
 
+[tasks.source-check]
+description = "Check a skill against its fetched sources for shared wording and arrangement: mise run source-check -- ~/tw/sources"
+run = "uv run -q method/scripts/source_check.py"
+
 [tasks.release]
 description = "Build one ZIP per skill into dist/ for a GitHub release: mise run release -- 1.0.0"
 run = "uv run -q method/scripts/build_release.py"

@@ -8,6 +8,15 @@
 # Slots (${SRC}, ${WORK}, ${LISTER}) are filled by prompt.py. In the
 # compare fields, ${does}, ${shows}, ${falls} and ${confirms} become the right verb
 # for a singular or plural source name.
+#
+# mode decides the merge's inclusion rule (step 6). "corroborate": the sources are
+# independent takes on one craft, as these are, and a rule needs two or more of them.
+# "compose": the sources are layers of one stack, such as a framework and the library
+# under it, and a rule needs the source that owns its layer. In compose mode, every
+# [[source]] also needs `layer`: what it owns, described without naming it, e.g.
+# layer = "the application framework: its update loop, commands, and messages".
+
+mode = "corroborate"
 
 [[source]]
 key = "react"

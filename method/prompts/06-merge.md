@@ -29,4 +29,13 @@ Order "Kept" by source count, most first. Every rule in every "Rules" section mu
 
 The "where it applies" and "what an agent would do wrong" fields were added to the prompt just before it was sent; they're what let the writer place each rule and turn it into a gotcha.
 
-Check: every rule landed in exactly one cluster; each kept cluster has two or more sources; every skill citation is a real line.
+Check: every rule landed in exactly one cluster; each kept cluster has two or more sources (in compose mode, its layer's owner); every skill citation is a real line.
+
+## Layered sources
+
+When `method/sources.toml` sets `mode = "compose"`, `mise run prompt -- merge` swaps rules 2 and 3 above for these, and fills `${LAYERS}` from each source's `layer`. Under rule 2 as written, a skill over layered sources, such as a framework and the library under it, would lose every rule only one layer states.
+
+```
+2. Inclusion: the sources are layers of one stack, not independent takes on one craft. ${LAYERS} Keep a cluster if the source that owns the layer it's about backs it, even if no other source does. Drop a cluster that only sources outside its layer back, and say why.
+3. Conflicts: where rules in a cluster disagree, the source that owns the layer wins for its own interface and conventions, and a higher layer wins where it deliberately changes how a lower one is used. If ownership doesn't settle it, write the most specific rule none of them contradicts; if no such rule exists, drop the cluster and say why.
+```

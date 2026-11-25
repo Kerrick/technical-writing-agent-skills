@@ -90,12 +90,16 @@ The rules that decide what goes into the skill are fixed in advance, in the merg
 
 Fixing them in advance means the only judgment calls left are the ones written into those prompts, made by forks of the model being measured.
 
+The first two rules hold because the seven sources are independent takes on one craft: `mode = "corroborate"` in `method/sources.toml`. For sources that are layers of one stack, such as a framework and the library under it, set `mode = "compose"` and give each source a `layer`, and the merge prompt instead keeps a rule its layer's owner backs, and settles conflicts by which layer owns them ([Layered sources](prompts/06-merge.md#layered-sources)). Under the first rule, a skill over layered sources would lose every rule only one layer states.
+
 ## What each context may see
 
 The skill must carry ideas, not any source's wording, and must not restate the baseline. Two kinds of contamination are kept out:
 
 - **Source wording.** Only steps 3–5 and 7 see the sources or quotes from them. Everything after that reads files made by `method/scripts/` or written under a no-quotes, no-names rule, and `method/scripts/leak_check.py` checks each of them.
 - **The baseline.** The writer (step 9) is a fresh session, not a fork. A fork of the baseline's author would pull the baseline's structure and wording back into a skill meant to leave them out. Its only input, `kept.md`, has the baseline citations and process notes stripped out by `method/scripts/build_kept.py`. Neither the baseline nor any developer-docs skill may be installed while it runs, this repo's included.
+
+The leak check catches names, not wording. To check a finished skill against the sources themselves, fetch them and run `mise run source-check -- <SRC>`, which runs skill-authoring's `scripts/overlap.py` and `scripts/structure.py` against each source's pinned paths. The skill's CC0 dedication holds only if it finds nothing: copied text from React would need credit, from Rails or MDN would make the skill share-alike, and from the others would carry their notices. A structure failure lists lines to read, not a verdict.
 
 ## Evaluating
 
@@ -194,6 +198,8 @@ In order, each cheaper than the next, and each deciding whether the next is wort
 3. **Then, if either points that way, a hybrid run:** the target model's baseline, with the strongest model reading, auditing, merging and writing. Forks can't cross models, so the readers would get the baseline's files as given context instead of forking its session. An all-Fable run would likely do worse for Opus and Sonnet: its baseline would state more rules, so rule 4 would drop rules that Fable states and smaller models don't follow.
 
 The GPT-6-Luna trial (`runs/openai-gpt-6-luna-medium/`) found accurate but shallow findings, so a full run on a small model isn't on this list.
+
+Separate from that order, and as cheap as the first: **a card-sorted writer, as a variant of the first run.** Keep its `kept.md` and baseline; shuffle the kept rules, have two fresh sessions each design the skill's files and sections from the baseline's default behaviors before seeing the rules, then sort them in, reconcile the two sorts, and give the writer the outline as well as the rules (skill-authoring's `references/measured-build.md`, step 10). Step 9 stays as it is until the variant beats the default on the same evals, so runs stay comparable meanwhile. It tests whether a skill arranged around a writer's decisions, rather than around the clusters the merge produced, helps the agent more.
 
 ## Releasing
 
