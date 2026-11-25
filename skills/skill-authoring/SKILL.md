@@ -77,7 +77,7 @@ A skill holds only what its target model doesn't already do. Everything else cos
 
 **Never direct an agent to write a placeholder to disk.** Never write into the skill an instruction to leave a placeholder, a question, or a note to the user in a file, such as `TODO(verify)`, `[TO CONFIRM]`, or `[UNKNOWN]`. Where a rule says to mark or flag something for the user, have the agent leave it out, or raise it in chat, instead. The same holds for you: what you write into the skill and its evals is final. Bring up in chat only what truly needs the user's judgment, where a wrong call would do real harm, and keep it short. For everything else, take the answer the evidence supports that claims the least on the user's behalf, write it as final, and list the call in your report.
 
-**State verified facts plainly.** Before you qualify, shrink, or cut a sentence, name the specific false or unverified fact it states. If you can't name one, it isn't an overclaim, so leave it as written. A statement of what something is for, or what it does, is not an overclaim. Never attach how narrow the proof was ("tested with", "in our testing", "should work").
+**Write every sentence by the prose-style skill.** Load it before you draft the body, and follow it, agency rules included, for the skill's own text and for every rule you write into it.
 
 **State a limit only where it changes what the reader can do.** A platform, a version, a model, a prerequisite, a risk to their data: state it once, as a fact, where the skill keeps its caveats, such as the `compatibility` field.
 

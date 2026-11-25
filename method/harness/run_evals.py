@@ -190,7 +190,7 @@ def grade_one(suite, ev, seed):
         shutil.copy2(REPO / f, dst)
     if suite == "readme-rewrite":
         (gd / "tools").mkdir()
-        shutil.copy2(REPO / "skills/readme-rewrite/scripts/hunt.py", gd / "tools/hunt.py")
+        shutil.copy2(REPO / "skills/prose-style/scripts/hunt.py", gd / "tools/hunt.py")
     (gd / "grading/task.json").write_text(json.dumps(
         {"prompt": ev["prompt"], "expected_output": ev["expected_output"], "assertions": ev["assertions"]}, indent=2))
     prompt = GRADER.format()

@@ -1,6 +1,6 @@
 ---
 name: readme-rewrite
-description: Use when rewriting, substantially editing, restructuring, or reviewing a project README (README.md, README.rdoc, or similar), rewriting one from scratch, or writing the first one for a project that has none, including when a README has grown by appending or reads like stock AI prose. Use it to make the README work for marketing, onboarding, and indexing, with every claim checked against the code. Not for other documentation pages, such as tutorials, guides, or API reference (use developer-docs).
+description: Use when rewriting, substantially editing, restructuring, or reviewing a project README (README.md, README.rdoc, or similar), rewriting one from scratch, or writing the first one for a project that has none, including when a README has grown by appending or reads like stock AI prose. Use it to make the README work for marketing, onboarding, and indexing, with every claim checked against the code. Not for other documentation pages, such as tutorials, guides, or API reference (use developer-docs). Load prose-style as well, for the sentences.
 license: MIT-0
 metadata:
   author: Kerrick Long
@@ -54,27 +54,22 @@ In each heading, name the section's content in the reader's terms. "Compatibilit
 
 ## Step 4: Draft in plain style
 
-Short sentences. Specific nouns. Active voice with a human, the reader, or the program as the subject. Concrete numbers, versions, and commands. See [references/style-rules.md](references/style-rules.md) for the full rules, the banned-phrase list, and before/after examples.
+Load the prose-style skill and follow it for every sentence: who acts, plain words, the banned patterns, and how to state claims. For a README, also:
 
-Core rules:
-
-- Give agency only to things that act. A person runs, a program prints. A file, a section, or a lockfile does not decide, ask, or take anything.
-- Write "you" for the reader, and name the actor otherwise.
 - Do not explain a term the audience already knows. Do explain every term they do not, the first time it appears (a config file, a tool name). Say what it is, where it goes, and whether it is optional.
 - Show a concrete first example early, with the output.
 - Put each proper noun (tools, projects, platforms) in a link the first time it appears in a section.
-- Do not carry shorthand from your conversation with the maintainer ("go deeper", "forward", "sideways") into the document as metaphors.
+- Put the reader's goal before the mechanism. Lead with what they can do.
+- Do not tell readers to create what they already have. Start from where the reader is. A reader of a packaging tool has a program already, so start from "In your project folder, run ...".
 
 ## Step 5: Handle unproven claims without a confessional tone
 
 - State limits as facts with a scope: "Each build runs on the platform it's for. Building for Windows needs a Windows machine." No apology, no self-praise.
 - Keep caveats in a section for caveats (Compatibility, Limitations). Do not mix them into "Who it is for" or "Alternatives".
 - Write status for users: what works today, on which platforms, what is planned. Use a version badge instead of "version X is the latest".
-- Do not announce virtue with words like "honest", "frankly", or "to be clear". Say the fact.
-- Before you qualify, shrink, or cut a sentence, name the false or unverified fact it states. If you can't, it isn't an overclaim: leave it as written. A statement of what something is for, or what it does, is not an overclaim.
 - Do not claim what you have not tested. Mark unbuilt features as not available, with one line, or leave them out.
 - State a limit only when it changes what the reader can do or should expect: a platform, a version, a model, a prerequisite, a risk to their data.
-- Don't narrate the project's proof. Proof narration is a sentence about how far the project's testing has got. It either apologizes ("untested", "no app has been through a store's review yet", "no CI job runs on the oldest version") or boasts ("on every change, CI builds each example and runs it on a clean machine", a test count, a list of the devices it has run on). Both are about the maintainer's work, not about what the reader can do. Cut it, or move it to contributor docs (step 7), and keep only the fact it implies for the reader, such as a platform or a minimum version, stated as a fact. The AI disclosure (step 8) is the one place to name the project's checks.
+- Don't narrate the project's proof, as prose-style defines it. Cut it, or move it to contributor docs (step 7). The AI disclosure (step 8) is the one place to name the project's checks.
 
 ## Step 6: Use evidence, not invented proof
 
@@ -100,8 +95,8 @@ If agents wrote or changed the code or docs, and the maintainer discloses AI inv
 
 ## Step 9: Hunt for problems, then review
 
-1. Run `uv run scripts/hunt.py <README>` from this skill's directory (or `python3 scripts/hunt.py`, with Python 3.11 or later). It lists every banned pattern from the style rules, by line. For each hit, ask who acts, then fix it or defend it. Run it again until every remaining hit is one you can defend.
-2. If the repository has a Vale configuration (`.vale.ini`), run `vale` on the draft too. Its rules are the project's style guide: where they and the style rules here differ, follow Vale's.
+1. Run the prose-style skill's `scripts/hunt.py` on the draft, as that skill describes. For each hit, fix the sentence or defend it. Run it again until every remaining hit is one you can defend.
+2. If the repository has a Vale configuration (`.vale.ini`), run `vale` on the draft too. Its rules are the project's style guide: where they and the prose-style rules differ, follow Vale's.
 3. Read the draft once as the target reader who has never heard of the project. Note where you would stop reading.
 4. Run the review checklist in [references/review-checklist.md](references/review-checklist.md). It comes from detailed maintainer feedback on a real first draft.
 5. Re-run every command shown. Confirm every link resolves.

@@ -83,9 +83,9 @@ The log stays true to the code. When a change departs from an accepted ADR, eith
 
 ## Style
 
-Short sentences and plain words. State facts as they are now ("X is MIT-licensed"), not how the team got there ("X moved to MIT in 0.8.0"). Leave out session names, run IDs, and anything private to the people involved. Read the whole record before you edit it, and edit so it still reads as one piece.
+Load the prose-style skill and follow it for every sentence. Leave out session names, run IDs, and anything private to the people involved. Read the whole record before you edit it, and edit so it still reads as one piece.
 
-Never write a placeholder, an open question, or a note to the maintainer into an ADR or a design document. What you write is final. Bring up in chat only what truly needs the maintainer's judgment, and for everything else take the answer the evidence supports that claims the least on their behalf, and list those calls in your report. Before you qualify or cut a sentence, name the false or unverified fact it states. If you can't, leave it as written.
+Never write a placeholder, an open question, or a note to the maintainer into an ADR or a design document. What you write is final. Bring up in chat only what truly needs the maintainer's judgment, and for everything else take the answer the evidence supports that claims the least on their behalf, and list those calls in your report.
 
 ## Checklist
 

@@ -28,7 +28,7 @@ These rules add to standard developer-docs practice; they don't restate it. Wher
    - How-to guides and explanations need only this file.
 2. Apply the rules for every page below, plus the rules in **Rules for several kinds of page** tagged with your page's kind.
 3. Gather sources before drafting: code, schema, `--help`, tests, changelog. Note the version you are documenting.
-4. Draft.
+4. Draft. Then load the prose-style skill and apply it to every sentence. Where it and this skill differ, this skill's rules win.
 5. Work through the **Pre-publish checklist** and fix every item that fails before you hand the page over.
 
 ## Rules for every page

@@ -10,18 +10,15 @@ Audience
 
 Truth
 - [ ] Is each command one you ran? Does each claim match the code?
-- [ ] Is any sentence proof narration, apologizing ("untested", "not yet through review") or boasting ("CI runs every example on every change", a test count)? Cut it or move it to contributor docs, and keep only the fact it implies for the reader.
 - [ ] Is anything listed that the code does not yet do? Remove or mark it as not available.
 - [ ] Does any sentence say the opposite of what the code or license says? (For example, a license that does or does not cover work built with the tool.) Verify with the license text. If it stays unclear, ask the maintainer and write nothing misleading in the meantime.
 - [ ] Does any wording state a current state as a policy, or a policy as a permanent fact? Keep "not yet available", "not accepted", and "never will" apart.
-- [ ] Do "first", "only", "best" claims hold? "The first app built with X" can read as "the first anyone built".
 - [ ] Is any sentence misleading about who installs or does what?
 - [ ] If a package registry also shows this README, do its images and links still work there?
 
 Clarity
 - [ ] Does every file, option, or tool get one line saying what it is, where it goes, and whether it is optional?
-- [ ] Is every size, speed, or scale claim backed by a number or example?
-- [ ] Is every sentence free of non-agentic subjects ("the lockfile decides", "the gem asks")?
+- [ ] Does every sentence pass the prose-style skill: who acts, plain words, the banned patterns, and its rules for claims?
 - [ ] Does the draft describe what the project is, in the reader's terms?
 - [ ] Are there confusing constructions that need two reads? Rewrite them in plain order: actor, action, object.
 - [ ] Do readers learn whether it is for them from the first screen?
