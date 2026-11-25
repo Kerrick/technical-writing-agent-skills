@@ -1,7 +1,8 @@
 # Technical writing agent skills
 
-[Agent Skills](https://agentskills.io/) that make a coding agent write better developer documentation, decision records, and Agent Skills:
+[Agent Skills](https://agentskills.io/) that make a coding agent write better prose, developer documentation, decision records, and Agent Skills:
 
+- **prose-style** covers how every sentence is written, in chat replies, docs, commit messages, and code comments: who may act in a sentence, plain words, banned patterns, and how to state claims. Agents using the other four skills load it for sentence-level work.
 - **developer-docs** guides tutorials, quickstarts, how-to guides, API and CLI reference, docstrings, conceptual explanations, docs-site landing pages, programming books, courses, and video scripts.
 - **readme-rewrite** rewrites, reviews, or writes from scratch a project README, so that it tells readers why to try the project, gets them started, and links to the rest of the docs, with every claim checked against the code.
 - **adr** writes, reviews, splits, and replaces Architecture Decision Records (ADRs), and keeps a decision log short and true: what earns a record, what to write when the reasons were never recorded, and what to do when a decision changes.
@@ -14,28 +15,27 @@ They're for developers who have an AI agent such as [Claude Code](https://claude
 - **No skill at all.** A current model already knows the usual advice: know your audience, use active voice, show examples. developer-docs leaves that out. Its 47 rules come from comparing a docs skill that [Claude Opus 5.5](https://www.anthropic.com/claude) at medium effort wrote from memory with seven documentation sets: [React Learn](https://react.dev/learn), the [Ember Guides](https://guides.emberjs.com/), the [Django docs](https://docs.djangoproject.com/), the [Rails Guides](https://guides.rubyonrails.org/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide), and the [PostgreSQL manual](https://www.postgresql.org/docs/current/). A rule got in only if two or more of those sets practice it. Rules the model's first skill already stated were left out, unless two or more of the sets break them by mistake.
 - **[Diátaxis](https://diataxis.fr/)** sorts documentation into tutorials, how-to guides, reference, and explanation. developer-docs uses the same kinds of page, and adds rules for each one, such as how to mark a code sample that is meant to fail.
 - **A style guide** such as the [Google developer documentation style guide](https://developers.google.com/style) is written for people, and covers grammar and word choice at length. developer-docs is under 200 lines, plus reference files of under 40 lines each that the agent reads only for the kind of page it is writing. It covers how to plan, check, and finish a page: run every example, verify every fact against the code, and never leave a placeholder in a file.
-- **[Vale](https://vale.sh/)** lints prose against a style guide. readme-rewrite includes a script that checks for banned patterns, and when your project has a `.vale.ini`, the skill tells the agent to run Vale too and follow its rules where the two disagree.
+- **[Vale](https://vale.sh/)** lints prose against a style guide. prose-style includes a script that checks for banned patterns, and when your project has a `.vale.ini`, the skill tells the agent to run Vale too and follow its rules where the two disagree.
 
 In the first round of evals, graded blind on Claude Opus 5.5 at medium effort, developer-docs passed 87% of its 71 assertions, against 56% for the docs skill the model wrote from memory and 46% with no skill. readme-rewrite passed all 19 of its assertions, against 74% with no skill. Graders ranked the skill's output first in all eight evals. adr was evaluated separately, in three rounds: in the third it passed all 37 of its assertions, against 30 with no skill ([results](evals/adr/workspace/iteration-3/benchmark.json)). Agents using a skill spent about 3.5 times the tokens of agents using none. The [results](runs/claude-opus-5.5-medium/workspace/iteration-1/benchmark.json) include every output and grade.
 
 ## Example: checking a README draft
 
-readme-rewrite includes `scripts/hunt.py`, which the agent runs on each README draft. You can run it yourself. Here it is on a test README in this repository, run from the skill's folder:
+prose-style includes `scripts/hunt.py`, which the agent runs on each draft. You can run it yourself. Here it is on a test README in this repository, run from the skill's folder:
 
 ```
 $ uv run scripts/hunt.py ../../evals/readme-rewrite/files/tallyho/README.md
-2 em dashes: two or more per page is too many
+2 em dashes: two in a page are too many
 ../../evals/readme-rewrite/files/tallyho/README.md:3: [announced honesty] honestly
 ../../evals/readme-rewrite/files/tallyho/README.md:3: [em dash] —
 ../../evals/readme-rewrite/files/tallyho/README.md:3: [vague size or speed] fast
 ../../evals/readme-rewrite/files/tallyho/README.md:3: [vague size or speed] lightweight
 ../../evals/readme-rewrite/files/tallyho/README.md:3: [self-praise] powerful
-../../evals/readme-rewrite/files/tallyho/README.md:15: [non-agentic subject] decides
+../../evals/readme-rewrite/files/tallyho/README.md:15: [mind verb] decides
 ../../evals/readme-rewrite/files/tallyho/README.md:15: [internal citation] ADR 3
 ../../evals/readme-rewrite/files/tallyho/README.md:19: [proof narration] CI runs
 ../../evals/readme-rewrite/files/tallyho/README.md:19: [proof narration] on every push
 ../../evals/readme-rewrite/files/tallyho/README.md:23: [em dash] —
-../../evals/readme-rewrite/files/tallyho/README.md:23: [non-agentic subject] handles
 ```
 
 Each hit is a phrase for the agent to fix or defend, not proof of a mistake. Line 15 of that README says "the counter decides how to break ties". A counter doesn't decide anything, so the agent rewrites the sentence to name what does. The script skips code blocks and inline code, exits with 1 when it finds hits and 0 when it finds none, and prints JSON when you add `--json`.
@@ -48,7 +48,7 @@ Each hit is a phrase for the agent to fix or defend, not proof of a mistake. Lin
 | Agent | Any agent that loads Agent Skills. |
 | Model | developer-docs was made for Claude Opus 5.5 at medium effort. On Claude Sonnet 5.5 at medium effort it also does best: in evals it passed 80% of its assertions, against 53% with no skill and 51% for a variant the method made for Sonnet. |
 | Installing | [Node.js](https://nodejs.org/), for `npx skills`. Or copy the folders by hand. |
-| `hunt.py` (readme-rewrite only) | [uv](https://docs.astral.sh/uv/), or Python 3.11 or later with `python3 scripts/hunt.py`. It uses only the standard library. |
+| `hunt.py` (prose-style only) | [uv](https://docs.astral.sh/uv/), or Python 3.11 or later with `python3 scripts/hunt.py`. It uses only the standard library. |
 
 ## Installation
 
