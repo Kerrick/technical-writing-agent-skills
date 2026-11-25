@@ -65,6 +65,7 @@ Each has its fix.
 ## Procedure
 
 1. Read [references/agency.md](references/agency.md) before drafting or reviewing anything longer than a short reply.
+   When agency is the subject of the task (reviewing prose for who acts, explaining what's wrong with a sentence, fixing a sentence someone flagged, or writing rules about prose), also read [references/verdicts.md](references/verdicts.md).
 2. Draft by the rules above.
 3. For a file, run `uv run scripts/hunt.py FILE…` from this skill's directory (or `python3 scripts/hunt.py`, with Python 3.11 or later). It prints `FILE:LINE: [rule] match` for each candidate and exits 1 when it finds any. A hit is a question, not a verdict: fix the sentence or defend it.
 4. Reread for agency the script can't see: every subject, every possessive, every "by" phrase, every noun or adjective that gives a thing a mind or an act.
