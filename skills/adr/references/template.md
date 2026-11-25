@@ -57,7 +57,7 @@ Confidence: <what the evidence shows works; whether any recorded comparison says
 
 ### Later research (YYYY-MM-DD)
 
-<Alternatives found after the decision. They inform a reader; they were never its reason.>
+<Alternatives found after the decision. They are for a reader's information; they were never a reason for it.>
 ```
 
 ## Fields and sections
