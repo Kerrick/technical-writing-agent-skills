@@ -1,8 +1,8 @@
 # Evaluating a skill
 
-Read this when writing output evals, running them, or deciding whether one version of a skill beats another. Adapted from the Agent Skills guide to evaluating skills, with rules for keeping runs isolated and comparable; [NOTICE.md](../NOTICE.md) gives the credit and the changes.
+Read this when writing output evals, running them, or deciding whether one version of a skill is better than another. Adapted from the Agent Skills guide to evaluating skills, with rules for keeping runs isolated and comparable; [NOTICE.md](../NOTICE.md) has the credit and the changes.
 
-An eval answers one question: does the agent do the task better with this skill than without it, or than with the previous version? Without a comparison, a pass rate means nothing.
+An eval is for one question: does the agent do the task better with this skill than without it, or than with the previous version? Without a comparison, a pass rate means nothing.
 
 ## Where evals live
 
@@ -15,9 +15,9 @@ evals/<skill-name>/
 └── files/              # input files the prompts name
 ```
 
-Inside the skill folder, an agent under evaluation can open the assertions, and every install ships them. If the repository already keeps evals inside each skill, follow it, and keep the agent under test away from them.
+Inside the skill folder, an agent under evaluation can open the assertions, and every install includes them. If the repository already keeps evals inside each skill, follow it, and keep the agent under test away from them.
 
-Keep the evals fixed once results exist. Changing a prompt, an input file, or an assertion makes earlier results incomparable. Add a new eval rather than editing an old one, and change the set in its own commit.
+Keep the evals fixed once results exist. Changing a prompt, an input file, or an assertion makes earlier results incomparable. Add a new eval rather than editing an old one, and change the set in a separate commit.
 
 ## Test cases
 
@@ -42,16 +42,16 @@ Keep the evals fixed once results exist. Changing a prompt, an input file, or an
 - **Start with three or four.** Expand after you've seen results.
 - **Realistic prompts:** file paths, names, personal context, varied formality ("hey can you clean up this csv" beside a precise spec).
 - **At least one edge case:** malformed input, an unusual request, or a case where the skill is ambiguous.
-- **Build inputs that exercise the rules.** A fixture with a planted flaw (a wrong flag in a README, a name that doesn't match its folder) shows whether the agent catches it.
+- **Build inputs on which the rules make a difference.** A fixture with a planted flaw (a wrong flag in a README, a name that doesn't match its folder) shows whether the agent catches it.
 - **No placeholders** in prompts, fixtures, or assertions. They're final files too.
 
 ## Assertions
 
-Each assertion names, in brackets, the rule it tests, then states one observable fact about the output. Name the rule so you can aggregate results by rule, and find rules that never make a difference.
+Start each assertion with the rule it's for, in brackets, then state one observable fact about the output. Name the rule so you can aggregate results by rule, and find rules that never make a difference.
 
 - Good: "The output file is valid JSON", "Both axes are labeled", "At least 3 recommendations". Checkable and specific.
 - Weak: "The output is good" (vague), "Uses exactly the phrase 'Total Revenue: $X'" (brittle).
-- A rule's "Without it" usually gives the assertion: test for the absence of that mistake.
+- The assertion usually comes from a rule's "Without it": test for the absence of that mistake.
 - Leave taste (style, whether it "feels right") to human review.
 
 Draft assertions from the rules, then revise them after the first run shows what outputs look like.
@@ -61,9 +61,9 @@ Draft assertions from the rules, then revise them after the first run shows what
 Every run must measure one skill, or none, and nothing else.
 
 - **A fresh session per run,** with no history from writing the skill or from other runs. Sub-agents work if each starts fresh.
-- **Give the skill by path in the prompt** ("Read and follow the skill at `<path>/SKILL.md`"), and disable the agent's skill tool, so no installed skill can join the run. In Claude Code: `--disallowedTools Skill`.
+- **Give the skill by path in the prompt** ("Read and follow the skill at `<path>/SKILL.md`"), and disable the agent's skill tool, so the agent can't load an installed skill during the run. In Claude Code: `--disallowedTools Skill`.
 - **Three setups per eval:** the new skill; the baseline, or the previous version; and no skill, with the same prompt minus the path. Before editing a skill, snapshot it outside its folder, and point the previous-version setup at the snapshot.
-- **Its own copy of every input file,** since agents edit files.
+- **A separate copy of every input file,** since agents edit files.
 - **Record tokens and duration** when each run finishes. Harnesses often report them only once: in Claude Code, a sub-agent's completion notification carries `total_tokens` and `duration_ms`, and a headless JSON result carries `usage`.
 
 ## Workspace
@@ -99,7 +99,7 @@ Put results outside the skill folder, one directory per pass:
 
 ## Aggregating
 
-Write `benchmark.json` per iteration: for each setup, the mean and standard deviation of pass rate, seconds, and tokens, plus the delta between setups. Break pass rates down by rule, and by each rule's kind (new, correction, known but skipped), to see which kind of rule the skill earns its keep on. A skill that adds 13 seconds for 50 points of pass rate is worth it; one that doubles tokens for 2 points may not be.
+Write `benchmark.json` per iteration: for each setup, the mean and standard deviation of pass rate, seconds, and tokens, plus the delta between setups. Break pass rates down by rule, and by each rule's kind (new, correction, known but skipped), to see which kind of rule makes the skill worth its cost. A skill that adds 13 seconds for 50 points of pass rate is worth it; one that doubles tokens for 2 points may not be.
 
 Run each setup three times before trusting a difference. Standard deviation means nothing with one run.
 
@@ -115,18 +115,18 @@ Then review outputs yourself, or with the user, and record specific feedback per
 
 ## Iterating
 
-Give the failed assertions, the feedback, the transcripts, and the current `SKILL.md` to a model, and ask for changes that:
+Give the failed assertions, the feedback, the transcripts, and the current `SKILL.md` to a model, and have it change the skill:
 
 - generalize, rather than patch the one test case;
 - keep the skill lean: remove instructions that cause wasted work, and try removing rules when pass rates plateau;
 - explain the why behind each rule;
 - bundle any helper every run rewrote.
 
-Apply them, rerun every eval into `iteration-<N+1>/`, grade, review, repeat. Stop when feedback is empty or iterations stop improving. A new version replaces the current one only if it beats it, on the current one's target model.
+Apply them, rerun every eval into `iteration-<N+1>/`, grade, review, repeat. Stop when feedback is empty or iterations stop improving. A new version replaces the current one only if its results are better, on the current one's target model.
 
 ## Real tasks
 
-Real work counts as an eval. For each, keep the target repository's commit, the request word for word, the session ID, tokens and time, whether the skill loaded without being named, every correction given, and any hand fixes in a separate commit. Then the task can be rerun later with a newer version, the baseline, or no skill.
+Real work counts as an eval. For each, keep the target repository's commit, the request word for word, the session ID, tokens and time, whether the agent loaded the skill without being told its name, every correction given, and any hand fixes in a separate commit. Then the task can be rerun later with a newer version, the baseline, or no skill.
 
 ## Headless runs in Claude Code
 
@@ -134,7 +134,7 @@ With Claude Code's command line (v2.1.311):
 
 - **Start** a session with a known ID: `claude -p --model <model> --effort <level> --session-id <uuid> --output-format json "<prompt>" < /dev/null`.
 - **Continue** it: `claude -p --resume <uuid> … "<next prompt>"`.
-- **Fork** it: `claude -p --resume <uuid> --fork-session … "<prompt>"`. The fork gets everything the session had and its own ID, and leaves the original unchanged.
+- **Fork** it: `claude -p --resume <uuid> --fork-session … "<prompt>"`. The fork gets everything the session had and a new ID, and leaves the original unchanged.
 - **Measure context** from the session's transcript, not the JSON result: add `input_tokens`, `cache_read_input_tokens`, and `cache_creation_input_tokens` in the last assistant message's `usage` in `~/.claude/projects/<cwd>/<session>.jsonl`. The result's `usage` is summed over the session's calls.
 - **Limit** a session with `--allowedTools`, keep it to the run's folders with `--add-dir`, and start it from the run's working folder.
 - **For every eval run,** add `--disallowedTools Skill` and give the skill by path in the prompt.

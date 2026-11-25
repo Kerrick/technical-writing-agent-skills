@@ -1,10 +1,10 @@
 # Scripts in skills
 
-Read this when a skill runs a command or bundles code. Adapted from the Agent Skills guide to using scripts; [NOTICE.md](../NOTICE.md) gives the credit and the changes.
+Read this when a skill runs a command or bundles code. Adapted from the Agent Skills guide to using scripts; [NOTICE.md](../NOTICE.md) has the credit and the changes.
 
 ## Commands, or a bundled script
 
-When an existing package does the job, have the skill run it directly with a runner that resolves dependencies on demand, and pin an exact version so the command behaves the same over time:
+When an existing package does the job, have the agent run it directly with a runner that resolves dependencies on demand, and pin an exact version so the command behaves the same over time:
 
 | Runner | Example | Ships with |
 | - | - | - |
@@ -12,7 +12,7 @@ When an existing package does the job, have the skill run it directly with a run
 | `pipx run` | `pipx run 'black==24.10.0' .` | OS package managers |
 | `npx` | `npx eslint@9.0.0 --fix .` | Node.js |
 | `bunx` | `bunx eslint@9.0.0 --fix .` | Bun, for Bun environments only |
-| `deno run` | `deno run --allow-read npm:eslint@9.0.0 -- --fix .` | Deno; needs permission flags, and `--` before the tool's own flags |
+| `deno run` | `deno run --allow-read npm:eslint@9.0.0 -- --fix .` | Deno; needs permission flags, and `--` before the tool's flags |
 | `go run` | `go run golang.org/x/tools/cmd/goimports@v0.28.0 .` | Go |
 
 State prerequisites the skill relies on ("Requires Node.js 18+"), and put runtime requirements in the `compatibility` field. When a command grows too complex to get right on the first try, move it into a tested script.
@@ -33,23 +33,23 @@ Declare dependencies inside the script, so one command runs it with no install s
   # ///
   ```
 - **Deno:** `npm:` and `jsr:` import specifiers, such as `import * as cheerio from "npm:cheerio@1.0.0"`. Packages with native addons may fail.
-- **Bun:** versioned imports, such as `from "cheerio@1.0.0"`, auto-install when no `node_modules` exists up the tree; if one does, auto-install is off.
-- **Ruby:** `require 'bundler/inline'` with a `gemfile do … end` block. Pin every gem, since there's no lockfile; a `Gemfile` or `BUNDLE_GEMFILE` in the working directory can interfere.
+- **Bun:** Bun installs versioned imports, such as `from "cheerio@1.0.0"`, automatically when no `node_modules` exists up the tree; if one does, it doesn't.
+- **Ruby:** `require 'bundler/inline'` with a `gemfile do … end` block. Pin every gem, since there's no lockfile. Bundler may not work as expected with a `Gemfile` or `BUNDLE_GEMFILE` in the working directory.
 
 ## Design for an agent
 
 The agent decides its next step from what the script prints.
 
-- **No interactive prompts.** Agents run in non-interactive shells, so a prompt hangs forever. Take all input from flags, environment variables, or stdin, and fail with the usage line when something's missing.
-- **`--help`** is how the agent learns the interface: a one-line description, the flags, examples, and the exit codes. Keep it short. Make the usage line show the command the skill gives (for Python's `argparse`, set `prog`).
+- **No interactive prompts.** Agents run in non-interactive shells, so a script that prompts hangs forever. Take all input from flags, environment variables, or stdin, and fail with the usage line when something's missing.
+- **`--help`** is how the agent learns the interface: a one-line description, the flags, examples, and the exit codes. Keep it short. Make the usage line show the command in the skill (for Python's `argparse`, set `prog`).
 - **Error messages** say what went wrong, what was expected, and what to try: `--format must be one of: json, csv, table. Received: "xml"`.
 - **Structured output.** Data goes to stdout in JSON, CSV, or TSV; progress and warnings go to stderr. A `--json` flag works well beside a readable default.
-- **Exit codes** distinguish failure types (not found, invalid arguments, check failed), documented in `--help`.
-- **Idempotent.** Agents retry; "create if missing" beats "fail on duplicate".
+- **Exit codes:** use a different one for each kind of failure (not found, invalid arguments, check failed), and document them in `--help`.
+- **Idempotent.** Agents retry; "create if missing" is better than "fail on duplicate".
 - **Strict input.** Reject ambiguous input with a clear error rather than guessing; use closed sets.
 - **Dry runs and safe defaults.** Give destructive operations `--dry-run`, and require `--force` or `--confirm` where the risk warrants it.
 - **Bounded output.** Harnesses often truncate tool output past 10,000–30,000 characters. Default to a summary or a limit, with flags such as `--offset` for more, or require `--output FILE`.
 
 ## Before you ship it
 
-Run the script the way an agent will: from the skill directory, with the exact command the skill gives, plus `--help` and one bad argument. Then delete what the test left behind, such as `__pycache__/`, so it isn't installed with the skill.
+Run the script the way an agent will: from the skill directory, with the exact command in the skill, plus `--help` and one bad argument. Then delete what the test left behind, such as `__pycache__/`, so it isn't installed with the skill.
