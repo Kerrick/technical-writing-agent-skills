@@ -39,6 +39,10 @@ A query triggered if the agent loaded the skill's `SKILL.md`. In Claude Code, ru
 
 Run each query three times and compute its trigger rate. A should-trigger query passes above 0.5; a shouldn't-trigger query passes below it. Script the loop: 20 queries at three runs each is 60 sessions.
 
+In Claude Code, `--tools` and `--allowedTools` take several values, so pass the query on stdin, or right after `-p`; placed after them, it's read as one of their values and the session starts with no prompt.
+
+A query sent as a session's first message tests loading at the start of work. An agent that skips a skill usually does it mid-task: it finishes the work it was asked for, then commits, pushes, or releases without loading the skill that covers that step. For a skill about such a step, add queries that arrive as the second or third message of a session already busy with other work, and count those separately.
+
 ## Tuning
 
 1. **Split** the queries once, at random: about 60% train, 40% validation, each with a proportional mix of positives and negatives. Keep the split fixed across iterations.

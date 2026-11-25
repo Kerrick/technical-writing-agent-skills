@@ -35,14 +35,14 @@ A skill holds only what its target model doesn't already do. Everything else cos
 ## Workflow
 
 1. **Name the target.** Write down the model and effort level the skill is for, the job it does, and the skills it sits beside. A skill is a measured difference for one model. On another model it's a guess, so a version made for another model is a variant, kept apart, not a replacement.
-2. **Fix a baseline.** Before gathering any rules, record what the target model does without the skill: in a fresh session, with no version of the skill installed, have it do two or three representative tasks, or write down what it knows about the domain. Save the result and never edit it. Every later "does the model already do this?" is answered against this file, not against your sense of what models know. For a skill built rule by rule from outside sources, read [references/measured-build.md](references/measured-build.md) before step 3.
+2. **Fix a baseline.** Before gathering any rules, record what the target model does without the skill: in a fresh session, with no version of the skill installed, have it do two or three representative tasks, or write down what it knows about the domain and what it would do by default in a few situations the skill covers. Save the result and never edit it. Every later "does the model already do this?" is answered against this file, not against your sense of what models know. For a skill built rule by rule from outside sources, read [references/measured-build.md](references/measured-build.md) before step 3.
 3. **Gather evidence.** Use real material: corrections the user gave an agent, review comments, runbooks, incident fixes, the project's own code and config. Write each candidate rule in this shape:
    - **Rule:** what to do, standalone, so a reader who has never seen the evidence can act on it.
    - **Applies to:** every task, or which kind of task.
    - **Without it:** what an agent does wrong.
    - **Kind:** new to the model; a correction that replaces advice the model follows; or known to the model but often skipped.
 4. **Filter against the baseline.** Drop each rule the baseline already states and follows. Keep a rule the baseline states but breaks, as a checklist item. State a correction as the right rule itself, not as "unlike the usual advice". Decide these tests before you judge the rules, and apply them the same way to every rule.
-5. **Place each rule.** Rules for every task go in SKILL.md. Rules for one kind of task go in a reference file for that kind, and SKILL.md says when to read it. Each "Without it" becomes a gotcha where it names a mistake an agent would make. Known-but-skipped rules go in a checklist. Add nothing of substance beyond the rules and the backbone they hang on (a short procedure, a checklist). When in doubt, leave it out.
+5. **Place each rule.** Rules for every task go in SKILL.md. Rules for one kind of task go in a reference file for that kind, and SKILL.md says when to read it. Each "Without it" becomes a gotcha where it names a mistake an agent would make. Known-but-skipped rules go in a checklist. Add nothing of substance beyond the rules and the backbone they hang on (a short procedure, a checklist). When in doubt, leave it out. Arrange files and sections around the decisions the agent faces, in the order it needs them at each, not in the order a source teaches; for a skill built from sources, [references/measured-build.md](references/measured-build.md) gives a card sort that does this.
 6. **Write the frontmatter.** Read [references/specification.md](references/specification.md) for the field rules and limits. Write the description by **Descriptions** below.
 7. **Write the body.** Follow **Rules for every skill**. For the patterns (gotchas, templates, checklists, validation loops), read [references/writing-instructions.md](references/writing-instructions.md). If the skill bundles or runs code, read [references/scripts.md](references/scripts.md).
 8. **Validate,** fix every error, and repeat until it passes. Run, from this skill's directory:
@@ -85,7 +85,7 @@ A skill holds only what its target model doesn't already do. Everything else cos
 
 **Explain the why where the agent must judge.** Give the reason behind a rule the agent will have to apply to cases you didn't foresee. Be prescriptive, with exact commands, where the operation is fragile.
 
-**Credit adapted text.** When a skill adapts someone else's text, set `license` to that text's terms, or terms that honor them, and add a `NOTICE.md` naming the source, its holder, its license, which file came from which page, and every change you made.
+**Credit adapted text.** When a skill adapts someone else's text, set `license` to that text's terms, or terms that honor them, and add a `NOTICE.md` naming the source, its holder, its license, which file came from which page, and every change you made. A skill that restates a source's ideas in its own words, without adapting its text, needs no `NOTICE.md`; credit the source in one sentence at the end of SKILL.md.
 
 ## Descriptions
 
@@ -110,6 +110,7 @@ Agents decide whether to load a skill from its description alone. Write it as an
 - Writing what models already know (what a CSV is, how to write clear prose, "handle errors appropriately"), which dilutes the rules that matter.
 - Judging "the model already knows this" from intuition instead of a saved baseline, so rules the model breaks get cut and rules it follows stay in.
 - Letting the session that wrote the baseline, or that read the sources, write the skill. It pulls the baseline's structure, or the sources' wording, back in. See [references/measured-build.md](references/measured-build.md).
+- Arranging a skill the way its source teaches, page by page. That order serves people learning the subject, not an agent about to act, and it carries the source's arrangement along even when every sentence is reworded.
 - Linking to a file in the surrounding repository, which isn't installed with the skill.
 - Adding a reference file and never saying when to read it, so the agent never does, or always does.
 - Offering a menu of tools with no default, so the agent tries several.
