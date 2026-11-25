@@ -1,6 +1,6 @@
 ---
 name: readme-rewrite
-description: Use when rewriting, substantially editing, restructuring, or reviewing a project README (README.md, README.rdoc, or similar), rewriting one from scratch, or writing the first one for a project that has none, including when a README has grown by appending or reads like stock AI prose. Makes the README serve marketing, onboarding, and indexing, with every claim checked against the code. Not for other documentation pages, such as tutorials, guides, or API reference (use developer-docs).
+description: Use when rewriting, substantially editing, restructuring, or reviewing a project README (README.md, README.rdoc, or similar), rewriting one from scratch, or writing the first one for a project that has none, including when a README has grown by appending or reads like stock AI prose. Use it to make the README work for marketing, onboarding, and indexing, with every claim checked against the code. Not for other documentation pages, such as tutorials, guides, or API reference (use developer-docs).
 license: MIT-0
 metadata:
   author: Kerrick Long
@@ -9,12 +9,12 @@ metadata:
 
 # Rewrite a README
 
-A README grows bad by appending. Each session adds a paragraph, none reads the whole, and the file turns into a log. Fix that by rewriting for coherence, not by adding to it.
+A README goes bad when people append to it. In each session, an agent adds a paragraph without reading the whole, and the file turns into a log. Fix that by rewriting for coherence, not by adding to it.
 
 ## Step 0: Choose the mode
 
 - **Draft blind, then reconcile (default).**
-  1. Draft from the code alone (steps 1 to 9), without reading the old README in any form: not the file, not `git show`, `git log -p` or `git diff` on it, not a search whose output prints its lines, not its rendered page. Its structure and phrasing would pull your draft toward it. Write the draft to a new file, so you never have to open the old one to replace it.
+  1. Draft from the code alone (steps 1 to 9), without reading the old README in any form: not the file, not `git show`, `git log -p` or `git diff` on it, not a search whose output prints its lines, not its rendered page. If you read it first, you'll copy its structure and phrasing. Write the draft to a new file, so you never have to open the old one to replace it.
   2. When the draft has passed step 9, read the old README in full, as a checklist rather than a model. For each thing it says that the draft doesn't, check it against the code and ask whether the reader needs it. Add what passes, in the draft's structure. Keep wording the maintainer chose on purpose, such as an existing disclosure. Then move the draft over the old file.
 - **From-scratch mode.** If the project has no README, or the maintainer wants a fresh start ("rewrite it from scratch", "start over", "throw out the old one"), do part 1 only, and never read the old README.
 - **Edit mode.** For a review, or a narrow change the maintainer asked for ("fix the install section"), read every README-like file in full first: README.md, README.rdoc, README.txt, and any sibling that describes the project. Do not search for the paragraph to change and patch it. Change what was asked, so the whole file stays coherent.
@@ -30,27 +30,27 @@ Never write a placeholder, a question, or a note to the maintainer into any file
 - Read the entry points, the CLI definition, the config schema, the manifest and lockfile, the tests, and the CI configuration.
 - Run the commands you plan to show. Copy the output you rely on. A command you did not run does not go in. Run install commands in a scratch directory or container, not the user's environment.
 - Treat other documentation (design notes, plans, older READMEs, changelogs) as leads, not evidence. Each can be out of date. Confirm against code or a run.
-- If code and docs disagree, trust the code. Report the disagreement to the maintainer.
+- If the docs say something the code doesn't do, trust the code. Report the disagreement to the maintainer.
 - If something is not built yet, check the code, then say so in one sentence (step 5).
-- Check where else the README is shown. If the manifest publishes it to a package registry (for example, `readme` in `pyproject.toml`), the registry shows it without the repository around it, and relative image paths and links can break there; PyPI doesn't resolve them. Use absolute URLs for those.
+- Check where else the README is shown. If the project publishes it to a package registry (for example, through `readme` in `pyproject.toml`), the registry shows it without the repository around it, and relative image paths and links can break there; PyPI doesn't resolve them. Use absolute URLs for those.
 
 ## Step 2: Name the audience and the three purposes
 
 Write down who reads this: the person who might use the project, in their words ("a developer with a finished script who wants to ship it"). Not maintainers, not you. Every sentence must matter to that reader.
 
-A README does three jobs:
+A README has three jobs:
 
 1. **Marketing.** Convince the reader to try it. Say what problem it solves, who it is for, how it compares with the alternatives they know, and answer their likely questions. Show evidence (step 6).
 2. **Onboarding.** Get them started, and show the whole path: install, first run, everyday use, release or upgrade. They should see the journey before taking it.
-3. **Index.** Link to the API docs, guides, changelog, issue tracker, and CONTRIBUTING. Say in plain words what each link holds.
+3. **Index.** Link to the API docs, guides, changelog, issue tracker, and CONTRIBUTING. Say in plain words what each linked page holds.
 
-Anything that serves none of the three, or serves a different reader, belongs elsewhere (step 7).
+Anything that's for none of the three, or for a different reader, belongs elsewhere (step 7).
 
 ## Step 3: Plan the sections
 
 Use a conventional order. Readers scan for the headings they expect. See [references/section-plan.md](references/section-plan.md) for the template and what each section holds.
 
-Headings name the content in the reader's terms. "Compatibility" beats "What CI checks". Skip cleverness. A reader who skips a heading because it looks internal will miss the section.
+In each heading, name the section's content in the reader's terms. "Compatibility" is better than "What CI checks". Skip cleverness. A reader who skips a heading because it looks internal will miss the section.
 
 ## Step 4: Draft in plain style
 
@@ -67,14 +67,14 @@ Core rules:
 
 ## Step 5: Handle unproven claims without a confessional tone
 
-- State limits as facts with a scope: "Builds run on the platform they target. Building for Windows needs a Windows machine." No apology, no self-praise.
+- State limits as facts with a scope: "Each build runs on the platform it's for. Building for Windows needs a Windows machine." No apology, no self-praise.
 - Keep caveats in a section for caveats (Compatibility, Limitations). Do not mix them into "Who it is for" or "Alternatives".
-- Write status for users: what works today, on which platforms, what is planned. A version badge replaces "version X is the latest".
+- Write status for users: what works today, on which platforms, what is planned. Use a version badge instead of "version X is the latest".
 - Do not announce virtue with words like "honest", "frankly", or "to be clear". Say the fact.
 - Before you qualify, shrink, or cut a sentence, name the false or unverified fact it states. If you can't, it isn't an overclaim: leave it as written. A statement of what something is for, or what it does, is not an overclaim.
 - Do not claim what you have not tested. Mark unbuilt features as not available, with one line, or leave them out.
 - State a limit only when it changes what the reader can do or should expect: a platform, a version, a model, a prerequisite, a risk to their data.
-- Don't narrate the project's proof. Proof narration is a sentence about how far the project's own testing has got. It either apologizes ("untested", "no app has been through a store's review yet", "no CI job runs on the oldest version") or boasts ("on every change, CI builds each example and runs it on a clean machine", a test count, a list of the devices it has run on). Both tell the reader about the maintainer's work, not about what the reader can do. Cut it, or move it to contributor docs (step 7), and keep only the fact it implies for the reader, such as a platform or a minimum version, stated as a fact. The AI disclosure (step 8) is the one place that names the project's checks.
+- Don't narrate the project's proof. Proof narration is a sentence about how far the project's testing has got. It either apologizes ("untested", "no app has been through a store's review yet", "no CI job runs on the oldest version") or boasts ("on every change, CI builds each example and runs it on a clean machine", a test count, a list of the devices it has run on). Both are about the maintainer's work, not about what the reader can do. Cut it, or move it to contributor docs (step 7), and keep only the fact it implies for the reader, such as a platform or a minimum version, stated as a fact. The AI disclosure (step 8) is the one place to name the project's checks.
 
 ## Step 6: Use evidence, not invented proof
 
@@ -87,7 +87,7 @@ Build instructions for the project itself, test commands, architecture decision 
 Move that material; don't delete it. Remove only what you've confirmed against the code is false or obsolete, and report each removal. To choose where each piece goes, take the first of these that fits:
 
 1. Where the repository already keeps that kind of material: an existing CONTRIBUTING, docs folder, changelog, ADR folder, or wiki.
-2. Beside what it describes: a folder's own README for material about that folder, or the docstrings and `--help` text for detail about an API or CLI.
+2. Beside what it describes: a folder's README for material about that folder, or the docstrings and `--help` text for detail about an API or CLI.
 3. `CONTRIBUTING.md`, for how to contribute: setup, tests, and releases.
 4. The ecosystem's documentation location, only if the project's tooling uses it (for example, Sphinx's `docs/`, or RDoc's and YARD's `doc/`).
 5. Otherwise, the closest fit to the options above. Say which you chose and why in your report.
@@ -96,12 +96,12 @@ Don't invent a new location, and don't copy one from another project because it 
 
 ## Step 8: Disclose AI involvement as a fact
 
-If agents wrote or changed the code or docs, and the maintainer discloses AI involvement (their other projects do, or they say so; ask if you can't tell), say so near the end, in a short paragraph, in the project's terms. See [references/ai-provenance.md](references/ai-provenance.md). Follow the maintainer's existing house pattern if one exists. Do not apologize and do not boast.
+If agents wrote or changed the code or docs, and the maintainer discloses AI involvement (they do in their other projects, or they say so; ask if you can't tell), say so near the end, in a short paragraph, in the project's terms. See [references/ai-provenance.md](references/ai-provenance.md). Follow the maintainer's existing house pattern if one exists. Do not apologize and do not boast.
 
 ## Step 9: Hunt for problems, then review
 
 1. Run `uv run scripts/hunt.py <README>` from this skill's directory (or `python3 scripts/hunt.py`, with Python 3.11 or later). It lists every banned pattern from the style rules, by line. For each hit, ask who acts, then fix it or defend it. Run it again until every remaining hit is one you can defend.
-2. If the repository has a Vale configuration (`.vale.ini`), run `vale` on the draft too. Its rules are the project's style guide: where they and the style rules here disagree, follow Vale's.
+2. If the repository has a Vale configuration (`.vale.ini`), run `vale` on the draft too. Its rules are the project's style guide: where they and the style rules here differ, follow Vale's.
 3. Read the draft once as the target reader who has never heard of the project. Note where you would stop reading.
 4. Run the review checklist in [references/review-checklist.md](references/review-checklist.md). It comes from detailed maintainer feedback on a real first draft.
 5. Re-run every command shown. Confirm every link resolves.

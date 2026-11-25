@@ -1,8 +1,8 @@
 # AI-provenance disclosure
 
-Put it in the README's last section, after License, under a heading such as "How this was made". Say the facts a reader needs to weigh the code: who wrote what, and who reviewed it, or what checks stand in for review.
+Put it in the README's last section, after License, under a heading such as "How this was made". Say the facts a reader needs to weigh the code: who wrote what, and who reviewed it, or what checks the project uses in place of review.
 
-Use the maintainer's existing wording and any existing disclosure in their other projects. Never assume they've written, reviewed, or read anything they haven't said they have. Ask in chat only if you have no evidence at all, once, with your proposed answer. Otherwise, use the category that claims least: work an agent made, with no record of review, is requested. Write the disclosure as final, and say in your report which categories you inferred.
+Use the maintainer's existing wording and any existing disclosure in their other projects. Never assume they've written, reviewed, or read anything they haven't said they have. Ask in chat only if you have no evidence at all, once, with your proposed answer. Otherwise, use the category with the smallest claim: work an agent made, with no record of review, is requested. Write the disclosure as final, and say in your report which categories you inferred.
 
 ## In Kerrick Long's projects
 
@@ -17,7 +17,7 @@ I use three words for how code and prose comes to exist. Code or prose I wrote, 
 The second says, in a few sentences:
 
 1. Which parts are wrote, wrought, or requested. Name parts, not files: "its code, tests, and documentation, this README included". Give one blanket label only when it's true.
-2. What stands in for review, for anything requested: the tests, checks, and gates the project requires.
+2. What the project uses in place of review, for anything requested: the tests, checks, and gates the project requires.
 3. The project's [declare-ai](https://declare-ai.org/1.0.0/assess.html) level, as a link whose text is `declare-ai.org`, pointing at that level's page, at the end of the paragraph.
 
 For example, from a project an agent built in full:
@@ -37,7 +37,7 @@ Work it out with the [assessment](https://declare-ai.org/1.0.0/assess.html), the
 | Creative | AI contributed creatively, and a person contributed to the work too | `https://declare-ai.org/1.0.0/creative.html` |
 | Total | AI produced the entire work | `https://declare-ai.org/1.0.0/total.html` |
 
-A person's goals and decisions alone don't make a project creative rather than total. It's total if an agent produced every part.
+A person's goals and decisions alone don't count as a creative contribution. A project is total if an agent produced every part.
 
 ## Rules
 

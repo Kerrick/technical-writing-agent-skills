@@ -5,7 +5,7 @@
 - **Filler "own".** "The runtime's own libraries", "Rake's own tasks". Delete "own" or name the thing: "the libraries in the runtime".
 - **"honest", "honestly", "frankly", "to be clear", "it's worth noting".** Delete. State the fact.
 - **"The X part", "the X bit".** "The tricky part is paths." Write: "Paths are tricky because ..."
-- **Agency given to non-agentic nouns.** Files, sections, lockfiles, versions, builds, and gems do not decide, ask, take, want, or know. Name the person or program that acts.
+- **Agency given to non-agentic nouns.** Files, sections, lockfiles, versions, and gems do not decide, ask, take, want, or know. Name the person or program that acts.
 - **Em-dash asides.** Use a period, a comma, or parentheses. Two or more per page is too many.
 - **"not X but Y" and "it's not just X, it's Y".** State Y.
 - **Clever or abstract headings.** Use a plain noun phrase the reader would search for.
@@ -14,14 +14,14 @@
 - **Stock openers and closers.** "In today's world", "Whether you are ... or ...", "Happy shipping".
 - **Your private shorthand.** Words like "deeper", "forward", "sideways", "upstream" used as metaphors for links or flow.
 - **Hedge stacks.** "might possibly", "in some cases generally". Say when, or leave it out.
-- **Proof narration.** How far the project's own testing has got, as an apology ("untested", "not yet tried on", "no one has submitted one to the store yet") or a boast ("CI builds and runs every example on every change", a test count, a list of what has run where). Cut it or move it to contributor docs. Keep the fact it implies (a platform, a minimum version, a prerequisite) as a plain statement in the caveats section.
+- **Proof narration.** How far the project's testing has got, as an apology ("untested", "not yet tried on", "no one has submitted one to the store yet") or a boast ("CI builds and runs every example on every change", a test count, a list of what has run where). Cut it or move it to contributor docs. Keep the fact it implies (a platform, a minimum version, a prerequisite) as a plain statement in the caveats section.
 - **Proof hedging.** "Tested with Claude Code", "in our testing", "as far as we know", "should work". Before you qualify, shrink, or cut a sentence, name the false or unverified fact it states. If you can't, it isn't an overclaim: leave it as written. A statement of what something is for, or what it does, is not an overclaim.
 - **Self-praise.** "Powerful", "seamless", "robust", "blazing". Show evidence.
 - **Internal citations.** "(see decision 5)", "(ADR 10)" in a user-facing README.
 
 ## Procedure to hunt for them
 
-After drafting, run `uv run scripts/hunt.py <README>`. It searches the prose (not code) for every pattern above and prints each hit with its line. For each hit, ask: who acts here? Fix or defend. If you add a pattern to this list, add it to the script too. Then read the headings alone, in order, as a list. They should tell the story and be plain.
+After drafting, run `uv run scripts/hunt.py <README>`. It searches the prose (not code) for every pattern above and prints each hit with its line. For each hit, ask: who acts here? Fix or defend. If you add a pattern to this list, add it to the script too. Then read the headings alone, in order, as a list. Read in order, they should sum up the page in plain words.
 
 ## Before and after
 
